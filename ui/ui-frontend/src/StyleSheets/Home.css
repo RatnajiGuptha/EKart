@@ -1,0 +1,11 @@
+.card-info {
+    border-radius: 10px;
+    background-color: gainsboro;
+    height: 100px;
+    width: 100px;
+}
+
+.card-names{
+    color: black;
+    font-weight: 500;
+}
