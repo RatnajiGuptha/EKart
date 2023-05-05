@@ -14,7 +14,10 @@
 }
 
 .card-info2 img {
-  width: 20rem
+  width: 20rem;
+  border-radius: 10px;
+  padding: 50px;
+  background-color: #abebc6;
 }
 
 .card-names {

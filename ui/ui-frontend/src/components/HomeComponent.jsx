@@ -14,17 +14,18 @@ import img10 from '../images/groceries.png'
 import img11 from '../images/toys.png'
 import img12 from '../images/appliances.png';
 import img13 from '../images/new_arrivals.gif';
+import img14 from '../images/kids_card.PNG';
 
 function HomeComponent() {
     return (
         <div className='fluid-container'>
             <div className='d-flex flex-row justify-content-center'>
                 <div className='card-info'>
-                    <img src={img9} className='w-75' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" className='w-75' />
                     <p className='card-names'>  Accessories</p>
                 </div>
                 <div className='card-info'>
-                    <img src={img7} className='w-75' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280205/beauty_rbw6fv.png" className='w-75' />
                     <p className='card-names'>  Beauty </p>
                 </div>
                 <div className='card-info'>
@@ -32,15 +33,15 @@ function HomeComponent() {
                     <p className='card-names'>   Electronics </p>
                 </div>
                 <div className='card-info'>
-                    <img src={img8} />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683279944/fashion1_drwetu.png" />
                     <p className='card-names'>   Fashion </p>
                 </div>
                 <div className='card-info'>
-                    <img src={img10} className='w-75' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280292/groceries_xwmz5e.png" className='w-75' />
                     <p className='card-names'>   Grocery </p>
                 </div>
                 <div className='card-info'>
-                    <img src={img12} className='w-75 p-1' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280343/appliances_zxbxbl.png" className='w-75 p-1' />
                     <p className='card-names'>   Appliances</p>
                 </div>
                 <div className='card-info'>
@@ -48,12 +49,12 @@ function HomeComponent() {
                     <p className='card-names'>    Mobiles </p>
                 </div>
                 <div className='card-info'>
-                    <img src={img11} className='w-75' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280398/toys_zyfzq2.png" className='w-75' />
                     <p className='card-names'>   Toys </p>
                 </div>
 
                 <div className='card-info'>
-                    <img src={img6} className='w-75' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280396/kids_wear_xgdhkr.png" className='w-75' />
                     <p className='card-names'> Kids wear</p>
                 </div>
 
@@ -134,7 +135,7 @@ function HomeComponent() {
 
             <div className='cards2 d-flex flex-row justify-content-center'>
                 <div className='card-info2 m-3'>
-                    <img src={img9} className='w-1000' />
+                    <img src={img14} className='w-1000' />
                 </div>
 
                 <div className='card-info2 m-3'>
@@ -142,7 +143,7 @@ function HomeComponent() {
                 </div>
 
                 <div className='card-info2 m-3'>
-                    <img src={img9} className='w-1000' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683279566/toys_okyi0r.png" className='w-1000' />
                 </div>
 
             </div>
