@@ -20,7 +20,7 @@ function LoginPage() {
 
     return (
         <div className="login-page">
-            <form onSubmit={handleLogin}>
+            <form className='forms' onSubmit={handleLogin}>
                 <label > <b>  User Name </b>
                     <input type="text" value={username} onChange={handleUsername} placeholder="Enter a username" />
                 </label>

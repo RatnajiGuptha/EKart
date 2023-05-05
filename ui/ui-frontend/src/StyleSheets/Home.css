@@ -13,6 +13,10 @@
     height: 60px;
 }
 
+.card-info2 img{
+    width : 20rem
+}
+
 .card-names {
     color: black;
     font-weight: 500;
@@ -29,4 +33,13 @@
     height: 60vh;
     border-radius: 2rem;
 
+}
+
+.newArrivalGif{
+    margin-top: 2rem;
+    width: 97%;
+    padding: 10px;
+    border-radius: 2rem;
+    border: 15px;
+    background-color:#abebc6;
 }

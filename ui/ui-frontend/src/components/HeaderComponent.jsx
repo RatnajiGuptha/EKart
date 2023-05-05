@@ -15,11 +15,11 @@ function headerComponent() {
                 <Navbar.Brand href="/" className='m-auto'>E-Kart</Navbar.Brand>
                 <Navbar.Toggle aria-controls='basic-navbar-nav' />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    {/* <Container>
+                    <Container>
                         <Form className="d-flex">
                             <Form.Control type="search" placeholder="Search" className='m-auto text-dark w-75 ' aria-label='Search' />
                         </Form>
-                    </Container> */}
+                    </Container>
                     <Container>
                         <Nav className='m-auto'>
                             <Nav.Link href='/' > Home</Nav.Link>
