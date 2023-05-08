@@ -15,12 +15,9 @@
 
 .card-info2 img {
   width: 20rem;
-<<<<<<< HEAD
-=======
   border-radius: 10px;
   padding: 50px;
   background-color: #abebc6;
->>>>>>> 99921644f02791abbd58a6f2034c820818244fa2
 }
 
 .card-names {
@@ -33,6 +30,7 @@
   height: 60vh;
   padding: 20px;
 }
+
 .carousalImgClass {
   height: 60vh;
   border-radius: 2rem;
@@ -60,67 +58,45 @@
   padding: 100px 100px 100px 20px;
   margin-left: 10px;
   line-height: 1.4;
-  
-<<<<<<< HEAD
-  font-weight: inherit;
-  display: inline-block; */
-=======
->>>>>>> 99921644f02791abbd58a6f2034c820818244fa2
 }
-.newArrivalGif {
-  margin-top: 2rem;
-
-  width: 97%;
-
-  padding: 10px;
-
-  border-radius: 2rem;
-
-  border: 15px;
-
-<<<<<<< HEAD
-  background-color: #abebc6;
-=======
 
 .newArrivalGif {
-
   margin-top: 2rem;
   width: 97%;
   padding: 10px;
   border-radius: 2rem;
   border: 15px;
   background-color: #abebc6;
-
 }
 
 .top-picks {
+  /* border-radius: 10px; */
+  /* background-color: antiquewhite; */
 
-  border-radius: 10px;
+  padding: 1rem;
+  border-radius: 20rem;
   overflow: hidden;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 250px;
   position: relative;
-
-
 }
 
 .image {
-  margin-bottom:  0px;
-  height: 60%;
+  padding: 1rem;
+  height: 80%;
   background-size: cover;
   background-position: center;
   transition: transform 0.3s ease;
->>>>>>> 99921644f02791abbd58a6f2034c820818244fa2
 }
 
 .top-picks:hover .image {
   transform: scale(1.1);
 }
 
-h2 {
-  margin-top: 0;
+.names {
+  transition: transform 0.3s ease;
 }
 
-p {
-  margin-bottom: 0;
+.top-picks:hover .names {
+  transform: scale(1.1);
 }
