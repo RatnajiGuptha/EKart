@@ -1,20 +1,7 @@
 import React, { Component } from 'react';
 import '../StyleSheets/Home.css'
 import Carousel from 'react-bootstrap/Carousel';
-import img1 from '../images/caurosel-img1.png';
-import img2 from '../images/caurosel-img2.png';
-import img3 from '../images/caurosel-img3.png';
-import img4 from '../images/caurosel-img4.png';
-import img5 from '../images/caurosel-img5.png';
-import img6 from '../images/kids wear.png';
-import img7 from '../images/beauty.png';
-import img8 from '../images/fashion1.png'
-import img9 from '../images/accesories.png'
-import img10 from '../images/groceries.png'
-import img11 from '../images/toys.png'
-import img12 from '../images/appliances.png';
-import img13 from '../images/new_arrivals.gif';
-import img14 from '../images/kids_card.PNG';
+
 
 function HomeComponent() {
     return (
@@ -29,7 +16,7 @@ function HomeComponent() {
                     <p className='card-names'>  Beauty </p>
                 </div>
                 <div className='card-info'>
-                    <img src="https://rukminim1.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100" className='w-75' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522149/electronics_yjk1bl.webp" className='w-75' />
                     <p className='card-names'>   Electronics </p>
                 </div>
                 <div className='card-info'>
@@ -45,7 +32,7 @@ function HomeComponent() {
                     <p className='card-names'>   Appliances</p>
                 </div>
                 <div className='card-info'>
-                    <img src="https://rukminim1.flixcart.com/flap/128/128/image/22fddf3c7da4c4f4.png?q=100" className='w-75' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683523235/mobiles_s5p07b.webp" className='w-75' />
                     <p className='card-names'>    Mobiles </p>
                 </div>
                 <div className='card-info'>
@@ -64,7 +51,7 @@ function HomeComponent() {
                     <Carousel.Item >
                         <img
                             className="d-block w-100 carousalImgClass "
-                            src={img1}
+                            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522373/caurosel-img1_qzq725.png"
                             alt="First slide"
                         />
                         {/* <Carousel.Caption>
@@ -75,7 +62,7 @@ function HomeComponent() {
                     <Carousel.Item>
                         <img
                             className="d-block w-100 carousalImgClass"
-                            src={img2}
+                            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522373/caurosel-img2_dzgqem.png"
                             alt="Second slide"
                         />
 
@@ -83,7 +70,7 @@ function HomeComponent() {
                     <Carousel.Item>
                         <img
                             className="d-block w-100 carousalImgClass"
-                            src={img3}
+                            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522373/caurosel-img3_pvatjv.png"
                             alt="Third slide"
                         />
                         {/* <Carousel.Caption>
@@ -96,7 +83,7 @@ function HomeComponent() {
                     <Carousel.Item>
                         <img
                             className="d-block w-100 carousalImgClass"
-                            src={img4}
+                            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522374/caurosel-img4_kcomga.png"
                             alt="Second slide"
                         />
 
@@ -104,7 +91,7 @@ function HomeComponent() {
                     <Carousel.Item>
                         <img
                             className="d-block w-100 carousalImgClass"
-                            src={img5}
+                            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522375/caurosel-img5_ndkq7v.png"
                             alt="Second slide"
                         />
 
@@ -113,20 +100,20 @@ function HomeComponent() {
             </div>
 
             <div className='m-2'>
-                <img className="newArrivalGif coloooo" src={img13}></img>
+                <img className="newArrivalGif coloooo" src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522925/new_arrivals_ceoifa.gif"></img>
             </div>
 
             <div className='cards2 d-flex flex-row justify-content-center'>
                 <div className='card-info2 m-3'>
-                    <img src={img9} className='w-1000' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" className='w-1000' />
                 </div>
 
                 <div className='card-info2 m-3'>
-                    <img src={img9} className='w-1000' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" className='w-1000' />
                 </div>
 
                 <div className='card-info2 m-3'>
-                    <img src={img9} className='w-1000' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" className='w-1000' />
                 </div>
 
             </div>
@@ -135,11 +122,11 @@ function HomeComponent() {
 
             <div className='cards2 d-flex flex-row justify-content-center'>
                 <div className='card-info2 m-3'>
-                    <img src={img14} className='w-1000' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" className='w-1000' />
                 </div>
 
                 <div className='card-info2 m-3'>
-                    <img src={img9} className='w-1000' />
+                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" className='w-1000' />
                 </div>
 
                 <div className='card-info2 m-3'>

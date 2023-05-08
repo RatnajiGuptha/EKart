@@ -30,14 +30,15 @@ class headerComponent extends Component {
               <Nav className="m-auto">
                 <Nav.Link href="/"> Home</Nav.Link>
                 <NavDropdown title="Categories" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/">Appliances</NavDropdown.Item>
+                  <NavDropdown.Item href="/">Accessories</NavDropdown.Item>
                   <NavDropdown.Item href="/">Beauty</NavDropdown.Item>
                   <NavDropdown.Item href="/">Electronics</NavDropdown.Item>
                   <NavDropdown.Item href="/">Fashion</NavDropdown.Item>
                   <NavDropdown.Item href="/">Grocery</NavDropdown.Item>
-                  <NavDropdown.Item href="/">Home</NavDropdown.Item>
+                  <NavDropdown.Item href="/">Appliances</NavDropdown.Item>
                   <NavDropdown.Item href="/">Mobiles</NavDropdown.Item>
                   <NavDropdown.Item href="/">Toys</NavDropdown.Item>
+                  <NavDropdown.Item href="/">Kids wear</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/">Help</Nav.Link>
                 <Nav.Link href="/">Login</Nav.Link>
