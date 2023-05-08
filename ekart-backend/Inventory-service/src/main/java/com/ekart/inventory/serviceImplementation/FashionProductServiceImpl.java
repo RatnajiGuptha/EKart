@@ -11,8 +11,7 @@ import com.ekart.inventory.service.FashionProductService;
 
 @Service
 public class FashionProductServiceImpl implements FashionProductService {
-	
-	
+
 	@Autowired
 	private FashionProductsRepository fashionProductsRepo;
 
@@ -24,7 +23,7 @@ public class FashionProductServiceImpl implements FashionProductService {
 
 	@Override
 	public List<FashionProducts> loadFashionProducts() {
-		List<FashionProducts> allFashionProducts =fashionProductsRepo.findAll();
+		List<FashionProducts> allFashionProducts = fashionProductsRepo.findAll();
 		return allFashionProducts;
 	}
 
