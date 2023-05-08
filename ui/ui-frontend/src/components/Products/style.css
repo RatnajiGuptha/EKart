@@ -1,4 +1,4 @@
-.space {
+/* .space {
   width: 100px;
   height: 100px;
 }
@@ -6,26 +6,26 @@
 .image_link {
   width: 10%;
   /* height: 10%; */
-}
+/* } */
 
-.card {
+/* .card {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   gap: 20px;
-}
-.sub-card {
+} */
+/* .sub-card {
   display: grid;
-  width: 100%;
-  /* grid-template-columns: 3fr 3fr 3fr 3fr; */
-  gap: 20px;
+  width: 100%; */
+/* grid-template-columns: 3fr 3fr 3fr 3fr; */
+/* gap: 20px;
   height: auto;
   grid-column: auto;
   place-items: cenetr;
 }
-/* .sub1-card {
+.sub1-card {
   display: flex;
   justify-content: center;
   align-items: center;
