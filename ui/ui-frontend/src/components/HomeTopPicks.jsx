@@ -134,6 +134,14 @@ function HomeTopPics() {
           />
           <h5 className="names"> Beauty </h5>
         </div>
+
+        <div className="top-picks">
+          <img
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683540420/beauty_llrlc3.png"
+            className="image"
+          />
+          <h5 className="names"> Beauty </h5>
+        </div>
       </div>
     </div>
   );
