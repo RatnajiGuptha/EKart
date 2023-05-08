@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 class headerComponent extends Component {
   render() {
     return (
-      <Navbar className="navbar navbar-dark bg-dark">
+      <Navbar className="navbar navbar-dark bg-dark ">
         <Navbar fixed="top" />
         <Container>
           <Navbar.Brand href="/" className="m-auto">
