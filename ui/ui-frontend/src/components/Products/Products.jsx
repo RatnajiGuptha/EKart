@@ -14,8 +14,8 @@ const Products = () => {
     <div>
       {products.map((item) => {
         return (
-          <div classsName="card">
-            <div className="sub-card">
+          <div>
+            <div>
               <img className="image_link" src={item.image} alt="/"></img>
               <div className="sub1-card">
                 <div>
