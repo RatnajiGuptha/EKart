@@ -1,11 +1,11 @@
-.login-page{
+.login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.forms{
+.forms {
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -25,11 +25,11 @@ label {
 input {
     padding: 0.5rem;
     font-size: 1rem;
-    border : 1px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 0.3rem;
 }
 
-button[type = "submit"]{
+button[type="submit"] {
     margin-top: 1rem;
     padding: 0.5rem;
     background-color: #333;
@@ -43,4 +43,13 @@ button[type = "submit"]{
 
 button[type="submit"]:hover {
     background-color: #555;
+}
+
+.top-picks {
+    border-color: rgba(red, green, blue, alpha);
+    border-style: solid;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    border-right-style: dashed;
+
 }

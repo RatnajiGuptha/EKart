@@ -46,9 +46,7 @@
 
 .item-2 {
   width: 500px;
-
   height: 400px;
-
   margin-top: 50px;
   background-color: grey;
   padding: 10px;
@@ -60,25 +58,48 @@
   padding: 100px 100px 100px 20px;
   margin-left: 10px;
   line-height: 1.4;
-  /* font-size: inherit;
   
-  font-weight: inherit;
-  display: inline-block; */
 }
 
 
 .newArrivalGif {
 
   margin-top: 2rem;
-
   width: 97%;
-
   padding: 10px;
-
   border-radius: 2rem;
-
   border: 15px;
-
   background-color: #abebc6;
 
+}
+
+.top-picks {
+
+  border-radius: 10px;
+  overflow: hidden;
+  width: 300px;
+  height: 300px;
+  position: relative;
+
+
+}
+
+.image {
+  margin-bottom:  0px;
+  height: 60%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+.top-picks:hover .image {
+  transform: scale(1.1);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+p {
+  margin-bottom: 0;
 }
