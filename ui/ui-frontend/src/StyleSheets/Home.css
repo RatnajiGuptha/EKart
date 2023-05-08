@@ -70,20 +70,17 @@
 }
 
 .top-picks {
-  /* border-radius: 10px; */
-  /* background-color: antiquewhite; */
-
   padding: 1rem;
   border-radius: 20rem;
   overflow: hidden;
-  width: 350px;
-  height: 250px;
   position: relative;
 }
 
 .image {
   padding: 1rem;
-  height: 80%;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
   background-size: cover;
   background-position: center;
   transition: transform 0.3s ease;
@@ -95,6 +92,8 @@
 
 .names {
   transition: transform 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .top-picks:hover .names {
