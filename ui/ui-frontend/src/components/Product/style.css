@@ -65,3 +65,7 @@
   color: #03dac5;
   border-color: #03dac5;
 }
+.image-size {
+  width: 50px;
+  height: 10%;
+}

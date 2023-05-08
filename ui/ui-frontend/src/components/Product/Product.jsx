@@ -17,7 +17,7 @@ const Product = ({ product, addProduct = () => {} }) => (
         component="img"
         alt="Contemplative Reptile"
         height="260"
-        className="card-image"
+        className="card-image image-size"
         image={product.image.url}
         title="Contemplative Reptile"
       />
