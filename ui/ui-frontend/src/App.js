@@ -1,27 +1,32 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HeaderComponent from "./components/HeaderComponent.jsx"
-import HomeComponent from './components/HomeComponent';
-<<<<<<< HEAD
-import ItemDetails from './components/ItemDetails';
-=======
-// import LoginPage from './components/LoginPage';
->>>>>>> 6be996ab1dde0bd3ccb4772fc04f93cf666491af
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HeaderComponent from "./components/HeaderComponent.jsx";
+import HomeComponent from "./components/HomeComponent";
+import ItemDetails from "./components/ItemDetails";
+import Itemmmm from "./components/Itemmm";
+import { commerce } from "./lib/commerce";
+import { useEffect, useState } from "react";
+import Products from "./components/Products/Products";
 
 function App() {
+  const [products, setProducts] = useState([]);
+  const fetchProducts = async () => {
+    const response = await commerce.products.list();
+    setProducts((response && response.data) || []);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+  console.log({ products });
   return (
     <div className="App">
-      <Router>
+      <Router exact path="/">
         <HeaderComponent />
-<<<<<<< HEAD
-        <HomeComponent/>
-        {/* <ItemDetails/> */}
-=======
         <HomeComponent />
-        {/* <LoginPage/> */}
->>>>>>> 6be996ab1dde0bd3ccb4772fc04f93cf666491af
-      </Router >
-    </div >
+        <Products products={products} />
+      </Router>
+    </div>
   );
 }
 

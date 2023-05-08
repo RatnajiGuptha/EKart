@@ -13,8 +13,8 @@
   height: 60px;
 }
 
-.card-info2 img{
-    width : 20rem
+.card-info2 img {
+  width: 20rem;
 }
 
 .card-names {
@@ -27,7 +27,6 @@
   height: 60vh;
   padding: 20px;
 }
-
 .carousalImgClass {
   height: 60vh;
   border-radius: 2rem;
@@ -40,7 +39,6 @@
   margin-top: 20px;
 }
 
-<<<<<<< HEAD
 .item-2 {
   width: 500px;
 
@@ -61,15 +59,17 @@
   
   font-weight: inherit;
   display: inline-block; */
-=======
 }
+.newArrivalGif {
+  margin-top: 2rem;
 
-.newArrivalGif{
-    margin-top: 2rem;
-    width: 97%;
-    padding: 10px;
-    border-radius: 2rem;
-    border: 15px;
-    background-color:#abebc6;
->>>>>>> 6be996ab1dde0bd3ccb4772fc04f93cf666491af
+  width: 97%;
+
+  padding: 10px;
+
+  border-radius: 2rem;
+
+  border: 15px;
+
+  background-color: #abebc6;
 }
