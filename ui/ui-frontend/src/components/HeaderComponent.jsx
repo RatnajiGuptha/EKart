@@ -41,6 +41,7 @@ class headerComponent extends Component {
                   <NavDropdown.Item href="/">Kids wear</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/">Help</Nav.Link>
+                <Nav.Link href="/">Cart</Nav.Link>
                 <Nav.Link href="/">Login</Nav.Link>
                 <Nav.Link href="/">Become a Seller</Nav.Link>
               </Nav>
