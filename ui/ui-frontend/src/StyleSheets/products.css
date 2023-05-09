@@ -19,19 +19,18 @@
     align-items: center;
     justify-content: center;
     margin: 0 0.5rem;
-    width: 16.5rem;
+    width: 14rem;
     background-color: #fff;
     padding: 20px;
     box-shadow: 0px 0px 5px rgba(41, 199, 230, 0.1);
     border-radius: 10px;
-    /* border: 0.05rem solid gray; */
     transition: all 0.3s ease-in-out;
 }
 
 .cards-tables:hover {
     box-shadow: 10px 15px 20px rgba(97, 0, 253, 0.2);
     transform: translateY(-5px);
-     border: 0.05rem solid gray;
+    border: 0.05rem solid gray;
 }
 
 .images {

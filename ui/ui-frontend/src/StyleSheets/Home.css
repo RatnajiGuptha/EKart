@@ -99,3 +99,40 @@
 .top-picks:hover .names {
   transform: scale(1.1);
 }
+
+.search {
+  width: 200rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10%;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  padding: 0.6rem;
+  width: 30rem;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background-color: #eee;
+  margin-right: 10px;
+}
+
+input[type="text"]::placeholder {
+  color: #999;
+}
