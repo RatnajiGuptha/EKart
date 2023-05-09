@@ -13,14 +13,14 @@ function HomeTopPics() {
       <div className="d-flex flex-row justify-content-center">
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683538794/kurtaset1_ub81xn.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683561941/kurtaset1_suhzrp.png" alt="1"
             className="image" />
           <h5 className="names"> Kurta Sets</h5>
         </div>
 
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683538795/saree1_q7ayhy.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683562594/saree1_cropped1_z88s9u.png" alt="1"
             className="image"
           />
           <h5 className="names"> Sarees </h5>
@@ -97,7 +97,7 @@ function HomeTopPics() {
 
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683541276/infant_wwergc.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683562798/infant_wggbqi.png" alt="1"
             className="image"
           />
           <h5 className="names"> Infant Essentials </h5>
@@ -105,7 +105,7 @@ function HomeTopPics() {
 
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683539185/kids-categories_dsjqqj.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683562953/kids_wear_categories_hpxjpq.png" alt="1"
             className="image"
           />
           <h5 className="names"> Kids Wear </h5>
@@ -113,34 +113,34 @@ function HomeTopPics() {
        
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683540420/beauty_llrlc3.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683612516/MicrosoftTeams-image_2_epqjna.png" alt="1"
             className="image"
           />
-          <h5 className="names"> Beauty </h5>
+          <h5 className="names"> Shirts </h5>
         </div>
 
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683540420/beauty_llrlc3.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683610406/trousers3_dkjb1g.png" alt="1"
             className="image"
           />
-          <h5 className="names"> Beauty </h5>
+          <h5 className="names"> Trousers </h5>
         </div>
 
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683540420/beauty_llrlc3.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683611014/MicrosoftTeams-image_uimpfn.png" alt="1"
             className="image"
           />
-          <h5 className="names"> Beauty </h5>
+          <h5 className="names"> Lounge Wear </h5>
         </div>
 
         <div className="top-picks">
           <img
-            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683540420/beauty_llrlc3.png" alt="1"
+            src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683611238/active_wear1_k8xpye.png" alt="1"
             className="image" 
           />
-          <h5 className="names"> Beauty </h5>
+          <h5 className="names"> Active Wear </h5>
         </div>
       </div>
     </div>
