@@ -2,7 +2,8 @@ import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent.jsx";
 import HomeComponent from "./components/HomeComponent";
-import Products from "./components/Product/Products";
+import Products from "./components/Products/Products";
+
 
 function App() {
 
