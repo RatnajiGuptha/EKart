@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Router exact path="/">
         <HeaderComponent />
-        <HomeComponent />
+        {/* <HomeComponent /> */}
         <Products/>
       </Router>
     </div>
