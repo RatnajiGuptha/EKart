@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ekart.inventory.entity.FashionProducts;
+import com.ekart.inventory.enums.FashionTypes;
 import com.ekart.inventory.repository.FashionProductsRepository;
 import com.ekart.inventory.service.FashionProductService;
 
@@ -32,5 +33,13 @@ public class FashionProductServiceImpl implements FashionProductService {
 		fashionProductsRepo.deleteById(id);
 		return "item deleted";
 	}
+
+	@Override
+	public List<FashionProducts> fetchByType(FashionTypes type) {
+		List<FashionProducts> products = fashionProductsRepo.findByType(type);
+		return products;
+	}
+
+
 
 }
