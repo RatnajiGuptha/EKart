@@ -9,7 +9,7 @@ const ProductsInfo = () => {
     const { productId } = useParams();
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [image, setImage] = useState(
-
+        productsInfo.image
     );
 
     const handleClick = () => {
@@ -25,29 +25,35 @@ const ProductsInfo = () => {
 
 
     return (
-        <div className='productinfo-container'>
+        <div className='d-flex flex-row justify-content-center'>
+            <div className='d-flex flex-column justify-content-start'>
+                <img className='card-images' alt='/'
+                    onClick={handleClick}// 
+                    src={productsInfo.image} />
 
-            <img className='card-images' alt='/'
-                // onClick={handleClick}// 
-                src={productsInfo.image} />
-            <img className='card-images' alt='/'
-                // onClick={handleClick}// 
-                src={productsInfo.image} />
-            <img className='card-images' alt='/'
-                // onClick={handleClick}// 
-                src={productsInfo.image} />
-            <img className='card-images' alt='/'
-                // onClick={handleClick}// 
-                src={productsInfo.image} />
-            <img className='card-images' alt='/'
-                // onClick={handleClick}// 
-                src={productsInfo.image} />
+                <img className='card-images' alt='/'
+                    // onClick={handleClick}//  
+                    src={productsInfo.image} />
 
+                <img className='card-images' alt='/'
+                    // onClick={handleClick}// 
+                    src={productsInfo.image} />
+
+                <img className='card-images' alt='/'
+                    // onClick={handleClick}// 
+                    src={productsInfo.image} />
+
+                <img className='card-images' alt='/'
+                    // onClick={handleClick}// 
+                    src={productsInfo.image} />
+            </div>
+            <div><img className='card-images' src={image}></img></div>
             <div>
                 <p>{productsInfo.title}</p>
                 <p>{productsInfo.description}</p>
             </div>
         </div>
+
 
     )
 }
