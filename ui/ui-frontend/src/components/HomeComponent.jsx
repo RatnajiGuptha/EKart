@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../StyleSheets/Home.css'
 
 import HomeCarousels from './HomeCarousels';

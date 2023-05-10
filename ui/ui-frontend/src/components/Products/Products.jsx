@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductService from "../../Services/ProductService";
+import { Link } from "react-router-dom";
 import "../../StyleSheets/products.css";
 
 const Products = () => {
@@ -17,37 +18,28 @@ const Products = () => {
         });
     }
 
-    const rows = []
-    let currentRow = [];
-
-    for (let i = 0; i < products.length; i++) {
-        currentRow.push(products[i])
-        if (currentRow.length === 5 || i === products.length - 1) {
-            rows.push(currentRow);
-            currentRow = [];
-        }
-    }
-
     return (
         <div className="cards-container">
-            {rows.map((row, rowIndex) => (
-                <div key={rowIndex} className="cards-row">
-                    {row.map((item, itemIndex) =>
-                        <div key={itemIndex} className="cards-tables">
-                            <img className="images" src={item.image} alt="/" />
+            {products.map((item) => {
+                return (
+                    <div className="cards-row">
+                        <div className="cards-tables">
+                            <Link to={`/fashion/${item.id}`} id={item.id}>
+                                <img className="images" src={item.image} />
+                            </Link>
                             <div className="product-info">
                                 <p className="cat">{item.category}</p>
                                 <p className="title">{item.title}</p>
                                 <p className="price">Rs. {item.price} /-</p>
                             </div>
                         </div>
-                    )}
+                    </div>
+                );
+            })}
 
-                </div>
-            ))}
         </div>
 
-    )
+    );
 
 }
 
