@@ -1,0 +1,14 @@
+.card-images {
+    height: 200px;
+    width: 200px;
+    padding: 10px;
+
+}
+
+.productinfo-containe {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+}

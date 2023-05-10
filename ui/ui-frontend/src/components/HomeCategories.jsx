@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function HomeCategories() {
     return (
-        <div className='d-flex flex-row justify-content-center'>
+        <div className='categories-container'>
             <div className='card-info'>
                 <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" alt="/" className='w-75' />
                 <p className='card-names'>  Accessories</p>

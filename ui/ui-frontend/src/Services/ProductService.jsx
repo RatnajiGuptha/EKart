@@ -1,13 +1,17 @@
 import axios from 'axios';
 
-const products_URI = "https://fakestoreapi.com/products";
+const PRODUCTS_BASE_URI = "https://fakestoreapi.com/products";
 
 
 class ProductService {
 
     getAllProducts() {
-        return axios.get(products_URI);
+        return axios.get(PRODUCTS_BASE_URI);
+    }
+
+    getProductById(productId) {
+        return axios.get(PRODUCTS_BASE_URI + "/" + productId);
     }
 }
 
-export default new ProductService() ;
+export default new ProductService();
