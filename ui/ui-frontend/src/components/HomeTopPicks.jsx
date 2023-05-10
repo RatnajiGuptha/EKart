@@ -1,8 +1,22 @@
+import React, { useEffect, useState } from "react";
+import ProductService from "../Services/ProductService";
+import ProductsByTypeComponent from "./Products/ProductsByTypeComponent";
 import "../StyleSheets/Home.css";
+import { typeImplementation } from "@testing-library/user-event/dist/type/typeImplementation";
 
 function HomeTopPics() {
+
+  const [type, setType] = useState('KurthaSets');
+  const data1="kurtha set";
+
+  const getByType = (types) =>{
+    console.log(types);
+      window.location.assign("/fashionByType");
+      <ProductsByTypeComponent info = {data1}/>
+  }
   return (
     <div className="fluid-container">
+      {/* <ProductsByTypeComponent info = {data1}/> */}
       <div className="m-2">
         <img
           className="newArrivalGif coloooo"
@@ -11,11 +25,12 @@ function HomeTopPics() {
       </div>
 
       <div className="d-flex flex-row justify-content-center">
-        <div className="top-picks">
+        <div className="top-picks" onClick={()=>getByType("KurthaSets")}>
           <img
             src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683561941/kurtaset1_suhzrp.png" alt="1"
             className="image" />
           <h5 className="names"> Kurta Sets</h5>
+          
         </div>
 
         <div className="top-picks">
@@ -66,7 +81,7 @@ function HomeTopPics() {
           <h5 className="names"> Heels </h5>
         </div>
 
-       
+
         <div className="top-picks">
           <img
             src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683539206/shoes1_ggm0s3.png" alt="1"
@@ -110,7 +125,7 @@ function HomeTopPics() {
           />
           <h5 className="names"> Kids Wear </h5>
         </div>
-       
+
         <div className="top-picks">
           <img
             src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683612516/MicrosoftTeams-image_2_epqjna.png" alt="1"
@@ -138,7 +153,7 @@ function HomeTopPics() {
         <div className="top-picks">
           <img
             src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683611238/active_wear1_k8xpye.png" alt="1"
-            className="image" 
+            className="image"
           />
           <h5 className="names"> Active Wear </h5>
         </div>
