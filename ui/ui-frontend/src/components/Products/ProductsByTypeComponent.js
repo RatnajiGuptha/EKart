@@ -14,7 +14,7 @@ const ProductsByTypeComponent = (props) => {
     }, []);
 
     const getProducts = (type) => {
-        ProductService.getProdByType(type).then((response) => {
+        ProductService.getProdByType("KurthaSets").then((response) => {
             console.log(response.data);
             setProducts(response.data);
         }).catch(error => {
