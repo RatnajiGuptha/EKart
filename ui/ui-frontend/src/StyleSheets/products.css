@@ -65,3 +65,8 @@
 .cat {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.img-main{   
+    height: 80%; 
+    width: 100%;
+}

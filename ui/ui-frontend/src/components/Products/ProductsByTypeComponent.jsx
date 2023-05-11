@@ -26,9 +26,9 @@ const ProductsByTypeComponent = () => {
         <div className="cards-container">
             {products.map((item) => {
                 return (
-                    <div key={item.id} className="cards-row">
+                    <div key={item.productId} className="cards-row">
                         <div className="cards-tables">
-                            <Link to={`/fashion/${type}/${item.productId}`} id={item.productId}>
+                            <Link to={`/fashion/${item.fashionId}`} id={item.productId}>
                                 <img className="images" src={item.logoImg} />
                             </Link>
                             <div className="product-info">
