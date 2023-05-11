@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProductService from "../Services/ProductService";
+import { useNavigate } from 'react-router-dom';
 import ProductsByTypeComponent from "./Products/ProductsByTypeComponent";
 import "../StyleSheets/Home.css";
 import "../StyleSheets/products.css"
@@ -7,10 +7,12 @@ import "../StyleSheets/products.css"
 const HomeTopPics = () => {
 
   const [type, setType] = useState('');
+  const navigate = useNavigate();
 
   const handleCategoryClicks = (categoryType) => {
     console.log(categoryType);
     setType(categoryType);
+    navigate(`/fashionByType/${categoryType}`);
 
   }
 
@@ -25,14 +27,14 @@ const HomeTopPics = () => {
 
       <div className="d-flex flex-row justify-content-center">
         <div className="categories-container" >
-          <div className="top-picks" onClick={() => handleCategoryClicks('KurtaSets')}>
+          <div className="top-picks" onClick={() => handleCategoryClicks('KurthaSets')}>
             <img
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683561941/kurtaset1_suhzrp.png" alt="/"
               className="image" />
             <h5 className="names"> Kurta Sets</h5>
           </div>
 
-          <div className="top-picks" onClick={() => handleCategoryClicks('sarees')}>
+          <div className="top-picks" onClick={() => handleCategoryClicks('Sarees')}>
             <img
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683562594/saree1_cropped1_z88s9u.png" alt="/"
               className="image"
@@ -88,7 +90,7 @@ const HomeTopPics = () => {
             <h5 className="names"> Shoes </h5>
           </div>
 
-          <div className="top-picks" onClick={() => handleCategoryClicks('TShirts')}>
+          <div className="top-picks" onClick={() => handleCategoryClicks('Tshirt')}>
             <img
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683539492/t-shirts2_pyetoj.png" alt="/"
               className="image"

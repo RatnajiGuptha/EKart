@@ -14,9 +14,13 @@ class ProductService {
         return axios.get(PRODUCTS_BASE_URI + "/" + productId);
     }
 
-    getProdByType() {
-        // return axios.get(products_URI + "/getProducts/type/" + type);
-        return axios.get(PRODUCTS_BASE_URI);
+    getProdByType(type) {
+        return axios.get(products_URI + "/getProducts/type/" + type);
+
+    }
+
+    getProducts() {
+        return axios.get(products_URI +"/getProducts");
     }
 
 }

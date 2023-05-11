@@ -17,7 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/fashion" element={<Products />}></Route>
-          <Route path="/fashionByType" element={<ProductsByTypeComponent />}></Route>
+          <Route path="/fashionByType/:type" element={<ProductsByTypeComponent />}></Route>
+          <Route path="/fashionByType/:type/:productId" element={<ProductsInfo />}></Route>
           <Route path="/fashion/:productId" element={<ProductsInfo />}></Route>
         </Routes>
 
