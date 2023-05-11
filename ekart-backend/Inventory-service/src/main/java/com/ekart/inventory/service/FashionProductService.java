@@ -17,4 +17,6 @@ public interface FashionProductService {
 	public String deleteFashionProductById(int id);
 	
 	public List<FashionProducts> fetchByType(FashionTypes type);
+	
+	public FashionProducts fetchById(int id);
 }

@@ -40,6 +40,12 @@ public class FashionProductServiceImpl implements FashionProductService {
 		return products;
 	}
 
+	@Override
+	public FashionProducts fetchById(int id) {
+		FashionProducts product = fashionProductsRepo.findById(id).get();
+		return product;
+	}
+
 
 
 }
