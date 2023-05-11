@@ -54,20 +54,20 @@
 .product-deatails-container h1 {
     font-size: 28px;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .product-deatails-container p {
     font-size: 16px;
-    line-height: 1.5;
-    margin: 10px 0;
+    line-height: 1;
+    margin: 5px 0;
 
 }
 
 .product-deatails-container .product-name {
     font-size: 24px;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 10px;
 
 }
 
@@ -89,6 +89,33 @@
 }
 
 .product-deatails-container .suitable-for{
-    margin-top : 10px;
+    margin-top : 5px;
     font-style: italic;
+}
+
+.size-selector {
+    display: inline-block;
+    border : 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-right: 10px ;
+    cursor: pointer;
+}
+
+.size-selector:hover {
+    background-color: #f2f2f2;
+}
+
+.size-selector.seleted {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.size-selector.seleted:hover {
+    background-color: #0069d9;
+}
+
+.size-text{
+    font-size: 16px;
+    font-weight: bold;
 }

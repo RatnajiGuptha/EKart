@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import ProductsByTypeComponent from "./Products/ProductsByTypeComponent";
+import ProductsByTypeComponent from "./Products/FashionProductByCategory";
 import "../StyleSheets/Home.css";
 import "../StyleSheets/products.css"
 

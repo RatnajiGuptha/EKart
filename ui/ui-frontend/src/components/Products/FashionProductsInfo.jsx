@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 import "../../StyleSheets/ProductInfo.css"
 
 
-const ProductsInfo = () => {
+const FashionProductsInfo = () => {
 
-    const { productId } = useParams();
+    const { type, productId } = useParams();
 
     const [productsInfo, setProductInfo] = useState({ id: null });
 
@@ -17,12 +17,12 @@ const ProductsInfo = () => {
     }
 
     useEffect(() => {
-        ProductService.getProductById(productId).then((response) => {
+        ProductService.getProductFilterTypeById(type, productId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)
         })
-    }, [productId]);
+    }, [type, productId]);
 
     return (
         <div className='product-info-container'>
@@ -51,20 +51,27 @@ const ProductsInfo = () => {
                 <img className='product-main-image' src={image}></img>
             </div>
             <div className='product-deatails-container'>
-                <h1 className='brand-name'>{productsInfo.brandName}</h1>
-                <p>{productsInfo.type}</p>
+                <h1>{productsInfo.brandName}</h1>
+                <p className='suitable-for'> {productsInfo.suitablefor} / {productsInfo.type}</p>
                 <h2 className='product-name'>{productsInfo.productName}</h2>
                 <p className='product-description'>{productsInfo.productDescription}</p>
-                <p>Color {productsInfo.color}</p>
-                <p>Size {productsInfo.size}</p>
-                <p className='product-price'>{productsInfo.productPrice}</p>
-                <h2 className='seller-name'>{productsInfo.sellerName}</h2>
-                <p className='suitable-for'> {productsInfo.suitablefor}</p>
+                <div className="d-flex">
+                    <div className={`size-selector`}>
+                        <span className='size-text'> Color:{productsInfo.color} </span>
+                    </div>
+                    <div className={`size-selector`}>
+                        <span className='size-text'> Size:{productsInfo.size} </span>
+                    </div>
+                </div>
+                <p className='product-price'> Price : ₹ {productsInfo.productPrice}/-</p>
+                <h5 className='seller-name'>Seller : {productsInfo.sellerName}</h5>
+                <div><button className='btn btn-warning'>Add to cart</button> </div>
             </div>
+
         </div>
 
 
     )
 }
 
-export default ProductsInfo;
+export default FashionProductsInfo;

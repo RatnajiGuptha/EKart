@@ -146,3 +146,8 @@ input[type="text"] {
 input[type="text"]::placeholder {
   color: #999;
 }
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

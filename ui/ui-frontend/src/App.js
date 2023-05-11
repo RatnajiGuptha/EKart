@@ -1,10 +1,11 @@
 import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent.jsx";
-import HomeComponent from "./components/HomeComponent";
-import Products from "./components/Products/Products";
-import ProductsByTypeComponent from "./components/Products/ProductsByTypeComponent";
-import ProductsInfo from "./components/Products/ProductsInfo";
+import HomeComponent from "../../ui-frontend/src/components/HomeComponent"
+import FashionProducts from "./components/Products/FashionProducts";
+import FashionProductByCategory from "./components/Products/FashionProductByCategory";
+import FashionProductsInfo from "./components/Products/FashionProductsInfo";
+import AllFashionProductsInfo from "./components/Products/AllFashionProductsInfo";
 
 
 function App() {
@@ -16,12 +17,11 @@ function App() {
         {/* <HomeComponent /> */}
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
-          <Route path="/fashion" element={<Products />}></Route>
-          <Route path="/fashionByType/:type" element={<ProductsByTypeComponent />}></Route>
-          <Route path="/fashionByType/:productId" element={<ProductsInfo />}></Route>
-          <Route path="/fashion/:productId" element={<ProductsInfo />}></Route>
+          <Route path="/fashion" element={<FashionProducts />}></Route>
+          <Route path="/fashion/:productId" element={<AllFashionProductsInfo/>}></Route>
+          <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>
+          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />}></Route>
         </Routes>
-
       </Router>
 
     </div>

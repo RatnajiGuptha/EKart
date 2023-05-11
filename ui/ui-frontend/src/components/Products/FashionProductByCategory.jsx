@@ -4,11 +4,11 @@ import ProductService from "../../Services/ProductService";
 import "../../StyleSheets/products.css";
 import "../HomeTopPicks";
 
-const ProductsByTypeComponent = () => {
+const FashionProductByCategory = () => {
     const [products, setProducts] = useState([]);
 
     const { type } = useParams();
-    console.log(type)
+    // console.log(type)
 
     useEffect(() => {
         ProductService.getProdByType(type).then((response) => {
@@ -26,19 +26,18 @@ const ProductsByTypeComponent = () => {
         <div className="cards-container">
             {products.map((item) => {
                 return (
-                    <div key={item.productId} className="cards-row">
-                        <div className="cards-tables">
-                            <Link to={`/fashion/${item.fashionId}`} id={item.productId}>
+                    <Link to={`/fashion/${type}/${item.fashionId}`} className="link" id={item.productId}>
+                        <div key={item.productId} className="cards-row">
+                            <div className="cards-tables">
                                 <img className="images" src={item.logoImg} />
-                            </Link>
-                            <div className="product-info">
-                                <p className="cat">{item.type}</p>
-                                <p className="title">{item.productName}</p>
-                                <p className="price">Rs. {item.productPrice} /-</p>
+                                <div className="product-info">
+                                    <p className="cat">{item.type}</p>
+                                    <p className="title">{item.productName}</p>
+                                    <p className="price">₹ {item.productPrice} /-</p>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
+                    </Link>
                 );
             })}
         </div>
@@ -48,4 +47,4 @@ const ProductsByTypeComponent = () => {
 
 }
 
-export default ProductsByTypeComponent;
+export default FashionProductByCategory;

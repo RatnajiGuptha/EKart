@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import '../StyleSheets/Home.css';
 
 function HomeCategories() {
     return (
@@ -15,12 +16,12 @@ function HomeCategories() {
                 <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522149/electronics_yjk1bl.webp" alt="/" className='w-75' />
                 <p className='card-names'>   Electronics </p>
             </div>
-            <Link to="/fashion">
+            <Link to="/fashion" className="link">
                 <div className='card-info'>
                     <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683279944/fashion1_drwetu.png" alt="/" className="w-100" />
                     <p className='card-names'> Fashion </p>
-                </div>
-            </Link>
+                </div></Link>
+
             <div className='card-info'>
                 <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280292/groceries_xwmz5e.png" alt="/" className='w-75' />
                 <p className='card-names'>   Grocery </p>
