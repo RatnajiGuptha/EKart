@@ -3,7 +3,13 @@ package com.ekart.inventory.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.inventory.entity.FashionProducts;
 import com.ekart.inventory.enums.FashionTypes;
@@ -44,5 +50,19 @@ public class FashionProductsController {
 		List<FashionProducts> fetchByTypes = fashionService.fetchByType(type);
 		return fetchByTypes;
 	}
+	
+	@GetMapping("/getProducts/type/{type}/{productId}")
+	public FashionProducts getFashionProductsByTypeAndId(@PathVariable FashionTypes type,@PathVariable int productId ){
+//		List<FashionProducts> fetchByTypes = fashionService.fetchByType(type);
+		FashionProducts product = fashionService.fetchById(productId);
+		return product;
+	}
+	
+	@GetMapping("/getProducts/{ProductId}")
+	public FashionProducts getFashionProductsById(@PathVariable int productId) {
+		FashionProducts product = fashionService.fetchById(productId);
+		return product;
+	}
+	
 	
 }
