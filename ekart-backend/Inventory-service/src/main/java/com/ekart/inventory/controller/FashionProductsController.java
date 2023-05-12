@@ -58,7 +58,7 @@ public class FashionProductsController {
 		return product;
 	}
 	
-	@GetMapping("/getProducts/{ProductId}")
+	@GetMapping("/getProducts/{productId}")
 	public FashionProducts getFashionProductsById(@PathVariable int productId) {
 		FashionProducts product = fashionService.fetchById(productId);
 		return product;
