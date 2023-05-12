@@ -15,7 +15,7 @@ import com.ekart.inventory.entity.FashionProducts;
 import com.ekart.inventory.enums.FashionTypes;
 import com.ekart.inventory.service.FashionProductService;
 
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000/")
 @RestController
 @RequestMapping("/api/fashionProducts")
 public class FashionProductsController {
