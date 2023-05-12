@@ -6,6 +6,7 @@ import FashionProducts from "./components/Products/FashionProducts";
 import FashionProductByCategory from "./components/Products/FashionProductByCategory";
 import FashionProductsInfo from "./components/Products/FashionProductsInfo";
 import AllFashionProductsInfo from "./components/Products/AllFashionProductsInfo";
+import LoginPage from "./components/LoginPage";
 
 
 function App() {
@@ -14,13 +15,13 @@ function App() {
     <div className="App">
       <Router>
         <HeaderComponent />
-        {/* <HomeComponent /> */}
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/fashion" element={<FashionProducts />}></Route>
-          <Route path="/fashion/:productId" element={<AllFashionProductsInfo/>}></Route>
+          <Route path="/fashion/:productId" element={<AllFashionProductsInfo />}></Route>
           <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>
           <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
         </Routes>
       </Router>
 

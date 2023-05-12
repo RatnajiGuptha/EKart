@@ -21,15 +21,15 @@ function LoginPage() {
     return (
         <div className="login-page">
             <form className='forms' onSubmit={handleLogin}>
-                <label > <b>  User Name </b>
+                <label >  User Name
                     <input type="text" value={username} onChange={handleUsername} placeholder="Enter a username" />
                 </label>
-                <label > <b>  Password </b>
+                <label >   Password
                     <input type="password" value={password} onChange={handlePassword} placeholder="Enter a password" />
                 </label>
-                <div >
-                    <button type='submit' className='btn btn-success m-2'> Login</button>
-                    <button className='btn btn-warning m-2'> Sign Up</button>
+                <div className='text-center'>
+                    <button type='submit' className='login-button'> Login </button>
+                    <button className='signup-button'> Sign Up</button>
                 </div>
             </form>
 

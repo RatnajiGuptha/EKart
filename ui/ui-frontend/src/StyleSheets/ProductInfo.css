@@ -73,7 +73,7 @@
 
 .product-deatails-container .product-description {
     max-width: 800px;
-    text-align: center;
+    text-align: start;
     margin-bottom: 30px;
 }
 

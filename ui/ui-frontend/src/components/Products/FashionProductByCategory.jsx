@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ProductService from "../../Services/ProductService";
 import "../../StyleSheets/products.css";
-import "../HomeTopPicks";
+import "../HomePagesComponents/FashionHomeFilter";
 
 const FashionProductByCategory = () => {
     const [products, setProducts] = useState([]);
 
     const { type } = useParams();
-    // console.log(type)
 
     useEffect(() => {
         ProductService.getProdByType(type).then((response) => {
