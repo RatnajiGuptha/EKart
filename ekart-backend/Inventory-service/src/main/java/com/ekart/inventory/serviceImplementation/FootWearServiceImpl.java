@@ -30,9 +30,9 @@ public class FootWearServiceImpl implements FootWearService{
     }
 
     @Override
-    public List<FootWear> GetFootWearBYId(int Id) {
-        List<FootWear> footWearList = footWearRepository.findByFootWearId(Id);
-        return footWearList;
+    public FootWear GetFootWearBYId(int Id) {
+        FootWear footWear = footWearRepository.findByFootWearId(Id);
+        return footWear;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class FootWearServiceImpl implements FootWearService{
 
     @Override
     public List<FootWear> GetFootWearBySuitable(Suitable suitable) {
-        List<FootWear> footWearList = footWearRepository.findBySuitable(suitable);
+        List<FootWear> footWearList = footWearRepository.findBySuitablefor(suitable);
         return footWearList;
     }
 }

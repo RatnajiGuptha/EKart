@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ekart.inventory.entity.AccessoriesProducts;
 import com.ekart.inventory.enums.AccessoriesTypes;
+import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.repository.AccessoriesProductsRepository;
 import com.ekart.inventory.service.AccessoriesProductService;
 
@@ -37,6 +38,12 @@ public class AccessoriesProductServiceImpl implements AccessoriesProductService{
 	@Override
 	public List<AccessoriesProducts> getAccessoriesProductsByType(AccessoriesTypes type) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesRepo.findByType(type);
+		return accessoriesProducts;
+	}
+
+	@Override
+	public List<AccessoriesProducts> GetAccessoriesProductsBySuitable(Suitable suitable) {
+		List<AccessoriesProducts> accessoriesProducts = accessoriesRepo.findBySuitablefor(suitable);
 		return accessoriesProducts;
 	}
 

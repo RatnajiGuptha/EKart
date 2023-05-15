@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ekart.inventory.entity.FashionProducts;
 import com.ekart.inventory.enums.FashionTypes;
+import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.repository.FashionProductsRepository;
 import com.ekart.inventory.service.FashionProductService;
 
@@ -44,6 +45,12 @@ public class FashionProductServiceImpl implements FashionProductService {
 	public FashionProducts fetchById(int id) {
 		FashionProducts product = fashionProductsRepo.findById(id).get();
 		return product;
+	}
+
+	@Override
+	public List<FashionProducts> GetFashionProductsBySuitable(Suitable suitable) {
+		List<FashionProducts> fashionProducts = fashionProductsRepo.findBySuitablefor(suitable);
+		return fashionProducts;
 	}
 
 
