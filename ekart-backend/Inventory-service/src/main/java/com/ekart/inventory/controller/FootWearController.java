@@ -1,6 +1,7 @@
 package com.ekart.inventory.controller;
 
 import com.ekart.inventory.entity.FootWear;
+import com.ekart.inventory.enums.FootWearType;
 import com.ekart.inventory.service.FootWearService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,9 +35,17 @@ public class FootWearController {
     }
 
     @GetMapping("/getFootWear")
-    public ResponseEntity<List<FootWear>> FetchFootWare(){
+    public ResponseEntity<List<FootWear>> fetchFootWare(){
         List<FootWear> footWearList = footWearService.GetAllFootWear();
 
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
     }
+
+    @GetMapping("/getFootWear/{type}")
+    public ResponseEntity<List<FootWear>> fetchByType(@PathVariable FootWearType type){
+        List<FootWear> footWearList = footWearService.GetFootWearByType(type);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+    }
+
 }

@@ -17,12 +17,13 @@ public class FootWear {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int footWearId;
 
-    private String footWearName;
+    private String productName;
     private String logoImg;
 
-    private int FootWearPrice;
-    private String footWearDescription;
+    private int productPrice;
+    private String productDescription;
     private String brandName;
+
 
     @Enumerated(EnumType.STRING)
     private FootWearType type;
@@ -31,7 +32,7 @@ public class FootWear {
     private FootWearSize size;
 
     @Enumerated(EnumType.STRING)
-    private Suitable suitable;
+    private Suitable suitablefor;
 
     private String manufactureDate;
 
