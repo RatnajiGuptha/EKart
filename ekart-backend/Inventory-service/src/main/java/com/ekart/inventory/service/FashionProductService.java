@@ -3,7 +3,6 @@ package com.ekart.inventory.service;
 import java.util.List;
 
 import com.ekart.inventory.entity.FashionProducts;
-import com.ekart.inventory.entity.FootWear;
 import com.ekart.inventory.enums.FashionTypes;
 import com.ekart.inventory.enums.Suitable;
 

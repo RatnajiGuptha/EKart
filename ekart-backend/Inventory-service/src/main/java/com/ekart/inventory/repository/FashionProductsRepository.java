@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ekart.inventory.entity.FashionProducts;
-import com.ekart.inventory.entity.FootWear;
 import com.ekart.inventory.enums.FashionTypes;
 import com.ekart.inventory.enums.Suitable;
 

@@ -1,7 +1,8 @@
 package com.ekart.inventory.repository;
 
-import com.ekart.inventory.entity.Toys;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ekart.inventory.entity.Toys;
 
 public interface ToysRepository extends JpaRepository<Toys,Integer> {
 }

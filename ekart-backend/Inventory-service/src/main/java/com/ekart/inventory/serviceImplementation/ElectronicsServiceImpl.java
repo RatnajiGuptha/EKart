@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.ekart.inventory.entity.ElectronicsProducts;
 import com.ekart.inventory.enums.ElectronicsTypes;
-import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.repository.ElectronicsRepository;
 import com.ekart.inventory.service.ElectronicsService;
 

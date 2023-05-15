@@ -1,9 +1,10 @@
 package com.ekart.inventory.service;
 
-import com.ekart.inventory.entity.Cart;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.ekart.inventory.entity.Cart;
 
 @Service
 public interface CartService {

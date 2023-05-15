@@ -1,9 +1,6 @@
 package com.ekart.inventory.entity;
 
 import com.ekart.inventory.enums.ElectronicsTypes;
-import com.ekart.inventory.enums.FashionTypes;
-import com.ekart.inventory.enums.Size;
-import com.ekart.inventory.enums.Suitable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

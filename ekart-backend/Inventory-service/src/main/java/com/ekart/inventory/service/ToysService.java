@@ -1,8 +1,8 @@
 package com.ekart.inventory.service;
 
-import com.ekart.inventory.entity.Toys;
-
 import java.util.List;
+
+import com.ekart.inventory.entity.Toys;
 
 public interface ToysService {
     String addToys(Toys toys);
