@@ -49,7 +49,7 @@ public class FootWearServiceImpl implements FootWearService{
 
     @Override
     public List<FootWear> GetFootWearBySuitable(Suitable suitable) {
-        List<FootWear> footWearList = footWearRepository.findBySuitable(suitable);
+        List<FootWear> footWearList = footWearRepository.findBySuitablefor(suitable);
         return footWearList;
     }
 }
