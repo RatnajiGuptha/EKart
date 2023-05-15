@@ -1,15 +1,22 @@
 package com.ekart.inventory.controller;
 
-import com.ekart.inventory.entity.FootWear;
-import com.ekart.inventory.enums.FootWearType;
-import com.ekart.inventory.service.FootWearService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.ekart.inventory.entity.FootWear;
+import com.ekart.inventory.enums.FootWearType;
+import com.ekart.inventory.enums.Suitable;
+import com.ekart.inventory.service.FootWearService;
 
 @CrossOrigin("http://localhost:3000/")
 @RestController
@@ -46,6 +53,19 @@ public class FootWearController {
         List<FootWear> footWearList = footWearService.GetFootWearByType(type);
 
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+    }
+    
+    @GetMapping("/getFootWear/type/{type}/{footWearId}")
+    public ResponseEntity<FootWear> fetchByTypeandId(@PathVariable FootWearType type,@PathVariable int footWearId){
+    	List<FootWear> footWearList = footWearService.GetFootWearByType(type);
+    	FootWear footWear = footWearService.GetFootWearBYId(footWearId);
+    	return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWear);
+    }
+    
+    @GetMapping("/getFootWear/suitableFor/{suitable}")
+    public ResponseEntity<List<FootWear>> fetchBySuitable(@PathVariable Suitable suitable){
+    	List<FootWear> footWearList = footWearService.GetFootWearBySuitable(suitable);
+    	return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
     }
 
 }
