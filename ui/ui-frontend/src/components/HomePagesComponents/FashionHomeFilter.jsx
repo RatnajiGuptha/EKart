@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import ProductsByTypeComponent from "../Products/FashionProductByCategory";
 import "../../StyleSheets/Home.css";
-import "../../StyleSheets/products.css"
+import "../../StyleSheets/products.css";
 
 const FashionHomeFilter = () => {
 
@@ -20,7 +19,6 @@ const FashionHomeFilter = () => {
     <div className="fluid-container">
       <div className="d-flex flex-row justify-content-center">
         <div className="categories-container" >
-
           <div className="top-picks" onClick={() => handleCategoryClicks('Sarees')}>
             <img
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683562594/saree1_cropped1_z88s9u.png" alt="/"
@@ -29,12 +27,12 @@ const FashionHomeFilter = () => {
             <h5 className="names"> Sarees </h5>
           </div>
 
-          <div className="top-picks" onClick={() => handleCategoryClicks('Pants')}>
+          <div className="top-picks" onClick={() => handleCategoryClicks('Jeans')}>
             <img
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683540982/jeans_n3w09a.png" alt="/"
               className="image"
             />
-            <h5 className="names"> Pants </h5>
+            <h5 className="names"> Jeans </h5>
           </div>
 
           <div className="top-picks" onClick={() => handleCategoryClicks('Shirts')}>

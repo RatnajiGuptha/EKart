@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import ProductService from "../../Services/ProductService";
+import FashionProductService from "../../Services/FashionProductService";
 import "../../StyleSheets/products.css";
 import "../HomePagesComponents/FashionHomeFilter";
 
@@ -10,7 +10,7 @@ const FashionProductByCategory = () => {
     const { type } = useParams();
 
     useEffect(() => {
-        ProductService.getProdByType(type).then((response) => {
+        FashionProductService.getProdByType(type).then((response) => {
             console.log(type);
             console.log(response.data);
             setProducts(response.data);
@@ -28,7 +28,7 @@ const FashionProductByCategory = () => {
                     <Link to={`/fashion/${type}/${item.fashionId}`} className="link" id={item.productId}>
                         <div key={item.productId} className="cards-row">
                             <div className="cards-tables">
-                                <img className="images" src={item.logoImg} />
+                                <img className="images" src={item.logoImg} alt="/" />
                                 <div className="product-info">
                                     <p className="cat">{item.type}</p>
                                     <p className="title">{item.productName}</p>

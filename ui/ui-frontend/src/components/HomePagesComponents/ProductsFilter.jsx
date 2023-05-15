@@ -4,7 +4,7 @@ import ProductsByTypeComponent from "../Products/FashionProductByCategory";
 import "../../StyleSheets/Home.css";
 import "../../StyleSheets/products.css"
 
-const HomeTopPics = () => {
+const ProductsFilter = () => {
 
   const [type, setType] = useState('');
   const navigate = useNavigate();
@@ -12,10 +12,9 @@ const HomeTopPics = () => {
   const handleCategoryClicks = (categoryType) => {
     console.log(categoryType);
     setType(categoryType);
-    navigate(`/fashionByType/${categoryType}`);
+    navigate(`/${categoryType}`);
 
   }
-
   return (
     <div className="fluid-container">
       <div className="d-flex flex-row justify-content-center">
@@ -37,8 +36,6 @@ const HomeTopPics = () => {
             <h5 className="names"> Beauty </h5>
           </div>
 
-
-
           <div className="top-picks" onClick={() => handleCategoryClicks('Heels')}>
             <img
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683539977/heels_b4akkl.png" alt="/"
@@ -55,20 +52,13 @@ const HomeTopPics = () => {
             <h5 className="names"> Shoes </h5>
           </div>
 
-
-
-          <div className="top-picks" onClick={() => handleCategoryClicks('Watches')}>
+          <div className="top-picks" onClick={() => handleCategoryClicks('accessories/Watches')}>
             <img
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683541431/watch_zjwjfc.png" alt="/"
               className="image"
             />
             <h5 className="names"> Watches </h5>
           </div>
-
-
-
-
-
 
           <div>
             <div className="top-picks" onClick={() => handleCategoryClicks('Jewellery')}>
@@ -89,4 +79,4 @@ const HomeTopPics = () => {
   );
 }
 
-export default HomeTopPics;
+export default ProductsFilter;

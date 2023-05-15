@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import ProductService from '../../Services/ProductService';
+import FashionProductService from '../../Services/FashionProductService';
 import { useParams } from 'react-router-dom';
-import "../../StyleSheets/ProductInfo.css"
+
+import "../../StyleSheets/Home.css";
+import AccessoriesService from '../../Services/AccessoriesService';
 
 
-const AllFashionProductsInfo = () => {
+const AccessoriesProductsInfo = () => {
 
-    const { productId } = useParams();
+    const { accessoryId } = useParams();
 
     const [productsInfo, setProductInfo] = useState({ id: null });
 
@@ -17,12 +19,12 @@ const AllFashionProductsInfo = () => {
     }
 
     useEffect(() => {
-        ProductService.getProductById(productId).then((response) => {
+        AccessoriesService.getAccessoryById(accessoryId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)
         })
-    }, [productId]);
+    }, [accessoryId]);
 
     return (
         <div className='product-info-container'>
@@ -48,7 +50,7 @@ const AllFashionProductsInfo = () => {
                     src={productsInfo.productImg5} />
             </div>
             <div className='product-main-image-container'>
-                <img className='product-main-image' src={image}></img>
+                <img className='product-main-image' src={image} alt='/'></img>
             </div>
             <div className='product-deatails-container'>
                 <h1>{productsInfo.brandName}</h1>
@@ -74,4 +76,4 @@ const AllFashionProductsInfo = () => {
     )
 }
 
-export default AllFashionProductsInfo;
+export default AccessoriesProductsInfo;

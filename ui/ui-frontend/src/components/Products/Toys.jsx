@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from "react";
-import FashionProductService from "../../Services/FashionProductService";
+import ToysService from '../../Services/ToysService';
 import { Link } from "react-router-dom";
-import "../../StyleSheets/products.css";
 
 
-const FashionProducts = () => {
-
-    const [products, setProducts] = useState([]);
+const Toys = () => {
+    const [toy, setToy] = useState([]);
 
     useEffect(() => {
         getProducts();
     }, []);
 
     const getProducts = () => {
-        FashionProductService.getAllProducts().then((response) => {
+        ToysService.getAllToys().then((response) => {
             console.log(response);
-            setProducts(response.data);
+            setToy(response.data);
         });
     }
 
     return (
         <div className="cards-container">
-            {products.map((item) => {
+            {toy.map((item) => {
                 return (
-                    <Link to={`/fashion/${item.fashionId}`} className="link" id={item.productId}>
-                        <div key={item.productId} className="cards-row">
+                    <Link to={`/toys/${item.toyId}`} className="link" id={item.toyId}>
+                        <div key={item.toyId} className="cards-row">
                             <div className="cards-tables">
                                 <img className="images" src={item.logoImg} alt='/' />
                                 <div className="product-info">
@@ -36,15 +34,10 @@ const FashionProducts = () => {
                         </div>
                     </Link>
                 );
-
             })}
         </div>
 
     );
-
 }
 
-export default FashionProducts;
-
-
-
+export default Toys;
