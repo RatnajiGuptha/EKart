@@ -15,7 +15,7 @@ public interface FootWearService {
 
     public List<FootWear> GetAllFootWear();
 
-    public List<FootWear> GetFootWearBYId(int Id);
+    public FootWear GetFootWearBYId(int Id);
 
     public List<FootWear> GetFootWearByType(FootWearType footWearType);
     public List<FootWear> GetFootWearBySize(FootWearSize footWearSize);

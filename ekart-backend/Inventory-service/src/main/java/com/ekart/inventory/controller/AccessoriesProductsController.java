@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.inventory.entity.AccessoriesProducts;
 import com.ekart.inventory.enums.AccessoriesTypes;
+import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.service.AccessoriesProductService;
 
 @CrossOrigin("http://localhost:3000/")
@@ -54,9 +55,22 @@ public class AccessoriesProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 	
-	@GetMapping("/getAccessoriesProductByType/{type}")
+	@GetMapping("/getAccessories/type/{type}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductByType(@PathVariable AccessoriesTypes type){
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProductsByType(type);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
+	}
+	
+	@GetMapping("/getAccessories/type/{type}/{accessoryId}")
+	public ResponseEntity<AccessoriesProducts> getAccessoriesProductByTypeandId(@PathVariable AccessoriesTypes type,@PathVariable int accessoryId){
+		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProductsByType(type);
+		AccessoriesProducts acccessoryProductById = accessoriesProductService.getAccessoriesProductById(accessoryId);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(acccessoryProductById);
+	}
+	
+	@GetMapping("/getAccessories/suitableFor/{suitable}")
+	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySuitable(@PathVariable Suitable suitable){
+		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.GetAccessoriesProductsBySuitable(suitable);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 

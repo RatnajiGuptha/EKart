@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FootWearRepository extends JpaRepository<FootWear, Integer> {
-    List<FootWear> findByFootWearId(int id);
+    FootWear findByFootWearId(int id);
 
     List<FootWear> findByType(FootWearType footWearType);
 
