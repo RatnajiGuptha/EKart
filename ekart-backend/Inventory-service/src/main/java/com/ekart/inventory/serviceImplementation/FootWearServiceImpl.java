@@ -1,0 +1,55 @@
+package com.ekart.inventory.serviceImplementation;
+
+import com.ekart.inventory.entity.FootWear;
+import com.ekart.inventory.enums.FootWearSize;
+import com.ekart.inventory.enums.FootWearType;
+import com.ekart.inventory.enums.Suitable;
+import com.ekart.inventory.repository.FootWearRepository;
+import com.ekart.inventory.service.FootWearService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class FootWearServiceImpl implements FootWearService{
+
+    @Autowired
+    private FootWearRepository footWearRepository;
+
+    @Override
+    public String PostFootWare(FootWear footWear) {
+        footWearRepository.save(footWear) ;
+        return "Fottware added";
+    }
+
+    @Override
+    public List<FootWear> GetAllFootWear() {
+        List<FootWear> footWearList = footWearRepository.findAll();
+        return footWearList;
+    }
+
+    @Override
+    public List<FootWear> GetFootWearBYId(int Id) {
+        List<FootWear> footWearList = footWearRepository.findByFootWearId(Id);
+        return footWearList;
+    }
+
+    @Override
+    public List<FootWear> GetFootWearByType(FootWearType footWearType) {
+        List<FootWear> footWearList = footWearRepository.findByType(footWearType);
+        return footWearList;
+    }
+
+    @Override
+    public List<FootWear> GetFootWearBySize(FootWearSize footWearSize) {
+        List<FootWear> footWearList = footWearRepository.findBySize(footWearSize);
+        return footWearList;
+    }
+
+    @Override
+    public List<FootWear> GetFootWearBySuitable(Suitable suitable) {
+        List<FootWear> footWearList = footWearRepository.findBySuitable(suitable);
+        return footWearList;
+    }
+}
