@@ -48,4 +48,10 @@ public class CartController {
         Cart cart = cartService.getByUserName(userName);
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
     }
+
+    @GetMapping("/getByProductId/{productId}")
+    public ResponseEntity<Cart> fetchCartByUserName(@PathVariable int productId){
+        Cart cart = cartService.getByProductId(productId);
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
+    }
 }

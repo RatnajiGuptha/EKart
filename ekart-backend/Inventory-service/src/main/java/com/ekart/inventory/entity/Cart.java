@@ -31,19 +31,13 @@ public class Cart {
     private String productDescription;
     private String brandName;
 
-    private String productImg1;
-    private String productImg2;
-    private String productImg3;
-    private String productImg4;
-    private String productImg5;
-
     @Enumerated(EnumType.STRING)
     private FashionTypes type;
 
     @Enumerated(EnumType.STRING)
     private Suitable suitablefor;
 
-    private String manufactureDate;
+//    private String manufactureDate;
     private Size size;
 
     private String color;

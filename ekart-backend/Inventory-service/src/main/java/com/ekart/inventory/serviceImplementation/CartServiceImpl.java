@@ -35,4 +35,9 @@ public class CartServiceImpl implements CartService {
     public Cart getByUserName(String userName) {
         return cartRepository.findByUserName(userName);
     }
+
+    @Override
+    public Cart getByProductId(int productId) {
+        return cartRepository.findByProductId(productId);
+    }
 }
