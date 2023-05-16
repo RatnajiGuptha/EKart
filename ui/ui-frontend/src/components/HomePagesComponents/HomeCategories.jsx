@@ -9,7 +9,7 @@ function HomeCategories() {
                     <p className='card-names'> Fashion </p>
                 </div>
             </Link>
-            <Link to="/kidswear" className="link"> 
+            <Link to="/fashionByType/KidsWear" className="link"> 
                 <div className='card-info'>
                     <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280396/kids_wear_xgdhkr.png" alt="/" className='w-75' />
                     <p className='card-names'> Kids wear</p>
