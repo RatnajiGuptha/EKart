@@ -16,8 +16,8 @@ const AllFashionProductsInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(() => {
-        FashionProductService.getProductById(productId).then((response) => {
+    useEffect(async () => {
+        await FashionProductService.getProductById(productId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)
@@ -25,7 +25,7 @@ const AllFashionProductsInfo = () => {
     }, [productId]);
 
     return (
-        <div className='product-info-container'>          
+        <div className='product-info-container'>
             <div className='product-image-container'>
                 <img className='card-images' alt='/'
                     onClick={() => handleClick(productsInfo.productImg1)}

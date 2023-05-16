@@ -4,28 +4,29 @@ import FashionProductService from "../../Services/FashionProductService";
 import "../../StyleSheets/products.css";
 import "../HomePagesComponents/FashionHomeFilter";
 
-const FashionProductByCategory = () => {
+const FashionProductByGender = () => {
     const [products, setProducts] = useState([]);
 
-    const { type } = useParams();
+    const { suitablefor } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await FashionProductService.getProdByType(type);
+                const response = await FashionProductService.getProductByGender(suitablefor);
                 console.log(response.data);
                 setProducts(response.data);
             } catch (error) {
-                console.log(error);
+                console.log(error)
             }
-        };
-        fetchData();
-    }, [type])
+        }
+
+    }, [suitablefor])
+
 
     return (
         <div className="cards-container">
             {products.map((item) => (
-                <Link to={`/fashion/${type}/${item.fashionId}`} key={item.fashionId} className="link" id={item.productId}>
+                <Link to={`/fashionBy/${suitablefor}/${item.fashionId}`} key={item.fashionId} className="link" id={item.productId}>
                     <div className="cards-row">
                         <div className="cards-tables">
                             <img className="images" src={item.logoImg} alt="/" />
@@ -45,4 +46,4 @@ const FashionProductByCategory = () => {
 
 }
 
-export default FashionProductByCategory;
+export default FashionProductByGender;

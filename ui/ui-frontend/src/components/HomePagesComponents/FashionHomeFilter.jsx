@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../../StyleSheets/Home.css";
-import "../../StyleSheets/products.css";
+
 
 const FashionHomeFilter = () => {
 
   const [type, setType] = useState('');
+  
   const navigate = useNavigate();
 
   const handleCategoryClicks = (categoryType) => {
-    console.log(categoryType);
     setType(categoryType);
     navigate(`/fashionByType/${categoryType}`);
 

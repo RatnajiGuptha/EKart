@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import FashionProductService from '../../Services/FashionProductService';
 import { useParams } from 'react-router-dom';
+import "../../StyleSheets/ProductInfo.css";
 
-import "../../StyleSheets/Home.css";
 
+const FashionProductsByGenderInfo = () => {
 
-const FashionProductsInfo = () => {
-
-    const { type, productId } = useParams();
+    const { suitablefor, productId } = useParams();
 
     const [productsInfo, setProductInfo] = useState({ id: null });
 
@@ -18,12 +17,12 @@ const FashionProductsInfo = () => {
     }
 
     useEffect(async () => {
-        await FashionProductService.getProductFilterTypeById(type, productId).then((response) => {
+        await FashionProductService.getProductByGenderId(suitablefor, productId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)
         })
-    }, [type, productId]);
+    }, [suitablefor, productId]);
 
     return (
         <div className='product-info-container'>
@@ -75,4 +74,4 @@ const FashionProductsInfo = () => {
     )
 }
 
-export default FashionProductsInfo;
+export default FashionProductsByGenderInfo;

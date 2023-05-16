@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import FashionProductService from '../../Services/FashionProductService';
 import { useParams } from 'react-router-dom';
-
 import "../../StyleSheets/Home.css";
+import ElectronicsService from '../../Services/ElectronicsService';
 
+const ElectronicsProductsByTpeInfo = () => {
 
-const FashionProductsInfo = () => {
-
-    const { type, productId } = useParams();
+    const { type, electronicsId } = useParams();
 
     const [productsInfo, setProductInfo] = useState({ id: null });
 
@@ -18,12 +16,12 @@ const FashionProductsInfo = () => {
     }
 
     useEffect(async () => {
-        await FashionProductService.getProductFilterTypeById(type, productId).then((response) => {
+        await ElectronicsService.getElectronicsByTypeWithId(type, electronicsId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)
         })
-    }, [type, productId]);
+    }, [type, electronicsId]);
 
     return (
         <div className='product-info-container'>
@@ -53,7 +51,7 @@ const FashionProductsInfo = () => {
             </div>
             <div className='product-deatails-container'>
                 <h1>{productsInfo.brandName}</h1>
-                <p className='suitable-for'> {productsInfo.suitablefor} / {productsInfo.type}</p>
+                <p className='suitable-for'>  {productsInfo.type}</p>
                 <h2 className='product-name' style={{ textAlign: 'left' }}>{productsInfo.productName}</h2>
                 <p className='product-description' style={{ textAlign: 'left' }}>{productsInfo.productDescription}</p>
                 <div className="d-flex">
@@ -61,7 +59,7 @@ const FashionProductsInfo = () => {
                         <span className='size-text'> Color:{productsInfo.color} </span>
                     </div>
                     <div className={`size-selector`}>
-                        <span className='size-text'> Size:{productsInfo.size} </span>
+                        <span className='size-text'> Capacity:{productsInfo.capacity} </span>
                     </div>
                 </div>
                 <p className='product-price'> Price : ₹ {productsInfo.productPrice}/-</p>
@@ -75,4 +73,4 @@ const FashionProductsInfo = () => {
     )
 }
 
-export default FashionProductsInfo;
+export default ElectronicsProductsByTpeInfo;

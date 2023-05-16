@@ -7,34 +7,35 @@ const Toys = () => {
     const [toy, setToy] = useState([]);
 
     useEffect(() => {
-        getProducts();
+        const fetchData = async () => {
+            try {
+                const response = await ToysService.getAllToys();
+                console.log(response);
+                setToy(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
     }, []);
-
-    const getProducts = () => {
-        ToysService.getAllToys().then((response) => {
-            console.log(response);
-            setToy(response.data);
-        });
-    }
 
     return (
         <div className="cards-container">
-            {toy.map((item) => {
-                return (
-                    <Link to={`/toys/${item.toyId}`} className="link" id={item.toyId}>
-                        <div key={item.toyId} className="cards-row">
-                            <div className="cards-tables">
-                                <img className="images" src={item.logoImg} alt='/' />
-                                <div className="product-info">
-                                    <p className="cat">{item.type}</p>
-                                    <p className="title">{item.productName}</p>
-                                    <p className="price">₹ {item.productPrice} /-</p>
-                                </div>
+            {toy.map((item) =>
+            (
+                <Link to={`/toys/${item.toyId}`} key={item.toyId} className="link" id={item.toyId}>
+                    <div className="cards-row">
+                        <div className="cards-tables">
+                            <img className="images" src={item.logoImg} alt='/' />
+                            <div className="product-info">
+                                <p className="cat">{item.type}</p>
+                                <p className="title">{item.productName}</p>
+                                <p className="price">₹ {item.productPrice} /-</p>
                             </div>
                         </div>
-                    </Link>
-                );
-            })}
+                    </div>
+                </Link>
+            ))}
         </div>
 
     );

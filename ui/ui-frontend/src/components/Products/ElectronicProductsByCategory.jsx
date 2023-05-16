@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import FashionProductService from "../../Services/FashionProductService";
 import "../../StyleSheets/products.css";
 import "../HomePagesComponents/FashionHomeFilter";
+import ElectronicsService from "../../Services/ElectronicsService";
 
-const FashionProductByCategory = () => {
-    const [products, setProducts] = useState([]);
+const ElectronicProductsByCategory = () => {
+    const [electronicsproducts, setElectronicsProducts] = useState([]);
 
     const { type } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await FashionProductService.getProdByType(type);
+                const response = await ElectronicsService.getElectronicsByType(type);
                 console.log(response.data);
-                setProducts(response.data);
+                setElectronicsProducts(response.data)
             } catch (error) {
                 console.log(error);
             }
         };
         fetchData();
-    }, [type])
+    }, [type]);
 
     return (
         <div className="cards-container">
-            {products.map((item) => (
-                <Link to={`/fashion/${type}/${item.fashionId}`} key={item.fashionId} className="link" id={item.productId}>
+            {electronicsproducts.map((item) => (
+                <Link to={`/electronicsBy/${type}/${item.electronicsId}`} className="link" key={item.electronicsId} id={item.electronicsId}>
                     <div className="cards-row">
                         <div className="cards-tables">
                             <img className="images" src={item.logoImg} alt="/" />
@@ -45,4 +45,4 @@ const FashionProductByCategory = () => {
 
 }
 
-export default FashionProductByCategory;
+export default ElectronicProductsByCategory;

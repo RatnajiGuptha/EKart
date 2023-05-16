@@ -43,6 +43,7 @@ function HomeCarousels() {
           </Carousel.Item>
         </Carousel>
       </div>
+      
       <div className="categories-container">
         <img
           className="me-auto newArrivalGif"

@@ -7,11 +7,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "../StyleSheets/Home.css"
 
 function HeaderComponent() {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  }
+  // const handleSearch = (e) => {
+  //   setSearch(e.target.value);
+  // }
 
   return (
     <Navbar className="navbar navbar-dark bg-dark">

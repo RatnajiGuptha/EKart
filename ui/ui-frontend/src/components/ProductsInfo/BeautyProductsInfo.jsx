@@ -18,8 +18,8 @@ const BeautyProductsInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(() => {
-        BeautyService.getBeautyProductsById(beautyId).then((response) => {
+    useEffect(async () => {
+        await BeautyService.getBeautyProductsById(beautyId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import FashionProductService from '../../Services/FashionProductService';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import "../../StyleSheets/Home.css";
 import AccessoriesService from '../../Services/AccessoriesService';
-
+import "../../StyleSheets/Home.css";
 
 const AccessoriesProductsInfo = () => {
 
@@ -12,17 +10,17 @@ const AccessoriesProductsInfo = () => {
 
     const [productsInfo, setProductInfo] = useState({ id: null });
 
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState('');
 
     const handleClick = (imgSrc) => {
         setImage(imgSrc);
     }
 
-    useEffect(() => {
-        AccessoriesService.getAccessoryById(accessoryId).then((response) => {
+    useEffect(async () => {
+        await AccessoriesService.getAccessoryById(accessoryId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
-            setImage(response.data.productImg1)
+            setImage(response.data.productImg1);
         })
     }, [accessoryId]);
 

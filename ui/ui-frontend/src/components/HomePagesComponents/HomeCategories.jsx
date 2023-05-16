@@ -33,15 +33,14 @@ function HomeCategories() {
                     <p className='card-names'>  Beauty </p>
                 </div>
             </Link>
-            <Link to="/electronics" className="link">
+            <Link to= "/electronics" className="link">
                 <div className='card-info'>
                     <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522149/electronics_yjk1bl.webp" alt="/" className='w-75' />
                     <p className='card-names'>   Electronics </p>
                 </div>
             </Link>
 
-
-            <Link to="/appliances" className="link">
+            <Link to="/electronicsBy/Appliances" className="link">
                 <div className='card-info'>
                     <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280343/appliances_zxbxbl.png" alt="/" className='w-75 p-1' />
                     <p className='card-names'>   Appliances</p>

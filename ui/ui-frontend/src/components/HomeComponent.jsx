@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import HomeCarousels from "./HomePagesComponents/HomeCarousels";
 import HomeCategories from "./HomePagesComponents/HomeCategories";
 import FashionHomeFilter from './HomePagesComponents/FashionHomeFilter';
