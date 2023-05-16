@@ -13,4 +13,6 @@ public interface CartService {
     List<Cart> getAllCartItems();
 
     String removeCartItem(int id);
+
+    Cart getByUserName(String userName);
 }

@@ -6,4 +6,5 @@ import com.ekart.inventory.entity.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
+    Cart findByUserName(String userName);
 }

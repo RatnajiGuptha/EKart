@@ -42,4 +42,10 @@ public class CartController {
         String response = cartService.removeCartItem(id);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
     }
+
+    @GetMapping("/getByUserName/{userName}")
+    public ResponseEntity<Cart> fetchCartByUserName(@PathVariable String userName){
+        Cart cart = cartService.getByUserName(userName);
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
+    }
 }
