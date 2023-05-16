@@ -58,7 +58,7 @@ const FootwearProductsInfo = () => {
                 <h1>{productsInfo.brandName}</h1>
                 <p className='suitable-for'> {productsInfo.suitablefor} / {productsInfo.type}</p>
                 <h2 className='product-name'>{productsInfo.productName}</h2>
-                <p className='product-description'>{productsInfo.productDescription}</p>
+                <p className='product-description' style={{textAlign:'left'}}>{productsInfo.productDescription}</p>
                 <div className="d-flex">
                     <div className={`size-selector`}>
                         <span className='size-text'> Color:{productsInfo.color} </span>

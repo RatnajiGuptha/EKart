@@ -47,7 +47,7 @@ function HomeCategories() {
                     <p className='card-names'>   Appliances</p>
                 </div>
             </Link>
-            <Link to="/mobiles" className="link">
+            <Link to="/electronicsBy/Mobiles" className="link">
                 <div className='card-info'>
                     <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683523235/mobiles_s5p07b.webp" alt="/" className='w-75' />
                     <p className='card-names'>    Mobiles </p>

@@ -15,7 +15,12 @@ import FootwearProductsInfo from "./components/ProductsInfo/FootwearProductsInfo
 import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
 import BeautyProducts from "./components/Products/BeautyProducts";
 import BeautyProductsInfo from "./components/ProductsInfo/BeautyProductsInfo";
-
+import FashionProductByGender from "./components/Products/FashionProductByGender";
+import FashionProductsByGenderInfo from "./components/ProductsInfo/FashionProductsByGenderInfo";
+import ElectronicsProducts from "./components/Products/ElectronicsProducts";
+import ElectronicsProductsInfo from "./components/ProductsInfo/ElectronicsProductsInfo";
+import ElectronicProductsByCategory from "./components/Products/ElectronicProductsByCategory";
+import ElectronicsProductsByTpeInfo from "./components/ProductsInfo/ElectronicsProductsByTpeInfo";
 
 function App() {
 
@@ -27,6 +32,8 @@ function App() {
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/fashion" element={<FashionProducts />}></Route>
+          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
+          <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
           <Route path="/fashion/:productId" element={<AllFashionProductsInfo />}></Route>
           <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>
           <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />}></Route>
@@ -38,6 +45,10 @@ function App() {
           <Route path="/accessories/:accessoryId" element={<AccessoriesProductsInfo />}></Route>
           <Route path="/beauty" element={<BeautyProducts />}></Route>
           <Route path="/beauty/:beautyId" element={<BeautyProductsInfo />}></Route>
+          <Route path="/electronics" element={<ElectronicsProducts />} ></Route>
+          <Route path="/electronics/:electronicsId" element={<ElectronicsProductsInfo />} ></Route>
+          <Route path="/electronicsBy/:type" element={<ElectronicProductsByCategory />}></Route>
+          <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
         </Routes>
       </Router>
 

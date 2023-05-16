@@ -38,10 +38,11 @@ function HeaderComponent() {
                 <NavDropdown.Item href="/accessories">Accessories</NavDropdown.Item>
                 <NavDropdown.Item href="/beauty">Beauty</NavDropdown.Item>
                 <NavDropdown.Item href="/electronics">Electronics</NavDropdown.Item>
-                <NavDropdown.Item href="/fashion">Fashion</NavDropdown.Item>
+                <NavDropdown.Item href="/fashionBy/Male">Men's Fashion</NavDropdown.Item>
+                <NavDropdown.Item href="/fashionBy/Female">Women's Fashion</NavDropdown.Item>
                 <NavDropdown.Item href="/footwear">Footwear</NavDropdown.Item>
                 <NavDropdown.Item href="/appliances">Appliances</NavDropdown.Item>
-                <NavDropdown.Item href="/mobiles">Mobiles</NavDropdown.Item>
+                <NavDropdown.Item href="/electronicsBy/Mobiles">Mobiles</NavDropdown.Item>
                 <NavDropdown.Item href="/toys">Toys</NavDropdown.Item>
                 <NavDropdown.Item href="/fashionByType/KidsWear">Kidswear</NavDropdown.Item>
               </NavDropdown>

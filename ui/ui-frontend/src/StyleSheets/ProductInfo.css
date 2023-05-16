@@ -30,7 +30,6 @@
 }
 
 
-
 .product-main-image-container {
     margin-left: 10px;
 
@@ -62,6 +61,7 @@
     line-height: 1;
     margin: 5px 0;
 
+
 }
 
 .product-deatails-container .product-name {
@@ -73,8 +73,8 @@
 
 .product-deatails-container .product-description {
     max-width: 800px;
-    text-align: start;
     margin-bottom: 30px;
+    line-height: 1.5;
 }
 
 .product-deatails-container .product-price {
