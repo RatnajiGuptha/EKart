@@ -21,7 +21,9 @@ import lombok.NoArgsConstructor;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int fashionId;
+    private int cartId;
+    private  String userName;
+    private int productId;
     private String productName;
     private String logoImg;
 
