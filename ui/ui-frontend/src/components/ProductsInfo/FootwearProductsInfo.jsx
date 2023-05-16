@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import FashionProductService from '../../Services/FashionProductService';
+
 import { useParams } from 'react-router-dom';
 
 import "../../StyleSheets/Home.css";
-import AccessoriesService from '../../Services/AccessoriesService';
+
 import FootwearService from '../../Services/FootwearService';
 
 
@@ -20,8 +20,8 @@ const FootwearProductsInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(async () => {
-        await FootwearService.getFootwearById(footWearId).then((response) => {
+    useEffect(() => {
+        FootwearService.getFootwearById(footWearId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)

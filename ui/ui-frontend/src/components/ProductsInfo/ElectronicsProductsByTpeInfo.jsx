@@ -15,8 +15,8 @@ const ElectronicsProductsByTpeInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(async () => {
-        await ElectronicsService.getElectronicsByTypeWithId(type, electronicsId).then((response) => {
+    useEffect(() => {
+        ElectronicsService.getElectronicsByTypeWithId(type, electronicsId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)

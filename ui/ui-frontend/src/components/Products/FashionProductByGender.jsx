@@ -19,7 +19,7 @@ const FashionProductByGender = () => {
                 console.log(error)
             }
         }
-
+        fetchData();
     }, [suitablefor])
 
 

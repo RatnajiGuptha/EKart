@@ -26,8 +26,8 @@ class FashionProductService {
 
     }
 
-    getProductByGenderId(gender,id) {
-        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/suitableFor/" + gender +"/" + id)
+    getProductByGenderId(gender, id) {
+        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/suitableFor/" + gender + "/" + id)
     }
 
 }

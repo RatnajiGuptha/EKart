@@ -7,16 +7,13 @@ const ElectronicsProducts = () => {
     const [electronicsProducts, setElectronicsProducts] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await ElectronicsService.getAllElctronicProducts();
-                console.log(response.data);
-                setElectronicsProducts(response.data);
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            const response = ElectronicsService.getAllElctronicProducts();
+            console.log(response.data);
+            setElectronicsProducts(response.data);
+        } catch (error) {
+            console.log(error);
         }
-        fetchData();
     }, []);
 
     return (

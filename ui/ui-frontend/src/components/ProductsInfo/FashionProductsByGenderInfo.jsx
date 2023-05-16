@@ -16,8 +16,8 @@ const FashionProductsByGenderInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(async () => {
-        await FashionProductService.getProductByGenderId(suitablefor, productId).then((response) => {
+    useEffect(() => {
+        FashionProductService.getProductByGenderId(suitablefor, productId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)

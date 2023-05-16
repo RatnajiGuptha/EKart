@@ -16,8 +16,8 @@ const AccessoriesProductsInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(async () => {
-        await AccessoriesService.getAccessoryById(accessoryId).then((response) => {
+    useEffect(() => {
+        AccessoriesService.getAccessoryById(accessoryId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1);

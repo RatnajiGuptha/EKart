@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import {FaSearch} from "react-icons/fa";
+import {FaSearch} from "react-icons/fa";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -7,11 +7,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "../StyleSheets/Home.css"
 
 function HeaderComponent() {
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
-  // const handleSearch = (e) => {
-  //   setSearch(e.target.value);
-  // }
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  }
 
   return (
     <Navbar className="navbar navbar-dark bg-dark">
@@ -22,7 +22,7 @@ function HeaderComponent() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse id="basic-navbar-nav">
-          {/* <Container className="search-bar">
+          <Container className="search-bar">
             < input
               type="text"
               placeholder="Search"
@@ -30,7 +30,7 @@ function HeaderComponent() {
               onChange={handleSearch}
             />
             <FaSearch className="search-icon" />
-          </Container> */}
+          </Container>
           <Container className="d-flex flex-row justify-content-end">
             <Nav >
               <Nav.Link href="/"> Home</Nav.Link>

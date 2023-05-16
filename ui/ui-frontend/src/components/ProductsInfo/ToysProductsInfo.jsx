@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import FashionProductService from '../../Services/FashionProductService';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import "../../StyleSheets/Home.css";
@@ -19,8 +18,8 @@ const ToysProductsInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(async () => {
-        await ToysService.getToysById(toyId).then((response) => {
+    useEffect(() => {
+        ToysService.getToysById(toyId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)

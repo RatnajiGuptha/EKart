@@ -6,7 +6,8 @@ import "../../StyleSheets/Home.css";
 const FashionHomeFilter = () => {
 
   const [type, setType] = useState('');
-  
+  console.log(type);
+
   const navigate = useNavigate();
 
   const handleCategoryClicks = (categoryType) => {

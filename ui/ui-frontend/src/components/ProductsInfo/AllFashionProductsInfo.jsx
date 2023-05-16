@@ -16,8 +16,8 @@ const AllFashionProductsInfo = () => {
         setImage(imgSrc);
     }
 
-    useEffect(async () => {
-        await FashionProductService.getProductById(productId).then((response) => {
+    useEffect(() => {
+        FashionProductService.getProductById(productId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)
