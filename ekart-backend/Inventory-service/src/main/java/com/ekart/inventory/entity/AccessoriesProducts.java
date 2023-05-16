@@ -1,7 +1,6 @@
 package com.ekart.inventory.entity;
 
 import com.ekart.inventory.enums.AccessoriesTypes;
-import com.ekart.inventory.enums.FashionTypes;
 import com.ekart.inventory.enums.Size;
 import com.ekart.inventory.enums.Suitable;
 

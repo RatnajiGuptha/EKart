@@ -1,15 +1,16 @@
 package com.ekart.inventory.serviceImplementation;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ekart.inventory.entity.FootWear;
 import com.ekart.inventory.enums.FootWearSize;
 import com.ekart.inventory.enums.FootWearType;
 import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.repository.FootWearRepository;
 import com.ekart.inventory.service.FootWearService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class FootWearServiceImpl implements FootWearService{

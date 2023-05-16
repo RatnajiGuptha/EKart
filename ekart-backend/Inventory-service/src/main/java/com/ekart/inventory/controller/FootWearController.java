@@ -23,49 +23,55 @@ import com.ekart.inventory.service.FootWearService;
 @RequestMapping("/api/footWear")
 public class FootWearController {
 
-    @Autowired
-    private FootWearService footWearService;
+	@Autowired
+	private FootWearService footWearService;
 
-    @PostMapping("/addMultipleFootWear")
-    public ResponseEntity<String> SaveMultipleFootWear(@RequestBody List<FootWear> footWears){
+	@PostMapping("/addMultipleFootWear")
+	public ResponseEntity<String> SaveMultipleFootWear(@RequestBody List<FootWear> footWears) {
 
-        for(FootWear footWear : footWears){
-            String result = footWearService.PostFootWare(footWear);
-        }
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Foot Wear Added");
-    }
+		for (FootWear footWear : footWears) {
+			footWearService.PostFootWare(footWear);
+		}
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Foot Wear Added");
+	}
 
-    @PostMapping("/add")
-    public ResponseEntity<String> saveFootWare(@RequestBody FootWear footWear){
-        String result = footWearService.PostFootWare(footWear);
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(result);
-    }
+	@PostMapping("/add")
+	public ResponseEntity<String> saveFootWare(@RequestBody FootWear footWear) {
+		String result = footWearService.PostFootWare(footWear);
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(result);
+	}
 
-    @GetMapping("/getFootWear")
-    public ResponseEntity<List<FootWear>> fetchFootWare(){
-        List<FootWear> footWearList = footWearService.GetAllFootWear();
+	@GetMapping("/getFootWear")
+	public ResponseEntity<List<FootWear>> fetchFootWare() {
+		List<FootWear> footWearList = footWearService.GetAllFootWear();
 
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
-    }
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+	}
 
-    @GetMapping("/getFootWear/{type}")
-    public ResponseEntity<List<FootWear>> fetchByType(@PathVariable FootWearType type){
-        List<FootWear> footWearList = footWearService.GetFootWearByType(type);
+	@GetMapping("/getFootWearById/{id}")
+	public ResponseEntity<FootWear> getFootwearById(@PathVariable int id) {
+		FootWear footwear = footWearService.GetFootWearBYId(id);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footwear);
+	}
 
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
-    }
-    
-    @GetMapping("/getFootWear/type/{type}/{footWearId}")
-    public ResponseEntity<FootWear> fetchByTypeandId(@PathVariable FootWearType type,@PathVariable int footWearId){
-    	List<FootWear> footWearList = footWearService.GetFootWearByType(type);
-    	FootWear footWear = footWearService.GetFootWearBYId(footWearId);
-    	return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWear);
-    }
-    
-    @GetMapping("/getFootWear/suitableFor/{suitable}")
-    public ResponseEntity<List<FootWear>> fetchBySuitable(@PathVariable Suitable suitable){
-    	List<FootWear> footWearList = footWearService.GetFootWearBySuitable(suitable);
-    	return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
-    }
+	@GetMapping("/getFootWear/{type}")
+	public ResponseEntity<List<FootWear>> fetchByType(@PathVariable FootWearType type) {
+		List<FootWear> footWearList = footWearService.GetFootWearByType(type);
+
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+	}
+
+	@GetMapping("/getFootWear/type/{type}/{footWearId}")
+	public ResponseEntity<FootWear> fetchByTypeandId(@PathVariable FootWearType type, @PathVariable int footWearId) {
+//		List<FootWear> footWearList = footWearService.GetFootWearByType(type);
+		FootWear footWear = footWearService.GetFootWearBYId(footWearId);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWear);
+	}
+
+	@GetMapping("/getFootWear/suitableFor/{suitable}")
+	public ResponseEntity<List<FootWear>> fetchBySuitable(@PathVariable Suitable suitable) {
+		List<FootWear> footWearList = footWearService.GetFootWearBySuitable(suitable);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+	}
 
 }

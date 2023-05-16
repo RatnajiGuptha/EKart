@@ -20,7 +20,7 @@ import com.ekart.inventory.service.AccessoriesProductService;
 
 @CrossOrigin("http://localhost:3000/")
 @RestController
-@RequestMapping("api/accessoriesProducts")
+@RequestMapping("/api/accessoriesProducts")
 public class AccessoriesProductsController {
 	
 	@Autowired
@@ -50,8 +50,8 @@ public class AccessoriesProductsController {
 	}
 	
 	@GetMapping("/getAccessoriesProductById/{accessoryId}")
-	public ResponseEntity<AccessoriesProducts> getAccessoriesProductById(@PathVariable int id) {
-		AccessoriesProducts accessoriesProducts = accessoriesProductService.getAccessoriesProductById(id);
+	public ResponseEntity<AccessoriesProducts> getAccessoriesProductById(@PathVariable int accessoryId) {
+		AccessoriesProducts accessoriesProducts = accessoriesProductService.getAccessoriesProductById(accessoryId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 	
@@ -63,7 +63,7 @@ public class AccessoriesProductsController {
 	
 	@GetMapping("/getAccessories/type/{type}/{accessoryId}")
 	public ResponseEntity<AccessoriesProducts> getAccessoriesProductByTypeandId(@PathVariable AccessoriesTypes type,@PathVariable int accessoryId){
-		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProductsByType(type);
+//		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProductsByType(type);
 		AccessoriesProducts acccessoryProductById = accessoriesProductService.getAccessoriesProductById(accessoryId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(acccessoryProductById);
 	}

@@ -1,12 +1,13 @@
 package com.ekart.inventory.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.ekart.inventory.entity.FootWear;
 import com.ekart.inventory.enums.FootWearSize;
 import com.ekart.inventory.enums.FootWearType;
 import com.ekart.inventory.enums.Suitable;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface FootWearService {
