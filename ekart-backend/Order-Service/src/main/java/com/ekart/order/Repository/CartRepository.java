@@ -1,8 +1,8 @@
-package com.ekart.inventory.repository;
+package com.ekart.order.Repository;
 
+import com.ekart.order.entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ekart.inventory.entity.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 

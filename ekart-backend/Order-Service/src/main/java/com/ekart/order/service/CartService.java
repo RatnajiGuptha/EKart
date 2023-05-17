@@ -1,10 +1,11 @@
-package com.ekart.inventory.service;
+package com.ekart.order.service;
 
 import java.util.List;
 
+import com.ekart.order.entity.Cart;
 import org.springframework.stereotype.Service;
 
-import com.ekart.inventory.entity.Cart;
+
 
 @Service
 public interface CartService {

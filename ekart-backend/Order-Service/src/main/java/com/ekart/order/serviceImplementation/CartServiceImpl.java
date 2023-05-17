@@ -1,13 +1,13 @@
-package com.ekart.inventory.serviceImplementation;
+package com.ekart.order.serviceImplementation;
 
 import java.util.List;
 
+import com.ekart.order.Repository.CartRepository;
+import com.ekart.order.entity.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ekart.order.service.CartService;
 
-import com.ekart.inventory.entity.Cart;
-import com.ekart.inventory.repository.CartRepository;
-import com.ekart.inventory.service.CartService;
 
 @Service
 public class CartServiceImpl implements CartService {

@@ -1,9 +1,9 @@
-package com.ekart.inventory.entity;
+package com.ekart.order.entity;
 
-import com.ekart.inventory.enums.FashionTypes;
-import com.ekart.inventory.enums.Size;
-import com.ekart.inventory.enums.Suitable;
 
+import com.ekart.order.enums.FashionTypes;
+import com.ekart.order.enums.Size;
+import com.ekart.order.enums.Suitable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @AllArgsConstructor

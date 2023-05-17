@@ -1,7 +1,8 @@
-package com.ekart.inventory.controller;
+package com.ekart.order.controller;
 
 import java.util.List;
 
+import com.ekart.order.entity.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.ekart.order.service.CartService;
 
-import com.ekart.inventory.entity.Cart;
-import com.ekart.inventory.service.CartService;
 
 @CrossOrigin("http://localhost:3000/")
 @RestController
