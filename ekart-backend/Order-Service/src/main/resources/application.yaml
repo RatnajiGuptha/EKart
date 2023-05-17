@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    function:
+      definition: orderSupplier;paymentEventConsumer
+    stream:
+      bindings:
+        orderSupplier-out-0:
+          destination: order-event
+        paymentEventConsumer-in-0:
+          destination: payment-event
+
+  

@@ -12,4 +12,5 @@ public class PaymentRequestDTO {
 	private int paymentId;
 	private int userName;
 	private int amount;
+	
 }
