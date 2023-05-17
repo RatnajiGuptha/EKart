@@ -3,6 +3,7 @@ package com.ekart.order.controller;
 import java.util.List;
 
 import com.ekart.order.entity.Cart;
+import com.ekart.order.enums.ProductCategories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -50,8 +51,19 @@ public class CartController {
     }
 
     @GetMapping("/getByProductId/{productId}")
-    public ResponseEntity<Cart> fetchCartByUserName(@PathVariable int productId){
+    public ResponseEntity<Cart> fetchCartByProdId(@PathVariable int productId){
         Cart cart = cartService.getByProductId(productId);
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
+    }
+
+    @GetMapping("/getByProductId&Category/{productId}/{category}")
+    public ResponseEntity<Cart> fetchCartByUserName(@PathVariable int productId, @PathVariable ProductCategories category){
+        Cart cart = cartService.getByProductIdAndCategorie(productId, category);
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
+    }
+    @DeleteMapping("/deleteProductInCartByProductId/{productId}")
+    public ResponseEntity<String> deleteCartItemByProduct(@PathVariable int productId){
+        String response = cartService.removeCartByProductId(productId);
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
     }
 }

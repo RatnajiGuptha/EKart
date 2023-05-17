@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ekart.order.Repository.CartRepository;
 import com.ekart.order.entity.Cart;
+import com.ekart.order.enums.ProductCategories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ekart.order.service.CartService;
@@ -39,5 +40,19 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart getByProductId(int productId) {
         return cartRepository.findByProductId(productId);
+    }
+
+    @Override
+    public String removeCartByProductId(int productId) {
+        Cart cart = cartRepository.findByProductId(productId);
+        int Id = cart.getCartId();
+        cartRepository.deleteById(Id);
+
+        return "Item Removed From cart";
+    }
+
+    @Override
+    public Cart getByProductIdAndCategorie(int productId, ProductCategories category) {
+        return cartRepository.findByProductIdAndProductCategories(productId,category);
     }
 }
