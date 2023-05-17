@@ -49,5 +49,6 @@
 		<module>Erueka-service</module>
 		<module>Inventory-service</module>
 		<module>Gateway-service</module>
+		<module>common-dto</module>
 	</modules>
 </project>
