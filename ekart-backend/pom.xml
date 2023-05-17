@@ -50,5 +50,6 @@
 		<module>Inventory-service</module>
 		<module>Gateway-service</module>
 		<module>common-dto</module>
+		<module>Payment-service</module>
 	</modules>
 </project>

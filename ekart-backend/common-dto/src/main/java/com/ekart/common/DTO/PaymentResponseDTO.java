@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class PaymentResponseDTO{
 
 	private int paymentId;
-	private int userName;
+	private String userName;
 	private int amount;
 	private PaymentStatus paymentStatus;
 }
