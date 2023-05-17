@@ -1,7 +1,7 @@
 package com.ekart.order.entity;
 
 import com.ekart.order.enums.FashionTypes;
-import com.ekart.order.enums.ProductCatogories;
+import com.ekart.order.enums.ProductCategories;
 import com.ekart.order.enums.Size;
 import com.ekart.order.enums.Suitable;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ public class Cart {
     private int cartId;
     private  String userName;
     private int productId;
-    private ProductCatogories productCatogories;
+    private ProductCategories productCategories;
     private String productName;
     private String logoImg;
 

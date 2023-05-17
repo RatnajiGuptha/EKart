@@ -3,6 +3,7 @@ package com.ekart.order.service;
 import java.util.List;
 
 import com.ekart.order.entity.Cart;
+import com.ekart.order.enums.ProductCategories;
 import org.springframework.stereotype.Service;
 
 
@@ -20,4 +21,6 @@ public interface CartService {
     Cart getByProductId(int productId);
 
     String removeCartByProductId(int productId);
+
+    Cart getByProductIdAndCategorie(int productId, ProductCategories categorie);
 }
