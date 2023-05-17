@@ -6,13 +6,16 @@ const Accessories = () => {
     const [accessories, setAccessories] = useState([]);
 
     useEffect(() => {
-        try {
-            const response = AccessoriesService.getAllAccessories();
-            console.log(response.data);
-            setAccessories(response.data);
-        } catch (error) {
-            console.log(error);
+        const fetchData = async () => {
+            try {
+                const response = await AccessoriesService.getAllAccessories();
+                console.log(response.data);
+                setAccessories(response.data);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, []);
 
 

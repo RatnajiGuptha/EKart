@@ -7,13 +7,16 @@ const BeautyProducts = () => {
     const [beautyProducts, setBeautyProducts] = useState([]);
 
     useEffect(() => {
-        try {
-            const response = BeautyService.getAllBeautyProducts();
-            console.log(response.data);
-            setBeautyProducts(response.data);
-        } catch (error) {
-            console.log(error);
+        const fetchData = async () => {
+            try {
+                const response = await BeautyService.getAllBeautyProducts();
+                console.log(response.data);
+                setBeautyProducts(response.data);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, []);
 
 
