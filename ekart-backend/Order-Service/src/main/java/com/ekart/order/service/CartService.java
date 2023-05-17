@@ -18,4 +18,6 @@ public interface CartService {
     Cart getByUserName(String userName);
 
     Cart getByProductId(int productId);
+
+    String removeCartByProductId(int productId);
 }

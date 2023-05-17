@@ -40,4 +40,13 @@ public class CartServiceImpl implements CartService {
     public Cart getByProductId(int productId) {
         return cartRepository.findByProductId(productId);
     }
+
+    @Override
+    public String removeCartByProductId(int productId) {
+        Cart cart = cartRepository.findByProductId(productId);
+        int Id = cart.getCartId();
+        cartRepository.deleteById(Id);
+
+        return "Item Removed From cart";
+    }
 }
