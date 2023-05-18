@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import FashionProductService from '../../Services/FashionProductService';
 import { useParams } from 'react-router-dom';
 import "../../StyleSheets/ProductInfo.css";
-
+import CartService from "../../Services/CartService";
 
 const FashionProductsByGenderInfo = () => {
 
     const { suitablefor, productId } = useParams();
 
     const [productsInfo, setProductInfo] = useState({ id: null });
-
+    const [quantity, setQuantity] = useState(1);
     const [image, setImage] = useState('')
 
     const handleClick = (imgSrc) => {
@@ -24,6 +24,41 @@ const FashionProductsByGenderInfo = () => {
         })
     }, [suitablefor, productId]);
 
+    const quantityDec = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1)
+        }
+    };
+
+    const quantityInc = () => {
+        setQuantity(quantity + 1);
+    };
+
+    const handleCardItems = async () => {
+        const cart = {
+            productId: productsInfo.fashionId,
+            brandName: productsInfo.brandName,
+            productName: productsInfo.productName,
+            logoImg: productsInfo.logoImg,
+            productPrice: productsInfo.productPrice,
+            size: productsInfo.size,
+            color: productsInfo.color,
+            qty: quantity,
+            productCategories: "Fashion",
+            type: productsInfo.type,
+            sellerName: productsInfo.sellerName,
+            suitablefor: productsInfo.suitablefor,
+            productDescription: productsInfo.productDescription,
+
+        };
+
+        await CartService.addItemsToCart(cart).then((response) => {
+            console.log(response);
+            alert("Item added successfully");
+
+        });
+
+    };
     return (
         <div className='product-info-container'>
             <div className='product-image-container'>
@@ -65,7 +100,14 @@ const FashionProductsByGenderInfo = () => {
                 </div>
                 <p className='product-price'> Price : ₹ {productsInfo.productPrice}/-</p>
                 <h5 className='seller-name'>Seller : {productsInfo.sellerName}</h5>
-                <div><button className='btn btn-warning'>Add to cart</button> </div>
+                <div className="quantity">
+                    <div>
+                        <button className="quantity-button" disabled={quantity === 1} onClick={quantityDec}> - </button>
+                        {quantity}
+                        <button className="quantity-button" onClick={quantityInc}> + </button>
+                    </div>
+                </div>
+                <div><button className='btn btn-warning' onClick={handleCardItems}>Add to cart</button> </div>
             </div>
 
         </div>

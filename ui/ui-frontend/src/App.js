@@ -29,7 +29,11 @@ import LoginPage from "./components/LoginPage";
 
 import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
 import Toys from "./components/Products/Toys";
+import CartComponent from "./components/CartComponent";
+
 import FashionComponent from "./components/FashionComponent";
+import CartComponent from "./components/CartComponent";
+
 
 function App() {
 
@@ -68,6 +72,7 @@ function App() {
           <Route path="/electronicsBy/:type" element={<ElectronicProductsByCategory />}></Route>
           <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
+          <Route path="/cart" element={<CartComponent />}></Route>
         </Routes>
       </Router>
 

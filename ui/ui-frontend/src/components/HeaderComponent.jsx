@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {FaSearch} from "react-icons/fa";
+// import {FaSearch} from "react-icons/fa";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -14,15 +14,14 @@ function HeaderComponent() {
   }
 
   return (
-    <Navbar className="navbar navbar-dark bg-dark">
-      <Navbar fixed="top" />
+    <Navbar className="navbar navbar-dark bg-dark">     
       <Container>
         <Navbar.Brand href="/">
           E-Kart
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Container className="search-bar">
+          {/* <Container className="search-bar">
             < input
               type="text"
               placeholder="Search"
@@ -30,7 +29,7 @@ function HeaderComponent() {
               onChange={handleSearch}
             />
             <FaSearch className="search-icon" />
-          </Container>
+          </Container> */}
           <Container className="d-flex flex-row justify-content-end">
             <Nav >
               <Nav.Link href="/"> Home</Nav.Link>
@@ -41,7 +40,7 @@ function HeaderComponent() {
                 <NavDropdown.Item href="/fashionBy/Male">Men's Fashion</NavDropdown.Item>
                 <NavDropdown.Item href="/fashionBy/Female">Women's Fashion</NavDropdown.Item>
                 <NavDropdown.Item href="/footwear">Footwear</NavDropdown.Item>
-                <NavDropdown.Item href="/appliances">Appliances</NavDropdown.Item>
+                <NavDropdown.Item href="/electronicsBy/Appliances">Appliances</NavDropdown.Item>
                 <NavDropdown.Item href="/electronicsBy/Mobiles">Mobiles</NavDropdown.Item>
                 <NavDropdown.Item href="/toys">Toys</NavDropdown.Item>
                 <NavDropdown.Item href="/fashionByType/KidsWear">Kidswear</NavDropdown.Item>
@@ -55,6 +54,7 @@ function HeaderComponent() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
   );
 }
 
