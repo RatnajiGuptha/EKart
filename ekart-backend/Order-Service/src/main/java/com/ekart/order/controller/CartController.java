@@ -18,18 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ekart.order.service.CartService;
 
 
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin(origins="http://localhost:3000/")
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {
 
     @Autowired
     private CartService cartService;
+    
     @PostMapping("/add")
     public ResponseEntity<String> SaveItems(@RequestBody Cart cart){
 
         String items = cartService.saveItemsInCart(cart);
         return  ResponseEntity.status(HttpStatusCode.valueOf(201)).body(items);
+    }
+    
+    @PostMapping("/addMutlipleProducts")
+    public ResponseEntity<?> saveMultipleProductsToCart(@RequestBody List<Cart> cartsProductsList){
+    	
+    	for (Cart c : cartsProductsList) {
+    		cartService.saveItemsInCart(c);
+    	}
+    	return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Mutliple products added into cart");
+    	
     }
 
     @GetMapping("/getProducts")
@@ -56,10 +67,15 @@ public class CartController {
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
     }
 
-    @GetMapping("/getByProductId&Category/{productId}/{category}")
-    public ResponseEntity<Cart> fetchCartByUserName(@PathVariable int productId, @PathVariable ProductCategories category){
-        Cart cart = cartService.getByProductIdAndCategorie(productId, category);
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
+//    @GetMapping("/getByProductIdAndCategory/{category}{productId}")
+//    public ResponseEntity<Cart> fetchCartByUserName( @PathVariable ProductCategories category,@PathVariable int productId){
+//        Cart cart = cartService.getByProductCategoriesAndProductId(category,productId);
+//        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
+//    }
+    
+    @GetMapping("/getProductCategoryAndProductId/{category}/{productId}")
+    public Cart fetchData( @PathVariable ProductCategories category,@PathVariable int productId){
+    	return cartService.getByProductCategoriesAndProductId(category,productId);
     }
     @DeleteMapping("/deleteProductInCartByProductId/{productId}")
     public ResponseEntity<String> deleteCartItemByProduct(@PathVariable int productId){

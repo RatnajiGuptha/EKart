@@ -12,16 +12,18 @@ import com.ekart.inventory.enums.Suitable;
 @Service
 public interface FootWearService {
 
-    public String PostFootWare(FootWear footWearList);
+	public String PostFootWare(FootWear footWearList);
 
-    public List<FootWear> GetAllFootWear();
+	public List<FootWear> GetAllFootWear();
 
-    public FootWear GetFootWearBYId(int Id);
+	public FootWear GetFootWearBYId(int Id);
 
-    public List<FootWear> GetFootWearByType(FootWearType footWearType);
-    public List<FootWear> GetFootWearBySize(FootWearSize footWearSize);
+	public List<FootWear> GetFootWearByType(FootWearType footWearType);
 
-    public List<FootWear> GetFootWearBySuitable(Suitable suitable);
+	public List<FootWear> GetFootWearBySize(FootWearSize footWearSize);
 
+	public List<FootWear> GetFootWearBySuitable(Suitable suitable);
+
+	public FootWear getFootWearByTypeAndId(FootWearType type, int footWearId);
 
 }

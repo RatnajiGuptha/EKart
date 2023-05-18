@@ -33,7 +33,7 @@ public class ElectronicsProducts {
 	
 
 	private String manufactureDate;
-	private String storage;
+	private String capacity;
 	
 	private String productImg1;
 	private String productImg2;

@@ -22,32 +22,34 @@ public class FashionProducts {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int fashionId;
+	private Integer fashionId;
 	private String productName;
 	private String logoImg;
-	
+
 	private int productPrice;
 	private String productDescription;
 	private String brandName;
-	
+
 	@Enumerated(EnumType.STRING)
 	private FashionTypes type;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Suitable suitablefor;
 
 	private String manufactureDate;
-	private Size size;
 	
+	@Enumerated(EnumType.STRING)
+	private Size size;
+
 	private String productImg1;
 	private String productImg2;
 	private String productImg3;
 	private String productImg4;
 	private String productImg5;
-	
+
 	private String color;
 	private String sellerName;
-	
-	private int qty; 
+
+	private int qty;
 
 }

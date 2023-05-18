@@ -12,15 +12,15 @@ import com.ekart.inventory.repository.AccessoriesProductsRepository;
 import com.ekart.inventory.service.AccessoriesProductService;
 
 @Service
-public class AccessoriesProductServiceImpl implements AccessoriesProductService{
-	
+public class AccessoriesProductServiceImpl implements AccessoriesProductService {
+
 	@Autowired
 	private AccessoriesProductsRepository accessoriesRepo;
 
 	@Override
 	public void saveAccessoriesProducts(AccessoriesProducts accessoriesProducts) {
 		accessoriesRepo.save(accessoriesProducts);
-		
+
 	}
 
 	@Override
@@ -45,6 +45,12 @@ public class AccessoriesProductServiceImpl implements AccessoriesProductService{
 	public List<AccessoriesProducts> GetAccessoriesProductsBySuitable(Suitable suitable) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesRepo.findBySuitablefor(suitable);
 		return accessoriesProducts;
+	}
+
+	@Override
+	public AccessoriesProducts getAccessoriesByTpeAndProductById(AccessoriesTypes type, int accessoryId) {
+		AccessoriesProducts product = accessoriesRepo.findByTypeAndAccessoryId(type, accessoryId);
+		return product;
 	}
 
 }

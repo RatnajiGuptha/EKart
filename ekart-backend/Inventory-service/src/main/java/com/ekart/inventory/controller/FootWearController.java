@@ -26,21 +26,6 @@ public class FootWearController {
 	@Autowired
 	private FootWearService footWearService;
 
-	@PostMapping("/addMultipleFootWear")
-	public ResponseEntity<String> SaveMultipleFootWear(@RequestBody List<FootWear> footWears) {
-
-		for (FootWear footWear : footWears) {
-			footWearService.PostFootWare(footWear);
-		}
-		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Foot Wear Added");
-	}
-
-	@PostMapping("/add")
-	public ResponseEntity<String> saveFootWare(@RequestBody FootWear footWear) {
-		String result = footWearService.PostFootWare(footWear);
-		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(result);
-	}
-
 	@GetMapping("/getFootWear")
 	public ResponseEntity<List<FootWear>> fetchFootWare() {
 		List<FootWear> footWearList = footWearService.GetAllFootWear();
@@ -63,8 +48,7 @@ public class FootWearController {
 
 	@GetMapping("/getFootWear/type/{type}/{footWearId}")
 	public ResponseEntity<FootWear> fetchByTypeandId(@PathVariable FootWearType type, @PathVariable int footWearId) {
-//		List<FootWear> footWearList = footWearService.GetFootWearByType(type);
-		FootWear footWear = footWearService.GetFootWearBYId(footWearId);
+		FootWear footWear = footWearService.getFootWearByTypeAndId(type, footWearId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWear);
 	}
 
@@ -72,6 +56,21 @@ public class FootWearController {
 	public ResponseEntity<List<FootWear>> fetchBySuitable(@PathVariable Suitable suitable) {
 		List<FootWear> footWearList = footWearService.GetFootWearBySuitable(suitable);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+	}
+
+	@PostMapping("/add")
+	public ResponseEntity<String> saveFootWare(@RequestBody FootWear footWear) {
+		String result = footWearService.PostFootWare(footWear);
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(result);
+	}
+
+	@PostMapping("/addMultipleFootWear")
+	public ResponseEntity<String> SaveMultipleFootWear(@RequestBody List<FootWear> footWears) {
+
+		for (FootWear footWear : footWears) {
+			footWearService.PostFootWare(footWear);
+		}
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Foot Wear Added");
 	}
 
 }
