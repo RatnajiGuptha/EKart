@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import AccessoriesService from '../../Services/AccessoriesService';
+import CartService from "../../Services/CartService";
 import "../../StyleSheets/Home.css";
+import "../../StyleSheets/ProductInfo.css";
 
 const AccessoriesProductsInfo = () => {
 
     const { accessoryId } = useParams();
 
     const [productsInfo, setProductInfo] = useState({ id: null });
+    const [quantity, setQuantity] = useState(1);
 
     const [image, setImage] = useState('');
 
     const handleClick = (imgSrc) => {
         setImage(imgSrc);
+
     }
 
     useEffect(() => {
@@ -23,6 +27,42 @@ const AccessoriesProductsInfo = () => {
             setImage(response.data.productImg1);
         })
     }, [accessoryId]);
+
+    const quantityDec = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1)
+        }
+    };
+
+    const quantityInc = () => {
+        setQuantity(quantity + 1);
+    };
+
+    const handleCardItems = async () => {
+        const cart = {
+            productId: productsInfo.accessoryId,
+            brandName: productsInfo.brandName,
+            productName: productsInfo.productName,
+            logoImg: productsInfo.logoImg,
+            productPrice: productsInfo.productPrice,
+            size: productsInfo.size,
+            color: productsInfo.color,
+            qty: quantity,
+            productCategories: "Accessories",
+            type: productsInfo.type,
+            sellerName: productsInfo.sellerName,
+            suitablefor: productsInfo.suitablefor,
+            productDescription: productsInfo.productDescription,
+
+        };
+
+        await CartService.addItemsToCart(cart).then((response) => {
+            console.log(response);
+            alert("Item added successfully");
+
+        });
+
+    };
 
     return (
         <div className='product-info-container'>
@@ -65,10 +105,17 @@ const AccessoriesProductsInfo = () => {
                 </div>
                 <p className='product-price'> Price : ₹ {productsInfo.productPrice}/-</p>
                 <h5 className='seller-name'>Seller : {productsInfo.sellerName}</h5>
-                <div><button className='btn btn-warning'>Add to cart</button> </div>
+                <div className="quantity">
+                    <div>
+                        <button className="quantity-button" onClick={quantityDec}> - </button>
+                        {quantity}
+                        <button className="quantity-button" onClick={quantityInc}> + </button>
+                    </div>
+                </div>
+                <div><button className='btn btn-warning' onClick={handleCardItems}>Add to cart</button> </div>
             </div>
 
-        </div>
+        </div >
 
 
     )

@@ -151,3 +151,27 @@ input[type="text"]::placeholder {
   text-decoration: none;
   color: inherit;
 }
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-container.quantity-button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #eaeaea;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer
+}
+
+.quantity-text {
+  width: 40px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+
+}

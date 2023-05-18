@@ -1,0 +1,85 @@
+.cart-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: flex-start;
+   overflow: hidden;   
+}
+
+.items-container {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin-bottom: 5px;
+   margin-top: 5px;
+   flex: 1 1 auto;
+   overflow-y: auto;
+}
+
+.cart-product-img {
+   height: 150px;
+   width: 150px;
+   padding: 10px;
+   object-fit: cover;
+   margin-right: 10px;
+
+
+}
+
+.cart-item-details {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   width: 400px;
+   margin-right: 20px;
+
+}
+
+.product-name {
+   font-weight: bold;
+   margin-bottom: 3px;
+}
+
+.product-price {
+   margin-bottom: 3px;
+   font-weight: 500;
+   font-style: italic;
+}
+
+.product-description {
+   margin-bottom: 10px;
+   font-weight: 400;
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+.price-container {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   align-self: end;
+   position: sticky;
+   top: 0;
+   flex: 0 0 auto;
+   height: 25vh;
+   margin: 10px;
+   padding: 20px;
+
+}
+
+.total-price {
+   font-weight: bold;
+   font-size: 18px;
+   margin-top: 10px;
+}
+
+.checkout-btn {
+   height: 40px;
+   border-radius: 12px;
+   background-color: green;
+   color: #fff;
+   font-weight: bolder;
+   border: none;
+
+
+}
