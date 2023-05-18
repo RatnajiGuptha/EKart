@@ -1,6 +1,7 @@
 package com.ekart.order.entity;
 
-import com.ekart.order.enums.ProductCategories;
+import com.ekart.common.events.OrderStatus;
+import com.ekart.common.events.PaymentStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,34 +10,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
-public class Cart {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PurchaseOrder {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cartId;
+	private int id;
 	private String userName;
-
 	private int productId;
+	private int price;
 	@Enumerated(EnumType.STRING)
-	private ProductCategories productCategories;
-
-	private String productName;
-	private String logoImg;
-
-	private int productPrice;
-	private String productDescription;
-	private String brandName;
-
-	private String size;
-	private String color;
-	private int qty;
-
+	private OrderStatus orderStatus;
+	@Enumerated(EnumType.STRING)
+	private PaymentStatus paymentStatus;
 }
