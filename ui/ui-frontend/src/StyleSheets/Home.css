@@ -3,7 +3,6 @@
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
-
 }
 
 .card-info {
@@ -84,12 +83,13 @@
   border-radius: 20rem;
   overflow: hidden;
   position: relative;
+  
 }
 
 .image {
   padding: 1rem;
-  height: 7.9rem;
-  width: 7.9rem;
+  height: 7.5rem;
+  width: 7.5rem;
   border-radius: 50%;
   background-size: cover;
   background-position: center;

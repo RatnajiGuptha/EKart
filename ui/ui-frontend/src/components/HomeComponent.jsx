@@ -2,8 +2,8 @@ import React from 'react';
 
 import HomeCarousels from "./HomePagesComponents/HomeCarousels";
 import HomeCategories from "./HomePagesComponents/HomeCategories";
-import FashionHomeFilter from './HomePagesComponents/FashionHomeFilter';
-import FashionHomeFilterSample from './HomePagesComponents/FashionHomeFilterSample';
+
+import ProductsFilterComponent from "../components/HomePagesComponents/ProductsFilterComponent";
 
 import FooterComponent from './FooterComponent';
 
@@ -13,9 +13,7 @@ function HomeComponent() {
         <div>
             <HomeCategories />
             <HomeCarousels />
-            <FashionHomeFilter />
-            <FashionHomeFilterSample />
-
+            <ProductsFilterComponent />
             <FooterComponent />
         </div>
     );

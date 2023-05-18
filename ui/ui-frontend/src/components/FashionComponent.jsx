@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "../StyleSheets/Fashion.css";
 import { Link } from "react-router-dom";
-import FashionHomeFilter from "./HomePagesComponents/FashionHomeFilter";
 
 const FashionComponent = () => {
     return (
 
         <div className="fluid-container">
-            <FashionHomeFilter />
+           
             <div className="d-flex flex-row justify-content-center">
                 <div className="fashion-card-container">
                     <Link to="/fashionBy/Male" className="link">

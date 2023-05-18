@@ -8,8 +8,16 @@ class FootwearService {
         return axios.get(FOOTWEAR_BASE_URL + "/getFootWear");
     }
 
-    getFootwearById(footWearId){
+    getFootwearById(footWearId) {
         return axios.get(FOOTWEAR_BASE_URL + "/getFootWearById/" + footWearId);
+    }
+
+    getFootwearByType(type) {
+        return axios.get(FOOTWEAR_BASE_URL + "/getFootWear/" + type);
+    }
+
+    getFootwearByTypeAndId(type, id) {
+        return axios.get(FOOTWEAR_BASE_URL + "/getFootWear/" + type + "/" + id);
     }
 }
 

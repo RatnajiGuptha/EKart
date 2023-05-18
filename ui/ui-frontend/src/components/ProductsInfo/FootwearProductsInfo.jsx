@@ -55,11 +55,15 @@ const FootwearProductsInfo = () => {
 
         };
 
-        await CartService.addItemsToCart(cart).then((response) => {
-            console.log(response);
-            alert("Item added successfully");
+        if (productsInfo.qty > quantity) {
+            await CartService.addItemsToCart(cart).then((response) => {
+                console.log(response);
+                alert("Item added successfully");
 
-        });
+            });
+        } else {
+            alert(`${productsInfo.qty} products Left`);
+        }
 
     };
 

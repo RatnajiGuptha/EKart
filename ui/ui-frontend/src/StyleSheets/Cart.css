@@ -3,7 +3,7 @@
    flex-direction: column;
    justify-content: flex-start;
    align-items: flex-start;
-   overflow: hidden;   
+   overflow: hidden;
 }
 
 .items-container {
@@ -14,12 +14,14 @@
    margin-top: 5px;
    flex: 1 1 auto;
    overflow-y: auto;
+   border: 2px solid #eee;
+   border-radius: 12px;
 }
 
 .cart-product-img {
-   height: 150px;
-   width: 150px;
-   padding: 10px;
+   height: 140px;
+   width: 140px;
+   padding: 5px;
    object-fit: cover;
    margin-right: 10px;
 
@@ -30,7 +32,7 @@
    display: flex;
    flex-direction: column;
    align-items: flex-start;
-   width: 400px;
+   width: 350px;
    margin-right: 20px;
 
 }
@@ -50,6 +52,7 @@
    margin-bottom: 10px;
    font-weight: 400;
    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   text-align: left;
 }
 
 

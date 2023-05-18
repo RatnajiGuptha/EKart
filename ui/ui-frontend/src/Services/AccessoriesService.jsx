@@ -10,7 +10,14 @@ class AccessoriesService {
 
     getAccessoryById(id) {
         return axios.get(Accessories_BASE_URL + "/getAccessoriesProductById/" + id);
+    }
 
+    getAccessoriesByType(type) {
+        return axios.get(Accessories_BASE_URL + "/getAccessories/type/" + type);
+    }
+
+    getAccessoriesByTypeAndId(type, id) {
+        return axios.get(Accessories_BASE_URL + "/getAccessories/type/" + type + "/" + id);
     }
 
 }

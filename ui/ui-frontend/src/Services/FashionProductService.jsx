@@ -8,12 +8,12 @@ class FashionProductService {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts");
     }
 
-    getProdByType(type) {
-        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/type/" + type);
-    }
-
     getProductById(productId) {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/" + productId)
+    }
+
+    getProdByType(type) {
+        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/type/" + type);
     }
 
     getProductFilterTypeById(type, productId) {
@@ -29,6 +29,15 @@ class FashionProductService {
     getProductByGenderId(gender, id) {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/suitableFor/" + gender + "/" + id)
     }
+
+    getProductByGenderAndType(gender, type) {
+        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProductsBy/suitablefor/" + gender + "/" + type);
+    }
+
+    getProductByGenderAndTypeWithProductId(gender, type, productId) {
+        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProductsBy/suitablefor/" + gender + "/" + type + "/id/" + productId);
+    }
+
 
 }
 

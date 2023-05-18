@@ -55,12 +55,15 @@ const AccessoriesProductsInfo = () => {
             productDescription: productsInfo.productDescription,
 
         };
+        if (productsInfo.qty > quantity) {
+            await CartService.addItemsToCart(cart).then((response) => {
+                console.log(response);
+                alert("Item added successfully");
 
-        await CartService.addItemsToCart(cart).then((response) => {
-            console.log(response);
-            alert("Item added successfully");
-
-        });
+            });
+        } else {
+            alert(`${productsInfo.qty} products Left`);
+        }
 
     };
 
