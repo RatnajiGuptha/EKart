@@ -5,8 +5,8 @@ spring:
     stream:
       bindings:
         paymentProcessor-in-0 :
-          destination: order-event
+          destination: order-event1
         paymentProcessor-out-0:
-          destination: payment-event
+          destination: payment-event1
 server:
   port: 8083

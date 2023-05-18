@@ -1,5 +1,6 @@
 package com.ekart.order.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,13 @@ public class OrderController {
 	
 	@PostMapping("/createOrder")
 	public PurchaseOrder saveOrder() {
-		Cart cart = cartService.getByProductId(1);
+		Cart cart = cartService.getByProductId(12);
+
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
 		orderRequestDTO.setUserName(cart.getUserName());
 		orderRequestDTO.setProductId(cart.getProductId());
 		orderRequestDTO.setPrice(cart.getProductPrice());
-		
+
 		return orderService.createOrder(orderRequestDTO);
 	}
 	

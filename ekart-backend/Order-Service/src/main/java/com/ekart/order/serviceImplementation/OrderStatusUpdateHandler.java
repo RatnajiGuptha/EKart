@@ -11,6 +11,7 @@ import com.ekart.common.events.PaymentStatus;
 import com.ekart.order.Repository.OrderRepository;
 import com.ekart.order.config.OrderStatusPublisher;
 import com.ekart.order.entity.PurchaseOrder;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 public class OrderStatusUpdateHandler {
@@ -20,15 +21,21 @@ public class OrderStatusUpdateHandler {
 	
 	@Autowired
 	private OrderStatusPublisher publisher;
-	
+
+	@Transactional
 	public void updateOrder(int id,Consumer<PurchaseOrder> consumer) {
 		orderRepository.findById(id).ifPresent(consumer.andThen(this::updateOrder));
 	}
 	
 	public void updateOrder(PurchaseOrder purchaseOrder) {
+		System.out.println(".............."+purchaseOrder.getPaymentStatus());
 		boolean ispaymentComplete = PaymentStatus.PAYMENT_COMPLETED.equals(purchaseOrder.getPaymentStatus());
+		System.out.println("..................ispaymentComplete.."+ispaymentComplete+ "..................");
 		OrderStatus newOrderStatus = ispaymentComplete?OrderStatus.ORDER_COMPLETED:OrderStatus.ORDER_CANCELED;
+		System.out.println("..................newOrderStatus..."+newOrderStatus+ "..................");
 		purchaseOrder.setOrderStatus(newOrderStatus);
+		System.out.println("..................purchaseOrder.getOrderStatus()"+ purchaseOrder.getOrderStatus()+ "..................");
+
 		if(!ispaymentComplete) {
 			publisher.publishOrderEvent(convertEntityToDto(purchaseOrder), newOrderStatus);
 		}

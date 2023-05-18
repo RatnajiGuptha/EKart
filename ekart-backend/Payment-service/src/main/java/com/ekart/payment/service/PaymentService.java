@@ -35,18 +35,24 @@ public class PaymentService {
         PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO(orderRequestDTO.getOrderId(), orderRequestDTO.getUserName(),orderRequestDTO.getPrice());
         logger.info((paymentRequestDTO.toString()));
 
-        return userBalanceRepository.findById(orderRequestDTO.getOrderId())
-                .filter(ub-> ub.getPrice() > orderRequestDTO.getPrice())
-                .map(ub -> {
-                    ub.setPrice(ub.getPrice() - orderRequestDTO.getPrice());
+        UserBalance userBalance = userBalanceRepository.findByUserName(orderRequestDTO.getUserName());
+        if(userBalance != null) {
 
-                    userTransactionRepository.save(new UserTransaction(
-                            orderRequestDTO.getOrderId(), orderRequestDTO.getUserName()
-                    , orderRequestDTO.getPrice()));
+            int id = userBalance.getUserId();
 
-                    return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_COMPLETED);
-                }).orElse(new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED));
+            return userBalanceRepository.findById(id)
+                    .filter(ub -> ub.getPrice() > orderRequestDTO.getPrice())
+                    .map(ub -> {
+                        ub.setPrice(ub.getPrice() - orderRequestDTO.getPrice());
 
+                        userTransactionRepository.save(new UserTransaction(
+                                orderRequestDTO.getOrderId(), orderRequestDTO.getUserName()
+                                , orderRequestDTO.getPrice()));
+
+                        return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_COMPLETED);
+                    }).orElse(new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED));
+        }
+        return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED);
     }
 
     @Transactional
