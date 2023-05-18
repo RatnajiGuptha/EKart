@@ -1,0 +1,14 @@
+.fashion-card-image {
+    padding: 1rem;
+    height: 350px;
+    width: 350px;
+    background-size: cover;
+    transition: transform 0.3s ease;
+}
+
+.fashion-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
