@@ -29,6 +29,7 @@ import LoginPage from "./components/LoginPage";
 
 import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
 import Toys from "./components/Products/Toys";
+import FashionComponent from "./components/FashionComponent";
 
 function App() {
 
@@ -40,7 +41,10 @@ function App() {
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
 
-          <Route path="/fashion" element={<FashionProducts />}></Route>
+          {/* <Route path="/fashion" element={<FashionProducts />}></Route> */}
+          <Route path="/fashion" element={<FashionComponent />}></Route>
+          {/* <Route path="/fashionByType/:type" element={<FashionComponent/>}></Route> */}
+
           <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
           <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
           <Route path="/fashion/:productId" element={<AllFashionProductsInfo />}></Route>
