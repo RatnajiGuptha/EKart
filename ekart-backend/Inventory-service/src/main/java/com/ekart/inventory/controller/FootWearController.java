@@ -17,23 +17,10 @@ import com.ekart.inventory.service.FootWearService;
 @RequestMapping("/api/footWear")
 public class FootWearController {
 
+
+
 	@Autowired
 	private FootWearService footWearService;
-
-	@PostMapping("/addMultipleFootWear")
-	public ResponseEntity<String> SaveMultipleFootWear(@RequestBody List<FootWear> footWears) {
-
-		for (FootWear footWear : footWears) {
-			footWearService.PostFootWare(footWear);
-		}
-		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Foot Wear Added");
-	}
-
-	@PostMapping("/add")
-	public ResponseEntity<String> saveFootWare(@RequestBody FootWear footWear) {
-		String result = footWearService.PostFootWare(footWear);
-		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(result);
-	}
 
 	@GetMapping("/getFootWear")
 	public ResponseEntity<List<FootWear>> fetchFootWare() {
@@ -57,8 +44,7 @@ public class FootWearController {
 
 	@GetMapping("/getFootWear/type/{type}/{footWearId}")
 	public ResponseEntity<FootWear> fetchByTypeandId(@PathVariable FootWearType type, @PathVariable int footWearId) {
-//		List<FootWear> footWearList = footWearService.GetFootWearByType(type);
-		FootWear footWear = footWearService.GetFootWearBYId(footWearId);
+		FootWear footWear = footWearService.getFootWearByTypeAndId(type, footWearId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWear);
 	}
 
@@ -68,11 +54,26 @@ public class FootWearController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
 	}
 
+	@PostMapping("/add")
+	public ResponseEntity<String> saveFootWare(@RequestBody FootWear footWear) {
+		String result = footWearService.PostFootWare(footWear);
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(result);
+	}
+
+	@PostMapping("/addMultipleFootWear")
+	public ResponseEntity<String> SaveMultipleFootWear(@RequestBody List<FootWear> footWears) {
+
+		for (FootWear footWear : footWears) {
+			footWearService.PostFootWare(footWear);
+		}
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Foot Wear Added");
+	}
+
 	@PutMapping("/setQuantity/{prodId}/{quantity}")
-	public void settingQuantityFootWear(@PathVariable int prodId, @PathVariable int quantity){
+	public void settingQuantityFootWear(@PathVariable int prodId, @PathVariable int quantity) {
 		FootWear footWear = footWearService.GetFootWearBYId(prodId);
 
-		footWear.setQty(footWear.getQty()-quantity);
+		footWear.setQty(footWear.getQty() - quantity);
 		footWearService.PostFootWare(footWear);
 	}
 

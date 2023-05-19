@@ -6,21 +6,21 @@ import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.entity.Cart;
 import org.springframework.stereotype.Service;
 
-
+import com.ekart.order.entity.Cart;
 
 @Service
 public interface CartService {
-    String saveItemsInCart(Cart cart);
+	String saveItemsInCart(Cart cart);
 
-    List<Cart> getAllCartItems();
+	List<Cart> getAllCartItems();
 
-    String removeCartItem(int id);
+	String removeCartItem(int id);
 
     List<Cart> getByUserName(String userName);
 
-    Cart getByProductId(int productId);
+	Cart getByProductId(int productId);
 
-    String removeCartByProductId(int productId);
+	String removeCartByProductId(int productId);
 
-    Cart getByProductIdAndCategorie(int productId, ProductCategories categorie);
+	Cart getByProductCategoriesAndProductId(ProductCategories category, int productId);
 }

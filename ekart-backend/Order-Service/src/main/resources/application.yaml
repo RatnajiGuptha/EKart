@@ -9,4 +9,3 @@ spring:
         paymentEventConsumer-in-0:
           destination: payment-event1
 
-  

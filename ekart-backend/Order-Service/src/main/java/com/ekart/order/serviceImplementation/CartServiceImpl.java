@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ekart.order.service.CartService;
 
-
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -51,8 +50,14 @@ public class CartServiceImpl implements CartService {
         return "Item Removed From cart";
     }
 
-    @Override
-    public Cart getByProductIdAndCategorie(int productId, ProductCategories category) {
-        return cartRepository.findByProductIdAndProductCategories(productId,category);
-    }
+
+//    @Override
+//    public Cart getByProductIdAndCategorie(int productId, ProductCategories category) {
+//        return cartRepository.findByProductIdAndProductCategories(productId,category);
+//    }
+
+	@Override
+	public Cart getByProductCategoriesAndProductId(ProductCategories category, int productId) {
+		return cartRepository.findByProductCategoriesAndProductId(category, productId);
+	}
 }

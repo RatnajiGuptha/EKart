@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
-    List<Cart> findByUserName(String userName);
+	List<Cart> findByUserName(String userName);
 
-    Cart findByProductId(int productId);
+	Cart findByProductId(int productId);
 
+	Cart findByProductIdAndProductCategories(int productId, ProductCategories category);
 
-
-    Cart findByProductIdAndProductCategories(int productId, ProductCategories category);
+	Cart findByProductCategoriesAndProductId(ProductCategories category, int productId);
 }

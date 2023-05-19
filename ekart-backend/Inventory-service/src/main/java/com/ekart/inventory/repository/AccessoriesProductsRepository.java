@@ -8,8 +8,11 @@ import com.ekart.inventory.entity.AccessoriesProducts;
 import com.ekart.inventory.enums.AccessoriesTypes;
 import com.ekart.inventory.enums.Suitable;
 
-public interface AccessoriesProductsRepository extends JpaRepository<AccessoriesProducts, Integer>{
+public interface AccessoriesProductsRepository extends JpaRepository<AccessoriesProducts, Integer> {
 
 	public List<AccessoriesProducts> findByType(AccessoriesTypes type);
+
 	public List<AccessoriesProducts> findBySuitablefor(Suitable suitable);
+
+	public AccessoriesProducts findByTypeAndAccessoryId(AccessoriesTypes type, int accessoryId);
 }
