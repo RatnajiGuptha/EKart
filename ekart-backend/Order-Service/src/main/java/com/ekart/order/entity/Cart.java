@@ -37,6 +37,7 @@ public class Cart {
 
 	private String size;
 	private String color;
+	private String sellerName;
 	private int qty;
 
 }
