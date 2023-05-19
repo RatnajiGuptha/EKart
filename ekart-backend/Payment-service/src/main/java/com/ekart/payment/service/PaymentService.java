@@ -32,7 +32,8 @@ public class PaymentService {
         OrderRequestDTO orderRequestDTO = orderEvent.getOrderRequestDTO();
         logger.info(orderRequestDTO.toString());
 
-        PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO(orderRequestDTO.getOrderId(), orderRequestDTO.getUserName(),orderRequestDTO.getPrice());
+        PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO(orderRequestDTO.getOrderId(),orderRequestDTO.getUserName()
+                ,orderRequestDTO.getProductIds(),orderRequestDTO.getQty(),orderRequestDTO.getCategoryNames(),orderRequestDTO.getPrice());
         logger.info((paymentRequestDTO.toString()));
 
         UserBalance userBalance = userBalanceRepository.findByUserName(orderRequestDTO.getUserName());

@@ -2,8 +2,8 @@ package com.ekart.order.controller;
 
 import java.util.List;
 
+import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.entity.Cart;
-import com.ekart.order.enums.ProductCategories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -45,9 +45,9 @@ public class CartController {
     }
 
     @GetMapping("/getByUserName/{userName}")
-    public ResponseEntity<Cart> fetchCartByUserName(@PathVariable String userName){
-        Cart cart = cartService.getByUserName(userName);
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
+    public ResponseEntity<List<Cart>> fetchCartByUserName(@PathVariable String userName){
+        List<Cart> cartList = cartService.getByUserName(userName);
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cartList);
     }
 
     @GetMapping("/getByProductId/{productId}")

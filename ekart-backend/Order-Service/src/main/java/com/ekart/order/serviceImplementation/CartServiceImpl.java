@@ -2,9 +2,9 @@ package com.ekart.order.serviceImplementation;
 
 import java.util.List;
 
+import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.Repository.CartRepository;
 import com.ekart.order.entity.Cart;
-import com.ekart.order.enums.ProductCategories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ekart.order.service.CartService;
@@ -33,7 +33,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart getByUserName(String userName) {
+    public List<Cart> getByUserName(String userName) {
         return cartRepository.findByUserName(userName);
     }
 

@@ -1,7 +1,10 @@
 package com.ekart.order.serviceImplementation;
 
+import java.util.List;
 import java.util.function.Consumer;
 
+import com.ekart.common.DTO.ProductCategories;
+import com.ekart.order.proxy.InventoryServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,6 +25,9 @@ public class OrderStatusUpdateHandler {
 	@Autowired
 	private OrderStatusPublisher publisher;
 
+	@Autowired
+	private InventoryServiceProxy inventoryServiceProxy;
+
 	@Transactional
 	public void updateOrder(int id,Consumer<PurchaseOrder> consumer) {
 		orderRepository.findById(id).ifPresent(consumer.andThen(this::updateOrder));
@@ -36,6 +42,32 @@ public class OrderStatusUpdateHandler {
 		purchaseOrder.setOrderStatus(newOrderStatus);
 		System.out.println("..................purchaseOrder.getOrderStatus()"+ purchaseOrder.getOrderStatus()+ "..................");
 
+		List<Integer> prodIdList = purchaseOrder.getProductIds();
+		List<Integer> quantityList = purchaseOrder.getQty();
+		List<ProductCategories> categoriesList=purchaseOrder.getCategoryNames();
+		for(int i=0;i<categoriesList.size();i++){
+			if(categoriesList.get(i).equals(ProductCategories.Fashion)){
+				inventoryServiceProxy.settingQuantityFashion(prodIdList.get(i),quantityList.get(i));
+			}
+			else if(categoriesList.get(i).equals(ProductCategories.Toys)){
+				inventoryServiceProxy.settingQuantityToys(prodIdList.get(i),quantityList.get(i));
+			}
+			else if(categoriesList.get(i).equals(ProductCategories.Electronics)){
+				inventoryServiceProxy.settingQuantityElectronics(prodIdList.get(i),quantityList.get(i));
+			}
+			else if(categoriesList.get(i).equals(ProductCategories.Beauty)){
+				inventoryServiceProxy.settingQuantityBeauty(prodIdList.get(i),quantityList.get(i));
+			}
+			else if(categoriesList.get(i).equals(ProductCategories.Accessories)){
+				inventoryServiceProxy.settingQuantityAccessory(prodIdList.get(i),quantityList.get(i));
+			}
+			else if(categoriesList.get(i).equals(ProductCategories.FootWear)){
+				inventoryServiceProxy.settingQuantityFootWear(prodIdList.get(i),quantityList.get(i));
+			}
+			else{
+				System.out.println("incorrect category name given");
+			}
+		}
 		if(!ispaymentComplete) {
 			publisher.publishOrderEvent(convertEntityToDto(purchaseOrder), newOrderStatus);
 		}
@@ -45,7 +77,9 @@ public class OrderStatusUpdateHandler {
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
 		orderRequestDTO.setOrderId(purchaseOrder.getId());
 		orderRequestDTO.setUserName(purchaseOrder.getUserName());
-		orderRequestDTO.setProductId(purchaseOrder.getProductId());
+		orderRequestDTO.setProductIds(purchaseOrder.getProductIds());
+		orderRequestDTO.setQty(purchaseOrder.getQty());
+		orderRequestDTO.setCategoryNames(purchaseOrder.getCategoryNames());
 		orderRequestDTO.setPrice(purchaseOrder.getPrice());
 		return orderRequestDTO;
 	}

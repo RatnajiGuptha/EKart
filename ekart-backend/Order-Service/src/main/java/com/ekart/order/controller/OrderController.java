@@ -3,11 +3,9 @@ package com.ekart.order.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ekart.common.DTO.ProductCategories;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ekart.common.DTO.OrderRequestDTO;
 import com.ekart.order.entity.Cart;
@@ -23,20 +21,36 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private CartService cartService;
-	
-	@PostMapping("/createOrder")
-	public PurchaseOrder saveOrder() {
-		Cart cart = cartService.getByProductId(12);
 
+
+	@PostMapping("/createOrder/{userName}")
+	public PurchaseOrder saveOrder(@PathVariable String userName) {
+		List<Cart> cartList = cartService.getByUserName(userName);
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
-		orderRequestDTO.setUserName(cart.getUserName());
-		orderRequestDTO.setProductId(cart.getProductId());
-		orderRequestDTO.setPrice(cart.getProductPrice());
+		orderRequestDTO.setUserName(userName);
 
-		return orderService.createOrder(orderRequestDTO);
+		List<Integer> productIds = new ArrayList<>();
+		List<ProductCategories> categories = new ArrayList<>();
+		List<Integer> qtys = new ArrayList<>();
+
+		int amount = 0;
+		for(Cart cart : cartList){
+			productIds.add(cart.getProductId());
+			categories.add(cart.getProductCategories());
+			qtys.add(cart.getQty());
+			amount += (cart.getProductPrice()*cart.getQty());
+		}
+		orderRequestDTO.setProductIds(productIds);
+		orderRequestDTO.setCategoryNames(categories);
+		orderRequestDTO.setPrice(amount);
+		orderRequestDTO.setQty(qtys);
+
+		return orderService.createOrders(orderRequestDTO);
+
+
 	}
-	
-	@GetMapping("/getOrders")
+
+		@GetMapping("/getOrders")
 	public List<PurchaseOrder> getAllOrders(){
 		return orderService.fetchOrders();
 	}

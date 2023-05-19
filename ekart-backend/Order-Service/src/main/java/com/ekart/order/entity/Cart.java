@@ -1,7 +1,7 @@
 package com.ekart.order.entity;
 
+import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.enums.FashionTypes;
-import com.ekart.order.enums.ProductCategories;
 import com.ekart.order.enums.Size;
 import com.ekart.order.enums.Suitable;
 import jakarta.persistence.Entity;

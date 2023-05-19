@@ -10,4 +10,5 @@ public interface OrderService {
 	public PurchaseOrder createOrder(OrderRequestDTO orderRequestDTO);
 	public List<PurchaseOrder> fetchOrders();
 
+    PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO);
 }

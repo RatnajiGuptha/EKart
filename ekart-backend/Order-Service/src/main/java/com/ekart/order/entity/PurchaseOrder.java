@@ -1,5 +1,6 @@
 package com.ekart.order.entity;
 
+import com.ekart.common.DTO.ProductCategories;
 import com.ekart.common.events.OrderStatus;
 import com.ekart.common.events.PaymentStatus;
 
@@ -13,6 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,7 +26,9 @@ public class PurchaseOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String userName;
-	private int productId;
+	private List<Integer> productIds;
+	private List<Integer> qty;
+	private List<ProductCategories> categoryNames;
 	private int price;
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
