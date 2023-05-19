@@ -17,7 +17,7 @@ class FootwearService {
     }
 
     getFootwearByTypeAndId(type, id) {
-        return axios.get(FOOTWEAR_BASE_URL + "/getFootWear/" + type + "/" + id);
+        return axios.get(FOOTWEAR_BASE_URL + "/getFootWear/type/" + type + "/" + id);
     }
 }
 

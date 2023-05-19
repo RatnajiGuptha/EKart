@@ -15,7 +15,6 @@ const CartComponent = () => {
   }, []);
 
   const deleteItemFromCarttt = async (cartId) => {
-    // console.log(cartId);
     CartService.deleteItemFromCart(cartId);
     alert("Item Deleted Successfully");
     window.location.reload(false);
@@ -39,11 +38,7 @@ const CartComponent = () => {
         {cartItems.map((item) => (
           <div key={item.id} className="items-container">
             <div>
-              <img
-                src={item.logoImg}
-                className="cart-product-img"
-                alt="/"
-              ></img>
+              <img src={item.logoImg} className="cart-product-img" alt="/"  ></img>
             </div>
             <div className="cart-item-details">
               <h5 className="product-name">{item.productName}</h5>
@@ -57,12 +52,10 @@ const CartComponent = () => {
                 </div>
               </div>
             </div>
-            <div>
-              <p className="product-price">
-                {" "}
-                Quantity:{" "}
+            <div className="product-qty-container">
+              <p className="product-price">  Quantity:{" "}
                 <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-                  {item.qty}{" "}
+                  {item.qty}
                 </span>
               </p>
               <p className="product-price">
@@ -75,8 +68,7 @@ const CartComponent = () => {
             <div className="m-2">
               <button
                 className="btn btn-danger"
-                onClick={() => deleteItemFromCarttt(item.cartId)}
-              >
+                onClick={() => deleteItemFromCarttt(item.cartId)}              >
                 Remove From Cart
               </button>
             </div>

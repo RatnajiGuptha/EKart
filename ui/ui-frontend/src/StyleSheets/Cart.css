@@ -4,6 +4,7 @@
    justify-content: flex-start;
    align-items: flex-start;
    overflow: hidden;
+   padding: 10px;
 }
 
 .items-container {
@@ -16,14 +17,16 @@
    overflow-y: auto;
    border: 2px solid #eee;
    border-radius: 12px;
+   padding: 10px;
 }
 
 .cart-product-img {
    height: 140px;
    width: 140px;
    padding: 5px;
-   object-fit: cover;
+   object-fit: fill;
    margin-right: 10px;
+   border-radius: 20px;
 
 
 }
@@ -85,4 +88,10 @@
    border: none;
 
 
+}
+
+.product-qty-container{
+   width: 150px;
+   margin-right: 10px;
+   text-align: left;
 }

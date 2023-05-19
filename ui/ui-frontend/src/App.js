@@ -34,6 +34,7 @@ import FashionProductsByGenderAndTypeInfo from "./components/ProductsInfo/Fashio
 import AccessoriesByType from "./components/Products/AccessoriesByType";
 import AccessoriesProductsByTpeInfo from "./components/ProductsInfo/AccessoriesProductsByTpeInfo";
 import FootwearByType from "./components/Products/FootwearByType";
+import FootwearProductsByTypeInfo from "./components/ProductsInfo/FootwearProductsByTpeInfo";
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
           <Route path="/footwear" element={<Footware />}></Route>
           <Route path="/footwear/:footWearId" element={<FootwearProductsInfo />}></Route>
           <Route path="/footwearBy/:type" element={<FootwearByType />}></Route>
+          <Route path="/footwearBy/:type/:footWearId" element={<FootwearProductsByTypeInfo/>}></Route>
 
           <Route path="/accessories" element={<Accessories />}></Route>
           <Route path="/accessories/:accessoryId" element={<AccessoriesProductsInfo />}></Route>
