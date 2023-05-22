@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ekart.order.service.CartService;
 
-
-@CrossOrigin(origins="http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {
@@ -68,19 +67,25 @@ public class CartController {
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
     }
 
-//    @GetMapping("/getByProductIdAndCategory/{category}{productId}")
-//    public ResponseEntity<Cart> fetchCartByUserName( @PathVariable ProductCategories category,@PathVariable int productId){
-//        Cart cart = cartService.getByProductCategoriesAndProductId(category,productId);
-//        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
-//    }
-    
-    @GetMapping("/getProductCategoryAndProductId/{category}/{productId}")
-    public Cart fetchData( @PathVariable ProductCategories category,@PathVariable int productId){
-    	return cartService.getByProductCategoriesAndProductId(category,productId);
-    }
-    @DeleteMapping("/deleteProductInCartByProductId/{productId}")
-    public ResponseEntity<String> deleteCartItemByProduct(@PathVariable int productId){
-        String response = cartService.removeCartByProductId(productId);
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
-    }
+
+	@GetMapping("/getProductCategoryAndProductId/{category}/{productId}")
+	public Cart fetchData(@PathVariable ProductCategories category, @PathVariable int productId) {
+		return cartService.getByProductCategoriesAndProductId(category, productId);
+	}
+
+	@DeleteMapping("/deleteProductInCartByProductId/{productId}")
+	public ResponseEntity<String> deleteCartItemByProduct(@PathVariable int productId) {
+		String response = cartService.removeCartByProductId(productId);
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
+	}
+
+	@DeleteMapping("/DeleteAllItemsInCart")
+	public ResponseEntity<String> deleteAllCartItems() {
+		List<Cart> cartList = cartService.getAllCartItems();
+
+		for (Cart cart : cartList) {
+			String response = cartService.removeCartItem(cart.getCartId());
+		}
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Deleted elements of cart");
+	}
 }

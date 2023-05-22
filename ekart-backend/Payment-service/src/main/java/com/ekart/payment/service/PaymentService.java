@@ -33,7 +33,7 @@ public class PaymentService {
         logger.info(orderRequestDTO.toString());
 
         PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO(orderRequestDTO.getOrderId(),orderRequestDTO.getUserName()
-                ,orderRequestDTO.getProductIds(),orderRequestDTO.getQty(),orderRequestDTO.getCategoryNames(),orderRequestDTO.getPrice());
+                ,orderRequestDTO.getProductIds(),orderRequestDTO.getQty(),orderRequestDTO.getCategoryNames(),orderRequestDTO.getPriceList(),orderRequestDTO.getProductName(),orderRequestDTO.getBrandName(),orderRequestDTO.getSize(),orderRequestDTO.getColor(),orderRequestDTO.getSellerName(),orderRequestDTO.getPrice());
         logger.info((paymentRequestDTO.toString()));
 
         UserBalance userBalance = userBalanceRepository.findByUserName(orderRequestDTO.getUserName());
