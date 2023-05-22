@@ -55,6 +55,7 @@ public class CartController {
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
     }
 
+
     @GetMapping("/getByUserName/{userName}")
     public ResponseEntity<List<Cart>> fetchCartByUserName(@PathVariable String userName){
         List<Cart> cartList = cartService.getByUserName(userName);
