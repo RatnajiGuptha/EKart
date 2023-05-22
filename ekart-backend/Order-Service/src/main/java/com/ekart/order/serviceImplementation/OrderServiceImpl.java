@@ -51,7 +51,13 @@ public class OrderServiceImpl implements OrderService{
 		purchaseOrder.setProductIds(dto.getProductIds());
 		purchaseOrder.setQty(dto.getQty());
 		purchaseOrder.setCategoryNames(dto.getCategoryNames());
+		purchaseOrder.setPriceList(dto.getPriceList());
+		purchaseOrder.setProductName(dto.getProductName());
+		purchaseOrder.setBrandName(dto.getBrandName());
+		purchaseOrder.setSize(dto.getSize());
+		purchaseOrder.setColor(dto.getColor());
 		purchaseOrder.setPrice(dto.getPrice());
+		purchaseOrder.setSellerName(dto.getSellerName());
 		purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
 		return purchaseOrder;
 	}

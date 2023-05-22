@@ -33,7 +33,7 @@ public class PaymentService {
         logger.info(orderRequestDTO.toString());
 
         PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO(orderRequestDTO.getOrderId(),orderRequestDTO.getUserName()
-                ,orderRequestDTO.getProductIds(),orderRequestDTO.getQty(),orderRequestDTO.getCategoryNames(),orderRequestDTO.getPrice());
+                ,orderRequestDTO.getProductIds(),orderRequestDTO.getQty(),orderRequestDTO.getCategoryNames(),orderRequestDTO.getPriceList(),orderRequestDTO.getProductName(),orderRequestDTO.getBrandName(),orderRequestDTO.getSize(),orderRequestDTO.getColor(),orderRequestDTO.getSellerName(),orderRequestDTO.getPrice());
         logger.info((paymentRequestDTO.toString()));
 
         UserBalance userBalance = userBalanceRepository.findByUserName(orderRequestDTO.getUserName());
@@ -58,15 +58,15 @@ public class PaymentService {
 
     @Transactional
     public void cancelOrder(OrderEvent orderEvent) {
-        UserTransaction ut =  userTransactionRepository.findById(orderEvent.getOrderRequestDTO().getOrderId()).get();
-
-        System.out.println("........................");
-        System.out.println(orderEvent.getOrderRequestDTO().getUserName());
-        System.out.println("........................");
-        UserBalance ub = userBalanceRepository.findById(orderEvent.getOrderRequestDTO().getOrderId()).get();
-
-        ub.setPrice(ub.getPrice() + ut.getAmount());
-
-        userTransactionRepository.deleteById(ut.getOrderId());
+//        UserTransaction ut =  userTransactionRepository.findById(orderEvent.getOrderRequestDTO().getOrderId()).get();
+//
+//        System.out.println("........................");
+//        System.out.println(orderEvent.getOrderRequestDTO().getUserName());
+//        System.out.println("........................");
+//        UserBalance ub = userBalanceRepository.findById(orderEvent.getOrderRequestDTO().getOrderId()).get();
+//
+//        ub.setPrice(ub.getPrice() + ut.getAmount());
+//
+//        userTransactionRepository.deleteById(ut.getOrderId());
     }
 }

@@ -17,5 +17,12 @@ public class OrderResponseDTO {
 	private List<Integer> qty;
 	private List<Integer> productIds;
 	private List<ProductCategories> categoryNames;
+	private List<Integer> priceList;
+	private List<String> productName;
+	private List<String> brandName;
+
+	private List<String> size;
+	private List<String> color;
+	private List<String> sellerName;
 	private OrderStatus orderStatus;
 }

@@ -19,5 +19,13 @@ public class PaymentResponseDTO{
 	private List<Integer> qty;
 	private List<ProductCategories> categoryNames;
 	private int amount;
+	
+	private List<Integer> priceList;
+	private List<String> productName;
+	private List<String> brandName;
+
+	private List<String> size;
+	private List<String> color;
+	private List<String> sellerName;
 	private PaymentStatus paymentStatus;
 }

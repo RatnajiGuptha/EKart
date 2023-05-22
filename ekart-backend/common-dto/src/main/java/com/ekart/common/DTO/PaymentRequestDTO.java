@@ -16,6 +16,13 @@ public class PaymentRequestDTO {
 	private List<Integer> productIds;
 	private List<Integer> qty;
 	private List<ProductCategories> categoryNames;
+	private List<Integer> priceList;
+	private List<String> productName;
+	private List<String> brandName;
+
+	private List<String> size;
+	private List<String> color;
+	private List<String> sellerName;
 	private int amount;
 	
 }
