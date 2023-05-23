@@ -7,6 +7,10 @@ class CartService {
     return axios.post(CART_SERVICE_BASE_URL + "/add", cart);
   }
 
+  getCartItemsByUser(user) {
+    return axios.get(CART_SERVICE_BASE_URL + "/getByUserName/" + user);
+  }
+
   getAllItemsInCart() {
     return axios.get(CART_SERVICE_BASE_URL + "/getProducts");
   }

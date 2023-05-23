@@ -1,20 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CartService from "../Services/CartService";
+import CartService from "../../Services/CartService";
 
-import "../StyleSheets/Cart.css";
-
+import "../../StyleSheets/Cart.css";
 
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
+  const username = localStorage.getItem('username');
 
   useEffect(() => {
-    CartService.getAllItemsInCart().then((response) => {
+    CartService.getCartItemsByUser(username).then((response) => {
       setCartItems(response.data);
       console.log(response.data);
 
     });
   }, []);
+
+  const checkoutFromCart = () => {
+    let user = "";
+    cartItems.map((items) => {
+      console.log(items.userName);
+      user = items.userName;
+    });
+
+    console.log(user);
+    window.location.assign(`paymentPage/${user}`)
+
+  }
 
   const deleteItemFromCarttt = async (cartId) => {
     CartService.deleteItemFromCart(cartId);
@@ -90,7 +102,7 @@ const CartComponent = () => {
               ₹ {calculateTotalPrice().totalPrice}/-{" "}
             </span>
           </p>
-          <button className="checkout-btn">Checkout</button>
+          <button className="checkout-btn" onClick={() => checkoutFromCart()}>Checkout</button>
         </div>
       </div>
     </div>

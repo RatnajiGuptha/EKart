@@ -13,7 +13,7 @@ const FashionProductsInfo = () => {
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [quantity, setQuantity] = useState(1);
     const [image, setImage] = useState('')
-
+    const username = localStorage.getItem('username');
     const handleClick = (imgSrc) => {
         setImage(imgSrc);
     }
@@ -38,6 +38,7 @@ const FashionProductsInfo = () => {
 
     const handleCardItems = async () => {
         const cart = {
+            userName: username,
             productId: productsInfo.fashionId,
             brandName: productsInfo.brandName,
             productName: productsInfo.productName,

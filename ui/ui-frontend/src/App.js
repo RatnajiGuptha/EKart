@@ -29,22 +29,28 @@ import LoginPage from "./components/LoginPage";
 import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
 import Toys from "./components/Products/Toys";
 import FashionComponent from "./components/FashionComponent";
-import CartComponent from "./components/CartComponent";
 import FashionProductsByGenderAndTypeInfo from "./components/ProductsInfo/FashionProductsByGenderAndTypeInfo";
 import AccessoriesByType from "./components/Products/AccessoriesByType";
 import AccessoriesProductsByTpeInfo from "./components/ProductsInfo/AccessoriesProductsByTpeInfo";
 import FootwearByType from "./components/Products/FootwearByType";
 import FootwearProductsByTypeInfo from "./components/ProductsInfo/FootwearProductsByTpeInfo";
+import CheckoutComponent from "./components/OrdersModules/CheckoutComponent";
+import CartComponent from "./components/OrdersModules/CartComponent";
+
 import AddFashionModule from "./components/SellerModules/AddFashionModule";
 import AddAccessoriesModule from "./components/SellerModules/AddAccessoriesModule";
 import AddBeautyModule from "./components/SellerModules/AddBeautyModule";
 import AddElectronicsModule from "./components/SellerModules/AddElectronicsModule";
 import AddFootWearModule from "./components/SellerModules/AddFootWearModule";
 import AddToysProducts from "./components/SellerModules/AddToysProducts";
+<<<<<<< HEAD
 import Registrationpage from "./components/RegistrationPage";
 import ListFashionDetails from "./components/SellerModules/ListFashionDetails";
 function App() {
+=======
+>>>>>>> f4efd3afb938f4afabf8b57b3c697d215c10413a
 
+function App() {
   return (
     <div className="App">
       <Router>
@@ -84,6 +90,7 @@ function App() {
           <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
           <Route path="/cart" element={<CartComponent />}></Route>
+          <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
 
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
           <Route path='/addAccessories' element={<AddAccessoriesModule/>}></Route>
