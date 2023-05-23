@@ -13,15 +13,15 @@ import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.CartService;
 import com.ekart.order.service.OrderService;
 
+@CrossOrigin(origins="http://localhost:3000/")
 @RestController
 @RequestMapping("/api")
 public class OrderController {
-	
+
 	@Autowired
 	private OrderService orderService;
 	@Autowired
 	private CartService cartService;
-
 
 	@PostMapping("/createOrder/{userName}")
 	public PurchaseOrder saveOrder(@PathVariable String userName) {
@@ -32,27 +32,49 @@ public class OrderController {
 		List<Integer> productIds = new ArrayList<>();
 		List<ProductCategories> categories = new ArrayList<>();
 		List<Integer> qtys = new ArrayList<>();
+		List<Integer> priceList = new ArrayList<>();
+		List<String> productName = new ArrayList<>();
+		List<String> logoImg = new ArrayList<>();
+		List<String> productDescription = new ArrayList<>();
+		List<String> brandName = new ArrayList<>();
+
+		List<String> size = new ArrayList<>();
+		List<String> color = new ArrayList<>();
+		List<String> sellerName = new ArrayList<>();
 
 		int amount = 0;
-		for(Cart cart : cartList){
+		for (Cart cart : cartList) {
 			productIds.add(cart.getProductId());
 			categories.add(cart.getProductCategories());
 			qtys.add(cart.getQty());
-			amount += (cart.getProductPrice()*cart.getQty());
+			priceList.add(cart.getProductPrice());
+			productName.add(cart.getProductName());
+			logoImg.add(cart.getLogoImg());
+			productDescription.add(cart.getProductDescription());
+			brandName.add(cart.getBrandName());
+			size.add(cart.getSize());
+			color.add(cart.getColor());
+			sellerName.add(cart.getSellerName());
+			amount += (cart.getProductPrice() * cart.getQty());
 		}
 		orderRequestDTO.setProductIds(productIds);
 		orderRequestDTO.setCategoryNames(categories);
-		orderRequestDTO.setPrice(amount);
 		orderRequestDTO.setQty(qtys);
+		orderRequestDTO.setPriceList(priceList);
+		orderRequestDTO.setProductName(productName);
+		orderRequestDTO.setBrandName(brandName);
+		orderRequestDTO.setSize(size);
+		orderRequestDTO.setColor(color);
+		orderRequestDTO.setSellerName(sellerName);
+		orderRequestDTO.setPrice(amount);
 
 		return orderService.createOrders(orderRequestDTO);
 
-
 	}
 
-		@GetMapping("/getOrders")
-	public List<PurchaseOrder> getAllOrders(){
+	@GetMapping("/getOrders")
+	public List<PurchaseOrder> getAllOrders() {
 		return orderService.fetchOrders();
 	}
-	
+
 }
