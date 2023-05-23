@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
+import com.ekart.common.DTO.ProductCategories;
+import com.ekart.order.controller.CartController;
+import com.ekart.order.proxy.InventoryServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +34,7 @@ public class OrderStatusUpdateHandler {
 
 	@Autowired
 	private InventoryServiceProxy inventoryServiceProxy;
+
 
 	@Transactional
 	public void updateOrder(UUID id, Consumer<PurchaseOrder> consumer) {
@@ -69,7 +73,9 @@ public class OrderStatusUpdateHandler {
 					System.out.println("incorrect category name given");
 				}
 				cartController.deleteAllCartItems();
+
 			}
+
 		}
 		if (!ispaymentComplete) {
 			publisher.publishOrderEvent(convertEntityToDto(purchaseOrder), newOrderStatus);
