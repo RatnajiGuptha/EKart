@@ -32,4 +32,6 @@ public interface FashionProductService {
 	@Transactional
 	public String deleteFashionProductById(int id);
 
+	public List<FashionProducts> GetFashionProductsBySellerName(String sellerName);
+
 }
