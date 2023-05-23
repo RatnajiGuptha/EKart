@@ -38,6 +38,10 @@ class FashionProductService {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProductsBy/suitablefor/" + gender + "/" + type + "/id/" + productId);
     }
 
+    getFashionProductsBySellerName(sellerName) {
+        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/sellerName/" + sellerName);
+    }
+
 
 }
 

@@ -4,17 +4,26 @@
 option{
     color: black;
 } */
-.form-container{
+.form-container {
     margin-bottom: 10px;
     font-weight: bold;
     text-align: left;
+}
+
+.img-seller {
+    height: 90px;
+    width: 90px;
+    padding: 5px;
+    object-fit: fill;
+    margin-right: 10px;
+    border-radius: 20px;
 }
 
 .form-container label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-  }
+}
 
 
 .login-page {
@@ -23,4 +32,4 @@ option{
     justify-content: center;
     align-items: center;
     background-color: #f5f5f5;
-  }
+}

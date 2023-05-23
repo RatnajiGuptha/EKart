@@ -41,6 +41,8 @@ import AddBeautyModule from "./components/SellerModules/AddBeautyModule";
 import AddElectronicsModule from "./components/SellerModules/AddElectronicsModule";
 import AddFootWearModule from "./components/SellerModules/AddFootWearModule";
 import AddToysProducts from "./components/SellerModules/AddToysProducts";
+import Registrationpage from "./components/RegistrationPage";
+import ListFashionDetails from "./components/SellerModules/ListFashionDetails";
 function App() {
 
   return (
@@ -90,6 +92,9 @@ function App() {
           <Route path='/addFootWear' element={<AddFootWearModule/>}></Route>
           <Route path='/addToys' element={<AddToysProducts/>}></Route>
 
+          <Route path='/registrationPage' element={<Registrationpage/>}></Route>
+
+          <Route path='/fashionProductsList' element={<ListFashionDetails/>}></Route>
         </Routes>
       </Router>
 
