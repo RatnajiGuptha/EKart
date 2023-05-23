@@ -35,7 +35,12 @@ import AccessoriesByType from "./components/Products/AccessoriesByType";
 import AccessoriesProductsByTpeInfo from "./components/ProductsInfo/AccessoriesProductsByTpeInfo";
 import FootwearByType from "./components/Products/FootwearByType";
 import FootwearProductsByTypeInfo from "./components/ProductsInfo/FootwearProductsByTpeInfo";
-
+import AddFashionModule from "./components/SellerModules/AddFashionModule";
+import AddAccessoriesModule from "./components/SellerModules/AddAccessoriesModule";
+import AddBeautyModule from "./components/SellerModules/AddBeautyModule";
+import AddElectronicsModule from "./components/SellerModules/AddElectronicsModule";
+import AddFootWearModule from "./components/SellerModules/AddFootWearModule";
+import AddToysProducts from "./components/SellerModules/AddToysProducts";
 function App() {
 
   return (
@@ -80,6 +85,13 @@ function App() {
           <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
           <Route path="/cart" element={<CartComponent />}></Route>
+
+          <Route path="/addFashion" element={<AddFashionModule />}></Route>
+          <Route path='/addAccessories' element={<AddAccessoriesModule/>}></Route>
+          <Route path='/addBeauty' element={<AddBeautyModule/>}></Route>
+          <Route path='/addElectronics' element={<AddElectronicsModule/>}></Route>
+          <Route path='/addFootWear' element={<AddFootWearModule/>}></Route>
+          <Route path='/addToys' element={<AddToysProducts/>}></Route>
         </Routes>
       </Router>
 
