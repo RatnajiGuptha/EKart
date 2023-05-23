@@ -13,6 +13,7 @@ const BeautyProductsInfo = () => {
 
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [quantity, setQuantity] = useState(1);
+    const [username , setUserName] = useState('');
 
     const [image, setImage] = useState('')
 
@@ -25,6 +26,7 @@ const BeautyProductsInfo = () => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1)
+            setUserName("guptha")
         })
     }, [beautyId]);
 
@@ -41,6 +43,7 @@ const BeautyProductsInfo = () => {
 
     const handleCardItems = async () => {
         const cart = {
+            userName :username,
             productId: productsInfo.beautyId,
             brandName: productsInfo.brandName,
             productName: productsInfo.productName,

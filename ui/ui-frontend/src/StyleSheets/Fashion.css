@@ -1,14 +1,22 @@
-.fashion-card-image {
-    padding: 1rem;
-    height: 350px;
-    width: 350px;
-    background-size: cover;
-    transition: transform 0.3s ease;
-}
-
 .fashion-card-container {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+
+.fashion-card-image {
+    height: 400px;
+    width: 400px;
+    background-size: cover;
+    margin: 10px;
+    border-radius: 18px;
+    border: 1px solid #eee;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fashion-card-image:hover {
+    box-shadow: 3px 2px #eee;
+    border: 2px solid #eee;
+    transform: perspective()
 }

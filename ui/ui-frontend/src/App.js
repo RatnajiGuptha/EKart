@@ -50,8 +50,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
-
-
           <Route path="/fashion" element={<FashionComponent />}></Route>
 
           <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
@@ -68,13 +66,12 @@ function App() {
           <Route path="/footwear" element={<Footware />}></Route>
           <Route path="/footwear/:footWearId" element={<FootwearProductsInfo />}></Route>
           <Route path="/footwearBy/:type" element={<FootwearByType />}></Route>
-          <Route path="/footwearBy/:type/:footWearId" element={<FootwearProductsByTypeInfo/>}></Route>
+          <Route path="/footwearBy/:type/:footWearId" element={<FootwearProductsByTypeInfo />}></Route>
 
           <Route path="/accessories" element={<Accessories />}></Route>
           <Route path="/accessories/:accessoryId" element={<AccessoriesProductsInfo />}></Route>
           <Route path="/accessoriesBy/:type" element={<AccessoriesByType />}></Route>
           <Route path="/accessoriesBy/:type/:accessoryId" element={<AccessoriesProductsByTpeInfo />}></Route>
-
 
           <Route path="/beauty" element={<BeautyProducts />}></Route>
           <Route path="/beauty/:beautyId" element={<BeautyProductsInfo />}></Route>
@@ -92,6 +89,7 @@ function App() {
           <Route path='/addElectronics' element={<AddElectronicsModule/>}></Route>
           <Route path='/addFootWear' element={<AddFootWearModule/>}></Route>
           <Route path='/addToys' element={<AddToysProducts/>}></Route>
+
         </Routes>
       </Router>
 

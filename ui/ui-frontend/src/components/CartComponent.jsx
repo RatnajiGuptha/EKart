@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import { useParams } from "react-router-dom";
 import CartService from "../Services/CartService";
 
 import "../StyleSheets/Cart.css";
+
 
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -11,6 +12,7 @@ const CartComponent = () => {
     CartService.getAllItemsInCart().then((response) => {
       setCartItems(response.data);
       console.log(response.data);
+
     });
   }, []);
 
@@ -32,11 +34,12 @@ const CartComponent = () => {
     return { totalPrice, count };
   };
 
+
   return (
     <div className="d-flex justify-content-center">
       <div className="cart-container">
         {cartItems.map((item) => (
-          <div key={item.id} className="items-container">
+          <div key={item.cartId} className="items-container">
             <div>
               <img src={item.logoImg} className="cart-product-img" alt="/"  ></img>
             </div>

@@ -9,6 +9,7 @@ import "../../StyleSheets/ProductInfo.css";
 const AccessoriesProductsInfo = () => {
 
     const { accessoryId } = useParams();
+    const { username, setUsername } = useState('');
 
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [quantity, setQuantity] = useState(1);
@@ -25,6 +26,7 @@ const AccessoriesProductsInfo = () => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1);
+            setUsername("Guptha");
         })
     }, [accessoryId]);
 
@@ -40,6 +42,7 @@ const AccessoriesProductsInfo = () => {
 
     const handleCardItems = async () => {
         const cart = {
+            userName: username,
             productId: productsInfo.accessoryId,
             brandName: productsInfo.brandName,
             productName: productsInfo.productName,
