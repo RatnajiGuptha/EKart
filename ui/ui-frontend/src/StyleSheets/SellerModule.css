@@ -1,0 +1,26 @@
+/* select:invalid{
+    color: gray;
+}
+option{
+    color: black;
+} */
+.form-container{
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+  }

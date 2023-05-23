@@ -37,20 +37,18 @@ import FootwearProductsByTypeInfo from "./components/ProductsInfo/FootwearProduc
 import CheckoutComponent from "./components/OrdersModules/CheckoutComponent";
 import CartComponent from "./components/OrdersModules/CartComponent";
 
-function App() {
+import AddFashionModule from "./components/SellerModules/AddFashionModule";
+import AddAccessoriesModule from "./components/SellerModules/AddAccessoriesModule";
+import AddBeautyModule from "./components/SellerModules/AddBeautyModule";
+import AddElectronicsModule from "./components/SellerModules/AddElectronicsModule";
+import AddFootWearModule from "./components/SellerModules/AddFootWearModule";
+import AddToysProducts from "./components/SellerModules/AddToysProducts";
 
-  // const [headerValue,setHeaderValue] = useState("login");
-  // const pages = {
-  //   home:"home"
-  // } 
-  // useEffect(()=>{
-  //     setHeaderValue()
-  // },[headerValue])
+function App() {
   return (
     <div className="App">
       <Router>
-        
-        <HeaderComponent  />
+        <HeaderComponent />
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
@@ -88,6 +86,12 @@ function App() {
           <Route path="/cart" element={<CartComponent />}></Route>
           <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
 
+          <Route path="/addFashion" element={<AddFashionModule />}></Route>
+          <Route path='/addAccessories' element={<AddAccessoriesModule />}></Route>
+          <Route path='/addBeauty' element={<AddBeautyModule />}></Route>
+          <Route path='/addElectronics' element={<AddElectronicsModule />}></Route>
+          <Route path='/addFootWear' element={<AddFootWearModule />}></Route>
+          <Route path='/addToys' element={<AddToysProducts />}></Route>
         </Routes>
       </Router>
 
