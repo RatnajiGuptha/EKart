@@ -1,19 +1,20 @@
 package com.ekart.common.DTO;
 
+import java.util.List;
+import java.util.UUID;
+
 import com.ekart.common.events.PaymentStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentResponseDTO{
 
-	private int paymentId;
+	private UUID paymentId;
 	private String userName;
 	private List<Integer> productIds;
 	private List<Integer> qty;

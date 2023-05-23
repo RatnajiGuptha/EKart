@@ -1,6 +1,7 @@
 package com.ekart.order.serviceImplementation;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public PurchaseOrder createOrder(OrderRequestDTO orderRequestDTO) {
 		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
-		orderRequestDTO.setOrderId(purchaseOrder.getId());
+		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
 		orderStatusPublisher.publishOrderEvent(orderRequestDTO, OrderStatus.ORDER_CREATED);
 		return purchaseOrder;
 		
@@ -33,7 +34,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO) {
 		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
-		orderRequestDTO.setOrderId(purchaseOrder.getId());
+		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
 		orderStatusPublisher.publishOrderEvent(orderRequestDTO, OrderStatus.ORDER_CREATED);
 		return purchaseOrder;
 	}
@@ -47,6 +48,7 @@ public class OrderServiceImpl implements OrderService{
 
 	private PurchaseOrder convertDtoToEntity(OrderRequestDTO dto) {
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
+		purchaseOrder.setPurchaseOrderId(UUID.randomUUID());
 		purchaseOrder.setUserName(dto.getUserName());
 		purchaseOrder.setProductIds(dto.getProductIds());
 		purchaseOrder.setQty(dto.getQty());
@@ -59,6 +61,7 @@ public class OrderServiceImpl implements OrderService{
 		purchaseOrder.setPrice(dto.getPrice());
 		purchaseOrder.setSellerName(dto.getSellerName());
 		purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
+	
 		return purchaseOrder;
 	}
 

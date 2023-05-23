@@ -1,6 +1,7 @@
 package com.ekart.order.serviceImplementation;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class OrderStatusUpdateHandler {
 	private InventoryServiceProxy inventoryServiceProxy;
 
 	@Transactional
-	public void updateOrder(int id, Consumer<PurchaseOrder> consumer) {
+	public void updateOrder(UUID id, Consumer<PurchaseOrder> consumer) {
 		orderRepository.findById(id).ifPresent(consumer.andThen(this::updateOrder));
 	}
 
@@ -77,7 +78,7 @@ public class OrderStatusUpdateHandler {
 
 	public OrderRequestDTO convertEntityToDto(PurchaseOrder purchaseOrder) {
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
-		orderRequestDTO.setOrderId(purchaseOrder.getId());
+		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
 		orderRequestDTO.setUserName(purchaseOrder.getUserName());
 		orderRequestDTO.setProductIds(purchaseOrder.getProductIds());
 		orderRequestDTO.setQty(purchaseOrder.getQty());

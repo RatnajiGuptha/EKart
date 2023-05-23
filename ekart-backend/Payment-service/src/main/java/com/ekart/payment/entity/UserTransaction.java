@@ -1,5 +1,7 @@
 package com.ekart.payment.entity;
 
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class UserTransaction {
     @Id
-    private Integer orderId;
+    private UUID transactionId;
     private String UserName;
     private int amount;
 }

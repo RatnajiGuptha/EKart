@@ -1,5 +1,13 @@
 package com.ekart.payment.service;
 
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ekart.common.DTO.OrderRequestDTO;
 import com.ekart.common.DTO.PaymentRequestDTO;
 import com.ekart.common.events.OrderEvent;
@@ -9,11 +17,6 @@ import com.ekart.payment.Repository.UserBalanceRepository;
 import com.ekart.payment.Repository.UserTransactionRepository;
 import com.ekart.payment.entity.UserBalance;
 import com.ekart.payment.entity.UserTransaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PaymentService {
@@ -45,15 +48,20 @@ public class PaymentService {
                     .filter(ub -> ub.getPrice() > orderRequestDTO.getPrice())
                     .map(ub -> {
                         ub.setPrice(ub.getPrice() - orderRequestDTO.getPrice());
-
-                        userTransactionRepository.save(new UserTransaction(
-                                orderRequestDTO.getOrderId(), orderRequestDTO.getUserName()
-                                , orderRequestDTO.getPrice()));
+                        userTransactionRepository.save(convertTOUserTransactionEntity(orderRequestDTO));
 
                         return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_COMPLETED);
                     }).orElse(new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED));
         }
         return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED);
+    }
+    
+    public UserTransaction convertTOUserTransactionEntity(OrderRequestDTO orderRequestDTO) {
+    	UserTransaction userTransaction = new UserTransaction();
+    	userTransaction.setTransactionId(UUID.randomUUID());
+    	userTransaction.setUserName(orderRequestDTO.getUserName());
+    	userTransaction.setAmount(orderRequestDTO.getPrice());
+    	return userTransaction;
     }
 
     @Transactional
