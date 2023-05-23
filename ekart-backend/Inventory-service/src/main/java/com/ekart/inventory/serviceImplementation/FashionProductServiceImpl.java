@@ -78,4 +78,9 @@ public class FashionProductServiceImpl implements FashionProductService {
 		return "item deleted";
 	}
 
+	@Override
+	public List<FashionProducts> GetFashionProductsBySellerName(String sellerName) {
+		List<FashionProducts> fashionProducts = fashionProductsRepo.findBySellerName(sellerName);
+		return fashionProducts;
+	}
 }

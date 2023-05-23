@@ -17,7 +17,6 @@ import com.ekart.inventory.service.FashionProductService;
 @CrossOrigin("http://localhost:3000/")
 public class FashionProductsController {
 
-
 	@Autowired
 	private FashionProductService fashionService;
 
@@ -41,7 +40,7 @@ public class FashionProductsController {
 
 	@GetMapping("/getProducts/type/{type}/{productId}")
 	public ResponseEntity<FashionProducts> getFashionProductsByTypeAndId(@PathVariable FashionTypes type,
-																		 @PathVariable int productId) {
+			@PathVariable int productId) {
 		FashionProducts product = fashionService.fetchByProductTypeAndProductId(type, productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(product);
 	}
@@ -54,14 +53,14 @@ public class FashionProductsController {
 
 	@GetMapping("/getProducts/suitableFor/{suitable}/{productId}")
 	public ResponseEntity<FashionProducts> getFashionProductsBySuitableById(@PathVariable Suitable suitable,
-																			@PathVariable int productId) {
+			@PathVariable int productId) {
 		FashionProducts product = fashionService.fetchBySuitableForAndProductId(suitable, productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(product);
 	}
 
 	@GetMapping("/getProductsBy/suitablefor/{suitable}/{type}")
 	public ResponseEntity<List<FashionProducts>> getProductsByGenderWithTypes(@PathVariable Suitable suitable,
-																			  @PathVariable FashionTypes type) {
+			@PathVariable FashionTypes type) {
 		List<FashionProducts> fashionProducts = fashionService.getFashionProductsByGenderWithTypes(suitable, type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);
 
@@ -69,7 +68,7 @@ public class FashionProductsController {
 
 	@GetMapping("/getProductsBy/suitablefor/{suitable}/{type}/id/{productId}")
 	public ResponseEntity<FashionProducts> getProductsByGenderWithTypesAndProductId(@PathVariable Suitable suitable,
-																					@PathVariable FashionTypes type, @PathVariable int productId) {
+			@PathVariable FashionTypes type, @PathVariable int productId) {
 		FashionProducts fashionProducts = fashionService.getFashionProductsByGenderWithTypesAndProductId(suitable, type,
 				productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);
@@ -98,5 +97,11 @@ public class FashionProductsController {
 		fashionProducts.setQty(fashionProducts.getQty() - quantity);
 
 		fashionService.saveFashionProduct(fashionProducts);
+	}
+
+	@GetMapping("/getProducts/sellerName/{sellerName}")
+	public ResponseEntity<List<FashionProducts>> getFashionProductsBySellerName(@PathVariable String sellerName) {
+		List<FashionProducts> fashionProducts = fashionService.GetFashionProductsBySellerName(sellerName);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);
 	}
 }
