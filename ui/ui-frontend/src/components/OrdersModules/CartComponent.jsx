@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import CartService from "../../Services/CartService";
 
 import "../../StyleSheets/Cart.css";
@@ -14,7 +13,7 @@ const CartComponent = () => {
       console.log(response.data);
 
     });
-  }, []);
+  }, [username]);
 
   const checkoutFromCart = () => {
     let user = "";

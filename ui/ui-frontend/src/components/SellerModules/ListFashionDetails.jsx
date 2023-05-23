@@ -4,16 +4,15 @@ import "../../StyleSheets/SellerModule.css"
 function ListFashionDetails() {
 
     const [products, setProducts] = useState([]);
-    const [all, setAll] = useState([])
+
     useEffect(() => {
         FashionProductService.getFashionProductsBySellerName("Libas pvt Ltd").then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
         })
     }, [])
-    return (
 
+    return (
         <div>
             <h2 className="text-center">Fashion Products List</h2>
             <br></br>
@@ -48,14 +47,11 @@ function ListFashionDetails() {
                                     <td>{item.qty}</td>
                                     <td>
                                         <button className="btn btn-info">Update </button>
-                                        <br/>  
-                                        <button className="btn btn-primary" style={{marginTop:'10px',width:'78px'}}>View </button>
+                                        <br />
+                                        <button className="btn btn-primary" style={{ marginTop: '10px', width: '78px' }}>View </button>
                                     </td>
-
                                 </tr>)
-
                         })}
-
                     </tbody>
 
                 </table>

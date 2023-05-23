@@ -43,12 +43,8 @@ import AddBeautyModule from "./components/SellerModules/AddBeautyModule";
 import AddElectronicsModule from "./components/SellerModules/AddElectronicsModule";
 import AddFootWearModule from "./components/SellerModules/AddFootWearModule";
 import AddToysProducts from "./components/SellerModules/AddToysProducts";
-<<<<<<< HEAD
 import Registrationpage from "./components/RegistrationPage";
 import ListFashionDetails from "./components/SellerModules/ListFashionDetails";
-function App() {
-=======
->>>>>>> f4efd3afb938f4afabf8b57b3c697d215c10413a
 
 function App() {
   return (
@@ -93,15 +89,15 @@ function App() {
           <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
 
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
-          <Route path='/addAccessories' element={<AddAccessoriesModule/>}></Route>
-          <Route path='/addBeauty' element={<AddBeautyModule/>}></Route>
-          <Route path='/addElectronics' element={<AddElectronicsModule/>}></Route>
-          <Route path='/addFootWear' element={<AddFootWearModule/>}></Route>
-          <Route path='/addToys' element={<AddToysProducts/>}></Route>
+          <Route path='/addAccessories' element={<AddAccessoriesModule />}></Route>
+          <Route path='/addBeauty' element={<AddBeautyModule />}></Route>
+          <Route path='/addElectronics' element={<AddElectronicsModule />}></Route>
+          <Route path='/addFootWear' element={<AddFootWearModule />}></Route>
+          <Route path='/addToys' element={<AddToysProducts />}></Route>
 
-          <Route path='/registrationPage' element={<Registrationpage/>}></Route>
+          <Route path='/registrationPage' element={<Registrationpage />}></Route>
 
-          <Route path='/fashionProductsList' element={<ListFashionDetails/>}></Route>
+          <Route path='/fashionProductsList' element={<ListFashionDetails />}></Route>
         </Routes>
       </Router>
 
