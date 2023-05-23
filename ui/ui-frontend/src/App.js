@@ -24,7 +24,8 @@ import FootwearProductsInfo from "./components/ProductsInfo/FootwearProductsInfo
 import HeaderComponent from "./components/HeaderComponent.jsx";
 import HomeComponent from "../../ui-frontend/src/components/HomeComponent";
 
-import LoginPage from "./components/LoginPage";
+import LoginPage from "./components/SecurityModules/LoginPage";
+import Registrationpage from "./components/SecurityModules/RegistrationPage";
 
 import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
 import Toys from "./components/Products/Toys";
@@ -43,7 +44,7 @@ import AddBeautyModule from "./components/SellerModules/AddBeautyModule";
 import AddElectronicsModule from "./components/SellerModules/AddElectronicsModule";
 import AddFootWearModule from "./components/SellerModules/AddFootWearModule";
 import AddToysProducts from "./components/SellerModules/AddToysProducts";
-import Registrationpage from "./components/RegistrationPage";
+
 import ListFashionDetails from "./components/SellerModules/ListFashionDetails";
 
 function App() {

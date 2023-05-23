@@ -37,7 +37,7 @@ function ListFashionDetails() {
                             return (
                                 <tr key={item.fashionId}>
                                     <td> {item.productName}     </td>
-                                    <td><img src={item.logoImg} className="img-seller"></img></td>
+                                    <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
                                     <td>{item.type}</td>
@@ -46,9 +46,9 @@ function ListFashionDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                        <button className="btn btn-info">Update </button>
+                                        <button className="btn btn-primary">Update </button>
                                         <br />
-                                        <button className="btn btn-primary" style={{ marginTop: '10px', width: '78px' }}>View </button>
+                                        <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
                                     </td>
                                 </tr>)
                         })}

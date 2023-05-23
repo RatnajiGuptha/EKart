@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import "../StyleSheets/Login.css"
-import {useNavigate} from "react-router-dom";
-import SecurityService from "../Services/SecurityService";
+import "../../StyleSheets/Login.css"
+import { useNavigate } from "react-router-dom";
+import SecurityService from "../../Services/SecurityService";
 
 function LoginPage() {
     const navigate = useNavigate();
