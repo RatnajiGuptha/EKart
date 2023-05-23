@@ -23,4 +23,6 @@ public interface CartService {
 	String removeCartByProductId(int productId);
 
 	Cart getByProductCategoriesAndProductId(ProductCategories category, int productId);
+	
+	Cart getByCartIdAndUserName(int id,String userName);
 }
