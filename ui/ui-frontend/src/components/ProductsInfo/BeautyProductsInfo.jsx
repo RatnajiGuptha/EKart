@@ -13,10 +13,9 @@ const BeautyProductsInfo = () => {
 
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [quantity, setQuantity] = useState(1);
-    const [username , setUserName] = useState('');
 
     const [image, setImage] = useState('')
-
+    const username = localStorage.getItem('username');
     const handleClick = (imgSrc) => {
         setImage(imgSrc);
     }
@@ -25,8 +24,7 @@ const BeautyProductsInfo = () => {
         BeautyService.getBeautyProductsById(beautyId).then((response) => {
             console.log(response);
             setProductInfo(response.data);
-            setImage(response.data.productImg1)
-            setUserName("guptha")
+            setImage(response.data.productImg1);
         })
     }, [beautyId]);
 
@@ -43,7 +41,7 @@ const BeautyProductsInfo = () => {
 
     const handleCardItems = async () => {
         const cart = {
-            userName :username,
+            userName: username,
             productId: productsInfo.beautyId,
             brandName: productsInfo.brandName,
             productName: productsInfo.productName,

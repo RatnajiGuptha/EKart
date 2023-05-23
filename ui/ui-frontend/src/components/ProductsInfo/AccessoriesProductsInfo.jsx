@@ -9,13 +9,11 @@ import "../../StyleSheets/ProductInfo.css";
 const AccessoriesProductsInfo = () => {
 
     const { accessoryId } = useParams();
-    const { username, setUsername } = useState('');
 
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [quantity, setQuantity] = useState(1);
-
     const [image, setImage] = useState('');
-
+    const username = localStorage.getItem('username');
     const handleClick = (imgSrc) => {
         setImage(imgSrc);
 
@@ -26,7 +24,6 @@ const AccessoriesProductsInfo = () => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1);
-            setUsername("Guptha");
         })
     }, [accessoryId]);
 

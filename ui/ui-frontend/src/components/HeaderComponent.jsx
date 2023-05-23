@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import {FaSearch} from "react-icons/fa";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,13 +8,30 @@ import "../StyleSheets/Home.css"
 
 function HeaderComponent() {
   const [search, setSearch] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      setIsLogin(true)
+    }
+    else {
+      setIsLogin(false)
+    }
+
+  })
   return (
-    <Navbar className="navbar navbar-dark bg-dark">     
+    <Navbar className="navbar navbar-dark bg-dark">
       <Container>
         <Navbar.Brand href="/">
           E-Kart
@@ -47,14 +64,21 @@ function HeaderComponent() {
               </NavDropdown>
               <Nav.Link href="/cart">Cart</Nav.Link>
               <Nav.Link href="/help">Help</Nav.Link>
-              <Nav.Link href="/login">Login</Nav.Link>
-              {/* <Nav.Link href="/">Become a Seller</Nav.Link> */}
+              {
+                isLogin ? <NavDropdown title="Profile" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/profile" >Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/address" >Manage Address</NavDropdown.Item>
+                  <NavDropdown.Item href="/wallet" >Wallet</NavDropdown.Item>
+                  <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+                  : <Nav.Link href="/login">Login</Nav.Link>}
+
             </Nav>
           </Container>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    
+
   );
 }
 

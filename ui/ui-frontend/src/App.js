@@ -29,19 +29,28 @@ import LoginPage from "./components/LoginPage";
 import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
 import Toys from "./components/Products/Toys";
 import FashionComponent from "./components/FashionComponent";
-import CartComponent from "./components/CartComponent";
 import FashionProductsByGenderAndTypeInfo from "./components/ProductsInfo/FashionProductsByGenderAndTypeInfo";
 import AccessoriesByType from "./components/Products/AccessoriesByType";
 import AccessoriesProductsByTpeInfo from "./components/ProductsInfo/AccessoriesProductsByTpeInfo";
 import FootwearByType from "./components/Products/FootwearByType";
 import FootwearProductsByTypeInfo from "./components/ProductsInfo/FootwearProductsByTpeInfo";
+import CheckoutComponent from "./components/OrdersModules/CheckoutComponent";
+import CartComponent from "./components/OrdersModules/CartComponent";
 
 function App() {
 
+  // const [headerValue,setHeaderValue] = useState("login");
+  // const pages = {
+  //   home:"home"
+  // } 
+  // useEffect(()=>{
+  //     setHeaderValue()
+  // },[headerValue])
   return (
     <div className="App">
       <Router>
-        <HeaderComponent />
+        
+        <HeaderComponent  />
         <Routes>
           <Route path="/" element={<HomeComponent />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
@@ -77,7 +86,7 @@ function App() {
           <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
           <Route path="/cart" element={<CartComponent />}></Route>
-
+          <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
 
         </Routes>
       </Router>

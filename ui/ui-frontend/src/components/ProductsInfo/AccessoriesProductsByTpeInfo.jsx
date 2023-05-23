@@ -9,16 +9,13 @@ import "../../StyleSheets/ProductInfo.css";
 const AccessoriesProductsByTpeInfo = () => {
 
     const { type, accessoryId } = useParams();
-    const { username, setUsername } = useState('');
-
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [quantity, setQuantity] = useState(1);
 
     const [image, setImage] = useState('');
-
+    const username = localStorage.getItem('username');
     const handleClick = (imgSrc) => {
         setImage(imgSrc);
-
     }
 
     useEffect(() => {
@@ -26,7 +23,6 @@ const AccessoriesProductsByTpeInfo = () => {
             console.log(response);
             setProductInfo(response.data);
             setImage(response.data.productImg1);
-            setUsername("guptha");
         })
     }, [type, accessoryId]);
 
@@ -42,7 +38,7 @@ const AccessoriesProductsByTpeInfo = () => {
 
     const handleCardItems = async () => {
         const cart = {
-            userName : username,
+            userName: username,
             productId: productsInfo.accessoryId,
             brandName: productsInfo.brandName,
             productName: productsInfo.productName,

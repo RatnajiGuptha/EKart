@@ -11,7 +11,7 @@ const ElectronicsProductsInfo = () => {
     const [productsInfo, setProductInfo] = useState({ id: null });
     const [quantity, setQuantity] = useState(1);
     const [image, setImage] = useState('')
-
+    const username = localStorage.getItem('username');
     const handleClick = (imgSrc) => {
         setImage(imgSrc);
     }
@@ -36,6 +36,7 @@ const ElectronicsProductsInfo = () => {
 
     const handleCardItems = async () => {
         const cart = {
+            userName: username,
             productId: productsInfo.electronicsId,
             brandName: productsInfo.brandName,
             productName: productsInfo.productName,
