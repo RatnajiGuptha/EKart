@@ -64,5 +64,9 @@ public class OrderServiceImpl implements OrderService{
 	
 		return purchaseOrder;
 	}
+	@Override
+	public PurchaseOrder fetchOrderById(UUID id) {
+	return orderRepository.findById(id).get();
+	}
 
 }
