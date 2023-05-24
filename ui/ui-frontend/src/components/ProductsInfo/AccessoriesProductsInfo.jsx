@@ -39,6 +39,7 @@ const AccessoriesProductsInfo = () => {
 
     const handleCardItems = async () => {
         const cart = {
+    
             userName: username,
             productId: productsInfo.accessoryId,
             brandName: productsInfo.brandName,

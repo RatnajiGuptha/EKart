@@ -45,8 +45,11 @@ import AddFootWearModule from "./components/SellerModules/AddFootWearModule";
 import AddToysProducts from "./components/SellerModules/AddToysProducts";
 import Registrationpage from "./components/RegistrationPage";
 import ListFashionDetails from "./components/SellerModules/ListFashionDetails";
-
-
+import ListAccessoriesDetails from "./components/SellerModules/ListAccessoriesDetails";
+import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
+import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
+import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
+import ListToysDetails from "./components/SellerModules/ListToysDetails"
 function App() {
   return (
     <div className="App">
@@ -98,7 +101,12 @@ function App() {
 
           <Route path='/registrationPage' element={<Registrationpage/>}></Route>
 
-          <Route path='/fashionProductsList' element={<ListFashionDetails/>}></Route>
+          <Route path='/listFashionProducts' element={<ListFashionDetails/>}></Route>
+          <Route path="/listAccessoriesProducts" element={<ListAccessoriesDetails/>}></Route>
+          <Route path="/listBeautyProducts" element={<ListBeautyDetails/>}></Route>
+          <Route path="/listElectronicProducts" element={<ListElectronicsDetails/>}></Route>
+          <Route path="/listFootWearProducts" element={<ListFootWearDetails/>}></Route>
+          <Route path="/listToysProducts" element={<ListToysDetails/>}></Route>
         </Routes>
       </Router>
 

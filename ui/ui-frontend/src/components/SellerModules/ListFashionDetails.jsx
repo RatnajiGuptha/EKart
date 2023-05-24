@@ -4,7 +4,6 @@ import "../../StyleSheets/SellerModule.css"
 function ListFashionDetails() {
 
     const [products, setProducts] = useState([]);
-    const [all, setAll] = useState([])
     useEffect(() => {
         FashionProductService.getFashionProductsBySellerName("Libas pvt Ltd").then((res) => {
             console.log(res.data)
@@ -49,7 +48,7 @@ function ListFashionDetails() {
                                     <td>
                                         <button className="btn btn-info">Update </button>
                                         <br/>  
-                                        <button className="btn btn-primary" style={{marginTop:'10px',width:'78px'}}>View </button>
+                                        <button className="btn btn-secondary" style={{marginTop:'10px',width:'78px'}}>View </button>
                                     </td>
 
                                 </tr>)
