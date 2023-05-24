@@ -17,6 +17,18 @@ class CartService {
   deleteItemFromCart(cartId) {
     axios.delete(CART_SERVICE_BASE_URL + "/deleteProductInCart/" + cartId);
   }
+  updateQuantity(id, userName, qty) {
+    axios.put(CART_SERVICE_BASE_URL + "/" + id + "/" + userName + "/" + qty);
+  }
+  getProductCategoryAndProductId(category, productId) {
+    return axios.get(
+      CART_SERVICE_BASE_URL +
+        "/getProductCategoryAndProductId/" +
+        category +
+        "/" +
+        productId
+    );
+  }
 }
 
 export default new CartService();
