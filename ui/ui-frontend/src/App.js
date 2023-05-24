@@ -96,7 +96,7 @@ function App() {
           <Route path='/addFootWear' element={<AddFootWearModule />}></Route>
           <Route path='/addToys' element={<AddToysProducts />}></Route>
 
-          <Route path='/registrationPage' element={<Registrationpage />}></Route>
+          <Route path='/registration' element={<Registrationpage />}></Route>
 
           <Route path='/fashionProductsList' element={<ListFashionDetails />}></Route>
         </Routes>

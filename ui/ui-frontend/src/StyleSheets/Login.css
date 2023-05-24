@@ -1,5 +1,4 @@
 .login-page {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +7,8 @@
 
 .forms {
   text-align: start;
-  max-width: 400px;
+  max-width: 600px;
+  
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -57,6 +57,7 @@
 .signup-button {
   background-color: #ffc107;
   border-color: #ffc107;
+  color: black;
   border-radius: 4px;
   font-weight: bold;
   padding: 5px;
@@ -66,4 +67,9 @@
 .signup-button:hover {
   background-color: #e0a800;
   border-color: #d39e00;
+}
+
+.login-page span {
+  color: orangered;
+  margin-top: 0px;
 }
