@@ -10,4 +10,6 @@ public interface ToysService {
     List<Toys> getAllToys();
 
     Toys getToyById(int id);
+
+	List<Toys> GetToysBySellerName(String sellerName);
 }

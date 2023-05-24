@@ -12,4 +12,6 @@ public interface BeautyService {
 
 	Beauty getBeautyById(int id);
 
+	List<Beauty> getBeautyBySellerName(String sellerName);
+
 }
