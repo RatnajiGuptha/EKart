@@ -20,6 +20,11 @@ class AccessoriesService {
         return axios.get(Accessories_BASE_URL + "/getAccessories/type/" + type + "/" + id);
     }
 
+    getAccessoriesProductsBySellerName(sellerName) {
+        return axios.get(Accessories_BASE_URL + "/getAccessories/sellerName/" + sellerName);
+    }
+
+
 }
 
 

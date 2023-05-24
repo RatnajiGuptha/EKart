@@ -6,11 +6,16 @@ class BeautyService {
 
 
     getAllBeautyProducts() {
-        return axios.get(BEAUTY_BASE_URL + "/getBeautyProducts")
+        return axios.get(BEAUTY_BASE_URL + "/getBeautyProducts");
     }
 
     getBeautyProductsById(beautyId) {
-        return axios.get(BEAUTY_BASE_URL + "/getBeautyById/" + beautyId)
+        return axios.get(BEAUTY_BASE_URL + "/getBeautyById/" + beautyId);
+    }
+
+    
+    getBeautyBySellerName(sellerName){
+        return axios.get(BEAUTY_BASE_URL+"/getBeautyBySellerName/"+sellerName);
     }
 }
 
