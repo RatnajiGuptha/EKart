@@ -76,7 +76,7 @@ public class AccessoriesProductsController {
 
 		accessoriesProducts.setQty(accessoriesProducts.getQty() - quantity);
 		accessoriesProductService.saveAccessoriesProducts(accessoriesProducts);
-	}
+	}	
 
 	
 
