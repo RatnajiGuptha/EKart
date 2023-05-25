@@ -54,10 +54,11 @@ const FootwearProductsInfo = () => {
         logoImg: productsInfo.logoImg,
         productPrice: productsInfo.productPrice,
         size: productsInfo.size,
-        color: "NA",
+        color: productsInfo.color,
         qty: quantity,
         productCategories: category,
         type: productsInfo.type,
+        sellerName: productsInfo.sellerName
       };
       console.log(cart.productCategories);
       if (productsInfo.qty > quantity) {
@@ -65,7 +66,7 @@ const FootwearProductsInfo = () => {
           alert("Item added successfully");
         });
       } else {
-        alert(`${productsInfo.qty}` + " products Left");
+        alert(`${productsInfo.qty}`, " products Left");
       }
     } else {
       const qty = datad.data.qty + quantity;

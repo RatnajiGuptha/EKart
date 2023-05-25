@@ -54,10 +54,11 @@ const FashionProductsByGenderInfo = () => {
         logoImg: productsInfo.logoImg,
         productPrice: productsInfo.productPrice,
         size: productsInfo.size,
-        color: "NA",
+        color: productsInfo.color,
         qty: quantity,
         productCategories: category,
         type: productsInfo.type,
+        sellerName: productsInfo.sellerName
       };
       //   console.log(cart.productId);
       console.log(cart.productCategories);

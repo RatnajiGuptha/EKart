@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import OrderService from '../../Services/OrderService';
 
 const CheckoutComponent = () => {
     const { userName } = useParams();
     console.log(userName);
+    const navigate = useNavigate();
     const [purchaseOrder, setPurchaseOrder] = useState([]);
     useEffect(() => {
     }, []);
@@ -13,8 +14,18 @@ const CheckoutComponent = () => {
     const paymentFromCart = () => {
         OrderService.createOrderForCart(userName).then((Response) => {
             setPurchaseOrder(Response.data);
-            console.log(Response.data);
+            return Response.data;
+        }).then((data) => {
+            console.log(data?.purchaseOrderId)
+            console.log(data)
+
+            console.log("...........receivedData.........");
+            const i = data?.purchaseOrderId;
+            navigate(`/paymentCompleted/${i}`);
+
         });
+
+
     }
 
     return (

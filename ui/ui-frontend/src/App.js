@@ -50,6 +50,7 @@ import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
+import CheckMark from "./components/OrdersModules/CheckMark";
 
 function App() {
   return (
@@ -117,6 +118,8 @@ function App() {
           <Route path="/addFootWear" element={<AddFootWearModule />}></Route>
           <Route path="/addToys" element={<AddToysProducts />}></Route>
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
+
+          <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route> 
         </Routes>
       </Router>
     </div>

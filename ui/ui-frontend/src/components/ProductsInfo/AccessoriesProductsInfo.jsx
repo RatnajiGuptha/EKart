@@ -53,10 +53,11 @@ const AccessoriesProductsInfo = () => {
         logoImg: productsInfo.logoImg,
         productPrice: productsInfo.productPrice,
         size: productsInfo.size,
-        color: "NA",
         qty: quantity,
         productCategories: category,
         type: productsInfo.type,
+        sellerName: productsInfo.sellerName,
+        color: productsInfo.color
       };
       //   console.log(cart.productId);
       console.log(cart.productCategories);
