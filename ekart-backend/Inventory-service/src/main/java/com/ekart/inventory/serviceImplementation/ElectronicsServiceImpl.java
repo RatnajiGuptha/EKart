@@ -38,6 +38,12 @@ public class ElectronicsServiceImpl implements ElectronicsService{
 		return electronicsProductsByType;
 	}
 
+	@Override
+	public List<ElectronicsProducts> GetElectronicsBySellerName(String sellerName) {
+		List<ElectronicsProducts> electronicsProductsBySellerName = electronicsRepo.findBySellerName(sellerName);
+		return electronicsProductsBySellerName;
+	}
+
 	
 
 }

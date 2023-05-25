@@ -19,4 +19,6 @@ public interface AccessoriesProductService {
 	public List<AccessoriesProducts> GetAccessoriesProductsBySuitable(Suitable suitable);
 
 	public AccessoriesProducts getAccessoriesByTpeAndProductById(AccessoriesTypes type, int accessoryId);
+
+	public List<AccessoriesProducts> GetAccessoriesProductsBySellerName(String sellerName);
 }

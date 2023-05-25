@@ -26,4 +26,6 @@ public interface FootWearService {
 
 	public FootWear getFootWearByTypeAndId(FootWearType type, int footWearId);
 
+	public List<FootWear> GetFootWearBySellerName(String sellerName);
+
 }

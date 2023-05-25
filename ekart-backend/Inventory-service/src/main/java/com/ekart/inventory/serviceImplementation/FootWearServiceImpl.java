@@ -60,4 +60,10 @@ public class FootWearServiceImpl implements FootWearService {
 		return footWearList;
 	}
 
+	@Override
+	public List<FootWear> GetFootWearBySellerName(String sellerName) {
+		List<FootWear> footWearList = footWearRepository.findBySellerName(sellerName);
+		return footWearList;
+	}
+
 }

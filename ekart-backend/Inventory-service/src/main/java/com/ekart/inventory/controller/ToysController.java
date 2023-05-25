@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.ekart.inventory.entity.FashionProducts;
 import com.ekart.inventory.entity.Toys;
 import com.ekart.inventory.service.ToysService;
 
@@ -56,4 +57,12 @@ public class ToysController {
         toysService.addToys(toys);
 
     }
+    
+    @GetMapping("/getToys/sellerName/{sellerName}")
+	public ResponseEntity<List<Toys>> getToysBySellerName(@PathVariable String sellerName) {
+		List<Toys> toys = toysService.GetToysBySellerName(sellerName);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toys);
+	}
+    
+    
 }

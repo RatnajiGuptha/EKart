@@ -31,4 +31,10 @@ public class ToysServiceImplementation implements ToysService {
         Toys toy = toysRepository.findById(id).get();
         return toy;
     }
+
+	@Override
+	public List<Toys> GetToysBySellerName(String sellerName) {
+		List<Toys> toys=toysRepository.findToyBySellerName(sellerName);
+		return toys;
+	}
 }
