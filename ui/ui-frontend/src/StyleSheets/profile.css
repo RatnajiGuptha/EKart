@@ -1,0 +1,53 @@
+
+*{
+    box-sizing: border-box;
+}
+
+.profile{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: left; */
+    flex: 100%;
+}
+
+.profile-img{
+    flex: 20%;
+    padding: 1rem;
+}
+.username{
+    flex: 80%;
+    text-align: start;
+}
+
+.main-profile{
+    display: flex;
+    flex-direction: row;
+    justify-content:left ;
+    flex: 100%;
+    padding: 10px 30px;
+}
+
+.main-profile-left{
+    flex: 20%
+    
+}
+
+.main-profile-right{
+    flex: 80%;
+    padding:0px 0px 0px 10px;
+}
+
+.profile-categories{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;    
+}
+
+.main-profile-side{
+    display: flex;
+    flex-direction: column;
+}
+
+.category{
+    text-align: left;
+}
