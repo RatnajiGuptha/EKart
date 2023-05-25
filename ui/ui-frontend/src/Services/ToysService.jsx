@@ -12,6 +12,10 @@ class ToysService {
         return axios.get(TOYS_BASE_URL + "/getToys/" + toyId);
     }
 
+    getToysBySellerName(sellerName){
+        return axios.get(TOYS_BASE_URL+"/getToys/sellerName/"+sellerName);
+    }
+
 }
 
 

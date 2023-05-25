@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import FashionProductService from "../../Services/FashionProductService";
+import ElectronicsService from "../../Services/ElectronicsService";
 import "../../StyleSheets/SellerModule.css"
-function ListFashionDetails() {
+function ListElectronicsDetails() {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        FashionProductService.getFashionProductsBySellerName("Libas pvt Ltd").then((res) => {
+        ElectronicsService.getElectronicsBySellerName("Dwantech Electronics private Ltd").then((res) => {
             console.log(res.data)
             setProducts(res.data);
+
         })
     }, [])
-
     return (
+
         <div>
-            <h2 className="text-center">Fashion Products List</h2>
+            <h2 className="text-center">Electronic Products List</h2>
             <br></br>
             <div className="row">
                 <table className="table table-striped table-bordered">
@@ -24,8 +25,7 @@ function ListFashionDetails() {
                             <th> Product Price</th>
                             <th>Brand Name</th>
                             <th>Type</th>
-                            <th>Suitable For</th>
-                            <th>Size</th>
+                            <th>Capacity</th>
                             <th>Color</th>
                             <th>Quantity</th>
                             <th>Actions</th>
@@ -36,27 +36,39 @@ function ListFashionDetails() {
                             return (
                                 <tr key={item.fashionId}>
                                     <td> {item.productName}     </td>
-                                    <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
+                                    <td><img src={item.logoImg} className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
                                     <td>{item.type}</td>
-                                    <td>{item.suitablefor}</td>
-                                    <td>{item.size}</td>
+                                    <td>{item.capacity}</td>
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
                                         <button className="btn btn-info">Update </button>
-                                        <br />
-                                        <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
-                                    </td >
-                                </tr >)
-                        })}
-                    </tbody >
+                                        <br/>  
+                                        <button className="btn btn-secondary" style={{marginTop:'10px',width:'78px'}}>View </button>
+                                    </td>
 
-                </table >
-            </div >
-        </div >
+                                </tr>)
+
+                        })}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
 
     )
 }
-export default ListFashionDetails;
+export default ListElectronicsDetails;

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import CartService from "../../Services/CartService";
-
 import "../../StyleSheets/Cart.css";
 
 const CartComponent = () => {
@@ -14,19 +12,11 @@ const CartComponent = () => {
       console.log(response.data);
 
     });
-  }, []);
+  }, [username]);
 
   const checkoutFromCart = () => {
-    let user = "";
-    cartItems.map((items) => {
-      console.log(items.userName);
-      user = items.userName;
-    });
-
-    console.log(user);
-    window.location.assign(`paymentPage/${user}`)
-
-  }
+    window.location.assign(`paymentPage/${username}`)
+  };
 
   const deleteItemFromCarttt = async (cartId) => {
     CartService.deleteItemFromCart(cartId);
@@ -102,11 +92,13 @@ const CartComponent = () => {
               ₹ {calculateTotalPrice().totalPrice}/-{" "}
             </span>
           </p>
+
           <button className="checkout-btn" onClick={() => checkoutFromCart()}>Checkout</button>
         </div>
       </div>
     </div>
   );
-};
+}
+
 
 export default CartComponent;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import "../StyleSheets/Login.css"
-import {useNavigate} from "react-router-dom";
-import SecurityService from "../Services/SecurityService";
+import "../../StyleSheets/Login.css"
+import { useNavigate, Link } from "react-router-dom";
+import SecurityService from "../../Services/SecurityService";
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -40,7 +40,10 @@ function LoginPage() {
                 </label>
                 <div className='text-center'>
                     <button type='submit' className='login-button' >  Login </button>
-                    <button className='signup-button'> Sign Up</button>
+                    <Link to="/registration">
+                        <button className='signup-button'> Sign Up</button>
+                    </Link>
+
                 </div>
             </form>
 

@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import FashionProductService from "../../Services/FashionProductService";
 import "../../StyleSheets/SellerModule.css"
+import ToysService from "../../Services/ToysService";
 function ListFashionDetails() {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        FashionProductService.getFashionProductsBySellerName("Libas pvt Ltd").then((res) => {
+        ToysService.getToysBySellerName("Baby Moo pvt Ltd").then((res) => {
             console.log(res.data)
             setProducts(res.data);
+
         })
     }, [])
-
     return (
+
         <div>
-            <h2 className="text-center">Fashion Products List</h2>
+            <h2 className="text-center">Toys Products List</h2>
             <br></br>
             <div className="row">
                 <table className="table table-striped table-bordered">
@@ -36,7 +37,7 @@ function ListFashionDetails() {
                             return (
                                 <tr key={item.fashionId}>
                                     <td> {item.productName}     </td>
-                                    <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
+                                    <td><img src={item.logoImg} className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
                                     <td>{item.type}</td>
@@ -46,16 +47,29 @@ function ListFashionDetails() {
                                     <td>{item.qty}</td>
                                     <td>
                                         <button className="btn btn-info">Update </button>
-                                        <br />
-                                        <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
-                                    </td >
-                                </tr >)
-                        })}
-                    </tbody >
+                                        <br/>  
+                                        <button className="btn btn-primary" style={{marginTop:'10px',width:'78px'}}>View </button>
+                                    </td>
 
-                </table >
-            </div >
-        </div >
+                                </tr>)
+
+                        })}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
 
     )
 }
