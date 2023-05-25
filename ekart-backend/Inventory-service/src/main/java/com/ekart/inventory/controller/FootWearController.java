@@ -76,5 +76,12 @@ public class FootWearController {
 		footWear.setQty(footWear.getQty() - quantity);
 		footWearService.PostFootWare(footWear);
 	}
+	
+	@GetMapping("/getFootWearBySellerName/{sellerName}")
+	public ResponseEntity<List<FootWear>> fetchBySellerName(@PathVariable String sellerName) {
+		List<FootWear> footWearList = footWearService.GetFootWearBySellerName(sellerName);
+
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+	}
 
 }

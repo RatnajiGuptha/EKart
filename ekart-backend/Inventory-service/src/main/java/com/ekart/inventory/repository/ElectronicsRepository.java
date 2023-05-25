@@ -9,4 +9,6 @@ import com.ekart.inventory.enums.ElectronicsTypes;
 
 public interface ElectronicsRepository extends JpaRepository<ElectronicsProducts, Integer> {
 	public List<ElectronicsProducts> findByType(ElectronicsTypes type);
+
+	public List<ElectronicsProducts> findBySellerName(String sellerName);
 }

@@ -15,4 +15,6 @@ public interface ElectronicsService {
 
 	public List<ElectronicsProducts> fetchByElectronicsType(ElectronicsTypes type);
 
+	public List<ElectronicsProducts> GetElectronicsBySellerName(String sellerName);
+
 }

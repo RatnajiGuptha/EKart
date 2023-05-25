@@ -2,12 +2,18 @@ package com.ekart.order.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import com.ekart.common.DTO.ProductCategories;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.common.DTO.OrderRequestDTO;
+import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.entity.Cart;
 import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.CartService;
@@ -75,6 +81,11 @@ public class OrderController {
 	@GetMapping("/getOrders")
 	public List<PurchaseOrder> getAllOrders() {
 		return orderService.fetchOrders();
+	}
+	
+	@GetMapping("/getOrders/{Id}")
+	public PurchaseOrder getOrderById(@PathVariable UUID Id){
+	return orderService.fetchOrderById(Id);
 	}
 
 }

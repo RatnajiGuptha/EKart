@@ -55,5 +55,12 @@ public class BeautyController {
 		beautyService.addBeautyProducts(beauty);
 
 	}
+	
+	@GetMapping("/getBeautyBySellerName/{sellerName}")
+	public ResponseEntity<List<Beauty>> getBeautySellerName(@PathVariable String sellerName){
+		List<Beauty> beautyProducts=beautyService.getBeautyBySellerName(sellerName);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(beautyProducts);
+		
+	}
 
 	}

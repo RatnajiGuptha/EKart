@@ -32,4 +32,10 @@ public class BeautyServiceImplementation implements BeautyService {
 		Beauty beauty = beautyRepository.findById(id).get();
         return beauty;
 	}
+
+	@Override
+	public List<Beauty> getBeautyBySellerName(String sellerName) {
+		List<Beauty> beautyProducts=beautyRepository.findBeautyBySellerName(sellerName);
+		return beautyProducts;
+	}
 }

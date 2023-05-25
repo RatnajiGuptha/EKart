@@ -19,4 +19,6 @@ public interface FootWearRepository extends JpaRepository<FootWear, Integer> {
 	List<FootWear> findBySuitablefor(Suitable suitable);
 
 	FootWear findByTypeAndFootWearId(FootWearType type, int footWearId);
+
+	List<FootWear> findBySellerName(String sellerName);
 }
