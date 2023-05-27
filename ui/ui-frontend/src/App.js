@@ -51,6 +51,7 @@ import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDe
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
 import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
+import CheckMark from "./components/OrdersModules/CheckMark";
 
 function App() {
   return (
@@ -126,6 +127,7 @@ function App() {
           <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails/>}></Route>
           
           
+          <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route> 
         </Routes>
       </Router>
     </div>

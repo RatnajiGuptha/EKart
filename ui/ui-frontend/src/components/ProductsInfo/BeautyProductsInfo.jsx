@@ -59,6 +59,7 @@ const BeautyProductsInfo = () => {
         qty: quantity,
         productCategories: category,
         type: productsInfo.type,
+        sellerName: productsInfo.sellerName
       };
       //   console.log(cart.productId);
       console.log(cart.productCategories);
@@ -68,7 +69,7 @@ const BeautyProductsInfo = () => {
           alert("Item added successfully");
         });
       } else {
-        alert(`${productsInfo.qty}` + " products Left");
+        alert(`${productsInfo.qty}`, " products Left");
       }
     } else {
       //   console.log(datad.data.cartId);

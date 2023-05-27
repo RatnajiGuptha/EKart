@@ -5,14 +5,20 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "../StyleSheets/Home.css"
+import { useNavigate } from "react-router-dom";
 
 function HeaderComponent() {
   const [search, setSearch] = useState("");
   const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
 
+  const username = localStorage.getItem('username');
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
+  }
+  const handleLogin = (e) => {
+    navigate("/")
   }
 
   const handleLogout = () => {
@@ -63,16 +69,15 @@ function HeaderComponent() {
                 <NavDropdown.Item href="/fashionByType/KidsWear">Kidswear</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="/cart">Cart</Nav.Link>
-              <Nav.Link href="/help">Help</Nav.Link>
               {
-                isLogin ? <NavDropdown title="Profile" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/profile" >Profile</NavDropdown.Item>
-                  <NavDropdown.Item href="/address" >Manage Address</NavDropdown.Item>
-                  <NavDropdown.Item href="/wallet" >Wallet</NavDropdown.Item>
-                  <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item>
-                </NavDropdown>
-                  : <Nav.Link href="/login">Login</Nav.Link>}
+                isLogin ? <NavDropdown title={`${username}`} id="basic-nav-dropdown">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-person-circle profile-logo" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                  </svg>
+                  <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
 
+                  : <Nav.Link href="/login" onClick={handleLogin}>Login</Nav.Link>}
             </Nav>
           </Container>
         </Navbar.Collapse>

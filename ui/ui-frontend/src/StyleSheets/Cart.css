@@ -95,3 +95,14 @@
    margin-right: 10px;
    text-align: left;
 }
+.emptyCart{
+   margin-top: 20px;
+   /* font-size: 20pc; */
+   font-weight: bold;
+   font-style: "Sans-serif";
+
+}
+
+.contButton{
+   margin-top: 20px;
+}
