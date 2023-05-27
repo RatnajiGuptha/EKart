@@ -42,6 +42,14 @@ class FashionProductService {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/sellerName/" + sellerName);
     }
 
+    updateFashionProducts(fashionId,fashionProducts){
+        return axios.put(FASHION_PRODUCTS_BASE_URI+"/updateProducts/"+fashionId,fashionProducts);
+    }
+
+    addMultipleProduct(fashionProducts){
+        return axios.post(FASHION_PRODUCTS_BASE_URI+"/addMultipleProducts",fashionProducts);
+    }
+
 
 }
 

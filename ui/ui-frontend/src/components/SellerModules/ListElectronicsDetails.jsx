@@ -14,9 +14,9 @@ function ListElectronicsDetails() {
     return (
 
         <div>
-            <h2 className="text-center">Electronic Products List</h2>
             <br></br>
-            <div className="row">
+            <h2 className="text-center">Electronic Products List</h2> 
+            <div className="row p-4">
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>

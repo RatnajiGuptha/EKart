@@ -50,6 +50,7 @@ import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
+import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
 
 function App() {
   return (
@@ -117,6 +118,14 @@ function App() {
           <Route path="/addFootWear" element={<AddFootWearModule />}></Route>
           <Route path="/addToys" element={<AddToysProducts />}></Route>
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
+
+          {/* update products seller routes */}
+          <Route path="/updateEmployee/:fashionId" element={<AddFashionModule/>}></Route>
+
+          {/* view products seller routes */}
+          <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails/>}></Route>
+          
+          
         </Routes>
       </Router>
     </div>
