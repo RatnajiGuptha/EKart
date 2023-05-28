@@ -12,12 +12,10 @@ import com.ekart.inventory.enums.FootWearType;
 import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.service.FootWearService;
 
-@CrossOrigin("http://localhost:3000/")
 @RestController
+@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/footWear")
 public class FootWearController {
-
-
 
 	@Autowired
 	private FootWearService footWearService;
@@ -76,7 +74,7 @@ public class FootWearController {
 		footWear.setQty(footWear.getQty() - quantity);
 		footWearService.PostFootWare(footWear);
 	}
-	
+
 	@GetMapping("/getFootWearBySellerName/{sellerName}")
 	public ResponseEntity<List<FootWear>> fetchBySellerName(@PathVariable String sellerName) {
 		List<FootWear> footWearList = footWearService.GetFootWearBySellerName(sellerName);

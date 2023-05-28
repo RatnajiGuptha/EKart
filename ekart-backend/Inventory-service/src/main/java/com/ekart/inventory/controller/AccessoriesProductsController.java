@@ -19,8 +19,8 @@ import com.ekart.inventory.enums.AccessoriesTypes;
 import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.service.AccessoriesProductService;
 
-@CrossOrigin("http://localhost:3000/")
 @RestController
+@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/accessoriesProducts")
 public class AccessoriesProductsController {
 

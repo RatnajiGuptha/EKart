@@ -13,7 +13,7 @@ import com.ekart.jwt.entity.CustomerEntity;
 import com.ekart.jwt.repos.CustomerRepo;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class UsersController {
 
 	@Autowired
@@ -39,8 +39,8 @@ public class UsersController {
 			System.out.println(byEmail.get().getEmail());
 			return ResponseEntity.ok(byEmail.get().getEmail());
 		}
-
 	}
+	
 
 	@GetMapping("/getUserInfo/{userName}")
 	public ResponseEntity<?> getUserByUserInfo(@PathVariable String userName) {

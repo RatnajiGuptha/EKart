@@ -23,7 +23,7 @@ import com.ekart.jwt.security.CustomerDetailsService;
 import com.ekart.jwt.security.JwtService;
 
 @RestController
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("*")
 public class CustomersController {
 
 	@Autowired
