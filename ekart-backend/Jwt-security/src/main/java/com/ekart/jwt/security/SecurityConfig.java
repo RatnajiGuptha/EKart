@@ -54,9 +54,11 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
 
-		security.csrf().disable().authorizeHttpRequests().requestMatchers("/login", "/addUser").permitAll().anyRequest()
-				.authenticated().and().exceptionHandling().authenticationEntryPoint(entryPoint).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		security.csrf().disable().authorizeHttpRequests()
+				.requestMatchers("/login", "/addUser", "/getUserName/{userName}", "/getUserByMail/{email}",
+						"/getUserInfo/{userName}")
+				.permitAll().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(entryPoint)
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authenticationProvider(authenticationProvider())
 				.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 

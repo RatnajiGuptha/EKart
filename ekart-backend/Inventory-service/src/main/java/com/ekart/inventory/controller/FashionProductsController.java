@@ -98,7 +98,7 @@ public class FashionProductsController {
 
 		fashionService.saveFashionProduct(fashionProducts);
 	}
-
+	
 	@GetMapping("/getProducts/sellerName/{sellerName}")
 	public ResponseEntity<List<FashionProducts>> getFashionProductsBySellerName(@PathVariable String sellerName) {
 		List<FashionProducts> fashionProducts = fashionService.GetFashionProductsBySellerName(sellerName);

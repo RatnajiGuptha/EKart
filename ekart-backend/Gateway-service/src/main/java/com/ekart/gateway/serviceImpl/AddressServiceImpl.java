@@ -3,12 +3,14 @@ package com.ekart.gateway.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ekart.gateway.Repository.AddressRepository;
 import com.ekart.gateway.entity.Address;
 import com.ekart.gateway.service.AddressService;
 
-public class AddressServiceImpl implements AddressService{
+@Service
+public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressRepository addressRepository;
@@ -27,11 +29,8 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public Address fetchById(int id) {
-		
+
 		return addressRepository.findById(id).get();
 	}
 
-	
-	
-	
 }

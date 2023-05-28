@@ -47,7 +47,7 @@ public class AccessoriesProductsController {
 
 	@GetMapping("/getAccessories/type/{type}/{accessoryId}")
 	public ResponseEntity<AccessoriesProducts> getAccessoriesProductByTypeandId(@PathVariable AccessoriesTypes type,
-																				@PathVariable int accessoryId) {
+			@PathVariable int accessoryId) {
 		AccessoriesProducts acccessoryProductById = accessoriesProductService.getAccessoriesByTpeAndProductById(type,
 				accessoryId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(acccessoryProductById);
@@ -75,7 +75,6 @@ public class AccessoriesProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Items added");
 	}
 
-
 	@PutMapping("/setQuantity/{prodId}/{quantity}")
 	public void settingQuantityAccessory(@PathVariable int prodId, @PathVariable int quantity) {
 
@@ -84,10 +83,12 @@ public class AccessoriesProductsController {
 		accessoriesProducts.setQty(accessoriesProducts.getQty() - quantity);
 		accessoriesProductService.saveAccessoriesProducts(accessoriesProducts);
 	}
-	
+
 	@GetMapping("/getAccessories/sellerName/{sellerName}")
-	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySellerName(@PathVariable String sellerName) {
-		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.GetAccessoriesProductsBySellerName(sellerName);
+	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySellerName(
+			@PathVariable String sellerName) {
+		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
+				.GetAccessoriesProductsBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 	
@@ -117,7 +118,5 @@ public class AccessoriesProductsController {
 
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateAccessoriesProducts);
     }
-
-	
 
 }

@@ -48,7 +48,7 @@ public class PaymentService {
                     .filter(ub -> ub.getPrice() > orderRequestDTO.getPrice())
                     .map(ub -> {
                         ub.setPrice(ub.getPrice() - orderRequestDTO.getPrice());
-                        userTransactionRepository.save(convertTOUserTransactionEntity(orderRequestDTO));
+                        userTransactionRepository.save(new UserTransaction(UUID.randomUUID(),orderRequestDTO.getUserName(),orderRequestDTO.getPrice()));
 
                         return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_COMPLETED);
                     }).orElse(new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED));
@@ -56,13 +56,7 @@ public class PaymentService {
         return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED);
     }
     
-    public UserTransaction convertTOUserTransactionEntity(OrderRequestDTO orderRequestDTO) {
-    	UserTransaction userTransaction = new UserTransaction();
-    	userTransaction.setTransactionId(UUID.randomUUID());
-    	userTransaction.setUserName(orderRequestDTO.getUserName());
-    	userTransaction.setAmount(orderRequestDTO.getPrice());
-    	return userTransaction;
-    }
+    
 
     @Transactional
     public void cancelOrder(OrderEvent orderEvent) {
