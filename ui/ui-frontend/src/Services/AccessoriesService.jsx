@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const Accessories_BASE_URL = "http://localhost:8200/api/accessoriesProducts"
+// const Accessories_BASE_URL = "http://localhost:8200/api/accessoriesProducts"
+const Accessories_BASE_URL = "http://localhost:8888/api/accessoriesProducts";
 
 class AccessoriesService {
 

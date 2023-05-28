@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const FOOTWEAR_BASE_URL = "http://localhost:8200/api/footWear"
+// const FOOTWEAR_BASE_URL = "http://localhost:8200/api/footWear";
+const FOOTWEAR_BASE_URL = "http://localhost:8888/api/footWear";
 
 class FootwearService {
 

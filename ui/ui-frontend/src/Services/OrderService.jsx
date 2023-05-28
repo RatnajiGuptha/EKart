@@ -1,9 +1,10 @@
 import axios from "axios";
 
-const Purchase_Order_URL = "http://localhost:8300/api";
-class OrderService {
+// const Purchase_Order_URL = "http://localhost:8300/api";
+const Purchase_Order_URL = "http://localhost:8888/api";
 
-    
+class OrderService {
+   
     createOrderForCart(userName){
         return axios.post(Purchase_Order_URL+ "/createOrder/"+ userName);
 

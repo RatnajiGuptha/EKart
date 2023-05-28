@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const FASHION_PRODUCTS_BASE_URI = "http://localhost:8200/api/fashionProducts";
+// const FASHION_PRODUCTS_BASE_URI = "http://localhost:8200/api/fashionProducts";
+
+const FASHION_PRODUCTS_BASE_URI = "http://localhost:8888/api/fashionProducts";
 
 class FashionProductService {
 
