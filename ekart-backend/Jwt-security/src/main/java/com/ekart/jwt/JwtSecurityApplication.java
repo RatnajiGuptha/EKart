@@ -1,12 +1,12 @@
-package com.ekart.inventory;
+package com.ekart.jwt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class InvertoryApplication {
-	
+public class JwtSecurityApplication {
+
 	public static void main(String[] args) {
-		SpringApplication.run(InvertoryApplication.class, args);
+		SpringApplication.run(JwtSecurityApplication.class, args);
 	}
 }
