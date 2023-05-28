@@ -1,55 +1,75 @@
 .login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
 }
 
 .forms {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  text-align: start;
+  max-width: 600px;
+  
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    color: #333;
+.forms label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
-input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.3rem;
+.forms input[type="text"],
+.forms input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
-button[type="submit"] {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+.forms input[type="text"]:focus,
+.forms input[type="password"]:focus {
+  border-color: #007867;
+  box-shadow: 0 0 5px #007867;
+
 }
 
-button[type="submit"]:hover {
-    background-color: #555;
+.login-button {
+  background-color: #28a745;
+  border-color: #28a745;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px;
+  margin: 3px;
 }
 
-.top-picks {
-    border-color: rgba(red, green, blue, alpha);
-    border-style: solid;
-    border: 1px solid #ccc;
-    border-bottom-width: 2px;
-    border-right-style: dashed;
+.login-button:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
 
+.signup-button {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: black;
+  border-radius: 4px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 3px;
+}
+
+.signup-button:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+}
+
+.login-page span {
+  color: orangered;
+  margin-top: 0px;
 }

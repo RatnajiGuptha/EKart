@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import '../StyleSheets/Home.css'
+import React from 'react';
 
-import HomeCarousels from './HomeCarousels';
-import HomeCategories from './HomeCategories';
-import HomeTopPicks from './HomeTopPicks';
+import HomeCarousels from "./HomePagesComponents/HomeCarousels";
+import HomeCategories from "./HomePagesComponents/HomeCategories";
+
+import ProductsFilterComponent from "../components/HomePagesComponents/ProductsFilterComponent";
+
+import FooterComponent from './FooterComponent';
 
 
 function HomeComponent() {
@@ -11,7 +13,8 @@ function HomeComponent() {
         <div>
             <HomeCategories />
             <HomeCarousels />
-            <HomeTopPicks />
+            <ProductsFilterComponent />
+            <FooterComponent />
         </div>
     );
 }
