@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-// import {FaSearch} from "react-icons/fa";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "../StyleSheets/Home.css"
 import { useNavigate } from "react-router-dom";
 
 function HeaderComponent() {
+  const username = localStorage.getItem('username');
   const [search, setSearch] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  const navigate = useNavigate();
-
-  const username = localStorage.getItem('username');
+  const navigate = useNavigate(); 
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -22,8 +18,7 @@ function HeaderComponent() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
+    localStorage.clear();
   }
 
   useEffect(() => {
@@ -34,25 +29,21 @@ function HeaderComponent() {
     else {
       setIsLogin(false)
     }
-
   })
+
   return (
-    <Navbar className="navbar navbar-dark bg-dark">
+    <Navbar className="navbar navbar-dark bg-dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/">
-          E-Kart
-        </Navbar.Brand>
+        <Navbar.Brand href="/"> E-Kart </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse id="basic-navbar-nav">
-          {/* <Container className="search-bar">
-            < input
-              type="text"
+          <Container className="search-bar">
+            < input type="text"
               placeholder="Search"
               value={search}
-              onChange={handleSearch}
-            />
+              onChange={handleSearch} />
             <FaSearch className="search-icon" />
-          </Container> */}
+          </Container>
           <Container className="d-flex flex-row justify-content-end">
             <Nav >
               <Nav.Link href="/"> Home</Nav.Link>
@@ -68,15 +59,10 @@ function HeaderComponent() {
                 <NavDropdown.Item href="/toys">Toys</NavDropdown.Item>
                 <NavDropdown.Item href="/fashionByType/KidsWear">Kidswear</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/cart">Cart</Nav.Link>
+              <Nav.Link href="/cart"> <FaShoppingCart className="icon" /> Cart</Nav.Link>
               {
-                isLogin ? <NavDropdown title={`${username}`} id="basic-nav-dropdown">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-person-circle profile-logo" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                  </svg>
+                isLogin ? <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
                   <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
-
                   : <Nav.Link href="/login" onClick={handleLogin}>Login</Nav.Link>}
             </Nav>
           </Container>
