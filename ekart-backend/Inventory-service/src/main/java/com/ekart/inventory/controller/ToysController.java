@@ -71,7 +71,7 @@ public class ToysController {
 	}
     
     @PutMapping("/updateProducts/{toyId}")
-    public ResponseEntity<Toys> updateFashionProducts(@PathVariable int toyId,@RequestBody Toys toys) {
+    public ResponseEntity<Toys> updateToyProducts(@PathVariable int toyId,@RequestBody Toys toys) {
         
         Toys updateToys=toysService.getToyById(toyId);
             
