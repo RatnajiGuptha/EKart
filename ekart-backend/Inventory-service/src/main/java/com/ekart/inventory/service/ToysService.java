@@ -12,4 +12,6 @@ public interface ToysService {
     Toys getToyById(int id);
 
 	List<Toys> GetToysBySellerName(String sellerName);
+
+	String saveSellerToys(Toys updateToys);
 }

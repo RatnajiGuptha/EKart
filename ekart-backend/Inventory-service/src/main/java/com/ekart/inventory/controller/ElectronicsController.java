@@ -76,5 +76,31 @@ public class ElectronicsController {
 		List<ElectronicsProducts> electronicsProducts = electronicsService.GetElectronicsBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProducts);
 	}
+	
+	@PutMapping("/updateProducts/{electronicsId}")
+    public ResponseEntity<ElectronicsProducts> updateElectronicsProducts(@PathVariable int electronicsId,@RequestBody ElectronicsProducts electronicsProducts) {
+        
+        ElectronicsProducts updateElectronicsProducts=electronicsService.fetchByElectronicsId(electronicsId);
+            
+        updateElectronicsProducts.setProductName(electronicsProducts.getProductName());
+        updateElectronicsProducts.setProductPrice(electronicsProducts.getProductPrice());
+        updateElectronicsProducts.setLogoImg(electronicsProducts.getLogoImg());
+        updateElectronicsProducts.setProductDescription(electronicsProducts.getProductDescription());
+        updateElectronicsProducts.setBrandName(electronicsProducts.getBrandName());
+        updateElectronicsProducts.setType(electronicsProducts.getType());
+        updateElectronicsProducts.setCapacity(electronicsProducts.getCapacity());
+        updateElectronicsProducts.setColor(electronicsProducts.getColor());
+        updateElectronicsProducts.setManufactureDate(electronicsProducts.getManufactureDate());
+        updateElectronicsProducts.setQty(electronicsProducts.getQty());
+        updateElectronicsProducts.setProductImg1(electronicsProducts.getProductImg1());
+        updateElectronicsProducts.setProductImg2(electronicsProducts.getProductImg2());
+        updateElectronicsProducts.setProductImg3(electronicsProducts.getProductImg3());
+        updateElectronicsProducts.setProductImg4(electronicsProducts.getProductImg4());
+        updateElectronicsProducts.setProductImg5(electronicsProducts.getProductImg5());
+        
+        electronicsService.saveSellerElectronicProducts(updateElectronicsProducts);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateElectronicsProducts);
+    }
 
 	}

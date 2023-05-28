@@ -5,9 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.ekart.inventory.entity.FashionProducts;
 import com.ekart.inventory.entity.Toys;
 import com.ekart.inventory.service.ToysService;
 
@@ -63,6 +69,33 @@ public class ToysController {
 		List<Toys> toys = toysService.GetToysBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toys);
 	}
+    
+    @PutMapping("/updateProducts/{toyId}")
+    public ResponseEntity<Toys> updateFashionProducts(@PathVariable int toyId,@RequestBody Toys toys) {
+        
+        Toys updateToys=toysService.getToyById(toyId);
+            
+        updateToys.setProductName(toys.getProductName());
+        updateToys.setProductPrice(toys.getProductPrice());
+        updateToys.setLogoImg(toys.getLogoImg());
+        updateToys.setProductDescription(toys.getProductDescription());
+        updateToys.setBrandName(toys.getBrandName());
+        updateToys.setType(toys.getType());
+        updateToys.setSuitablefor(toys.getSuitablefor());
+        updateToys.setSize(toys.getSize());
+        updateToys.setColor(toys.getColor());
+        updateToys.setManufactureDate(toys.getManufactureDate());
+        updateToys.setQty(toys.getQty());
+        updateToys.setProductImg1(toys.getProductImg1());
+        updateToys.setProductImg2(toys.getProductImg2());
+        updateToys.setProductImg3(toys.getProductImg3());
+        updateToys.setProductImg4(toys.getProductImg4());
+        updateToys.setProductImg5(toys.getProductImg5());
+        
+        toysService.saveSellerToys(updateToys);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateToys);
+    }
     
     
 }

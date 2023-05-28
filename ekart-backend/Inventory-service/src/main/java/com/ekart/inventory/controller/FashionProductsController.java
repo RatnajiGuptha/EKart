@@ -104,4 +104,31 @@ public class FashionProductsController {
 		List<FashionProducts> fashionProducts = fashionService.GetFashionProductsBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);
 	}
+	
+	@PutMapping("/updateProducts/{fashionId}")
+    public ResponseEntity<FashionProducts> updateFashionProducts(@PathVariable int fashionId,@RequestBody FashionProducts fashionProducts) {
+        
+        FashionProducts updateFashionProducts=fashionService.fetchById(fashionId);
+            
+        updateFashionProducts.setProductName(fashionProducts.getProductName());
+        updateFashionProducts.setProductPrice(fashionProducts.getProductPrice());
+        updateFashionProducts.setLogoImg(fashionProducts.getLogoImg());
+        updateFashionProducts.setProductDescription(fashionProducts.getProductDescription());
+        updateFashionProducts.setBrandName(fashionProducts.getBrandName());
+        updateFashionProducts.setType(fashionProducts.getType());
+        updateFashionProducts.setSuitablefor(fashionProducts.getSuitablefor());
+        updateFashionProducts.setSize(fashionProducts.getSize());
+        updateFashionProducts.setColor(fashionProducts.getColor());
+        updateFashionProducts.setManufactureDate(fashionProducts.getManufactureDate());
+        updateFashionProducts.setQty(fashionProducts.getQty());
+        updateFashionProducts.setProductImg1(fashionProducts.getProductImg1());
+        updateFashionProducts.setProductImg2(fashionProducts.getProductImg2());
+        updateFashionProducts.setProductImg3(fashionProducts.getProductImg3());
+        updateFashionProducts.setProductImg4(fashionProducts.getProductImg4());
+        updateFashionProducts.setProductImg5(fashionProducts.getProductImg5());
+        
+        fashionService.saveSellerFashionProducts(updateFashionProducts);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateFashionProducts);
+    }
 }
