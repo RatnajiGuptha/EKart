@@ -28,4 +28,6 @@ public interface FootWearService {
 
 	public List<FootWear> GetFootWearBySellerName(String sellerName);
 
+	public String saveSellerFootWearProducts(FootWear updateFootWearProducts);
+
 }

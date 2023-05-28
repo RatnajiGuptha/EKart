@@ -37,4 +37,10 @@ public class ToysServiceImplementation implements ToysService {
 		List<Toys> toys=toysRepository.findToyBySellerName(sellerName);
 		return toys;
 	}
+
+	@Override
+	public String saveSellerToys(Toys updateToys) {
+		toysRepository.save(updateToys);
+		return "seller toy products saved";
+	}
 }

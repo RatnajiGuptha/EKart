@@ -38,4 +38,10 @@ public class BeautyServiceImplementation implements BeautyService {
 		List<Beauty> beautyProducts=beautyRepository.findBeautyBySellerName(sellerName);
 		return beautyProducts;
 	}
+
+	@Override
+	public String saveSellerBeautyProducts(Beauty updateBeautyProducts) {
+		beautyRepository.save(updateBeautyProducts);
+		return "seller beauty product saved";
+	}
 }

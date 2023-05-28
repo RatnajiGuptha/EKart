@@ -59,4 +59,12 @@ public class AccessoriesProductServiceImpl implements AccessoriesProductService 
 		return accessoriesProducts;
 	}
 
+	@Override
+	public String saveSellerAccessoriesProducts(AccessoriesProducts updateAccessoriesProducts) {
+		accessoriesRepo.save(updateAccessoriesProducts);
+		return "seller accessroies products saved";
+	}
+	
+	
+
 }

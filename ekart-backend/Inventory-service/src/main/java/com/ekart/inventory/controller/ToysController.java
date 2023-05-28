@@ -70,5 +70,32 @@ public class ToysController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toys);
 	}
     
+    @PutMapping("/updateProducts/{toyId}")
+    public ResponseEntity<Toys> updateFashionProducts(@PathVariable int toyId,@RequestBody Toys toys) {
+        
+        Toys updateToys=toysService.getToyById(toyId);
+            
+        updateToys.setProductName(toys.getProductName());
+        updateToys.setProductPrice(toys.getProductPrice());
+        updateToys.setLogoImg(toys.getLogoImg());
+        updateToys.setProductDescription(toys.getProductDescription());
+        updateToys.setBrandName(toys.getBrandName());
+        updateToys.setType(toys.getType());
+        updateToys.setSuitablefor(toys.getSuitablefor());
+        updateToys.setSize(toys.getSize());
+        updateToys.setColor(toys.getColor());
+        updateToys.setManufactureDate(toys.getManufactureDate());
+        updateToys.setQty(toys.getQty());
+        updateToys.setProductImg1(toys.getProductImg1());
+        updateToys.setProductImg2(toys.getProductImg2());
+        updateToys.setProductImg3(toys.getProductImg3());
+        updateToys.setProductImg4(toys.getProductImg4());
+        updateToys.setProductImg5(toys.getProductImg5());
+        
+        toysService.saveSellerToys(updateToys);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateToys);
+    }
+    
     
 }
