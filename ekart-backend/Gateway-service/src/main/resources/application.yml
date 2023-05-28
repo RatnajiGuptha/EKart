@@ -1,24 +1,14 @@
-server: 
-  port: 8111
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000/"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+#            allowCredentials: true
+            maxAge: 3600
 
-#spring:
-#  cloud:
-#    gateway:
-#      default-filters:
-#        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-#        - AddResponseHeader=Access-Control-Allow-Origin, *
-#      globalcors:
-#        cors-configurations:
-#          '[/**]':
-#            allowedOrigins: '*'
-#            allowedMethods:
-#            - POST
 
-#            
-#      routes:
-#        - id: jwt-security
-#          uri : http://localhost:8400
-#          predicates:
-#          -  Method=POST
-#          -  Path="/login"
           

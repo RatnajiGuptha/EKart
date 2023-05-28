@@ -31,7 +31,6 @@ public class Cart {
 	private String logoImg;
 
 	private int productPrice;
-	private String productDescription;
 	private String brandName;
 
 	private String size;

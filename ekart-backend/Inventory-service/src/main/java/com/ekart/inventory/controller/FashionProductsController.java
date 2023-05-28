@@ -14,7 +14,7 @@ import com.ekart.inventory.service.FashionProductService;
 
 @RestController
 @RequestMapping("/api/fashionProducts")
-@CrossOrigin("http://localhost:3000/")
+//@CrossOrigin("http://localhost:3000/")
 public class FashionProductsController {
 
 	@Autowired
