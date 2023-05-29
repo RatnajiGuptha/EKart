@@ -9,40 +9,13 @@ import AddressComponent from "./AddressComponent";
 const AccountPage = () => {
   const userName = localStorage.getItem("username");
 
-  //   const [page, setPages] = useState("");
-  const [submitProfile, setSubmitProfile] = useState(true);
-  const [submitAddress, setSubmitAddress] = useState(false);
-  const [submitMyorders, setSubmitMyorders] = useState(false);
-  const [submitWallet, setSubmitWallet] = useState(false);
+  const [page, setPages] = useState(null);
 
-  const handleSubmitProfile = () => {
-    setSubmitProfile(true);
-    setSubmitAddress(false);
-    setSubmitMyorders(false);
-    setSubmitWallet(false);
-    console.log("submit profile");
-  };
-  const handleSubmitAddress = () => {
-    setSubmitProfile(false);
-    setSubmitAddress(true);
-    setSubmitMyorders(false);
-    setSubmitWallet(false);
-    console.log("submit address");
-  };
-  const handleSubmitMyorders = () => {
-    setSubmitProfile(false);
-    setSubmitAddress(false);
-    setSubmitMyorders(true);
-    setSubmitWallet(false);
-    console.log("submit myOrders");
-  };
-  const handleSubmitWallet = () => {
-    setSubmitProfile(false);
-    setSubmitAddress(false);
-    setSubmitMyorders(false);
-    setSubmitWallet(true);
-    console.log("submit wallet");
-  };
+
+  const handlePage = (type) => {
+    setPages(type)
+  }
+
   return (
     <div className="accounts">
       <div className="main-profile">
@@ -56,20 +29,20 @@ const AccountPage = () => {
               <div className="username">{userName}</div>
             </div>
             <div className="profile-categories">
-              <p className="category" onClick={() => { handleSubmitProfile(); }}> Manage Profile</p>
-              <p className="category" type="submit" onClick={() => { handleSubmitAddress(); }}> Manage Address</p>
-              <p className="category" type="submit" onClick={() => { handleSubmitMyorders(); }}>My Orders</p>
-              <p className="category" type="submit" onClick={() => { handleSubmitWallet(); }}>wallet</p>
-              <p className="category">Logout</p>
+              <p className="category" onClick={() => { handlePage("profile"); }}> Manage Profile</p>
+              <p className="category" type="submit" onClick={() => { handlePage('address'); }}> Manage Address</p>
+              <p className="category" type="submit" onClick={() => { handlePage('orders'); }}>My Orders</p>
+              <p className="category" type="submit" onClick={() => { handlePage('wallet'); }}>wallet</p>
+              <p className="category" >Logout</p>
             </div>
           </div>
         </div>
         <div className="main-profile-right">
 
-          {submitProfile && <div>{<ProfileComponent />}</div>}
-          {submitAddress && <div>{<AddressComponent />}</div>}
-          {submitMyorders && <div>{<Footwear />}</div>}
-          {submitWallet && <div>{<Accessories />}</div>}
+          {page === 'profile' && <div>{<ProfileComponent />}</div>}
+          {page === 'address' && <div>{<AddressComponent />}</div>}
+          {page === 'orders' && <div>{<Footwear />}</div>}
+          {page === 'wallet' && <div>{<Accessories />}</div>}
         </div>
       </div>
     </div>

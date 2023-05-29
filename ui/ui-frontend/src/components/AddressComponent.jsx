@@ -25,7 +25,7 @@ const AddressComponent = () => {
 
         AddressService.deleteAddress(receiverName);
         console.log("address deleted successfully")
-        window.location.reload(true);
+        // window.location.reload(false);
     }
     return (
         <div className="address-box">

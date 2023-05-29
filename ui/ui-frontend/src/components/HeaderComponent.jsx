@@ -22,6 +22,8 @@ function HeaderComponent() {
     localStorage.clear();
   }
 
+
+
   useEffect(() => {
     const token = localStorage.getItem("token")
     if (token) {
@@ -63,6 +65,7 @@ function HeaderComponent() {
               <Nav.Link href="/cart"> <FaShoppingCart className="icon" /> Cart</Nav.Link>
               {
                 isLogin ? <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/profile" >Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
                   : <Nav.Link href="/login" onClick={handleLogin}>Login</Nav.Link>}
             </Nav>

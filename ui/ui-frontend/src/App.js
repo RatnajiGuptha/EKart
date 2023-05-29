@@ -52,6 +52,7 @@ import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails"
 import ListToysDetails from "./components/SellerModules/ListToysDetails";
 import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
 import CheckMark from "./components/OrdersModules/CheckMark";
+import AccountPage from "./components/AccountPage";
 
 function App() {
   return (
@@ -202,6 +203,7 @@ function App() {
           ></Route>
 
           <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route>
+          <Route path="/profile" element={<AccountPage />}></Route>
         </Routes>
       </Router>
     </div>
