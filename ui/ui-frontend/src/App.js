@@ -55,13 +55,15 @@ import CheckMark from "./components/OrdersModules/CheckMark";
 import SellerRegistration from "./components/SecurityModules/SellerRegistration";
 import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
 import SellerHeaderComponent from "./components/SellerModules/SellerHeaderComponent";
+import { useState } from "react";
 
 function App() {
 
+  const isLognedIn = useState(true);
   const role = localStorage.getItem('role');
 
-  const header = role === "SELLER" ? <SellerHeaderComponent /> : <HeaderComponent />
-  const home = role === "SELLER" ? <SellerHomeCategories /> : <HomeComponent />
+  const header = isLognedIn && role === "SELLER" ? <SellerHeaderComponent /> : <HeaderComponent />
+  const home = isLognedIn && role === "SELLER" ? <SellerHomeCategories /> : <HomeComponent />
 
   return (
     <div className="App">
@@ -70,6 +72,7 @@ function App() {
         {header}
         <Routes>
           <Route path="/" element={home} ></Route>
+          {/* <Route path="/" element={<HomeComponent />} ></Route> */}
 
           {/* security  */}
           <Route path="/login" element={<LoginPage />}></Route>
