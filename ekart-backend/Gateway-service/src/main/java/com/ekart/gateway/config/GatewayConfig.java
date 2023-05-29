@@ -79,8 +79,10 @@ public class GatewayConfig {
 				.route((p -> p.path("/api/add").uri("http://localhost:8083")))
 
 				.route((p -> p.path("/getUserName/**").uri("http://localhost:8400")))
+				.route((p -> p.path("/getUserByContactNumber/**").uri("http://localhost:8400")))
 				.route((p -> p.path("/getUserByMail/**").uri("http://localhost:8400")))
 				.route((p -> p.path("/addUser").uri("http://localhost:8400")))
+				.route((p -> p.path("/addSeller").uri("http://localhost:8400")))
 				.route((p -> p.path("/login").uri("http://localhost:8400")))
 				.route((p -> p.path("/getUserInfo/**").uri("http://localhost:8400")))
 

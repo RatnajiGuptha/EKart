@@ -56,7 +56,7 @@ public class SecurityConfig {
 
 		security.csrf().disable().cors().disable().authorizeHttpRequests()
 				.requestMatchers("/login", "/addUser", "/getUserName/{userName}", "/getUserByMail/{email}",
-						"/getUserInfo/{userName}")
+						"/getUserInfo/{userName}", "/addSeller", "/getUserByContactNumber/**","/addSeller")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(entryPoint)
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authenticationProvider(authenticationProvider())

@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +12,6 @@ import com.ekart.jwt.entity.CustomerEntity;
 import com.ekart.jwt.repos.CustomerRepo;
 
 @RestController
-@CrossOrigin("*")
 public class UsersController {
 
 	@Autowired
@@ -48,4 +46,15 @@ public class UsersController {
 		return ResponseEntity.ok(user);
 	}
 
+	@GetMapping("/getUserByContactNumber/{contactNumber}")
+	public ResponseEntity<?> getUserByContactNumber(@PathVariable String contactNumber) {
+		Optional<CustomerEntity> user = customerRepo.findByContactNumber(contactNumber);
+		if (user.isEmpty()) {
+			return ResponseEntity.ok("null");
+		} else {
+			System.out.println(user.get().getContactNumber());
+			return ResponseEntity.ok(user.get().getContactNumber());
+		}
+	}
+	
 }
