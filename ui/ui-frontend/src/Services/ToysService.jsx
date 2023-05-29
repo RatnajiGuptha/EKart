@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const TOYS_BASE_URL = "http://localhost:8200/api/Toys"
+// const TOYS_BASE_URL = "http://localhost:8200/api/Toys";
+const TOYS_BASE_URL = "http://localhost:8888/api/Toys"
 
 class ToysService {
 
@@ -12,8 +13,8 @@ class ToysService {
         return axios.get(TOYS_BASE_URL + "/getToys/" + toyId);
     }
 
-    getToysBySellerName(sellerName){
-        return axios.get(TOYS_BASE_URL+"/getToys/sellerName/"+sellerName);
+    getToysBySellerName(sellerName) {
+        return axios.get(TOYS_BASE_URL + "/getToys/sellerName/" + sellerName);
     }
 
     updateToyProducts(toyId,toys){

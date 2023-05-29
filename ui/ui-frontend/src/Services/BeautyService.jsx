@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const BEAUTY_BASE_URL = "http://localhost:8200/api/beauty";
+// const BEAUTY_BASE_URL = "http://localhost:8200/api/beauty";
+const BEAUTY_BASE_URL = "http://localhost:8888/api/beauty";
 
 class BeautyService {
-
 
     getAllBeautyProducts() {
         return axios.get(BEAUTY_BASE_URL + "/getBeautyProducts");

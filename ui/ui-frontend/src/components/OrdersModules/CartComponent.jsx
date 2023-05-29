@@ -21,7 +21,7 @@ const CartComponent = () => {
 
   const deleteItemFromCarttt = async (cartId) => {
     CartService.deleteItemFromCart(cartId);
-    alert("Item Deleted Successfully");
+    // alert("Item Deleted Successfully");
     window.location.reload(false);
   };
 

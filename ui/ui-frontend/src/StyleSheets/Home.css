@@ -120,13 +120,13 @@ nav {
 }
 
 .search-bar {
-  position: relative;
+  position:relative;
   display: flex;
   align-items: center;
 }
 
 .search-icon {
-  position: absolute;
+  position: relative;
   right: 10%;
   cursor: pointer;
 }
@@ -171,12 +171,4 @@ input[type="text"]::placeholder {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-}
-
-.profile-logo {
-  color: #ccc;
-  height: 30px;
-  width: 30px;
-  padding: 5px;
-  margin-top: 5px;
 }

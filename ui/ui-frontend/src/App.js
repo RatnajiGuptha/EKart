@@ -51,8 +51,9 @@ import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDe
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
 // import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
-import CheckMark from "./components/OrdersModules/CheckMark";
 import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
+import CheckMark from "./components/OrdersModules/CheckMark";
+import AccountPage from "./components/AccountPage";
 
 function App() {
   return (
@@ -64,7 +65,7 @@ function App() {
 
           {/* security  */}
           <Route path="/login" element={<LoginPage />}></Route>
-          <Route path='/registration' element={<Registrationpage />}></Route>
+          <Route path="/registration" element={<Registrationpage />}></Route>
 
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
@@ -72,11 +73,11 @@ function App() {
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>
-          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />} ></Route>
+          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
           <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
-          <Route path="/fashionByType/:type" element={<FashionProductByCategory />} ></Route>
-          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />} ></Route>
-          <Route path="/fashionBy/suitablefor/:suitablefor/:type" element={<FashionProductByGenderAndType />} ></Route>
+          <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>
+          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />}></Route>
+          <Route path="/fashionBy/suitablefor/:suitablefor/:type" element={<FashionProductByGenderAndType />}></Route>
           <Route path="/fashionBy/suitablefor/:suitablefor/:type/id/:productId" element={<FashionProductsByGenderAndTypeInfo />}></Route>
 
           {/* toys products  */}
@@ -106,7 +107,7 @@ function App() {
           <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
           {/* list seller products seller routes */}
-          <Route path='/listFashionProducts' element={<ListFashionDetails />}></Route>
+          <Route path="/listFashionProducts" element={<ListFashionDetails />}></Route>
           <Route path="/listAccessoriesProducts" element={<ListAccessoriesDetails />}></Route>
           <Route path="/listBeautyProducts" element={<ListBeautyDetails />}></Route>
           <Route path="/listElectronicProducts" element={<ListElectronicsDetails />}></Route>
@@ -135,7 +136,10 @@ function App() {
           {/* seller home page routes */}
           <Route path="/sellerFashion" element={<SellerHomeCategories/>}></Route>
           
-          <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route> 
+      
+          <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route>
+          <Route path="/profile" element={<AccountPage />}></Route>
+          <Route path="/profile/:type" element={<AccountPage />}></Route>
         </Routes>
       </Router>
     </div>
