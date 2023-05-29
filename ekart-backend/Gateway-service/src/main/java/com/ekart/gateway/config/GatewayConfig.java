@@ -83,7 +83,7 @@ public class GatewayConfig {
 				.route((p -> p.path("/addUser").uri("http://localhost:8400")))
 				.route((p -> p.path("/login").uri("http://localhost:8400")))
 				.route((p -> p.path("/getUserInfo/**").uri("http://localhost:8400")))
-
+				.route((p->p.path("/updateUserData/**").uri("http://localhost:8400")))
 				.build();
 	}
 
