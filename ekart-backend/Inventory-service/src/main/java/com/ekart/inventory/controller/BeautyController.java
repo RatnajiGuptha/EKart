@@ -5,14 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.inventory.entity.Beauty;
 import com.ekart.inventory.service.BeautyService;
 
 @RestController
 @RequestMapping("/api/beauty")
-@CrossOrigin("http://localhost:3000/")
+//@CrossOrigin("http://localhost:3000/")
 public class BeautyController {
 
 	@Autowired
@@ -22,7 +28,7 @@ public class BeautyController {
 	public ResponseEntity<String> saveAllBeautyProducts(@RequestBody List<Beauty> beautyProductsList) {
 
 		for (Beauty beauty : beautyProductsList) {
-			String response = beautyService.addBeautyProducts(beauty);
+			 beautyService.addBeautyProducts(beauty);
 		}
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Added multiple beauty products");
 	}
@@ -62,5 +68,30 @@ public class BeautyController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(beautyProducts);
 		
 	}
+	
+	@PutMapping("/updateProducts/{beautyId}")
+    public ResponseEntity<Beauty> updateBeautyProducts(@PathVariable int beautyId,@RequestBody Beauty beauty) {
+        
+        Beauty updateBeautyProducts=beautyService.getBeautyById(beautyId);
+            
+        updateBeautyProducts.setProductName(beauty.getProductName());
+        updateBeautyProducts.setProductPrice(beauty.getProductPrice());
+        updateBeautyProducts.setLogoImg(beauty.getLogoImg());
+        updateBeautyProducts.setProductDescription(beauty.getProductDescription());
+        updateBeautyProducts.setBrandName(beauty.getBrandName());
+        updateBeautyProducts.setType(beauty.getType());
+        updateBeautyProducts.setSuitablefor(beauty.getSuitablefor());
+        updateBeautyProducts.setSize(beauty.getSize());
+        updateBeautyProducts.setManufactureDate(beauty.getManufactureDate());
+        updateBeautyProducts.setQty(beauty.getQty());
+        updateBeautyProducts.setProductImg1(beauty.getProductImg1());
+        updateBeautyProducts.setProductImg2(beauty.getProductImg2());
+        updateBeautyProducts.setProductImg3(beauty.getProductImg3());
+        updateBeautyProducts.setProductImg4(beauty.getProductImg4());
+        
+        beautyService.saveSellerBeautyProducts(updateBeautyProducts);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateBeautyProducts);
+    }
 
 	}

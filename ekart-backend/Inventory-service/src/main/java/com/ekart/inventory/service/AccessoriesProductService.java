@@ -21,4 +21,6 @@ public interface AccessoriesProductService {
 	public AccessoriesProducts getAccessoriesByTpeAndProductById(AccessoriesTypes type, int accessoryId);
 
 	public List<AccessoriesProducts> GetAccessoriesProductsBySellerName(String sellerName);
+
+	public String saveSellerAccessoriesProducts(AccessoriesProducts updateAccessoriesProducts);
 }

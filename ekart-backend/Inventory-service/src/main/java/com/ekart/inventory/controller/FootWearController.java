@@ -5,19 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.inventory.entity.FootWear;
 import com.ekart.inventory.enums.FootWearType;
 import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.service.FootWearService;
 
-@CrossOrigin("http://localhost:3000/")
 @RestController
+//@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/footWear")
 public class FootWearController {
-
-
 
 	@Autowired
 	private FootWearService footWearService;
@@ -76,12 +80,40 @@ public class FootWearController {
 		footWear.setQty(footWear.getQty() - quantity);
 		footWearService.PostFootWare(footWear);
 	}
-	
+
 	@GetMapping("/getFootWearBySellerName/{sellerName}")
 	public ResponseEntity<List<FootWear>> fetchBySellerName(@PathVariable String sellerName) {
 		List<FootWear> footWearList = footWearService.GetFootWearBySellerName(sellerName);
 
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
 	}
+	
+	
+	@PutMapping("/updateProducts/{footWearId}")
+    public ResponseEntity<FootWear> updateFootWearProducts(@PathVariable int footWearId,@RequestBody FootWear footwearProducts) {
+        
+		FootWear updateFootWearProducts=footWearService.GetFootWearBYId(footWearId);
+            
+        updateFootWearProducts.setProductName(footwearProducts.getProductName());
+        updateFootWearProducts.setProductPrice(footwearProducts.getProductPrice());
+        updateFootWearProducts.setLogoImg(footwearProducts.getLogoImg());
+        updateFootWearProducts.setProductDescription(footwearProducts.getProductDescription());
+        updateFootWearProducts.setBrandName(footwearProducts.getBrandName());
+        updateFootWearProducts.setType(footwearProducts.getType());
+        updateFootWearProducts.setSuitablefor(footwearProducts.getSuitablefor());
+        updateFootWearProducts.setSize(footwearProducts.getSize());
+        updateFootWearProducts.setColor(footwearProducts.getColor());
+        updateFootWearProducts.setManufactureDate(footwearProducts.getManufactureDate());
+        updateFootWearProducts.setQty(footwearProducts.getQty());
+        updateFootWearProducts.setProductImg1(footwearProducts.getProductImg1());
+        updateFootWearProducts.setProductImg2(footwearProducts.getProductImg2());
+        updateFootWearProducts.setProductImg3(footwearProducts.getProductImg3());
+        updateFootWearProducts.setProductImg4(footwearProducts.getProductImg4());
+        updateFootWearProducts.setProductImg5(footwearProducts.getProductImg5());
+        
+        footWearService.saveSellerFootWearProducts(updateFootWearProducts);
+
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateFootWearProducts);
+    }
 
 }

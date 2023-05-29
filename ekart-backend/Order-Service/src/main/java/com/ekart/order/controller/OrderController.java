@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +18,7 @@ import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.CartService;
 import com.ekart.order.service.OrderService;
 
-@CrossOrigin(origins="http://localhost:3000/")
+//@CrossOrigin(origins="http://localhost:3000/")
 @RestController
 @RequestMapping("/api")
 public class OrderController {
@@ -41,7 +40,6 @@ public class OrderController {
 		List<Integer> priceList = new ArrayList<>();
 		List<String> productName = new ArrayList<>();
 		List<String> logoImg = new ArrayList<>();
-		List<String> productDescription = new ArrayList<>();
 		List<String> brandName = new ArrayList<>();
 
 		List<String> size = new ArrayList<>();
@@ -56,7 +54,6 @@ public class OrderController {
 			priceList.add(cart.getProductPrice());
 			productName.add(cart.getProductName());
 			logoImg.add(cart.getLogoImg());
-			productDescription.add(cart.getProductDescription());
 			brandName.add(cart.getBrandName());
 			size.add(cart.getSize());
 			color.add(cart.getColor());
@@ -82,10 +79,10 @@ public class OrderController {
 	public List<PurchaseOrder> getAllOrders() {
 		return orderService.fetchOrders();
 	}
-	
+
 	@GetMapping("/getOrders/{Id}")
-	public PurchaseOrder getOrderById(@PathVariable UUID Id){
-	return orderService.fetchOrderById(Id);
+	public PurchaseOrder getOrderById(@PathVariable UUID Id) {
+		return orderService.fetchOrderById(Id);
 	}
 
 }

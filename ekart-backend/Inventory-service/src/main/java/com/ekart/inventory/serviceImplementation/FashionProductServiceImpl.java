@@ -83,4 +83,10 @@ public class FashionProductServiceImpl implements FashionProductService {
 		List<FashionProducts> fashionProducts = fashionProductsRepo.findBySellerName(sellerName);
 		return fashionProducts;
 	}
+
+	@Override
+	public String saveSellerFashionProducts(FashionProducts updateFashionProducts) {
+		fashionProductsRepo.save(updateFashionProducts);
+		return "seller fashion products saved";
+	}
 }

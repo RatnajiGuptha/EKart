@@ -1,0 +1,20 @@
+#spring:
+#  cloud:
+#    gateway:
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedMethods:
+#            - GET
+#            - POST
+#            - DELETE
+#            - PUT
+#            
+#      routes:
+#        - id: jwt-security
+#          uri : http://localhost:8400
+#          predicates:
+#          -  Method=POST
+#          -  Path="/login"
+          

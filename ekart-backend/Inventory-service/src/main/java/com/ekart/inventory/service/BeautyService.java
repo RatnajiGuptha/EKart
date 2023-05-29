@@ -14,4 +14,6 @@ public interface BeautyService {
 
 	List<Beauty> getBeautyBySellerName(String sellerName);
 
+	String saveSellerBeautyProducts(Beauty updateBeautyProducts);
+
 }
