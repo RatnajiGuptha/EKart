@@ -23,6 +23,14 @@ class ElectronicsService {
     getElectronicsBySellerName(sellerName){
         return axios.get(ELECTRONICS_BASE_URL+"/getElectronics/sellerName/"+sellerName);
     }
+
+    updateElectronicsProducts(electronicsId,electronicsProducts){
+        return axios.put(ELECTRONICS_BASE_URL+"/updateProducts/"+electronicsId,electronicsProducts);
+    }
+
+    saveMultipleProducts(products){
+        return axios.post(ELECTRONICS_BASE_URL+"/addMultipleElectronics",products);
+    }
 }
 
 export default new ElectronicsService();

@@ -50,12 +50,13 @@ import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
-import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
+// import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
+import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
 import CheckMark from "./components/OrdersModules/CheckMark";
 import SellerRegistration from "./components/SecurityModules/SellerRegistration";
-import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
 import SellerHeaderComponent from "./components/SellerModules/SellerHeaderComponent";
 import { useState } from "react";
+import AccountPage from "./components/AccountPage";
 
 function App() {
 
@@ -85,11 +86,11 @@ function App() {
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>
-          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />} ></Route>
+          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
           <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
-          <Route path="/fashionByType/:type" element={<FashionProductByCategory />} ></Route>
-          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />} ></Route>
-          <Route path="/fashionBy/suitablefor/:suitablefor/:type" element={<FashionProductByGenderAndType />} ></Route>
+          <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>
+          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />}></Route>
+          <Route path="/fashionBy/suitablefor/:suitablefor/:type" element={<FashionProductByGenderAndType />}></Route>
           <Route path="/fashionBy/suitablefor/:suitablefor/:type/id/:productId" element={<FashionProductsByGenderAndTypeInfo />}></Route>
 
           {/* toys products  */}
@@ -119,7 +120,7 @@ function App() {
           <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
           {/* list seller products seller routes */}
-          <Route path='/listFashionProducts' element={<ListFashionDetails />}></Route>
+          <Route path="/listFashionProducts" element={<ListFashionDetails />}></Route>
           <Route path="/listAccessoriesProducts" element={<ListAccessoriesDetails />}></Route>
           <Route path="/listBeautyProducts" element={<ListBeautyDetails />}></Route>
           <Route path="/listElectronicProducts" element={<ListElectronicsDetails />}></Route>
@@ -135,17 +136,22 @@ function App() {
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
 
           {/* update products seller routes */}
-          <Route path="/updateEmployee/:fashionId" element={<AddFashionModule />}></Route>
+          <Route path="/updateFashion/:fashionId" element={<AddFashionModule />}></Route>
+          <Route path="/updateAccessories/:accessoryId" element={<AddAccessoriesModule />}></Route>
+          <Route path="/updateBeauty/:beautyId" element={<AddBeautyModule />}></Route>
+          <Route path="/updateElectronics/:electronicsId" element={<AddElectronicsModule />}></Route>
+          <Route path="/updateFootwear/:footwearId" element={<AddFootWearModule />}></Route>
+          <Route path="/updateToys/:toyId" element={<AddToysProducts />}></Route>
 
-          {/* view products seller routes */}
-          <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails />}></Route>
+          {/* seller home page routes */}
+          <Route path="/sellerFashion" element={<SellerHomeCategories />}></Route>
 
-
+          <Route path="/profile" element={<AccountPage />}></Route>
+          <Route path="/profile/:type" element={<AccountPage />}></Route>
           <Route path="/orderCreated/:id" element={<CheckMark />}></Route>
-
-        </Routes>
-      </Router>
-    </div>
+        </Routes >
+      </Router >
+    </div >
   );
 }
 

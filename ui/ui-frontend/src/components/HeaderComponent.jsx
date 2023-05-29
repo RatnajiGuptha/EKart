@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaHome, FaShoppingCart, FaUser, FaSignInAlt ,FaTh} from "react-icons/fa";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
@@ -20,6 +21,8 @@ function HeaderComponent() {
   const handleLogout = () => {
     localStorage.clear();
   }
+
+
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -62,6 +65,7 @@ function HeaderComponent() {
               <Nav.Link href="/cart"> <FaShoppingCart className="icon" /> Cart</Nav.Link>
               {
                 isLogin ? <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/profile" >Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
                   : <Nav.Link href="/login" onClick={handleLogin}><FaSignInAlt className="icon" />{" "} Login</Nav.Link>}
             </Nav>

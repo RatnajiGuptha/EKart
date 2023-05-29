@@ -17,6 +17,14 @@ class BeautyService {
     getBeautyBySellerName(sellerName){
         return axios.get(BEAUTY_BASE_URL+"/getBeautyBySellerName/"+sellerName);
     }
+
+    updateBeautyProducts(beautyId,beauty){
+        return axios.put(BEAUTY_BASE_URL+"/updateProducts/"+beautyId,beauty);
+    }
+
+    saveAllBeautyProducts(beautyProductsList){
+        return axios.post(BEAUTY_BASE_URL+"/addMultipleBeautyProducts",beautyProductsList);
+    }
 }
 
 export default new BeautyService();
