@@ -77,6 +77,7 @@ public class GatewayConfig {
 				.route((p -> p.path("/api/userBalance/getUserBalance").uri("http://localhost:8083")))
 				.route((p -> p.path("/api/userBalance/getDetails").uri("http://localhost:8083")))
 				.route((p -> p.path("/api/add").uri("http://localhost:8083")))
+				.route((p -> p.path("/api/userBalance/getBalanceByUserName/**").uri("http://localhost:8083")))
 
 				.route((p -> p.path("/getUserName/**").uri("http://localhost:8400")))
 				.route((p -> p.path("/getUserByContactNumber/**").uri("http://localhost:8400")))
@@ -85,7 +86,7 @@ public class GatewayConfig {
 				.route((p -> p.path("/addSeller").uri("http://localhost:8400")))
 				.route((p -> p.path("/login").uri("http://localhost:8400")))
 				.route((p -> p.path("/getUserInfo/**").uri("http://localhost:8400")))
-
+				.route((p->p.path("/updateUserData/**").uri("http://localhost:8400")))
 				.build();
 	}
 

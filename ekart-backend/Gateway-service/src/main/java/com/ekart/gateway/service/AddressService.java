@@ -14,5 +14,7 @@ public interface AddressService {
 	public List<Address> getAllAddress();
 
 	public Address fetchById(int id);
+	
+	public String deleteAddressByReceiverName(String ReceiverName);
 
 }
