@@ -23,6 +23,14 @@ class FootwearService {
     fetchBySellerName(sellerName){
         return axios.get(FOOTWEAR_BASE_URL+"/getFootWearBySellerName/"+sellerName);
     }
+
+    updateFootWearProducts(footWearId,footwearProducts){
+        return axios.put(FOOTWEAR_BASE_URL+"/updateProducts/"+footWearId,footwearProducts);
+    }
+
+    SaveMultipleFootWear(footWears){
+        return axios.post(FOOTWEAR_BASE_URL+"/addMultipleFootWear",footWears);
+    }
 }
 
 

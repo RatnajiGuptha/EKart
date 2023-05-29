@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FashionProductService from "../../Services/FashionProductService";
 import "../../StyleSheets/SellerModule.css"
 function ListFashionDetails() {
-    const { fashionId } = useParams();
     const [products, setProducts] = useState([]);
     useEffect(() => {
         FashionProductService.getFashionProductsBySellerName("Libas pvt Ltd").then((res) => {
@@ -25,7 +24,7 @@ function ListFashionDetails() {
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>id</th>
+                            <th> S.No</th>
                             <th> Product Name</th>
                             <th> Product Image</th>
                             <th> Product Price</th>
@@ -53,13 +52,13 @@ function ListFashionDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                        <Link to={`/updateEmployee/${item.fashionId}`}>
-                                            <button className="btn btn-info">Update </button>
+                                        <Link to={`/updateFashion/${item.fashionId}`}>
+                                            <button className="btn btn-info mt-0">Update </button>
                                         </Link>
-                                        <br />
+                                        {/* <br />
                                         <Link to={`/viewFashionDetails/${item.fashionId}`}>
-                                            <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
-                                        </Link>
+                                            <button className="btn btn-secondary">View </button>
+                                        </Link> */}
                                     </td >
                                 </tr >)
                         })}

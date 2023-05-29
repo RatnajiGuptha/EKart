@@ -50,8 +50,9 @@ import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
-import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
+// import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
 import CheckMark from "./components/OrdersModules/CheckMark";
+import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
 
 function App() {
   return (
@@ -121,11 +122,18 @@ function App() {
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
 
           {/* update products seller routes */}
-          <Route path="/updateEmployee/:fashionId" element={<AddFashionModule/>}></Route>
+          <Route path="/updateFashion/:fashionId" element={<AddFashionModule/>}></Route>
+          <Route path="/updateAccessories/:accessoryId" element={<AddAccessoriesModule/>}></Route>
+          <Route path="/updateBeauty/:beautyId" element={<AddBeautyModule/>}></Route>
+          <Route path="/updateElectronics/:electronicsId" element={<AddElectronicsModule/>}></Route>
+          <Route path="/updateFootwear/:footwearId" element={<AddFootWearModule/>}></Route>
+          <Route path="/updateToys/:toyId" element={<AddToysProducts/>}></Route>
 
           {/* view products seller routes */}
-          <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails/>}></Route>
+          {/* <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails/>}></Route> */}
           
+          {/* seller home page routes */}
+          <Route path="/sellerFashion" element={<SellerHomeCategories/>}></Route>
           
           <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route> 
         </Routes>

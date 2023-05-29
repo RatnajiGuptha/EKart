@@ -16,6 +16,14 @@ class ToysService {
         return axios.get(TOYS_BASE_URL+"/getToys/sellerName/"+sellerName);
     }
 
+    updateToyProducts(toyId,toys){
+        return axios.put(TOYS_BASE_URL+"/updateProducts/"+toyId,toys);
+    }
+
+    saveAllToys(toysList){
+        return axios.post(TOYS_BASE_URL+"/addMultipleToys",toysList);
+    }
+
 }
 
 
