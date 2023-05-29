@@ -25,13 +25,13 @@ const AddressComponent = () => {
 
         AddressService.deleteAddress(receiverName);
         console.log("address deleted successfully")
-        // window.location.reload(false);
+        window.location.reload(false);
     }
     return (
         <div className="address-box">
             <form className="Manage">
                 <h3 className='managess'> Manage Address</h3>
-                <div class="qkYgWG">
+                <div className="qkYgWG">
                     <div>
                         <div className="addNew-address">
                             <button onClick={toggleAddNewAddress}>
@@ -43,7 +43,7 @@ const AddressComponent = () => {
                     </div>
                 </div>
                 {addressList.map((item) => (
-                    <div class="address-container">
+                    <div className="address-container">
 
                         <div className="addr">
                             <h5>{item.receiverName}- {item.receiverPhoneNumber}</h5>

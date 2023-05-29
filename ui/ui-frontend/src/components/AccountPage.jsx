@@ -5,16 +5,32 @@ import "../StyleSheets/profile.css";
 import ProfileComponent from "./ProfileComponent";
 import Accessories from "./Products/Accessories";
 import AddressComponent from "./AddressComponent";
+import { useEffect } from "react";
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 const AccountPage = () => {
+  let { type } = useParams();
+
+  // console.log(type);
+  if (!type) {
+    type = "info";
+  }
+  const navigate = useNavigate();
   const userName = localStorage.getItem("username");
 
-  const [page, setPages] = useState(null);
-
+  const [assignType, setAssignType] = useState(type)
+  const [page, setPages] = useState(assignType);
 
   const handlePage = (type) => {
+    console.log(type);
+    setAssignType(type)
     setPages(type)
+    navigate(`/profile/${type}`);
   }
+  useEffect(() => {
+    setPages(assignType)
+  }, [])
 
   return (
     <div className="accounts">
@@ -29,17 +45,17 @@ const AccountPage = () => {
               <div className="username">{userName}</div>
             </div>
             <div className="profile-categories">
-              <p className="category" onClick={() => { handlePage("profile"); }}> Manage Profile</p>
-              <p className="category" type="submit" onClick={() => { handlePage('address'); }}> Manage Address</p>
-              <p className="category" type="submit" onClick={() => { handlePage('orders'); }}>My Orders</p>
-              <p className="category" type="submit" onClick={() => { handlePage('wallet'); }}>wallet</p>
-              <p className="category" >Logout</p>
+              <a className="category" onClick={() => { handlePage("info"); }}> Manage Profile</a>
+              <a className="category" type="submit" onClick={() => { handlePage('address'); }}> Manage Address</a>
+              <a className="category" type="submit" onClick={() => { handlePage('orders'); }}>My Orders</a>
+              <a className="category" type="submit" onClick={() => { handlePage('wallet'); }}>wallet</a>
+              <a className="category" >Logout</a>
             </div>
           </div>
         </div>
         <div className="main-profile-right">
 
-          {page === 'profile' && <div>{<ProfileComponent />}</div>}
+          {page === 'info' && <div>{<ProfileComponent />}</div>}
           {page === 'address' && <div>{<AddressComponent />}</div>}
           {page === 'orders' && <div>{<Footwear />}</div>}
           {page === 'wallet' && <div>{<Accessories />}</div>}

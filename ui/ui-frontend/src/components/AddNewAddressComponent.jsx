@@ -31,7 +31,7 @@ const AddNewAddressComponent = () => {
             console.log(response.data)
         })
         console.log(Name, ContactNumber, Area, City, State, District, Pincode);
-        // window.location.reload(false)
+        window.location.reload(false)
     }
 
     const handleAddress = (e) => {

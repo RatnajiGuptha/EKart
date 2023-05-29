@@ -70,7 +70,9 @@
 .category {
     text-align: left;
     padding: 10px;
-    }
+    text-decoration: none;
+        color: black;
+}
     
     .accounts {
     

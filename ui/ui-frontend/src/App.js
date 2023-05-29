@@ -204,6 +204,7 @@ function App() {
 
           <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route>
           <Route path="/profile" element={<AccountPage />}></Route>
+          <Route path="/profile/:type" element={<AccountPage />}></Route>
         </Routes>
       </Router>
     </div>
