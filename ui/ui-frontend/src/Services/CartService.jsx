@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const CART_SERVICE_BASE_URL = "http://localhost:8300/api/cart";
+// const CART_SERVICE_BASE_URL = "http://localhost:8300/api/cart";
+const CART_SERVICE_BASE_URL = "http://localhost:8888/api/cart";
 
 class CartService {
   addItemsToCart(cart) {

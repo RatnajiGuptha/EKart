@@ -120,13 +120,13 @@ nav {
 }
 
 .search-bar {
-  position: relative;
+  position:relative;
   display: flex;
   align-items: center;
 }
 
 .search-icon {
-  position: absolute;
+  position: relative;
   right: 10%;
   cursor: pointer;
 }

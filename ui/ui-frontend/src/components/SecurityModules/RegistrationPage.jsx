@@ -28,14 +28,29 @@ function Registrationpage() {
         let valid = true;
         const newError = {};
 
-        const userNameExists = await SecurityService.getUserByUsername(registerData.userName)
-
+        const userNameExists = await SecurityService.getUserByUsername(registerData.userName);
         console.log(userNameExists.data);
-        if (!registerData.userName || registerData.userName.trim().length < 4) {
+        if (!registerData.userName || registerData.userName.trim().length < 5) {
             newError.userName = 'User name should have at least 5 characters';
             valid = false;
-        } else if (userNameExists) {
-            newError.userName = 'User name alredy exists';
+        } else if (userNameExists.data !== null) {
+            newError.userName = 'User name already exists';
+            valid = false;
+        } else if (!/^[a-zA-Z0-9]+$/.test(registerData.userName)) {
+            newError.userName = 'Invalid user name';
+            valid = false;
+        }
+
+        const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
+        console.log(userEmailExists.data);
+        if (!registerData.email || !registerData.email.trim()) {
+            newError.email = "Email is required";
+            valid = false;
+        } else if (userEmailExists.data !== null) {
+            newError.email = "Email address already exists";
+            valid = false;
+        } else if (!/\S+@\S+\.\S+/.test(registerData.email)) {
+            newError.email = "Invalid Email address";
             valid = false;
         }
 
@@ -44,18 +59,6 @@ function Registrationpage() {
             valid = false;
         } else if (!/^[a-zA-Z ]+$/.test(registerData.fullName)) {
             newError.fullName = 'Invalid Name';
-            valid = false;
-        }
-
-        const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
-        if (!registerData.email || !registerData.email.trim()) {
-            newError.email = "Email is required";
-            valid = false;
-        } else if (!/\S+@\S+\.\S+/.test(registerData.email)) {
-            newError.email = "Invalid Email address"
-            valid = false;
-        } else if (userEmailExists) {
-            newError.email = "Email address already exists"
             valid = false;
         }
 

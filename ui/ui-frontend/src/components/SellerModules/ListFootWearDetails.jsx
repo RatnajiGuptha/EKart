@@ -14,9 +14,9 @@ function ListFootWearDetails() {
     return (
 
         <div>
-            <h2 className="text-center">FootWear Products List</h2>
             <br></br>
-            <div className="row">
+            <h2 className="text-center">FootWear Products List</h2>
+            <div className="row p-4">
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -37,7 +37,7 @@ function ListFootWearDetails() {
                             return (
                                 <tr key={item.fashionId}>
                                     <td> {item.productName}     </td>
-                                    <td><img src={item.logoImg} className="img-seller"></img></td>
+                                    <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
                                     <td>{item.type}</td>
@@ -47,8 +47,8 @@ function ListFootWearDetails() {
                                     <td>{item.qty}</td>
                                     <td>
                                         <button className="btn btn-info">Update </button>
-                                        <br/>  
-                                        <button className="btn btn-secondary" style={{marginTop:'10px',width:'78px'}}>View </button>
+                                        <br />
+                                        <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
                                     </td>
 
                                 </tr>)

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const FASHION_PRODUCTS_BASE_URI = "http://localhost:8200/api/fashionProducts";
+// const FASHION_PRODUCTS_BASE_URI = "http://localhost:8200/api/fashionProducts";
+
+const FASHION_PRODUCTS_BASE_URI = "http://localhost:8888/api/fashionProducts";
 
 class FashionProductService {
 
@@ -40,6 +42,14 @@ class FashionProductService {
 
     getFashionProductsBySellerName(sellerName) {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/sellerName/" + sellerName);
+    }
+
+    updateFashionProducts(fashionId,fashionProducts){
+        return axios.put(FASHION_PRODUCTS_BASE_URI+"/updateProducts/"+fashionId,fashionProducts);
+    }
+
+    addMultipleProduct(fashionProducts){
+        return axios.post(FASHION_PRODUCTS_BASE_URI+"/addMultipleProducts",fashionProducts);
     }
 
 

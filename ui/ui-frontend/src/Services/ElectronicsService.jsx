@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const ELECTRONICS_BASE_URL = "http://localhost:8200/api/electronicsProducts";
+//const ELECTRONICS_BASE_URL = "http://localhost:8200/api/electronicsProducts";
+const ELECTRONICS_BASE_URL = "http://localhost:8888/api/electronicsProducts";
 
 class ElectronicsService {
 

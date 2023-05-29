@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import "../../StyleSheets/Home.css";
+import { useParams, useNavigate } from "react-router-dom";
 import ElectronicsService from "../../Services/ElectronicsService";
 import CartService from "../../Services/CartService";
+import "../../StyleSheets/Home.css";
 
 const ElectronicsProductsByTpeInfo = () => {
+  const username = localStorage.getItem("username");
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
   const { type, electronicsId } = useParams();
-
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
   const [image, setImage] = useState("");
-  const username = localStorage.getItem("username");
   const [category, setCategory] = useState("");
+  
   const handleClick = (imgSrc) => {
     setImage(imgSrc);
   };
@@ -27,6 +29,14 @@ const ElectronicsProductsByTpeInfo = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token")
+    if (token) {
+      setIsLogin(true)
+    }
+    else {
+      setIsLogin(false)
+    }
+
     ElectronicsService.getElectronicsByTypeWithId(type, electronicsId).then(
       (response) => {
         console.log(response);
@@ -44,35 +54,43 @@ const ElectronicsProductsByTpeInfo = () => {
     );
 
     console.log(datad.data);
-    if (datad.data.cartId == null) {
-      const cart = {
-        productId: productsInfo.electronicsId,
-        userName: username,
-        brandName: productsInfo.brandName,
-        productName: productsInfo.productName,
-        logoImg: productsInfo.logoImg,
-        productPrice: productsInfo.productPrice,
-        size: productsInfo.size,
-        color: "NA",
-        qty: quantity,
-        productCategories: category,
-        type: productsInfo.type,
-      };
-      //   console.log(cart.productId);
-      console.log(cart.productCategories);
-      if (productsInfo.qty > quantity) {
-        await CartService.addItemsToCart(cart).then((response) => {
-          //   console.log(response);
-          alert("Item added successfully");
-        });
+
+    if (isLogin) {
+      if (datad.data.cartId == null) {
+        const cart = {
+          productId: productsInfo.electronicsId,
+          userName: username,
+          brandName: productsInfo.brandName,
+          productName: productsInfo.productName,
+          logoImg: productsInfo.logoImg,
+          productPrice: productsInfo.productPrice,
+          size: productsInfo.size,
+          color: productsInfo.color,
+          qty: quantity,
+          productCategories: category,
+          type: productsInfo.type,
+          sellerName: productsInfo.sellerName
+        };
+        //   console.log(cart.productId);
+        console.log(cart.productCategories);
+        if (productsInfo.qty > quantity) {
+          await CartService.addItemsToCart(cart).then((response) => {
+            //   console.log(response);
+            alert("Item added successfully");
+          });
+        } else {
+          alert(`${productsInfo.qty}`, " products Left");
+        }
       } else {
-        alert(`${productsInfo.qty}` + " products Left");
+        //   console.log(datad.data.cartId);
+        const qty = datad.data.qty + quantity;
+        await CartService.updateQuantity(datad.data.cartId, username, qty);
+        alert("Cart contains " + qty + " " + datad.data.productName);
       }
-    } else {
-      //   console.log(datad.data.cartId);
-      const qty = datad.data.qty + quantity;
-      await CartService.updateQuantity(datad.data.cartId, username, qty);
-      alert("Cart contains " + qty + " " + datad.data.productName);
+    }
+    else {
+      navigate("/login");
+
     }
   };
 
