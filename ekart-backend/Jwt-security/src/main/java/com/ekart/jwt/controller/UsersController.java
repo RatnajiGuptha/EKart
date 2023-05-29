@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.jwt.entity.CustomerEntity;
@@ -30,5 +32,20 @@ public class UsersController {
 	public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
 		Optional<CustomerEntity> byEmail = customerRepo.findByEmail(email);
 		return ResponseEntity.ok(byEmail.get().getEmail());
+	}
+
+	@GetMapping("/getUserInfo/{userName}")
+	public ResponseEntity<?> getUserByUserInfo(@PathVariable String userName) {
+		Optional<CustomerEntity> user = customerRepo.findByUserName(userName);
+		return ResponseEntity.ok(user);
+	}
+	
+	@PutMapping("/updateUserData/{userName}/{fullName}/{email}/{contactNumber}")
+	public void updateUser(@PathVariable String userName,@PathVariable String fullName,@PathVariable String email,@PathVariable String contactNumber) {
+		CustomerEntity customer =customerRepo.findByUserName(userName).get();
+		customer.setFullName(fullName);
+		customer.setEmail(email);
+		customer.setContactNumber(contactNumber);
+		customerRepo.save(customer);
 	}
 }

@@ -17,5 +17,12 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int addessId;
-	public String address;
+	public String receiverName;
+	public String receiverPhoneNumber;
+	public String buildingNo;
+	public String street1;
+	public String city;
+	public String district;
+	public String state;
+	public int pincode;
 }
