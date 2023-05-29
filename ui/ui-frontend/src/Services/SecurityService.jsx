@@ -13,6 +13,10 @@ class SecurityService {
         return axios.post(BASE_URL + "/addUser", user);
     }
 
+    addSeller(seller) {
+        return axios.post(BASE_URL + "/addSeller", seller)
+    }
+
     getUserByUsername(username) {
         return axios.get(BASE_URL + "/getUserName/" + username)
     }
@@ -20,6 +24,16 @@ class SecurityService {
     getUserByEmail(email) {
         return axios.get(BASE_URL + "/getUserByMail/" + email)
     }
+
+    getUserByContactNumber(contactNumber) {
+        return axios.get(BASE_URL + "/getUserByContactNumber/" + contactNumber);
+    }
+
+    getUserInfo(username) {
+        return axios.get(BASE_URL + "/getUserInfo/" + username);
+    }
+
+
 }
 
 export default new SecurityService();

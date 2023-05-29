@@ -8,7 +8,6 @@
 .forms {
   text-align: start;
   max-width: 600px;
-  
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -22,6 +21,8 @@
 }
 
 .forms input[type="text"],
+.forms input[type="number"],
+.forms input[type="email"],
 .forms input[type="password"] {
   width: 100%;
   padding: 10px;
@@ -33,6 +34,8 @@
 }
 
 .forms input[type="text"]:focus,
+.forms input[type="number"]:focus,
+.forms input[type="email"]:focus,
 .forms input[type="password"]:focus {
   border-color: #007867;
   box-shadow: 0 0 5px #007867;
@@ -72,4 +75,5 @@
 .login-page span {
   color: orangered;
   margin-top: 0px;
+  font-style: italic;
 }

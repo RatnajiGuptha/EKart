@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../StyleSheets/Login.css";
 import SecurityService from "../../Services/SecurityService";
 
-function Registrationpage() {
+function SellerRegistration() {
 
     const [registerData, setRegisterData] = useState({
         userName: '',
@@ -90,7 +90,7 @@ function Registrationpage() {
     const handleRegister = async (e) => {
         e.preventDefault();
         if (await validateForm()) {
-            SecurityService.addUser(registerData).then((res) => {
+            SecurityService.addSeller(registerData).then((res) => {
                 console.log(res.data);
             })
         }
@@ -161,4 +161,4 @@ function Registrationpage() {
     )
 
 }
-export default Registrationpage;
+export default SellerRegistration;

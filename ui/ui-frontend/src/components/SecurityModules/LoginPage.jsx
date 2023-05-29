@@ -7,6 +7,7 @@ function LoginPage() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState("");
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -15,10 +16,19 @@ function LoginPage() {
             localStorage.setItem('token', token);
             localStorage.setItem('username', userName);
             navigate("/");
-            console.log({ userName, password });
-            console.log(e)
-        });
+            console.log(token);
+        })
+            .catch((error) => {
+                if (error.response && error.response.status === 400) {
+                    setErrorMsg("Invalid Credentials");
+                    console.log("Invalid Credentials")
+                }
+            })
 
+        SecurityService.getUserInfo(userName).then((res) => {
+            let i = res.data;
+            localStorage.setItem("role", i.roles);
+        })
     }
 
     const handleUserName = (e) => {
@@ -38,13 +48,14 @@ function LoginPage() {
                 <label >   Password
                     <input type="password" name="password" value={password} onChange={handlePassword} placeholder="Enter a password" />
                 </label>
-                <div className='text-center'>
+                {errorMsg && <span>{errorMsg}</span>}
+                <div className='text-center mt-2 mb-2'>
                     <button type='submit' className='login-button' >  Login </button>
                     <Link to="/registration">
                         <button className='signup-button'> Sign Up</button>
                     </Link>
-
                 </div>
+                <p style={{ fontStyle: 'italic' }}>Become a seller?<a href="/addSeller"> <span style={{ color: "blue" }} >register here</span></a></p>
             </form>
 
         </div>

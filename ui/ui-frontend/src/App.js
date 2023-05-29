@@ -52,18 +52,29 @@ import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails"
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
 import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
 import CheckMark from "./components/OrdersModules/CheckMark";
+import SellerRegistration from "./components/SecurityModules/SellerRegistration";
+import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
+import SellerHeaderComponent from "./components/SellerModules/SellerHeaderComponent";
 
 function App() {
+
+  const role = localStorage.getItem('role');
+
+  const header = role === "SELLER" ? <SellerHeaderComponent /> : <HeaderComponent />
+  const home = role === "SELLER" ? <SellerHomeCategories /> : <HomeComponent />
+
   return (
     <div className="App">
       <Router>
-        <HeaderComponent />
+        {/* <HeaderComponent /> */}
+        {header}
         <Routes>
-          <Route path="/" element={<HomeComponent />}></Route>
+          <Route path="/" element={home} ></Route>
 
           {/* security  */}
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path='/registration' element={<Registrationpage />}></Route>
+          <Route path="/addSeller" element={<SellerRegistration />}></Route>
 
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
@@ -121,13 +132,14 @@ function App() {
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
 
           {/* update products seller routes */}
-          <Route path="/updateEmployee/:fashionId" element={<AddFashionModule/>}></Route>
+          <Route path="/updateEmployee/:fashionId" element={<AddFashionModule />}></Route>
 
           {/* view products seller routes */}
-          <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails/>}></Route>
-          
-          
-          <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route> 
+          <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails />}></Route>
+
+
+          <Route path="/orderCreated/:id" element={<CheckMark />}></Route>
+
         </Routes>
       </Router>
     </div>

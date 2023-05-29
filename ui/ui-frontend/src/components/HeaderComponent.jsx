@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaSearch, FaHome, FaShoppingCart, FaUser, FaSignInAlt ,FaTh} from "react-icons/fa";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "../StyleSheets/Home.css"
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ function HeaderComponent() {
   const username = localStorage.getItem('username');
   const [search, setSearch] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -29,7 +29,7 @@ function HeaderComponent() {
     else {
       setIsLogin(false)
     }
-  })
+  },[])
 
   return (
     <Navbar className="navbar navbar-dark bg-dark" expand="lg">
@@ -46,8 +46,8 @@ function HeaderComponent() {
           </Container>
           <Container className="d-flex flex-row justify-content-end">
             <Nav >
-              <Nav.Link href="/"> Home</Nav.Link>
-              <NavDropdown title="Categories" id="basic-nav-dropdown">
+              <Nav.Link href="/"><FaHome className="icon" /> Home</Nav.Link>
+              <NavDropdown title={<span><FaTh className="icon" /> Categories</span>} id="basic-nav-dropdown" >
                 <NavDropdown.Item href="/accessories">Accessories</NavDropdown.Item>
                 <NavDropdown.Item href="/beauty">Beauty</NavDropdown.Item>
                 <NavDropdown.Item href="/electronics">Electronics</NavDropdown.Item>
@@ -63,7 +63,7 @@ function HeaderComponent() {
               {
                 isLogin ? <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
                   <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
-                  : <Nav.Link href="/login" onClick={handleLogin}>Login</Nav.Link>}
+                  : <Nav.Link href="/login" onClick={handleLogin}><FaSignInAlt className="icon" />{" "} Login</Nav.Link>}
             </Nav>
           </Container>
         </Navbar.Collapse>
