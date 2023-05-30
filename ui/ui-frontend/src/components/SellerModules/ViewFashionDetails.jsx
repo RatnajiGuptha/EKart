@@ -12,6 +12,7 @@ function ViewFashionDetails() {
             setProducts(res.data);
         })
     }, [])
+    
     return (
         <div>
             <br></br>

@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
-import "../../StyleSheets/SellerModule.css"
+import "../../StyleSheets/SellerModule.css";
+import { Link } from "react-router-dom";
 import FootwearService from "../../Services/FootwearService";
 function ListFootWearDetails() {
-
     const [products, setProducts] = useState([]);
     useEffect(() => {
         FootwearService.fetchBySellerName("U.S.POLO ASSN").then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
         })
     }, [])
-    return (
 
+    return (
         <div>
             <br></br>
             <h2 className="text-center">FootWear Products List</h2>
+            <div className="add-button">
+                <Link to={`/addFootWear`}>
+                    <button className="btn btn-primary"> Add Product</button>
+                </Link>
+            </div>
             <div className="row p-4">
                 <table className="table table-striped table-bordered">
                     <thead>
@@ -35,7 +39,7 @@ function ListFootWearDetails() {
                     <tbody>
                         {products.map(function (item) {
                             return (
-                                <tr key={item.fashionId}>
+                                <tr key={item.footWearId}>
                                     <td> {item.productName}     </td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
@@ -46,9 +50,9 @@ function ListFootWearDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                        <button className="btn btn-info">Update </button>
-                                        <br />
-                                        <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
+                                        <Link to={`/updateFootwear/${item.footWearId}`}>
+                                            <button className="btn btn-info mt-0">Update </button>
+                                        </Link>
                                     </td>
 
                                 </tr>)

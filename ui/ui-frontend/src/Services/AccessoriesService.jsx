@@ -9,7 +9,7 @@ class AccessoriesService {
         return axios.get(Accessories_BASE_URL + "/getAllAccessoriesProduct");
     }
 
-    getAccessoryById(id) {
+    getAccessoriesProductById(id) {
         return axios.get(Accessories_BASE_URL + "/getAccessoriesProductById/" + id);
     }
 
@@ -23,6 +23,14 @@ class AccessoriesService {
 
     getAccessoriesProductsBySellerName(sellerName) {
         return axios.get(Accessories_BASE_URL + "/getAccessories/sellerName/" + sellerName);
+    }
+
+    updateAccessoriesProducts(accessoryId,accessoriesProducts){
+        return axios.put(Accessories_BASE_URL+"/updateProducts/"+accessoryId,accessoriesProducts);
+    }
+
+    addMultipleProduct(accessoriesProducts){
+        return axios.post(Accessories_BASE_URL+"/addMultipleProducts",accessoriesProducts);
     }
 
 

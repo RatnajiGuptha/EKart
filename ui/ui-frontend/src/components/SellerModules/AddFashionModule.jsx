@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import FashionProductService from '../../Services/FashionProductService';
@@ -69,14 +69,14 @@ function AddFashionModule() {
         }).catch(error => {
             console.log(error)
         })
-    }, [])
+    }, [fashionId])
 
     const title = () => {
 
         if (fashionId) {
-            return <h2 className="text-center mt-3">Update Fashion Products</h2>
+            return <h2 className="text-center">Update Fashion Products</h2>
         } else {
-            return <h2 className="text-center mt-3">Add Fashion Products</h2>
+            return <h2 className="text-center">Add Fashion Products</h2>
         }
     }
 
@@ -93,7 +93,7 @@ function AddFashionModule() {
                                 <div className='form-container'>
                                     <label> Product Name: </label>
                                     <input placeholder='Enter Product Name' name='productName' className='form-control' value = {productName}
-                                        required onChange = {(e) => setProductName(e.target.value)}>
+                                        onChange = {(e) => setProductName(e.target.value)}>
                                     </input>
                                 </div>
                                 <div className='form-container'>

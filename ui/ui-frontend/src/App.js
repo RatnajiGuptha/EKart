@@ -49,56 +49,49 @@ import ListAccessoriesDetails from "./components/SellerModules/ListAccessoriesDe
 import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
-import ListToysDetails from "./components/SellerModules/ListToysDetails";
-import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
+import ListToysDetails from "./components/SellerModules/ListToysDetails"
+// import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
+import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
 import CheckMark from "./components/OrdersModules/CheckMark";
+import SellerRegistration from "./components/SecurityModules/SellerRegistration";
+import SellerHeaderComponent from "./components/SellerModules/SellerHeaderComponent";
+import { useState } from "react";
 import AccountPage from "./components/AccountPage";
 
 function App() {
+
+  const isLognedIn = useState(true);
+  const role = localStorage.getItem('role');
+
+  const header = isLognedIn && role === "SELLER" ? <SellerHeaderComponent /> : <HeaderComponent />
+  const home = isLognedIn && role === "SELLER" ? <SellerHomeCategories /> : <HomeComponent />
+
   return (
     <div className="App">
       <Router>
-        <HeaderComponent />
+        {/* <HeaderComponent /> */}
+        {header}
         <Routes>
-          <Route path="/" element={<HomeComponent />}></Route>
+          <Route path="/" element={home} ></Route>
+          {/* <Route path="/" element={<HomeComponent />} ></Route> */}
 
           {/* security  */}
           <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/registration" element={<Registrationpage />}></Route>
+          <Route path='/registration' element={<Registrationpage />}></Route>
+          <Route path="/addSeller" element={<SellerRegistration />}></Route>
 
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
-          <Route
-            path="/paymentPage/:userName"
-            element={<CheckoutComponent />}
-          ></Route>
+          <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>
-          <Route
-            path="/fashionBy/:suitablefor"
-            element={<FashionProductByGender />}
-          ></Route>
-          <Route
-            path="/fashionBy/:suitablefor/:productId"
-            element={<FashionProductsByGenderInfo />}
-          ></Route>
-          <Route
-            path="/fashionByType/:type"
-            element={<FashionProductByCategory />}
-          ></Route>
-          <Route
-            path="/fashion/:type/:productId"
-            element={<FashionProductsInfo />}
-          ></Route>
-          <Route
-            path="/fashionBy/suitablefor/:suitablefor/:type"
-            element={<FashionProductByGenderAndType />}
-          ></Route>
-          <Route
-            path="/fashionBy/suitablefor/:suitablefor/:type/id/:productId"
-            element={<FashionProductsByGenderAndTypeInfo />}
-          ></Route>
+          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
+          <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
+          <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>
+          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />}></Route>
+          <Route path="/fashionBy/suitablefor/:suitablefor/:type" element={<FashionProductByGenderAndType />}></Route>
+          <Route path="/fashionBy/suitablefor/:suitablefor/:type/id/:productId" element={<FashionProductsByGenderAndTypeInfo />}></Route>
 
           {/* toys products  */}
           <Route path="/toys" element={<Toys />}></Route>
@@ -106,108 +99,59 @@ function App() {
 
           {/* footwear products  */}
           <Route path="/footwear" element={<Footware />}></Route>
-          <Route
-            path="/footwear/:footWearId"
-            element={<FootwearProductsInfo />}
-          ></Route>
+          <Route path="/footwear/:footWearId" element={<FootwearProductsInfo />}></Route>
           <Route path="/footwearBy/:type" element={<FootwearByType />}></Route>
-          <Route
-            path="/footwearBy/:type/:footWearId"
-            element={<FootwearProductsByTypeInfo />}
-          ></Route>
+          <Route path="/footwearBy/:type/:footWearId" element={<FootwearProductsByTypeInfo />}></Route>
 
           {/* accessories Products */}
           <Route path="/accessories" element={<Accessories />}></Route>
-          <Route
-            path="/accessories/:accessoryId"
-            element={<AccessoriesProductsInfo />}
-          ></Route>
-          <Route
-            path="/accessoriesBy/:type"
-            element={<AccessoriesByType />}
-          ></Route>
-          <Route
-            path="/accessoriesBy/:type/:accessoryId"
-            element={<AccessoriesProductsByTpeInfo />}
-          ></Route>
+          <Route path="/accessories/:accessoryId" element={<AccessoriesProductsInfo />}></Route>
+          <Route path="/accessoriesBy/:type" element={<AccessoriesByType />}></Route>
+          <Route path="/accessoriesBy/:type/:accessoryId" element={<AccessoriesProductsByTpeInfo />}></Route>
 
           {/* beauty products  */}
           <Route path="/beauty" element={<BeautyProducts />}></Route>
-          <Route
-            path="/beauty/:beautyId"
-            element={<BeautyProductsInfo />}
-          ></Route>
+          <Route path="/beauty/:beautyId" element={<BeautyProductsInfo />}></Route>
 
           {/* electronics products  */}
           <Route path="/electronics" element={<ElectronicsProducts />}></Route>
-          <Route
-            path="/electronics/:electronicsId"
-            element={<ElectronicsProductsInfo />}
-          ></Route>
-          <Route
-            path="/electronicsBy/:type"
-            element={<ElectronicProductsByCategory />}
-          ></Route>
-          <Route
-            path="/electronicsBy/:type/:electronicsId"
-            element={<ElectronicsProductsByTpeInfo />}
-          ></Route>
+          <Route path="/electronics/:electronicsId" element={<ElectronicsProductsInfo />}></Route>
+          <Route path="/electronicsBy/:type" element={<ElectronicProductsByCategory />}></Route>
+          <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
           {/* list seller products seller routes */}
-          <Route
-            path="/listFashionProducts"
-            element={<ListFashionDetails />}
-          ></Route>
-          <Route
-            path="/listAccessoriesProducts"
-            element={<ListAccessoriesDetails />}
-          ></Route>
-          <Route
-            path="/listBeautyProducts"
-            element={<ListBeautyDetails />}
-          ></Route>
-          <Route
-            path="/listElectronicProducts"
-            element={<ListElectronicsDetails />}
-          ></Route>
-          <Route
-            path="/listFootWearProducts"
-            element={<ListFootWearDetails />}
-          ></Route>
+          <Route path="/listFashionProducts" element={<ListFashionDetails />}></Route>
+          <Route path="/listAccessoriesProducts" element={<ListAccessoriesDetails />}></Route>
+          <Route path="/listBeautyProducts" element={<ListBeautyDetails />}></Route>
+          <Route path="/listElectronicProducts" element={<ListElectronicsDetails />}></Route>
+          <Route path="/listFootWearProducts" element={<ListFootWearDetails />}></Route>
           <Route path="/listToysProducts" element={<ListToysDetails />}></Route>
 
           {/* add products seller routes */}
-          <Route
-            path="/addAccessories"
-            element={<AddAccessoriesModule />}
-          ></Route>
+          <Route path="/addAccessories" element={<AddAccessoriesModule />}></Route>
           <Route path="/addBeauty" element={<AddBeautyModule />}></Route>
-          <Route
-            path="/addElectronics"
-            element={<AddElectronicsModule />}
-          ></Route>
+          <Route path="/addElectronics" element={<AddElectronicsModule />}></Route>
           <Route path="/addFootWear" element={<AddFootWearModule />}></Route>
           <Route path="/addToys" element={<AddToysProducts />}></Route>
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
 
           {/* update products seller routes */}
-          <Route
-            path="/updateEmployee/:fashionId"
-            element={<AddFashionModule />}
-          ></Route>
+          <Route path="/updateFashion/:fashionId" element={<AddFashionModule />}></Route>
+          <Route path="/updateAccessories/:accessoryId" element={<AddAccessoriesModule />}></Route>
+          <Route path="/updateBeauty/:beautyId" element={<AddBeautyModule />}></Route>
+          <Route path="/updateElectronics/:electronicsId" element={<AddElectronicsModule />}></Route>
+          <Route path="/updateFootwear/:footwearId" element={<AddFootWearModule />}></Route>
+          <Route path="/updateToys/:toyId" element={<AddToysProducts />}></Route>
 
-          {/* view products seller routes */}
-          <Route
-            path="/viewFashionDetails/:fashionId"
-            element={<ViewFashionDetails />}
-          ></Route>
+          {/* seller home page routes */}
+          <Route path="/sellerFashion" element={<SellerHomeCategories />}></Route>
 
-          <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route>
           <Route path="/profile" element={<AccountPage />}></Route>
           <Route path="/profile/:type" element={<AccountPage />}></Route>
-        </Routes>
-      </Router>
-    </div>
+          <Route path="/orderCreated/:id" element={<CheckMark />}></Route>
+        </Routes >
+      </Router >
+    </div >
   );
 }
 

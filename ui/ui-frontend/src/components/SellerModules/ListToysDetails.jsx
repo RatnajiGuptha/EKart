@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../../StyleSheets/SellerModule.css"
 import ToysService from "../../Services/ToysService";
 function ListFashionDetails() {
-
     const [products, setProducts] = useState([]);
     useEffect(() => {
         ToysService.getToysBySellerName("Baby Moo pvt Ltd").then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
         })
     }, [])
-    return (
 
+    return (
         <div>
             <br></br>
-            <h2 className="text-center">Toys Products List</h2> 
+            <h2 className="text-center">Toys Products List</h2>
+            <div className="add-button">
+                <Link to={`/addToys`}>
+                    <button className="btn btn-primary"> Add Product</button>
+                </Link>
+            </div>
             <div className="row p-4">
                 <table className="table table-striped table-bordered">
                     <thead>
@@ -35,7 +39,7 @@ function ListFashionDetails() {
                     <tbody>
                         {products.map(function (item) {
                             return (
-                                <tr key={item.fashionId}>
+                                <tr key={item.toyId}>
                                     <td> {item.productName}     </td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
@@ -46,9 +50,9 @@ function ListFashionDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                        <button className="btn btn-info">Update </button>
-                                        <br />
-                                        <button className="btn btn-primary" style={{ marginTop: '10px', width: '78px' }}>View </button>
+                                        <Link to={`/updateToys/${item.toyId}`}>
+                                            <button className="btn btn-info mt-0">Update </button>
+                                        </Link>
                                     </td>
 
                                 </tr>)
