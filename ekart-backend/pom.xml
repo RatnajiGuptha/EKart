@@ -45,7 +45,7 @@
 
 	<modules>
 		<module>Order-Service</module>
-		<module>Security-service</module>
+<!--		<module>Security-service</module>-->
 		<module>Erueka-service</module>
 		<module>Inventory-service</module>
 		<module>Gateway-service</module>

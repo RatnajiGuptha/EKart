@@ -33,4 +33,11 @@ public class AddressServiceImpl implements AddressService {
 		return addressRepository.findById(id).get();
 	}
 
+	@Override
+	public String deleteAddressByReceiverName(String ReceiverName) {
+		Address address = addressRepository.findByReceiverName(ReceiverName);
+		addressRepository.deleteById(address.getAddessId());
+		return "address deleted";
+	}
+
 }

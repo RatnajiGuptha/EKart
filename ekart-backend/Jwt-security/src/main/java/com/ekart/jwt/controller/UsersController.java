@@ -4,16 +4,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.jwt.entity.CustomerEntity;
 import com.ekart.jwt.repos.CustomerRepo;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class UsersController {
 
 	@Autowired
@@ -39,13 +38,33 @@ public class UsersController {
 			System.out.println(byEmail.get().getEmail());
 			return ResponseEntity.ok(byEmail.get().getEmail());
 		}
-
 	}
+
 
 	@GetMapping("/getUserInfo/{userName}")
 	public ResponseEntity<?> getUserByUserInfo(@PathVariable String userName) {
 		Optional<CustomerEntity> user = customerRepo.findByUserName(userName);
 		return ResponseEntity.ok(user);
 	}
+	
+	@PutMapping("/updateUserData/{userName}/{fullName}/{email}/{contactNumber}")
+	public void updateUser(@PathVariable String userName,@PathVariable String fullName,@PathVariable String email,@PathVariable String contactNumber) {
+		CustomerEntity customer =customerRepo.findByUserName(userName).get();
+		customer.setFullName(fullName);
+		customer.setEmail(email);
+		customer.setContactNumber(contactNumber);
+		customerRepo.save(customer);
+	}
 
+	@GetMapping("/getUserByContactNumber/{contactNumber}")
+	public ResponseEntity<?> getUserByContactNumber(@PathVariable String contactNumber) {
+		Optional<CustomerEntity> user = customerRepo.findByContactNumber(contactNumber);
+		if (user.isEmpty()) {
+			return ResponseEntity.ok("null");
+		} else {
+			System.out.println(user.get().getContactNumber());
+			return ResponseEntity.ok(user.get().getContactNumber());
+		}
+	}
+	
 }
