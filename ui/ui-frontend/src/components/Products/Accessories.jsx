@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AccessoriesService from "../../Services/AccessoriesService";
 import { Link } from "react-router-dom";
+import "../../StyleSheets/products.css";
 
 const Accessories = () => {
     const [accessories, setAccessories] = useState([]);
@@ -21,7 +22,7 @@ const Accessories = () => {
 
 
     return (
-        <div className="cards-container">
+        <div className="cards-container mr-5">
             {accessories.map((item) => (
                 <Link key={item.accessoryId} to={`/accessories/${item.accessoryId}`} className="link" id={item.accessoriesId}>
                     <div className="cards-row">

@@ -12,6 +12,8 @@ import ElectronicsProductsInfo from "./components/ProductsInfo/ElectronicsProduc
 import ElectronicProductsByCategory from "./components/Products/ElectronicProductsByCategory";
 import ElectronicsProductsByTpeInfo from "./components/ProductsInfo/ElectronicsProductsByTpeInfo";
 
+import FashionComponent from "./components/FashionComponent";
+import FashionProductsByGenderAndTypeInfo from "./components/ProductsInfo/FashionProductsByGenderAndTypeInfo";
 import FashionProductByGender from "./components/Products/FashionProductByGender";
 import FashionProductsByGenderInfo from "./components/ProductsInfo/FashionProductsByGenderInfo";
 import FashionProductByCategory from "./components/Products/FashionProductByCategory";
@@ -21,20 +23,24 @@ import FashionProductByGenderAndType from "./components/Products/FashionProductB
 import Footware from "./components/Products/Footwear";
 import FootwearProductsInfo from "./components/ProductsInfo/FootwearProductsInfo";
 
+import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
+import Toys from "./components/Products/Toys";
+
 import HeaderComponent from "./components/HeaderComponent.jsx";
 import HomeComponent from "../../ui-frontend/src/components/HomeComponent";
 
 import LoginPage from "./components/SecurityModules/LoginPage";
 import Registrationpage from "./components/SecurityModules/RegistrationPage";
+import SellerRegistration from "./components/SecurityModules/SellerRegistration";
+import SellerHeaderComponent from "./components/SellerModules/SellerHeaderComponent";
 
-import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
-import Toys from "./components/Products/Toys";
-import FashionComponent from "./components/FashionComponent";
-import FashionProductsByGenderAndTypeInfo from "./components/ProductsInfo/FashionProductsByGenderAndTypeInfo";
 import AccessoriesByType from "./components/Products/AccessoriesByType";
 import AccessoriesProductsByTpeInfo from "./components/ProductsInfo/AccessoriesProductsByTpeInfo";
+
 import FootwearByType from "./components/Products/FootwearByType";
 import FootwearProductsByTypeInfo from "./components/ProductsInfo/FootwearProductsByTpeInfo";
+
+import CheckMark from "./components/OrdersModules/CheckMark";
 import CheckoutComponent from "./components/OrdersModules/CheckoutComponent";
 import CartComponent from "./components/OrdersModules/CartComponent";
 
@@ -50,21 +56,15 @@ import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
-// import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
 import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
-import CheckMark from "./components/OrdersModules/CheckMark";
-import SellerRegistration from "./components/SecurityModules/SellerRegistration";
-import SellerHeaderComponent from "./components/SellerModules/SellerHeaderComponent";
-import { useState } from "react";
-import AccountPage from "./components/AccountPage";
+
+import AccountPage from "./components/UserModules/AccountPage";
 
 function App() {
 
-  const isLognedIn = useState(true);
   const role = localStorage.getItem('role');
-
-  const header = isLognedIn && role === "SELLER" ? <SellerHeaderComponent /> : <HeaderComponent />
-  const home = isLognedIn && role === "SELLER" ? <SellerHomeCategories /> : <HomeComponent />
+  const header = role === "SELLER" ? <SellerHeaderComponent forceRefresh={true} /> : <HeaderComponent forceRefresh={true} />
+  const home = role === "SELLER" ? <SellerHomeCategories forceRefresh={true} /> : <HomeComponent forceRefresh={true} />
 
   return (
     <div className="App">
@@ -140,7 +140,7 @@ function App() {
           <Route path="/updateAccessories/:accessoryId" element={<AddAccessoriesModule />}></Route>
           <Route path="/updateBeauty/:beautyId" element={<AddBeautyModule />}></Route>
           <Route path="/updateElectronics/:electronicsId" element={<AddElectronicsModule />}></Route>
-          <Route path="/updateFootwear/:footwearId" element={<AddFootWearModule />}></Route>
+          <Route path="/updateFootwear/:footWearId" element={<AddFootWearModule />}></Route>
           <Route path="/updateToys/:toyId" element={<AddToysProducts />}></Route>
 
           {/* seller home page routes */}
@@ -148,7 +148,7 @@ function App() {
 
           <Route path="/profile" element={<AccountPage />}></Route>
           <Route path="/profile/:type" element={<AccountPage />}></Route>
-          <Route path="/orderCreated/:id" element={<CheckMark />}></Route>
+          <Route path="/orderStatus/:id" element={<CheckMark />}></Route>
         </Routes >
       </Router >
     </div >

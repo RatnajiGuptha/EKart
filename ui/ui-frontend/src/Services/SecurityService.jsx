@@ -33,11 +33,6 @@ class SecurityService {
         return axios.get(BASE_URL + "/getUserByContactNumber/" + contactNumber);
     }
 
-    getUserInfo(username) {
-        return axios.get(BASE_URL + "/getUserInfo/" + username);
-    }
-
-
     updateUserByUserName(username, fullName, email, contactNumber) {
         return axios.put(BASE_URL + "/updateUserData/" + username + "/" + fullName + "/" + email + "/" + contactNumber)
     }

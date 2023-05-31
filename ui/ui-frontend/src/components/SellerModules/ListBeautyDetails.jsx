@@ -4,15 +4,16 @@ import BeautyService from "../../Services/BeautyService";
 import "../../StyleSheets/SellerModule.css"
 function ListBeautyDetails() {
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("username");
+
     useEffect(() => {
-        BeautyService.getBeautyBySellerName("Nivea pvt Ltd").then((res) => {
+        BeautyService.getBeautyBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
         })
-    }, [])
+    }, [userName])
+    
     return (
-
         <div>
             <br></br>
             <h2 className="text-center">Beauty Products List</h2>
@@ -55,7 +56,6 @@ function ListBeautyDetails() {
                                     </td>
 
                                 </tr>)
-
                         })}
 
                     </tbody>

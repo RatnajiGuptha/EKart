@@ -3,13 +3,16 @@ import "../../StyleSheets/SellerModule.css";
 import { Link } from "react-router-dom";
 import FootwearService from "../../Services/FootwearService";
 function ListFootWearDetails() {
+
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("username");
+
     useEffect(() => {
-        FootwearService.fetchBySellerName("U.S.POLO ASSN").then((res) => {
+        FootwearService.fetchBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
         })
-    }, [])
+    }, [userName])
 
     return (
         <div>
@@ -64,16 +67,6 @@ function ListFootWearDetails() {
                 </table>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
 
     )
 }

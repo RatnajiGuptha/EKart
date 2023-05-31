@@ -28,7 +28,7 @@ const AccessoriesProductsInfo = () => {
       setIsLogin(false)
     }
 
-    AccessoriesService.getAccessoryById(accessoryId).then((response) => {
+    AccessoriesService.getAccessoriesProductById(accessoryId).then((response) => {
       console.log(response);
       setProductInfo(response.data);
       setImage(response.data.productImg1);

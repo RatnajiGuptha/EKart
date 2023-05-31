@@ -23,7 +23,8 @@ const CheckMark = () => {
             setIsLoading(false);
         }, 5000);
 
-    }, []);
+    }, [id]);
+
     if (isLoading) {
 
         return (
@@ -40,7 +41,7 @@ const CheckMark = () => {
     }
 
     if (paymentStatus === "PAYMENT_FAILED") {
-        console.log("..............212")
+        console.log("................")
         return (
             <div >
                 <div className='mt-5'>

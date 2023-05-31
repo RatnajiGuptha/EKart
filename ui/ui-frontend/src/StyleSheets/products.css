@@ -3,7 +3,7 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-start;
-
+    
 }
 
 .cards-row {
@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: center;
     margin: 1rem 0;
+    width: 15rem;
 }
 
 .cards-tables {
@@ -63,6 +64,7 @@
 }
 
 .cat {
+    font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 

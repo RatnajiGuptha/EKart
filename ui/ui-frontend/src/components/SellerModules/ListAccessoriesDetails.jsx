@@ -3,13 +3,17 @@ import { Link } from "react-router-dom";
 import "../../StyleSheets/SellerModule.css"
 import AccessoriesService from "../../Services/AccessoriesService";
 function ListAccessoriesDetails() {
+
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("username");
+
     useEffect(() => {
-        AccessoriesService.getAccessoriesProductsBySellerName("Fire-Boltt pvt Ltd").then((res) => {
+        AccessoriesService.getAccessoriesProductsBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
         })
-    }, [])
+    }, [userName])
+
     return (
 
         <div>
@@ -38,10 +42,10 @@ function ListAccessoriesDetails() {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(function (item,i) {
+                        {products.map(function (item, i) {
                             return (
                                 <tr key={item.accessoryId}>
-                                    <td>{i+1}</td>
+                                    <td>{i + 1}</td>
                                     <td> {item.productName}</td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
@@ -55,10 +59,6 @@ function ListAccessoriesDetails() {
                                         <Link to={`/updateAccessories/${item.accessoryId}`}>
                                             <button className="btn btn-info mt-0">Update </button>
                                         </Link>
-                                        {/* <br />
-                                        <Link to={`/viewFashionDetails/${item.accessoryId}`}>
-                                            <button className="btn btn-secondary">View </button>
-                                        </Link> */}
                                     </td >
 
                                 </tr>)

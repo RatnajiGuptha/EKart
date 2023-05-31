@@ -16,6 +16,10 @@ class AddressService {
         return axios.delete(BASE_URL + "/deleteAddress/" + receiverName)
     }
 
+    getAddressById(id){
+        return axios.get(BASE_URL + "/GetAddressById/" + id)
+    }
+
 }
 
 export default new AddressService();

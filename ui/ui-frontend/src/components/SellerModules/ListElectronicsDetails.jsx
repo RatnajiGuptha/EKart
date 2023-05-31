@@ -5,13 +5,15 @@ import "../../StyleSheets/SellerModule.css"
 function ListElectronicsDetails() {
 
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("username");
+
     useEffect(() => {
-        ElectronicsService.getElectronicsBySellerName("Dwantech Electronics private Ltd").then((res) => {
+        ElectronicsService.getElectronicsBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
         })
-    }, [])
+    }, [userName])
+
     return (
         <div>
             <br></br>
@@ -20,7 +22,7 @@ function ListElectronicsDetails() {
                 <Link to={`/addElectronics`}>
                     <button className="btn btn-primary"> Add Product</button>
                 </Link>
-            </div> 
+            </div>
             <div className="row p-4">
                 <table className="table table-striped table-bordered">
                     <thead>
@@ -49,7 +51,7 @@ function ListElectronicsDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                    <Link to={`/updateElectronics/${item.electronicsId}`}>
+                                        <Link to={`/updateElectronics/${item.electronicsId}`}>
                                             <button className="btn btn-info mt-0">Update </button>
                                         </Link>
                                     </td>

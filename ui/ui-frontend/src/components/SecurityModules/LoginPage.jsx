@@ -16,6 +16,7 @@ function LoginPage() {
             localStorage.setItem('token', token);
             localStorage.setItem('username', userName);
             navigate("/");
+            window.location.reload(true);
             console.log(token);
         })
             .catch((error) => {
@@ -27,7 +28,9 @@ function LoginPage() {
 
         SecurityService.getUserInfo(userName).then((res) => {
             let i = res.data;
+            console.log(i);
             localStorage.setItem("role", i.roles);
+            
         })
     }
 
