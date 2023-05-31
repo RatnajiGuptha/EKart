@@ -21,9 +21,9 @@ const AddressComponent = () => {
         setAddNewAddress(!showAddNewAddress);
         event.preventDefault();
     };
-    const removeAddress = async (receiverName) => {
+    const removeAddress = async (addressId) => {
 
-        AddressService.deleteAddress(receiverName);
+        AddressService.deleteAddress(addressId);
         console.log("address deleted successfully")
         window.location.reload(false);
     }
@@ -50,7 +50,7 @@ const AddressComponent = () => {
                             <p>{item.buildingNo},{item.street1}</p>
                             <p>{item.city},{item.district},{item.state}-{item.pincode}</p>
                         </div>
-                        <p className='remove-address' onClick={() => removeAddress(item.receiverName)}>
+                        <p className='remove-address' onClick={() => removeAddress(item.addressId)}>
                             delete
                         </p>
                     </div>
