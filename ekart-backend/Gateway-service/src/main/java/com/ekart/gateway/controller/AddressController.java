@@ -41,12 +41,14 @@ public class AddressController {
 		String response = addressService.deleteAddressByReceiverName(receiverName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(response);
 	}
-//	@PutMapping("/updateAddress/{id}/{address}")
-//	public ResponseEntity<String> updateAddressById(@PathVariable int id,@PathVariable String address){
-//		Address addressResponse = addressService.fetchById(id);
-//		addressResponse.setAddress(address);
-//		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("updated address");
-//	}
+	
+	
+	@GetMapping("/GetAddressById/{id}")
+	public ResponseEntity<Address> fetchAddressById(@PathVariable int id){
+		Address address = addressService.fetchById(id);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(address);
+	}
+
 	
 	
 

@@ -7,8 +7,34 @@ spring:
             allowedOrigins: "http://localhost:3000/"
             allowedMethods: "*"
             allowedHeaders: "*"
-#            allowCredentials: true
+            allowCredentials: true
             maxAge: 3600
-
-
+            
+      routes:
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Method=POST
+          - Path=/api/fashionProducts/add
+          filters:
+          - AuthenticationFilter
+         
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Method=POST
+          - Path=/api/fashionProducts/addMultipleProducts
+          filters:
+          - AuthenticationFilter
           
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Method=POST
+          - Path=/api/cart/add
+          filters:
+          - AuthenticationFilter
+          
+      
+          
+        

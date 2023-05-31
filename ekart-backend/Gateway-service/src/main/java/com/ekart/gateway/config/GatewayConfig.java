@@ -12,11 +12,9 @@ public class GatewayConfig {
 	public RouteLocator locator(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route((p -> p.path("/api/accessoriesProducts/getAllAccessoriesProduct").uri("http://localhost:8200")))
-				.route((p -> p.path("/api/accessoriesProducts/getAccessoriesProductById/**")
-						.uri("http://localhost:8200")))
+				.route((p -> p.path("/api/accessoriesProducts/getAccessoriesProductById/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/accessoriesProducts/getAccessories/type/**").uri("http://localhost:8200")))
-				.route((p -> p.path("/api/accessoriesProducts/getAccessories/suitableFor/**")
-						.uri("http://localhost:8200")))
+				.route((p -> p.path("/api/accessoriesProducts/getAccessories/suitableFor/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/accessoriesProducts/addMultipleProducts").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/accessoriesProducts/add").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/accessoriesProducts/setQuantity/**").uri("http://localhost:8200")))
@@ -30,7 +28,7 @@ public class GatewayConfig {
 				.route((p -> p.path("/api/beauty/addMultipleBeautyProducts").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/beauty/getBeautyBySellerName/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/beauty/updateProducts/**").uri("http://localhost:8200")))
-				
+
 				.route((p -> p.path("/api/electronicsProducts/getElectronics").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/electronicsProducts/getElectronics/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/electronicsProducts/getElectronicsById/**").uri("http://localhost:8200")))
@@ -45,8 +43,8 @@ public class GatewayConfig {
 				.route((p -> p.path("/api/fashionProducts/getProducts/suitableFor/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/getProductsBy/suitablefor/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/getProducts/sellerName/**").uri("http://localhost:8200")))
-				.route((p -> p.path("/api/fashionProducts/add").uri("http://localhost:8200")))
-				.route((p -> p.path("/api/fashionProducts/addMultipleProducts").uri("http://localhost:8200")))
+//				.route((p -> p.path("/api/fashionProducts/add").uri("http://localhost:8200")))
+//				.route((p -> p.path("/api/fashionProducts/addMultipleProducts").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/setQuantity/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/getProducts/sellerName/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/updateProducts/**").uri("http://localhost:8200")))
@@ -74,7 +72,7 @@ public class GatewayConfig {
 				.route((p -> p.path("/api/cart/getByUserName/**").uri("http://localhost:8300")))
 				.route((p -> p.path("/api/cart/getByProductId/**").uri("http://localhost:8300")))
 				.route((p -> p.path("/api/cart/getProductCategoryAndProductId/**").uri("http://localhost:8300")))
-				.route((p -> p.path("/api/cart/add").uri("http://localhost:8300")))
+//				.route((p -> p.path("/api/cart/add").uri("http://localhost:8300")))
 				.route((p -> p.path("/api/cart/addMutlipleProducts").uri("http://localhost:8300")))
 				.route((p -> p.path("/api/cart/**").uri("http://localhost:8300")))
 				.route((p -> p.path("/api/cart/deleteProductInCartByProductId/**").uri("http://localhost:8300")))
@@ -97,8 +95,7 @@ public class GatewayConfig {
 				.route((p -> p.path("/addSeller").uri("http://localhost:8400")))
 				.route((p -> p.path("/login").uri("http://localhost:8400")))
 				.route((p -> p.path("/getUserInfo/**").uri("http://localhost:8400")))
-				.route((p->p.path("/updateUserData/**").uri("http://localhost:8400")))
-				.build();
+				.route((p -> p.path("/updateUserData/**").uri("http://localhost:8400"))).build();
 	}
 
 }
