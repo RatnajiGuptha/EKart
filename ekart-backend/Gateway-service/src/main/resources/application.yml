@@ -27,6 +27,8 @@ spring:
           filters:
           - AuthenticationFilter
           
+          
+          
         - id : order-service
           uri : http://localhost:8300
           predicates:

@@ -42,7 +42,7 @@ public class GatewayConfig {
 						.uri("http://localhost:8200")))
 				.route((p -> p.path("/api/electronicsProducts/updateProducts/**").uri("http://localhost:8200")))
 
-				.route((p -> p.path("/api/fashionProducts/getProducts").uri("http://localhost:8200")))
+//				.route((p -> p.path("/api/fashionProducts/getProducts").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/getProducts/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/getProducts/suitableFor/**").uri("http://localhost:8200")))
 				.route((p -> p.path("/api/fashionProducts/getProductsBy/suitablefor/**").uri("http://localhost:8200")))
