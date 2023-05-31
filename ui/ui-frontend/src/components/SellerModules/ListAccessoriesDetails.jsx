@@ -11,7 +11,6 @@ function ListAccessoriesDetails() {
         })
     }, [])
     return (
-
         <div>
             <br></br>
             <h2 className="text-center">Accessories Products List</h2>
@@ -55,10 +54,6 @@ function ListAccessoriesDetails() {
                                         <Link to={`/updateAccessories/${item.accessoryId}`}>
                                             <button className="btn btn-info mt-0">Update </button>
                                         </Link>
-                                        {/* <br />
-                                        <Link to={`/viewFashionDetails/${item.accessoryId}`}>
-                                            <button className="btn btn-secondary">View </button>
-                                        </Link> */}
                                     </td >
 
                                 </tr>)

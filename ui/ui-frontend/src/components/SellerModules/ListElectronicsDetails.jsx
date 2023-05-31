@@ -20,7 +20,7 @@ function ListElectronicsDetails() {
                 <Link to={`/addElectronics`}>
                     <button className="btn btn-primary"> Add Product</button>
                 </Link>
-            </div> 
+            </div>
             <div className="row p-4">
                 <table className="table table-striped table-bordered">
                     <thead>
@@ -49,7 +49,7 @@ function ListElectronicsDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                    <Link to={`/updateElectronics/${item.electronicsId}`}>
+                                        <Link to={`/updateElectronics/${item.electronicsId}`}>
                                             <button className="btn btn-info mt-0">Update </button>
                                         </Link>
                                     </td>

@@ -54,13 +54,9 @@ function ListFashionDetails() {
                                             <button className="btn btn-info mt-0">Update </button>
                                         </Link>
                                     </td>
-
                                 </tr>)
-
                         })}
-
                     </tbody>
-
                 </table>
             </div>
         </div>

@@ -55,10 +55,6 @@ function ListFashionDetails() {
                                         <Link to={`/updateFashion/${item.fashionId}`}>
                                             <button className="btn btn-info mt-0">Update </button>
                                         </Link>
-                                        {/* <br />
-                                        <Link to={`/viewFashionDetails/${item.fashionId}`}>
-                                            <button className="btn btn-secondary">View </button>
-                                        </Link> */}
                                     </td >
                                 </tr >)
                         })}

@@ -12,7 +12,6 @@ function ListBeautyDetails() {
         })
     }, [])
     return (
-
         <div>
             <br></br>
             <h2 className="text-center">Beauty Products List</h2>

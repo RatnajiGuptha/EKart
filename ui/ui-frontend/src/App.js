@@ -50,7 +50,6 @@ import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
 import ListToysDetails from "./components/SellerModules/ListToysDetails"
-// import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
 import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
 import CheckMark from "./components/OrdersModules/CheckMark";
 import SellerRegistration from "./components/SecurityModules/SellerRegistration";
@@ -140,7 +139,7 @@ function App() {
           <Route path="/updateAccessories/:accessoryId" element={<AddAccessoriesModule />}></Route>
           <Route path="/updateBeauty/:beautyId" element={<AddBeautyModule />}></Route>
           <Route path="/updateElectronics/:electronicsId" element={<AddElectronicsModule />}></Route>
-          <Route path="/updateFootwear/:footwearId" element={<AddFootWearModule />}></Route>
+          <Route path="/updateFootwear/:footWearId" element={<AddFootWearModule />}></Route>
           <Route path="/updateToys/:toyId" element={<AddToysProducts />}></Route>
 
           {/* seller home page routes */}
