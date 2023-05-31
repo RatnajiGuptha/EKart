@@ -12,8 +12,12 @@ class AddressService {
         return axios.get(BASE_URL + "/getAllAddress");
     }
 
-    deleteAddress(receiverName) {
-        return axios.delete(BASE_URL + "/deleteAddress/" + receiverName)
+    deleteAddress(id) {
+        return axios.delete(BASE_URL + "/deleteAddressById/" + id)
+    }
+
+    getAddressById(id){
+        return axios.get(BASE_URL + "/GetAddressById/" + id)
     }
 
 }

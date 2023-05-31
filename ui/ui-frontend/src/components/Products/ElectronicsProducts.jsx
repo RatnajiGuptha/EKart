@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ElectronicsService from '../../Services/ElectronicsService';
 import { Link } from "react-router-dom";
-
+import "../../StyleSheets/products.css";
 
 const ElectronicsProducts = () => {
     const [electronicsProducts, setElectronicsProducts] = useState([]);

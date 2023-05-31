@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AccessoriesService from "../../Services/AccessoriesService";
 import { Link, useParams } from "react-router-dom";
+import "../../StyleSheets/products.css";
 
 const AccessoriesByType = () => {
     const [accessories, setAccessories] = useState([]);

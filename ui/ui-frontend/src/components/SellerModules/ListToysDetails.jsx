@@ -4,12 +4,14 @@ import "../../StyleSheets/SellerModule.css"
 import ToysService from "../../Services/ToysService";
 function ListFashionDetails() {
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("username");
+
     useEffect(() => {
-        ToysService.getToysBySellerName("Baby Moo pvt Ltd").then((res) => {
+        ToysService.getToysBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
         })
-    }, [])
+    }, [userName])
 
     return (
         <div>

@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import FashionProductService from "../../Services/FashionProductService";
 import "../../StyleSheets/SellerModule.css"
 function ListFashionDetails() {
+
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("username");
+
     useEffect(() => {
-        FashionProductService.getFashionProductsBySellerName("Libas pvt Ltd").then((res) => {
+        FashionProductService.getFashionProductsBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
         })
-    }, [])
+    }, [userName])
 
     return (
         <div>

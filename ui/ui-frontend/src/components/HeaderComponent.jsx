@@ -1,14 +1,14 @@
 
-import React, { useEffect, useState } from "react";
-import { FaSearch, FaHome, FaShoppingCart, FaUser, FaSignInAlt ,FaTh} from "react-icons/fa";
+import React, { useState } from "react";
+import { FaSearch, FaHome, FaShoppingCart, FaUser, FaSignInAlt, FaTh } from "react-icons/fa";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import "../StyleSheets/Home.css"
 import { useNavigate } from "react-router-dom";
 
 function HeaderComponent() {
+
   const username = localStorage.getItem('username');
   const [search, setSearch] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
@@ -22,17 +22,6 @@ function HeaderComponent() {
     localStorage.clear();
   }
 
-
-
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-  },[])
 
   return (
     <Navbar className="navbar navbar-dark bg-dark" expand="lg">
@@ -64,7 +53,7 @@ function HeaderComponent() {
               </NavDropdown>
               <Nav.Link href="/cart"> <FaShoppingCart className="icon" /> Cart</Nav.Link>
               {
-                isLogin ? <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
+                localStorage.getItem("token") ? <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
                   <NavDropdown.Item href="/profile" >Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
                   : <Nav.Link href="/login" onClick={handleLogin}><FaSignInAlt className="icon" />{" "} Login</Nav.Link>}

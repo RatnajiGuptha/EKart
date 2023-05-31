@@ -5,13 +5,15 @@ import "../../StyleSheets/SellerModule.css"
 function ListElectronicsDetails() {
 
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("username");
+
     useEffect(() => {
-        ElectronicsService.getElectronicsBySellerName("Dwantech Electronics private Ltd").then((res) => {
+        ElectronicsService.getElectronicsBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
         })
-    }, [])
+    }, [userName])
+
     return (
         <div>
             <br></br>

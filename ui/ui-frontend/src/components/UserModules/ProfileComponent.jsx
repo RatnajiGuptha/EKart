@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 // import Changepassword from "./Changepassword";
-import "../StyleSheets/ManageProfile.css";
-import SecurityService from "../Services/SecurityService";
+import "../../StyleSheets/ManageProfile.css";
+import SecurityService from "../../Services/SecurityService";
 
 const ProfileComponent = () => {
   const [showChangepassword, setChangepassword] = useState(false);
-  const [userName, setUserName] = useState(localStorage.getItem('username'));
+  const userName = localStorage.getItem('username');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [contactNumber, setContactNumber] = useState('');
@@ -24,7 +24,7 @@ const ProfileComponent = () => {
 
       console.log(response.data)
     })
-  }, []);
+  }, [userName]);
 
   const toggleChangepassword = (event) => {
     setChangepassword(!showChangepassword);
@@ -106,7 +106,7 @@ const ProfileComponent = () => {
               <button className="change" onClick={(e) => { saveUserProfile(e); }}>save</button>
               <button className="change" onClick={(e) => { cancelChanges(e); }}>cancel</button>
             </div>
-            </form>
+          </form>
         }
       </div>
     </div>
