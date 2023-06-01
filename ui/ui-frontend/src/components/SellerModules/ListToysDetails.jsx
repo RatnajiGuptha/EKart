@@ -4,7 +4,7 @@ import "../../StyleSheets/SellerModule.css"
 import ToysService from "../../Services/ToysService";
 function ListFashionDetails() {
     const [products, setProducts] = useState([]);
-    const userName = localStorage.getItem("username");
+    const userName = localStorage.getItem("name");
 
     useEffect(() => {
         ToysService.getToysBySellerName(userName).then((res) => {

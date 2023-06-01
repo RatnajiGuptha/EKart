@@ -1,8 +1,12 @@
 import axios from "axios";
 
-// const Accessories_BASE_URL = "http://localhost:8200/api/accessoriesProducts"
 const Accessories_BASE_URL = "http://localhost:8888/api/accessoriesProducts";
 
+const token = localStorage.getItem('token');
+
+const header = {
+    headers: { Authorization: `Bearer ${token}` }
+};
 class AccessoriesService {
 
     getAllAccessories() {
@@ -22,21 +26,16 @@ class AccessoriesService {
     }
 
     getAccessoriesProductsBySellerName(sellerName) {
-        return axios.get(Accessories_BASE_URL + "/getAccessories/sellerName/" + sellerName);
+        return axios.get(Accessories_BASE_URL + "/getAccessories/sellerName/" + sellerName, header);
     }
 
-    updateAccessoriesProducts(accessoryId,accessoriesProducts){
-        return axios.put(Accessories_BASE_URL+"/updateProducts/"+accessoryId,accessoriesProducts);
+    updateAccessoriesProducts(accessoryId, accessoriesProducts) {
+        return axios.put(Accessories_BASE_URL + "/updateProducts/" + accessoryId, accessoriesProducts, header);
     }
 
-    addMultipleProduct(accessoriesProducts){
-        return axios.post(Accessories_BASE_URL+"/addMultipleProducts",accessoriesProducts);
+    addMultipleProduct(accessoriesProducts) {
+        return axios.post(Accessories_BASE_URL + "/addMultipleProducts", accessoriesProducts, header);
     }
-
-
 }
-
-
-
 
 export default new AccessoriesService();

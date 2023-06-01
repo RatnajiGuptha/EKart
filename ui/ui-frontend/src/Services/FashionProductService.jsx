@@ -1,8 +1,12 @@
 import axios from 'axios';
 
-// const FASHION_PRODUCTS_BASE_URI = "http://localhost:8200/api/fashionProducts";
-
 const FASHION_PRODUCTS_BASE_URI = "http://localhost:8888/api/fashionProducts";
+
+const token = localStorage.getItem('token');
+
+const header = {
+    headers: { Authorization: `Bearer ${token}` }
+};
 
 class FashionProductService {
 
@@ -20,12 +24,10 @@ class FashionProductService {
 
     getProductFilterTypeById(type, productId) {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/type/" + type + "/" + productId);
-
     }
 
     getProductByGender(gender) {
         return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/suitableFor/" + gender);
-
     }
 
     getProductByGenderId(gender, id) {
@@ -41,15 +43,15 @@ class FashionProductService {
     }
 
     getFashionProductsBySellerName(sellerName) {
-        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/sellerName/" + sellerName);
+        return axios.get(FASHION_PRODUCTS_BASE_URI + "/getProducts/sellerName/" + sellerName, header);
     }
 
-    updateFashionProducts(fashionId,fashionProducts){
-        return axios.put(FASHION_PRODUCTS_BASE_URI+"/updateProducts/"+fashionId,fashionProducts);
+    updateFashionProducts(fashionId, fashionProducts) {
+        return axios.put(FASHION_PRODUCTS_BASE_URI + "/updateProducts/" + fashionId, fashionProducts, header);
     }
 
-    addMultipleProduct(fashionProducts){
-        return axios.post(FASHION_PRODUCTS_BASE_URI+"/addMultipleProducts",fashionProducts);
+    addMultipleProduct(fashionProducts) {
+        return axios.post(FASHION_PRODUCTS_BASE_URI + "/addMultipleProducts", fashionProducts, header);
     }
 
 

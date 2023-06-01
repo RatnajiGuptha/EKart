@@ -5,7 +5,7 @@ import "../../StyleSheets/SellerModule.css"
 function ListFashionDetails() {
 
     const [products, setProducts] = useState([]);
-    const userName = localStorage.getItem("username");
+    const userName = localStorage.getItem("name");
 
     useEffect(() => {
         FashionProductService.getFashionProductsBySellerName(userName).then((res) => {

@@ -4,14 +4,14 @@ import BeautyService from "../../Services/BeautyService";
 import "../../StyleSheets/SellerModule.css"
 function ListBeautyDetails() {
     const [products, setProducts] = useState([]);
-    const userName = localStorage.getItem("username");
+    const name = localStorage.getItem("name");
 
     useEffect(() => {
-        BeautyService.getBeautyBySellerName(userName).then((res) => {
+        BeautyService.getBeautyBySellerName(name).then((res) => {
             console.log(res.data)
             setProducts(res.data);
         })
-    }, [userName])
+    }, [name])
     
     return (
         <div>

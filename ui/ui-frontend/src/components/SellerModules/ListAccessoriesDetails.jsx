@@ -5,7 +5,7 @@ import AccessoriesService from "../../Services/AccessoriesService";
 function ListAccessoriesDetails() {
 
     const [products, setProducts] = useState([]);
-    const userName = localStorage.getItem("username");
+    const userName = localStorage.getItem("name");
 
     useEffect(() => {
         AccessoriesService.getAccessoriesProductsBySellerName(userName).then((res) => {

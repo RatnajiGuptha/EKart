@@ -35,8 +35,7 @@ function AddBeautyModule() {
             })
 
         } else {
-            BeautyService.saveAllBeautyProducts(beauty).then((response) => {
-
+            BeautyService.saveBeautyProducts(beauty).then((response) => {
                 console.log(response.data)
             }).catch(error => {
                 console.log(error)
