@@ -38,13 +38,18 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 		return ((exchange, chain) -> {
 
 			if (validator.isSecured.test(exchange.getRequest())) {
+
 				if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
 					logger.error("missing authorization header");
 					throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "missing authorization header");
-
 				}
 
+				System.out.println("---------------------------------");
 				String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+				logger.info(authHeader);
+				System.out.println(authHeader);
+				System.out.println("---------------------------------");
+
 				if (authHeader != null && authHeader.startsWith("Bearer ")) {
 					authHeader = authHeader.substring(7);
 				}

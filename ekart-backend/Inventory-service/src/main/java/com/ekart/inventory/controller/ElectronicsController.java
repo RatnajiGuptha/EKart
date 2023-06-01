@@ -18,7 +18,6 @@ import com.ekart.inventory.enums.ElectronicsTypes;
 import com.ekart.inventory.service.ElectronicsService;
 
 @RestController
-//@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/electronicsProducts")
 public class ElectronicsController {
 

@@ -12,9 +12,11 @@ public class GatewayConfig {
 	public RouteLocator locator(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route((p -> p.path("/api/accessoriesProducts/getAllAccessoriesProduct").uri("http://localhost:8200")))
-				.route((p -> p.path("/api/accessoriesProducts/getAccessoriesProductById/**").uri("http://localhost:8200")))
+				.route((p -> p.path("/api/accessoriesProducts/getAccessoriesProductById/**")
+						.uri("http://localhost:8200")))
 				.route((p -> p.path("/api/accessoriesProducts/getAccessories/type/**").uri("http://localhost:8200")))
-				.route((p -> p.path("/api/accessoriesProducts/getAccessories/suitableFor/**").uri("http://localhost:8200")))
+				.route((p -> p.path("/api/accessoriesProducts/getAccessories/suitableFor/**")
+						.uri("http://localhost:8200")))
 //				.route((p -> p.path("/api/accessoriesProducts/addMultipleProducts").uri("http://localhost:8200")))
 //				.route((p -> p.path("/api/accessoriesProducts/add").uri("http://localhost:8200")))
 //				.route((p -> p.path("/api/accessoriesProducts/setQuantity/**").uri("http://localhost:8200")))
@@ -87,14 +89,15 @@ public class GatewayConfig {
 //				.route((p -> p.path("/api/add").uri("http://localhost:8083")))
 //				.route((p -> p.path("/api/userBalance/getBalanceByUserName/**").uri("http://localhost:8083")))
 
-//				.route((p -> p.path("/getUserName/**").uri("http://localhost:8400")))
-//				.route((p -> p.path("/getUserByContactNumber/**").uri("http://localhost:8400")))
-//				.route((p -> p.path("/getUserByMail/**").uri("http://localhost:8400")))
+				.route((p -> p.path("/getUserName/**").uri("http://localhost:8400")))
+				.route((p -> p.path("/getUserByContactNumber/**").uri("http://localhost:8400")))
+				.route((p -> p.path("/getUserByMail/**").uri("http://localhost:8400")))
 				.route((p -> p.path("/addUser").uri("http://localhost:8400")))
 				.route((p -> p.path("/addSeller").uri("http://localhost:8400")))
-				.route((p -> p.path("/login").uri("http://localhost:8400"))).build();
-//				.route((p -> p.path("/getUserInfo/**").uri("http://localhost:8400")))
+				.route((p -> p.path("/login").uri("http://localhost:8400")))
+				.route((p -> p.path("/getUserInfo/**").uri("http://localhost:8400")))
 //				.route((p -> p.path("/updateUserData/**").uri("http://localhost:8400"))).build();
+				.build();
 	}
 
 }

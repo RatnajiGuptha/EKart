@@ -19,7 +19,6 @@ import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.service.FootWearService;
 
 @RestController
-//@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/footWear")
 public class FootWearController {
 

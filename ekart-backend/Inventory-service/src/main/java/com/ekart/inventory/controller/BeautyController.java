@@ -18,7 +18,6 @@ import com.ekart.inventory.service.BeautyService;
 
 @RestController
 @RequestMapping("/api/beauty")
-//@CrossOrigin("http://localhost:3000/")
 public class BeautyController {
 
 	@Autowired

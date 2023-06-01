@@ -19,7 +19,6 @@ import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.service.AccessoriesProductService;
 
 @RestController
-//@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/accessoriesProducts")
 public class AccessoriesProductsController {
 
@@ -90,32 +89,34 @@ public class AccessoriesProductsController {
 				.GetAccessoriesProductsBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
-	
-	@PutMapping("/updateProducts/{accessoryId}")
-    public ResponseEntity<AccessoriesProducts> updateAccessoriesProducts(@PathVariable int accessoryId,@RequestBody AccessoriesProducts accessoriesProducts) {
-        
-        AccessoriesProducts updateAccessoriesProducts=accessoriesProductService.getAccessoriesProductById(accessoryId);
-            
-        updateAccessoriesProducts.setProductName(accessoriesProducts.getProductName());
-        updateAccessoriesProducts.setProductPrice(accessoriesProducts.getProductPrice());
-        updateAccessoriesProducts.setLogoImg(accessoriesProducts.getLogoImg());
-        updateAccessoriesProducts.setProductDescription(accessoriesProducts.getProductDescription());
-        updateAccessoriesProducts.setBrandName(accessoriesProducts.getBrandName());
-        updateAccessoriesProducts.setType(accessoriesProducts.getType());
-        updateAccessoriesProducts.setSuitablefor(accessoriesProducts.getSuitablefor());
-        updateAccessoriesProducts.setSize(accessoriesProducts.getSize());
-        updateAccessoriesProducts.setColor(accessoriesProducts.getColor());
-        updateAccessoriesProducts.setManufactureDate(accessoriesProducts.getManufactureDate());
-        updateAccessoriesProducts.setQty(accessoriesProducts.getQty());
-        updateAccessoriesProducts.setProductImg1(accessoriesProducts.getProductImg1());
-        updateAccessoriesProducts.setProductImg2(accessoriesProducts.getProductImg2());
-        updateAccessoriesProducts.setProductImg3(accessoriesProducts.getProductImg3());
-        updateAccessoriesProducts.setProductImg4(accessoriesProducts.getProductImg4());
-        updateAccessoriesProducts.setProductImg5(accessoriesProducts.getProductImg5());
-        
-        accessoriesProductService.saveSellerAccessoriesProducts(updateAccessoriesProducts);
 
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateAccessoriesProducts);
-    }
+	@PutMapping("/updateProducts/{accessoryId}")
+	public ResponseEntity<AccessoriesProducts> updateAccessoriesProducts(@PathVariable int accessoryId,
+			@RequestBody AccessoriesProducts accessoriesProducts) {
+
+		AccessoriesProducts updateAccessoriesProducts = accessoriesProductService
+				.getAccessoriesProductById(accessoryId);
+
+		updateAccessoriesProducts.setProductName(accessoriesProducts.getProductName());
+		updateAccessoriesProducts.setProductPrice(accessoriesProducts.getProductPrice());
+		updateAccessoriesProducts.setLogoImg(accessoriesProducts.getLogoImg());
+		updateAccessoriesProducts.setProductDescription(accessoriesProducts.getProductDescription());
+		updateAccessoriesProducts.setBrandName(accessoriesProducts.getBrandName());
+		updateAccessoriesProducts.setType(accessoriesProducts.getType());
+		updateAccessoriesProducts.setSuitablefor(accessoriesProducts.getSuitablefor());
+		updateAccessoriesProducts.setSize(accessoriesProducts.getSize());
+		updateAccessoriesProducts.setColor(accessoriesProducts.getColor());
+		updateAccessoriesProducts.setManufactureDate(accessoriesProducts.getManufactureDate());
+		updateAccessoriesProducts.setQty(accessoriesProducts.getQty());
+		updateAccessoriesProducts.setProductImg1(accessoriesProducts.getProductImg1());
+		updateAccessoriesProducts.setProductImg2(accessoriesProducts.getProductImg2());
+		updateAccessoriesProducts.setProductImg3(accessoriesProducts.getProductImg3());
+		updateAccessoriesProducts.setProductImg4(accessoriesProducts.getProductImg4());
+		updateAccessoriesProducts.setProductImg5(accessoriesProducts.getProductImg5());
+
+		accessoriesProductService.saveSellerAccessoriesProducts(updateAccessoriesProducts);
+
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateAccessoriesProducts);
+	}
 
 }

@@ -18,7 +18,6 @@ import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.CartService;
 import com.ekart.order.service.OrderService;
 
-//@CrossOrigin(origins="http://localhost:3000/")
 @RestController
 @RequestMapping("/api")
 public class OrderController {
