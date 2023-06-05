@@ -55,7 +55,7 @@ const AccessoriesProductsByTpeInfo = () => {
     );
 
     console.log(datad.data);
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.accessoryId,

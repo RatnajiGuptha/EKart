@@ -30,6 +30,7 @@ function LoginPage() {
             let i = res.data;
             console.log(i);
             localStorage.setItem("role", i.roles);
+            localStorage.setItem("name" , i.fullName);
             
         })
     }

@@ -1,7 +1,12 @@
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:8400";
 const BASE_URL = "http://localhost:8888";
+
+const token = localStorage.getItem('token');
+
+const header = {
+    headers: { Authorization: `Bearer ${token}` }
+};
 
 class SecurityService {
 
@@ -33,7 +38,7 @@ class SecurityService {
         return axios.get(BASE_URL + "/getUserByContactNumber/" + contactNumber);
     }
 
-    updateUserByUserName(username, fullName, email, contactNumber) {
+    updateUserByUserName(username, fullName, email, contactNumber, header) {
         return axios.put(BASE_URL + "/updateUserData/" + username + "/" + fullName + "/" + email + "/" + contactNumber)
     }
 }

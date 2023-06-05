@@ -5,7 +5,7 @@ import FootwearService from "../../Services/FootwearService";
 function ListFootWearDetails() {
 
     const [products, setProducts] = useState([]);
-    const userName = localStorage.getItem("username");
+    const userName = localStorage.getItem("name");
 
     useEffect(() => {
         FootwearService.fetchBySellerName(userName).then((res) => {

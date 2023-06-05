@@ -1,7 +1,12 @@
 import axios from "axios";
 
-// const TOYS_BASE_URL = "http://localhost:8200/api/Toys";
-const TOYS_BASE_URL = "http://localhost:8888/api/Toys"
+const TOYS_BASE_URL = "http://localhost:8888/api/Toys";
+
+const token = localStorage.getItem('token');
+
+const header = {
+    headers: { Authorization: `Bearer ${token}` }
+};
 
 class ToysService {
 
@@ -14,15 +19,15 @@ class ToysService {
     }
 
     getToysBySellerName(sellerName) {
-        return axios.get(TOYS_BASE_URL + "/getToys/sellerName/" + sellerName);
+        return axios.get(TOYS_BASE_URL + "/getToys/sellerName/" + sellerName, header);
     }
 
-    updateToyProducts(toyId,toys){
-        return axios.put(TOYS_BASE_URL+"/updateProducts/"+toyId,toys);
+    updateToyProducts(toyId, toys) {
+        return axios.put(TOYS_BASE_URL + "/updateProducts/" + toyId, toys, header);
     }
 
-    saveAllToys(toysList){
-        return axios.post(TOYS_BASE_URL+"/addMultipleToys",toysList);
+    saveAllToys(toysList) {
+        return axios.post(TOYS_BASE_URL + "/addMultipleToys", toysList, header);
     }
 
 }

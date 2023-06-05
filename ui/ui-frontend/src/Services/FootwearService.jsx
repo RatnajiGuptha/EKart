@@ -1,8 +1,12 @@
 import axios from "axios";
 
-// const FOOTWEAR_BASE_URL = "http://localhost:8200/api/footWear";
 const FOOTWEAR_BASE_URL = "http://localhost:8888/api/footWear";
 
+const token = localStorage.getItem('token');
+
+const header = {
+    headers: { Authorization: `Bearer ${token}` }
+};
 class FootwearService {
 
     getAllFootwear() {
@@ -21,16 +25,16 @@ class FootwearService {
         return axios.get(FOOTWEAR_BASE_URL + "/getFootWear/type/" + type + "/" + id);
     }
 
-    fetchBySellerName(sellerName){
-        return axios.get(FOOTWEAR_BASE_URL+"/getFootWearBySellerName/"+sellerName);
+    fetchBySellerName(sellerName) {
+        return axios.get(FOOTWEAR_BASE_URL + "/getFootWearBySellerName/" + sellerName, header);
     }
 
-    updateFootWearProducts(footWearId,footwearProducts){
-        return axios.put(FOOTWEAR_BASE_URL+"/updateProducts/"+footWearId,footwearProducts);
+    updateFootWearProducts(footWearId, footwearProducts) {
+        return axios.put(FOOTWEAR_BASE_URL + "/updateProducts/" + footWearId, footwearProducts, header);
     }
 
-    SaveMultipleFootWear(footWears){
-        return axios.post(FOOTWEAR_BASE_URL+"/addMultipleFootWear",footWears);
+    SaveMultipleFootWear(footWears) {
+        return axios.post(FOOTWEAR_BASE_URL + "/addMultipleFootWear", footWears, header);
     }
 }
 
