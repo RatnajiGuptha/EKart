@@ -33,8 +33,8 @@ class FootwearService {
         return axios.put(FOOTWEAR_BASE_URL + "/updateProducts/" + footWearId, footwearProducts, header);
     }
 
-    SaveMultipleFootWear(footWears) {
-        return axios.post(FOOTWEAR_BASE_URL + "/addMultipleFootWear", footWears, header);
+    saveFootWare(footWears) {
+        return axios.post(FOOTWEAR_BASE_URL + "/add", footWears, header);
     }
 }
 

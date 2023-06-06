@@ -36,7 +36,7 @@ function AddElectronicsModule() {
             })
 
         } else {
-            ElectronicsService.saveMultipleProducts(electronicsProducts).then((response) => {
+            ElectronicsService.saveElectronics(electronicsProducts).then((response) => {
                 console.log(response.data)
             }).catch(error => {
                 console.log(error)

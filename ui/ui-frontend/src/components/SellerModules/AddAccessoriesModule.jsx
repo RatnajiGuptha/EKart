@@ -37,7 +37,7 @@ function AddAccessoriesModule() {
             })
 
         } else {
-            AccessoriesService.addMultipleProduct(accessoriesProducts).then((response) => {
+            AccessoriesService.addProduct(accessoriesProducts).then((response) => {
 
                 console.log(response.data)
             }).catch(error => {

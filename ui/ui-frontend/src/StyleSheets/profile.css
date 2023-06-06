@@ -5,37 +5,37 @@
 .profile {
     display: flex;
     flex-direction: row;
-        justify-content: left;
-            background-color: #fff;
-        
-            align-items: center;
+    justify-content: left;
+    background-color: #fff;
+    align-items: center;
     flex: 100%;
     margin-bottom: 10px;
-        border-radius: 10px;
+    border-radius: 10px;
 }
 
 .profile-img {
     flex: 20%;
     padding: 10px;
 }
+
 .username {
     flex: 80%;
     text-align: start;
     align-items: center;
-        margin-left: 10px;
-        font-weight: 600;
+    margin-left: 10px;
+    font-weight: 600;
 }
 
 .main-profile {
     display: flex;
     flex-direction: row;
     justify-content: left;
-        background-color: #efefef;
+    background-color: #efefef;
     flex: 100%;
     padding: 50px 30px;
-        width: 100%;
-        height: 100%;
-        /* flex-wrap: wrap; */
+    width: 100%;
+    height: 100%;
+    /* flex-wrap: wrap; */
 }
 
 .main-profile-left {
@@ -52,8 +52,8 @@
     flex-direction: column;
     justify-content: left;
     cursor: pointer;
-        background-color: #fff;
-        border-radius: 10px;
+    background-color: #fff;
+    border-radius: 10px;
 }
 
 .main-profile-side {
@@ -71,10 +71,10 @@
     text-align: left;
     padding: 10px;
     text-decoration: none;
-        color: black;
+    color: black;
 }
-    
-    .accounts {
-    
-        background-color: bisque;
+
+.accounts {
+
+    background-color: bisque;
 }

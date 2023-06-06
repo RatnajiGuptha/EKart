@@ -26,8 +26,8 @@ class ToysService {
         return axios.put(TOYS_BASE_URL + "/updateProducts/" + toyId, toys, header);
     }
 
-    saveAllToys(toysList) {
-        return axios.post(TOYS_BASE_URL + "/addMultipleToys", toysList, header);
+    saveToys(toysList) {
+        return axios.post(TOYS_BASE_URL + "/add", toysList, header);
     }
 
 }

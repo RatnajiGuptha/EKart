@@ -33,8 +33,8 @@ class AccessoriesService {
         return axios.put(Accessories_BASE_URL + "/updateProducts/" + accessoryId, accessoriesProducts, header);
     }
 
-    addMultipleProduct(accessoriesProducts) {
-        return axios.post(Accessories_BASE_URL + "/addMultipleProducts", accessoriesProducts, header);
+    addProduct(accessoriesProducts) {
+        return axios.post(Accessories_BASE_URL + "/add", accessoriesProducts, header);
     }
 }
 

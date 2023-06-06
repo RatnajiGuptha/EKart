@@ -16,7 +16,7 @@ function HomeCarousels() {
           <Carousel.Item>
             <img
               className="d-block w-100 carousalImgClass"
-              src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522373/caurosel-img2_dzgqem.png"
+              src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1686044162/carousel-accessories_culdg0.png"
               alt="Second slide"
             />
           </Carousel.Item>

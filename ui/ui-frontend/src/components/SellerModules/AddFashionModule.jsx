@@ -37,7 +37,7 @@ function AddFashionModule() {
             })
 
         } else {
-            FashionProductService.addMultipleProduct(fashionProducts).then((response) => {
+            FashionProductService.addFashionProduct(fashionProducts).then((response) => {
 
             console.log(response.data)
             }).catch(error => {

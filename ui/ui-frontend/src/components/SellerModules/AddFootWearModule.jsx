@@ -37,7 +37,7 @@ function AddFootWearModule() {
             })
 
         } else {
-            FootwearService.SaveMultipleFootWear(footwearProducts).then((response) => {
+            FootwearService.saveFootWare(footwearProducts).then((response) => {
             console.log(response.data)
             }).catch(error => {
                 console.log(error)

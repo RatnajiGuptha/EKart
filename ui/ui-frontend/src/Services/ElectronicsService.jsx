@@ -31,8 +31,8 @@ class ElectronicsService {
         return axios.put(ELECTRONICS_BASE_URL + "/updateProducts/" + electronicsId, electronicsProducts, header);
     }
 
-    saveMultipleProducts(products) {
-        return axios.post(ELECTRONICS_BASE_URL + "/addMultipleElectronics", products, header);
+    saveElectronics(products) {
+        return axios.post(ELECTRONICS_BASE_URL + "/add", products, header);
     }
 }
 
