@@ -25,45 +25,45 @@ public class FashionProductsController {
 	@Autowired
 	private FashionProductService fashionService;
 
-	@GetMapping("/getProducts")
+	@GetMapping("/getAllProducts")
 	public ResponseEntity<List<FashionProducts>> getFashionProducts() {
 		List<FashionProducts> fashionProduct = fashionService.loadFashionProducts();
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProduct);
 	}
 
-	@GetMapping("/getProducts/{productId}")
+	@GetMapping("/getProductsById/{productId}")
 	public ResponseEntity<FashionProducts> getFashionProductsById(@PathVariable int productId) {
 		FashionProducts product = fashionService.fetchById(productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(product);
 	}
 
-	@GetMapping("/getProducts/type/{type}")
+	@GetMapping("/getProductsByType/type/{type}")
 	public ResponseEntity<List<FashionProducts>> getFashionProductsByType(@PathVariable FashionTypes type) {
 		List<FashionProducts> fetchByTypes = fashionService.fetchByType(type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fetchByTypes);
 	}
 
-	@GetMapping("/getProducts/type/{type}/{productId}")
+	@GetMapping("/getProductsByTypeAndId/type/{type}/{productId}")
 	public ResponseEntity<FashionProducts> getFashionProductsByTypeAndId(@PathVariable FashionTypes type,
 			@PathVariable int productId) {
 		FashionProducts product = fashionService.fetchByProductTypeAndProductId(type, productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(product);
 	}
 
-	@GetMapping("/getProducts/suitableFor/{suitable}")
+	@GetMapping("/getProductsBySuitable/suitableFor/{suitable}")
 	public ResponseEntity<List<FashionProducts>> getFashionProductsBySuitable(@PathVariable Suitable suitable) {
 		List<FashionProducts> fashionProducts = fashionService.GetFashionProductsBySuitable(suitable);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);
 	}
 
-	@GetMapping("/getProducts/suitableFor/{suitable}/{productId}")
+	@GetMapping("/getSuitableProductsById/suitableFor/{suitable}/{productId}")
 	public ResponseEntity<FashionProducts> getFashionProductsBySuitableById(@PathVariable Suitable suitable,
 			@PathVariable int productId) {
 		FashionProducts product = fashionService.fetchBySuitableForAndProductId(suitable, productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(product);
 	}
 
-	@GetMapping("/getProductsBy/suitablefor/{suitable}/{type}")
+	@GetMapping("/getProductsByGenderAndType/suitablefor/{suitable}/{type}")
 	public ResponseEntity<List<FashionProducts>> getProductsByGenderWithTypes(@PathVariable Suitable suitable,
 			@PathVariable FashionTypes type) {
 		List<FashionProducts> fashionProducts = fashionService.getFashionProductsByGenderWithTypes(suitable, type);
@@ -71,7 +71,7 @@ public class FashionProductsController {
 
 	}
 
-	@GetMapping("/getProductsBy/suitablefor/{suitable}/{type}/id/{productId}")
+	@GetMapping("/getSuitableProductsByTypeAndId/suitablefor/{suitable}/{type}/id/{productId}")
 	public ResponseEntity<FashionProducts> getProductsByGenderWithTypesAndProductId(@PathVariable Suitable suitable,
 			@PathVariable FashionTypes type, @PathVariable int productId) {
 		FashionProducts fashionProducts = fashionService.getFashionProductsByGenderWithTypesAndProductId(suitable, type,
@@ -104,7 +104,7 @@ public class FashionProductsController {
 		fashionService.saveFashionProduct(fashionProducts);
 	}
 	
-	@GetMapping("/getProducts/sellerName/{sellerName}")
+	@GetMapping("/getSellerProducts/sellerName/{sellerName}")
 	public ResponseEntity<List<FashionProducts>> getFashionProductsBySellerName(@PathVariable String sellerName) {
 		List<FashionProducts> fashionProducts = fashionService.GetFashionProductsBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);

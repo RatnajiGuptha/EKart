@@ -175,7 +175,7 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Method=GET
-          - Path=/api/fashionProducts/getProducts/sellerName/**
+          - Path=/api/fashionProducts/getSellerProducts/sellerName/**
           filters:
           - AuthenticationFilter
           
