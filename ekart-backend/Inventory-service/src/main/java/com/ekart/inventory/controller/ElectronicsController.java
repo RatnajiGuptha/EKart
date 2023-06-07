@@ -38,19 +38,19 @@ public class ElectronicsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Electronic products added");
 	}
 
-	@GetMapping("/getElectronics")
+	@GetMapping("/getAllElectronics")
 	public ResponseEntity<List<ElectronicsProducts>> getElectronics() {
 		List<ElectronicsProducts> electronicsProducts = electronicsService.fetchAllElectronics();
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProducts);
 	}
 
-	@GetMapping("/getElectronics/{type}")
+	@GetMapping("/getElectronicsByType/{type}")
 	public ResponseEntity<List<ElectronicsProducts>> getElectronicsByType(@PathVariable ElectronicsTypes type) {
 		List<ElectronicsProducts> electronicsProductsByType = electronicsService.fetchByElectronicsType(type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProductsByType);
 	}
 
-	@GetMapping("/getElectronics/{type}/{electronicsId}")
+	@GetMapping("/getElectronicsByTypeAndId/{type}/{electronicsId}")
 	public ResponseEntity<ElectronicsProducts> getElectronicsByType(@PathVariable ElectronicsTypes type,
 			@PathVariable int electronicsId) {
 		ElectronicsProducts electronicsProductsById = electronicsService.fetchByElectronicsId(electronicsId);
@@ -71,13 +71,13 @@ public class ElectronicsController {
 		electronicsService.saveElectronics(electronicsProducts);
 	}
 
-	@GetMapping("/getElectronics/sellerName/{sellerName}")
+	@GetMapping("/getElectronicsBySellerName/sellerName/{sellerName}")
 	public ResponseEntity<List<ElectronicsProducts>> getElectronicsBySellerName(@PathVariable String sellerName) {
 		List<ElectronicsProducts> electronicsProducts = electronicsService.GetElectronicsBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProducts);
 	}
 	
-	@PutMapping("/updateProducts/{electronicsId}")
+	@PutMapping("/updateSellerProducts/{electronicsId}")
     public ResponseEntity<ElectronicsProducts> updateElectronicsProducts(@PathVariable int electronicsId,@RequestBody ElectronicsProducts electronicsProducts) {
         
         ElectronicsProducts updateElectronicsProducts=electronicsService.fetchByElectronicsId(electronicsId);

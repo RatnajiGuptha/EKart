@@ -110,7 +110,7 @@ public class FashionProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);
 	}
 	
-	@PutMapping("/updateProducts/{fashionId}")
+	@PutMapping("/updateSellerProducts/{fashionId}")
     public ResponseEntity<FashionProducts> updateFashionProducts(@PathVariable int fashionId,@RequestBody FashionProducts fashionProducts) {
         
         FashionProducts updateFashionProducts=fashionService.fetchById(fashionId);

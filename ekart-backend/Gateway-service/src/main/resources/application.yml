@@ -14,235 +14,287 @@ spring:
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
+          - Path= /api/accessoriesProducts/getAllAccessoriesProduct
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path= /api/accessoriesProducts/getAccessoriesProductById/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path= /api/accessoriesProducts/getAccessoriesByType/type/**
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path= /api/accessoriesProducts/getAccessoriesByTypeAndId/type/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path= /api/accessoriesProducts/getAccessoriesBySuitable/suitableFor/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path= /api/accessoriesProducts/add
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/accessoriesProducts/addMultipleProducts
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/accessoriesProducts/setQuantity/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/beauty/getAllBeautyProducts
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/beauty/getBeautyById/**
+            
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/beauty/add
+            
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/beauty/addMultipleBeautyProducts
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/beauty/setQuantity/**
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getAllProducts
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getProductsById/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getProductsByType/type/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getProductsByTypeAndId/type/** 
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getProductsBySuitable/suitableFor/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getSuitableProductsById/suitableFor/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getProductsByGenderAndType/suitablefor/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getSuitableProductsByTypeAndId/suitablefor/**
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/setQuantity/**
+                   
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
           - Path=/api/fashionProducts/add
-          filters:
-          - AuthenticationFilter
          
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
           - Path=/api/fashionProducts/addMultipleProducts
-          filters:
-          - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
-          - Path=/api/footWear/addMultipleFootWear
-          filters:
-          - AuthenticationFilter
+          - Path=/api/electronicsProducts/getAllElectronics
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
-          - Path=/api/Toys/add
-          filters:
-          - AuthenticationFilter
+          - Path=/api/electronicsProducts/getElectronicsByType/**
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
-          - Path=/api/Toys/addMultipleToys
-          filters:
-          - AuthenticationFilter
-                    
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=POST
-          - Path= /api/accessoriesProducts/add
-          filters:
-          - AuthenticationFilter
+          - Path=/api/electronicsProducts/getElectronicsByTypeAndId/**
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
-          - Path=/api/accessoriesProducts/addMultipleProducts
-          filters:
-          - AuthenticationFilter
+          - Path=/api/electronicsProducts/getElectronicsById/**
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/electronicsProducts/setQuantity/**           
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
-          - Path=/api/beauty/add
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=POST
-          - Path=/api/beauty/addMultipleBeautyProducts
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=POST
           - Path=/api/electronicsProducts/add
-          filters:
-          - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=POST
           - Path=/api/electronicsProducts/addMultipleElectronics
-          filters:
-          - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=PUT
-          - Path=/api/accessoriesProducts/updateProducts/**
-          filters:
-          - AuthenticationFilter
+          - Path=/api/footWear/getAllFootWear
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/footWear/getFootWearById/**
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=PUT
-          - Path=/api/beauty/updateProducts/**
-          filters:
-          - AuthenticationFilter
+          - Path=/api/footWear/getFootWearByType/**
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=PUT
-          - Path=/api/electronicsProducts/updateProducts/**
-          filters:
-          - AuthenticationFilter
+          - Path=/api/footWear/getFootWearByTypeAndId/type/**
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=PUT
-          - Path=/api/fashionProducts/updateProducts/**
-          filters:
-          - AuthenticationFilter
+          - Path=/api/footWear/getFootWearBySuitable/suitableFor/**
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=PUT
-          - Path=/api/footWear/updateProducts/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=PUT
-          - Path=/api/Toys/updateProducts/**
-          filters:
-          - AuthenticationFilter
-                  
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=GET
-          - Path=/api/accessoriesProducts/getAccessories/sellerName/**
-          filters:
-          - AuthenticationFilter 
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=GET
-          - Path=/api/beauty/getBeautyBySellerName/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=GET
-          - Path=/api/electronicsProducts/getElectronics/sellerName/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=GET
-          - Path=/api/fashionProducts/getSellerProducts/sellerName/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=GET
-          - Path=/api/footWear/getFootWearBySellerName/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=GET
-          - Path=/api/Toys/getToys/sellerName/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=PUT
-          - Path=/api/accessoriesProducts/setQuantity/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=PUT
-          - Path=/api/beauty/setQuantity/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=PUT
-          - Path=/api/electronicsProducts/setQuantity/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=PUT
-          - Path=/api/fashionProducts/setQuantity/**
-          filters:
-          - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Method=PUT
           - Path=/api/footWear/setQuantity/**
-          filters:
-          - AuthenticationFilter
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/footWear/add
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Method=PUT
+          - Path=/api/footWear/addMultipleFootWear 
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/Toys/getAllToys
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/Toys/getToysById/**
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
           - Path=/api/Toys/setQuantity/**
-          filters:
-          - AuthenticationFilter                         
-                 
+          
+         
+          
+          
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/Toys/add
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/Toys/addMultipleToys
+               
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/accessoriesProducts/getAccessoriesBySellerName/sellerName/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/accessoriesProducts/updateSellerProducts/**
+         
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/beauty/getBeautyBySellerName/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/beauty/updateSellerProducts/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/electronicsProducts/getElectronicsBySellerName/sellerName/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/electronicsProducts/updateSellerProducts/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getSellerProducts/sellerName/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/updateSellerProducts/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/footWear/getFootWearBySellerName/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/footWear/updateSellerProducts/**
+       
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/Toys/getToysBySellerName/sellerName/**
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/Toys/updateSellerProducts/**
+       
         - id : order-service
           uri : http://localhost:8300
           predicates:

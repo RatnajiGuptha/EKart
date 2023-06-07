@@ -37,13 +37,13 @@ public class AccessoriesProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
-	@GetMapping("/getAccessories/type/{type}")
+	@GetMapping("/getAccessoriesByType/type/{type}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductByType(@PathVariable AccessoriesTypes type) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProductsByType(type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
-	@GetMapping("/getAccessories/type/{type}/{accessoryId}")
+	@GetMapping("/getAccessoriesByTypeAndId/type/{type}/{accessoryId}")
 	public ResponseEntity<AccessoriesProducts> getAccessoriesProductByTypeandId(@PathVariable AccessoriesTypes type,
 			@PathVariable int accessoryId) {
 		AccessoriesProducts acccessoryProductById = accessoriesProductService.getAccessoriesByTpeAndProductById(type,
@@ -51,7 +51,7 @@ public class AccessoriesProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(acccessoryProductById);
 	}
 
-	@GetMapping("/getAccessories/suitableFor/{suitable}")
+	@GetMapping("/getAccessoriesBySuitable/suitableFor/{suitable}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySuitable(@PathVariable Suitable suitable) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
 				.GetAccessoriesProductsBySuitable(suitable);
@@ -82,7 +82,7 @@ public class AccessoriesProductsController {
 		accessoriesProductService.saveAccessoriesProducts(accessoriesProducts);
 	}
 
-	@GetMapping("/getAccessories/sellerName/{sellerName}")
+	@GetMapping("/getAccessoriesBySellerName/sellerName/{sellerName}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySellerName(
 			@PathVariable String sellerName) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
@@ -90,7 +90,7 @@ public class AccessoriesProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
-	@PutMapping("/updateProducts/{accessoryId}")
+	@PutMapping("/updateSellerProducts/{accessoryId}")
 	public ResponseEntity<AccessoriesProducts> updateAccessoriesProducts(@PathVariable int accessoryId,
 			@RequestBody AccessoriesProducts accessoriesProducts) {
 

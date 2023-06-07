@@ -25,7 +25,7 @@ public class FootWearController {
 	@Autowired
 	private FootWearService footWearService;
 
-	@GetMapping("/getFootWear")
+	@GetMapping("/getAllFootWear")
 	public ResponseEntity<List<FootWear>> fetchFootWare() {
 		List<FootWear> footWearList = footWearService.GetAllFootWear();
 
@@ -38,20 +38,20 @@ public class FootWearController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footwear);
 	}
 
-	@GetMapping("/getFootWear/{type}")
+	@GetMapping("/getFootWearByType/{type}")
 	public ResponseEntity<List<FootWear>> fetchByType(@PathVariable FootWearType type) {
 		List<FootWear> footWearList = footWearService.GetFootWearByType(type);
 
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
 	}
 
-	@GetMapping("/getFootWear/type/{type}/{footWearId}")
+	@GetMapping("/getFootWearByTypeAndId/type/{type}/{footWearId}")
 	public ResponseEntity<FootWear> fetchByTypeandId(@PathVariable FootWearType type, @PathVariable int footWearId) {
 		FootWear footWear = footWearService.getFootWearByTypeAndId(type, footWearId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWear);
 	}
 
-	@GetMapping("/getFootWear/suitableFor/{suitable}")
+	@GetMapping("/getFootWearBySuitable/suitableFor/{suitable}")
 	public ResponseEntity<List<FootWear>> fetchBySuitable(@PathVariable Suitable suitable) {
 		List<FootWear> footWearList = footWearService.GetFootWearBySuitable(suitable);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
@@ -88,7 +88,7 @@ public class FootWearController {
 	}
 	
 	
-	@PutMapping("/updateProducts/{footWearId}")
+	@PutMapping("/updateSellerProducts/{footWearId}")
     public ResponseEntity<FootWear> updateFootWearProducts(@PathVariable int footWearId,@RequestBody FootWear footwearProducts) {
         
 		FootWear updateFootWearProducts=footWearService.GetFootWearBYId(footWearId);

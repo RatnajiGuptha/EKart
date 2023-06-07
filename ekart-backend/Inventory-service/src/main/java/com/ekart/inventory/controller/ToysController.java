@@ -38,14 +38,14 @@ public class ToysController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
 	}
 
-	@GetMapping("/getToys")
+	@GetMapping("/getAllToys")
 	public ResponseEntity<List<Toys>> fetchAllToys() {
 		List<Toys> toysList = toysService.getAllToys();
 
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toysList);
 	}
 
-	@GetMapping("/getToys/{id}")
+	@GetMapping("/getToysById/{id}")
 	public ResponseEntity<Toys> fetchByToyId(@PathVariable int id) {
 		Toys toy = toysService.getToyById(id);
 
@@ -61,13 +61,13 @@ public class ToysController {
 
 	}
 
-	@GetMapping("/getToys/sellerName/{sellerName}")
+	@GetMapping("/getToysBySellerName/sellerName/{sellerName}")
 	public ResponseEntity<List<Toys>> getToysBySellerName(@PathVariable String sellerName) {
 		List<Toys> toys = toysService.GetToysBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toys);
 	}
 
-	@PutMapping("/updateProducts/{toyId}")
+	@PutMapping("/updateSellerProducts/{toyId}")
 	public ResponseEntity<Toys> updateToyProducts(@PathVariable int toyId, @RequestBody Toys toys) {
 
 		Toys updateToys = toysService.getToyById(toyId);
