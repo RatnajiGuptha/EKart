@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../../StyleSheets/Login.css"
 import { useNavigate, Link } from "react-router-dom";
-import SecurityService from "../../Services/SecurityService";
+import { SecurityService } from "../../Services/SecurityService";
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -30,8 +30,8 @@ function LoginPage() {
             let i = res.data;
             console.log(i);
             localStorage.setItem("role", i.roles);
-            localStorage.setItem("name" , i.fullName);
-            
+            localStorage.setItem("name", i.fullName);
+
         })
     }
 

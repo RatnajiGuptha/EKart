@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ElectronicsService from "../../Services/ElectronicsService";
+import { ElectronicsService } from "../../Services/ElectronicsService";
 import "../../StyleSheets/SellerModule.css"
 function ListElectronicsDetails() {
 

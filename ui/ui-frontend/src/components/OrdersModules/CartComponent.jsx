@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import CartService from "../../Services/CartService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/Cart.css";
 
 const CartComponent = () => {
@@ -8,11 +8,16 @@ const CartComponent = () => {
   const username = localStorage.getItem('username');
 
   useEffect(() => {
-    CartService.getCartItemsByUser(username).then((response) => {
-      setCartItems(response.data);
-      console.log(response.data);
-
-    });
+    const fetchData = async () => {
+      try {
+        const response = await CartService.getCartItemsByUser(username)
+        setCartItems(response.data);
+        // console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
   }, [username]);
 
   const checkoutFromCart = () => {
@@ -38,16 +43,16 @@ const CartComponent = () => {
     return { totalPrice, count };
   };
 
-   console.log(cartItems.length);
-  if(cartItems.length === 0){
-    return(<div>
+  console.log(cartItems.length);
+  if (cartItems.length === 0) {
+    return (<div>
       <img src="https://www.adanione.com/~/media/Foundation/Adani/emptyImages/empty_cart.gif" alt="Fail to load data"></img>
       <div className="emptyCart">
-      Your cart looks empty.
-Let’s fill it with some goodness!
+        Your cart looks empty.
+        Let’s fill it with some goodness!
       </div>
       <div className="contButton">
-      <Link to={'/'} ><button className="btn btn-danger">Continue Shoping</button></Link>
+        <Link to={'/'} ><button className="btn btn-danger">Continue Shoping</button></Link>
       </div>
     </div>)
   }

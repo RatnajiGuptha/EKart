@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../StyleSheets/SellerModule.css";
 import { Link } from "react-router-dom";
-import FootwearService from "../../Services/FootwearService";
+import { FootwearService } from "../../Services/FootwearService";
 function ListFootWearDetails() {
 
     const [products, setProducts] = useState([]);

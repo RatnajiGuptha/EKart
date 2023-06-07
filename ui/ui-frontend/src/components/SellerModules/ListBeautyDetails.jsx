@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import BeautyService from "../../Services/BeautyService";
+import { BeautyService } from "../../Services/BeautyService";
 import "../../StyleSheets/SellerModule.css"
 function ListBeautyDetails() {
     const [products, setProducts] = useState([]);
@@ -12,7 +12,7 @@ function ListBeautyDetails() {
             setProducts(res.data);
         })
     }, [name])
-    
+
     return (
         <div>
             <br></br>

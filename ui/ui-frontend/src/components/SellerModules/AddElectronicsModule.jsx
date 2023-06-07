@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
-import ElectronicsService from '../../Services/ElectronicsService';
+import { ElectronicsService } from '../../Services/ElectronicsService';
 function AddElectronicsModule() {
     const [productName, setProductName] = useState('')
     const [logoImg, setLogoImg] = useState('')

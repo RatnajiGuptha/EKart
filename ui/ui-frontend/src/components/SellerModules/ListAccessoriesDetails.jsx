@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../StyleSheets/SellerModule.css"
-import AccessoriesService from "../../Services/AccessoriesService";
+import { AccessoriesService } from "../../Services/AccessoriesService";
 function ListAccessoriesDetails() {
 
     const [products, setProducts] = useState([]);

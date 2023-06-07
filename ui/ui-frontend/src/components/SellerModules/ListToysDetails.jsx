@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../StyleSheets/SellerModule.css"
-import ToysService from "../../Services/ToysService";
+import {ToysService} from "../../Services/ToysService";
 function ListFashionDetails() {
     const [products, setProducts] = useState([]);
     const userName = localStorage.getItem("name");

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import BeautyService from "../../Services/BeautyService";
-import CartService from "../../Services/CartService";
+import { BeautyService } from "../../Services/BeautyService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/ProductInfo.css";
 
 const BeautyProductsInfo = () => {
@@ -38,7 +38,7 @@ const BeautyProductsInfo = () => {
   const handleClick = (imgSrc) => {
     setImage(imgSrc);
   };
-  
+
   const quantityDec = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);

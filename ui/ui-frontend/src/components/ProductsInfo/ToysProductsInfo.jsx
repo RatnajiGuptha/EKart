@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ToysService from "../../Services/ToysService";
-import CartService from "../../Services/CartService";
+import { ToysService } from "../../Services/ToysService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/Home.css";
 
 const ToysProductsInfo = () => {

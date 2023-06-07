@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../StyleSheets/Login.css";
-import SecurityService from "../../Services/SecurityService";
+import { SecurityService } from "../../Services/SecurityService";
 
 function Registrationpage() {
 
@@ -42,7 +42,7 @@ function Registrationpage() {
         }
 
         const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
-        console.log("email =" , userEmailExists.data);
+        console.log("email =", userEmailExists.data);
         if (!registerData.email || !registerData.email.trim()) {
             newError.email = "Email is required";
             valid = false;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import ElectronicsService from "../../Services/ElectronicsService";
-import CartService from "../../Services/CartService";
+import { ElectronicsService } from "../../Services/ElectronicsService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/Home.css";
 
 const ElectronicsProductsByTpeInfo = () => {
@@ -13,7 +13,7 @@ const ElectronicsProductsByTpeInfo = () => {
   const [quantity, setQuantity] = useState(1);
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
-  
+
   const handleClick = (imgSrc) => {
     setImage(imgSrc);
   };
