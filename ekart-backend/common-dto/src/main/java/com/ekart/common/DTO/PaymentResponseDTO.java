@@ -16,6 +16,7 @@ public class PaymentResponseDTO{
 
 	private UUID paymentId;
 	private String userName;
+	private String email;
 	private List<Integer> productIds;
 	private List<Integer> qty;
 	private List<ProductCategories> categoryNames;

@@ -23,17 +23,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	
 	@Override
-	public PurchaseOrder createOrder(OrderRequestDTO orderRequestDTO) {
-		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
-		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
-		orderStatusPublisher.publishOrderEvent(orderRequestDTO, OrderStatus.ORDER_CREATED);
-		return purchaseOrder;
-		
-	}
-
-	@Override
 	public PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO) {
 		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
+//		purchaseOrder.setEmail(email);
 		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
 		orderStatusPublisher.publishOrderEvent(orderRequestDTO, OrderStatus.ORDER_CREATED);
 		return purchaseOrder;
@@ -61,6 +53,7 @@ public class OrderServiceImpl implements OrderService{
 		purchaseOrder.setPrice(dto.getPrice());
 		purchaseOrder.setSellerName(dto.getSellerName());
 		purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
+		purchaseOrder.setEmail(dto.getEmail());
 	
 		return purchaseOrder;
 	}

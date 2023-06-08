@@ -7,8 +7,12 @@ import java.util.function.Consumer;
 import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.controller.CartController;
 import com.ekart.order.proxy.InventoryServiceProxy;
+import com.ekart.order.service.EmailSenderService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.EventListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ekart.common.DTO.OrderRequestDTO;
@@ -23,6 +27,7 @@ import com.ekart.order.proxy.InventoryServiceProxy;
 
 @Configuration
 public class OrderStatusUpdateHandler {
+
 
 	@Autowired
 	private OrderRepository orderRepository;
@@ -52,7 +57,8 @@ public class OrderStatusUpdateHandler {
 				+ "..................");
 
 		if (ispaymentComplete) {
-
+			String email = purchaseOrder.getEmail();
+			UUID id = purchaseOrder.getPurchaseOrderId();
 			List<Integer> prodIdList = purchaseOrder.getProductIds();
 			List<Integer> quantityList = purchaseOrder.getQty();
 			List<ProductCategories> categoriesList = purchaseOrder.getCategoryNames();
@@ -75,7 +81,11 @@ public class OrderStatusUpdateHandler {
 				cartController.deleteAllCartItems();
 
 			}
-
+			try {
+				triggerMail(id,email);
+			} catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
 		}
 		if (!ispaymentComplete) {
 			publisher.publishOrderEvent(convertEntityToDto(purchaseOrder), newOrderStatus);
@@ -95,8 +105,20 @@ public class OrderStatusUpdateHandler {
 		orderRequestDTO.setSize(purchaseOrder.getSize());
 		orderRequestDTO.setColor(purchaseOrder.getColor());
 		orderRequestDTO.setSellerName(purchaseOrder.getSellerName());
-
+		orderRequestDTO.setEmail(purchaseOrder.getEmail());
 		orderRequestDTO.setPrice(purchaseOrder.getPrice());
 		return orderRequestDTO;
 	}
+
+	@Autowired
+	private EmailSenderService senderService;
+
+//	@EventListener(ApplicationReadyEvent.class)
+public void triggerMail(UUID id,String email) throws MessagingException {
+	senderService.sendSimpleEmail(email,
+			"Order Placed Successfully",
+			"Congratulations your order with ID : " + id + " is placed successfully and will soon deliver to you"
+					+ "\n" + "please click here " + "http://localhost:3000" +" For more information");
+
+}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.CartService;
 import com.ekart.order.service.OrderService;
 
+//@CrossOrigin(origins="http://localhost:3000/")
 @RestController
 @RequestMapping("/api")
 public class OrderController {
@@ -27,11 +29,12 @@ public class OrderController {
 	@Autowired
 	private CartService cartService;
 
-	@PostMapping("/createOrder/{userName}")
-	public PurchaseOrder saveOrder(@PathVariable String userName) {
+	@PostMapping("/createOrder/{userName}/{email}")
+	public PurchaseOrder saveOrder(@PathVariable String userName,@PathVariable  String email ) {
 		List<Cart> cartList = cartService.getByUserName(userName);
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
 		orderRequestDTO.setUserName(userName);
+		orderRequestDTO.setEmail(email);
 
 		List<Integer> productIds = new ArrayList<>();
 		List<ProductCategories> categories = new ArrayList<>();
@@ -78,6 +81,7 @@ public class OrderController {
 	public List<PurchaseOrder> getAllOrders() {
 		return orderService.fetchOrders();
 	}
+
 
 	@GetMapping("/getOrders/{Id}")
 	public PurchaseOrder getOrderById(@PathVariable UUID Id) {
