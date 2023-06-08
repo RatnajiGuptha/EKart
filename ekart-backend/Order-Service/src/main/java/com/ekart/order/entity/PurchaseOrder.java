@@ -1,5 +1,6 @@
 package com.ekart.order.entity;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public class PurchaseOrder {
 	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private UUID purchaseOrderId;
+	private Date orderDate=new Date();
 	private String userName;
 	private List<Integer> productIds;
 	private List<Integer> qty;
@@ -37,6 +39,8 @@ public class PurchaseOrder {
 	private List<String> size;
 	private List<String> color;
 	private List<String> sellerName;
+	
+	private int addressId;
 	
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;

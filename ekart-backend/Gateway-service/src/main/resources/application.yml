@@ -348,12 +348,32 @@ spring:
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/addMutlipleProducts
-        
-        - id : payment-service
-          uri : http://localhost:8083
-          predicates:
-          - Path=/api/add
           
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/cart/add
+        
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/address/addAddress
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/address/getAllAddress/**
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/address/deleteAddressById/**
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/address/GetAddressById/**  
+        
         - id : payment-service
           uri : http://localhost:8083
           predicates:
@@ -368,6 +388,11 @@ spring:
           uri : http://localhost:8083
           predicates:
           - Path=/api/userBalance/getDetails
+          
+        - id : payment-service
+          uri : http://localhost:8083
+          predicates:
+          - Path=/api/add
           
         - id : user-service
           uri : http://localhost:8400
@@ -398,6 +423,16 @@ spring:
           uri : http://localhost:8400 
           predicates:
           - Path=/login
+          
+        - id : user-service
+          uri : http://localhost:8400 
+          predicates:
+          - Path=/addUser
+          
+        - id : user-service
+          uri : http://localhost:8400 
+          predicates:
+          - Path=/addSeller
        
         
       
