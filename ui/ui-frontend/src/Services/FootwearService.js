@@ -44,7 +44,7 @@ export const FootwearService = {
 
     async updateFootWearProducts(footWearId, footwearProducts) {
         const res = await api.request({
-            url: `/api/footWear/updateSellerProducts/${footWearId}`, footwearProducts,
+            url: `/api/footWear/updateSellerProducts/${footWearId}`,
             method: 'PUT',
             data: footwearProducts
         })
@@ -53,7 +53,7 @@ export const FootwearService = {
 
     async saveFootWare(footWears) {
         const res = await api.request({
-            url: `/api/footWear/add`, footWears,
+            url: `/api/footWear/add`,
             method: 'POST',
             data: footWears
         })

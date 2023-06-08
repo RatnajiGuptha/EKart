@@ -14,7 +14,6 @@ export const AddressService = {
         const res = await api.request({
             url: `/api/address/getAllAddress/${userName}`,
             method: 'GET',
-            data: userName
         });
         return res;
     },

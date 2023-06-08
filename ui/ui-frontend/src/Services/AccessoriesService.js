@@ -43,7 +43,7 @@ export const AccessoriesService = {
 
     async updateAccessoriesProducts(accessoryId, accessoriesProducts) {
         const res = await api.request({
-            url: `/api/accessoriesProducts/updateSellerProducts/${accessoryId}`, accessoriesProducts,
+            url: `/api/accessoriesProducts/updateSellerProducts/${accessoryId}`,
             method: "PUT",
             data: accessoriesProducts
         })
@@ -52,7 +52,7 @@ export const AccessoriesService = {
 
     async addProduct(accessoriesProducts) {
         const res = await api.request({
-            url: `/api/accessoriesProducts/add`, accessoriesProducts,
+            url: `/api/accessoriesProducts/add`,
             method: "POST",
             data: accessoriesProducts
         })
