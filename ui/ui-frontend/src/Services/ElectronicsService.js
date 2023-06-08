@@ -35,7 +35,7 @@ export const ElectronicsService = {
     },
 
     async getElectronicsBySellerName(sellerName) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/electronicsProducts/getElectronicsBySellerName/sellerName/${sellerName}`,
             method: "GET",
         });
@@ -43,7 +43,7 @@ export const ElectronicsService = {
     },
 
     async updateElectronicsProducts(electronicsId, electronicsProducts) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/electronicsProducts/updateSellerProducts/${electronicsId}`,
             method: "PUT",
             data: electronicsProducts,
@@ -52,7 +52,7 @@ export const ElectronicsService = {
     },
 
     async saveElectronics(products) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/electronicsProducts/add`,
             method: "POST",
             data: products,

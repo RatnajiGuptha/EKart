@@ -35,7 +35,7 @@ export const FootwearService = {
 
 
     async fetchBySellerName(sellerName) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/footWear/getFootWearBySellerName/${sellerName}`,
             method: 'GET'
         })
@@ -43,7 +43,7 @@ export const FootwearService = {
     },
 
     async updateFootWearProducts(footWearId, footwearProducts) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/footWear/updateSellerProducts/${footWearId}`,
             method: 'PUT',
             data: footwearProducts
@@ -52,7 +52,7 @@ export const FootwearService = {
     },
 
     async saveFootWare(footWears) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/footWear/add`,
             method: 'POST',
             data: footWears

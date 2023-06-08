@@ -62,7 +62,7 @@ export const SecurityService = {
     },
 
     async updateUserByUserName(username, fullName, email, contactNumber) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/updateUserData/${username}/${fullName}/${email}/${contactNumber}`,
             method: 'PUT',
         });

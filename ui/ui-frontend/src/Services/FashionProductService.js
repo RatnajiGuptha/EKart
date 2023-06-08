@@ -67,7 +67,7 @@ export const FashionProductService = {
     },
 
     async getFashionProductsBySellerName(sellerName) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/fashionProducts/getSellerProducts/sellerName/${sellerName}`,
             method: "GET",
         });
@@ -75,7 +75,7 @@ export const FashionProductService = {
     },
 
     async updateFashionProducts(fashionId, fashionProducts) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/fashionProducts/updateSellerProducts/${fashionId}`,
             method: "PUT",
             data: fashionProducts,
@@ -84,7 +84,7 @@ export const FashionProductService = {
     },
 
     async addFashionProduct(fashionProducts) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/fashionProducts/add`,
             method: "POST",
             data: fashionProducts,

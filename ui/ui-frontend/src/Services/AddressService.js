@@ -1,8 +1,8 @@
-import { authenticateApi, api } from "./axiosConfig";
+import { authenticateApi } from "./axiosConfig";
 
 export const AddressService = {
     async addNewAddress(address) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/address/addAddress`,
             method: 'POST',
             data: address
@@ -11,7 +11,7 @@ export const AddressService = {
     },
 
     async getAllAddress(userName) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/address/getAllAddress/${userName}`,
             method: 'GET',
         });
@@ -19,14 +19,14 @@ export const AddressService = {
     },
 
     async deleteAddress(id) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/address/deleteAddressById/${id}`,
             method: 'DELETE'
         });
         return res;
     },
     async getAddressById(id) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/address/GetAddressById/${id}`,
             method: 'GET'
         });
