@@ -6,6 +6,7 @@ function ListFashionDetails() {
 
     const [products, setProducts] = useState([]);
     const userName = localStorage.getItem("name");
+    console.log(userName)
 
     useEffect(() => {
         FashionProductService.getFashionProductsBySellerName(userName).then((res) => {
