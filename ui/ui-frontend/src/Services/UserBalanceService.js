@@ -7,8 +7,8 @@ export const UserBalanceService = {
             url: `/api/userBalance/getBalanceByUserName/${userName}`,
             method: "GET",
         });
-        return res.data;
-    }
+        return res;
+    } 
 
 }
 

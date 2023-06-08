@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { OrderService } from '../../Services/OrderService';
 import "../../StyleSheets/Checkout.css";
+import { UserBalanceService } from '../../Services/UserBalanceService';
 import { AddressService } from '../../Services/AddressService';
-import { UserBalanceService } from "../../Services/UserBalanceService"
 
 
 const CheckoutComponent = () => {
@@ -22,13 +22,14 @@ const CheckoutComponent = () => {
     useEffect(() => {
         UserBalanceService.getUserBalance(userName).then((Response) => {
             setBalance(Response.data);
-            console.log(Response.data);
+            console.log("Balance", Response.data);
         });
 
         AddressService.getAllAddress().then((Response) => {
             setAddressList(Response.data);
             console.log(Response.data);
         })
+
 
     }, [userName]);
 
@@ -50,10 +51,10 @@ const CheckoutComponent = () => {
 
 
 
-
+    const Email = localStorage.getItem("userEmail");
 
     const paymentFromCart = () => {
-        OrderService.createOrderForCart(userName).then((Response) => {
+        OrderService.createOrderForCart(userName, Email).then((Response) => {
             setPurchaseOrder(Response.data);
             return Response.data;
         }).then((data) => {
@@ -64,11 +65,13 @@ const CheckoutComponent = () => {
             const i = data?.purchaseOrderId;
             navigate(`/orderStatus/${i}`);
 
+
         });
+        // console.log(Email);
     }
 
     return (
-        <div>
+        <div className='paymentPage'>
             <div className="d-flex align-content-center flex-column">
 
                 <div className="d-flex align-items-start flex-column" style={{ height: 300 }}>
