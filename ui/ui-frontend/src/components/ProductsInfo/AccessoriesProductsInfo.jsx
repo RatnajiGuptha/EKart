@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import AccessoriesService from "../../Services/AccessoriesService";
-import CartService from "../../Services/CartService";
+import { AccessoriesService } from "../../Services/AccessoriesService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/ProductInfo.css";
 
 const AccessoriesProductsInfo = () => {
@@ -72,6 +72,7 @@ const AccessoriesProductsInfo = () => {
         //   console.log(cart.productId);
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
+          
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
             alert("Item added successfully");

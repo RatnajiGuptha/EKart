@@ -2,7 +2,7 @@ import React from 'react'
 import { Checkmark } from 'react-checkmark'
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import OrderService from '../../Services/OrderService';
+import { OrderService } from '../../Services/OrderService';
 import { Roller } from 'react-awesome-spinners';
 const CheckMark = () => {
 

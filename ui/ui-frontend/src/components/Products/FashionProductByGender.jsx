@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import FashionProductService from "../../Services/FashionProductService";
+import { FashionProductService } from "../../Services/FashionProductService";
 import "../../StyleSheets/products.css";
 
 

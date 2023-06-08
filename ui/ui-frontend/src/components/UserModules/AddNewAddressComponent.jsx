@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddressService from "../../Services/AddressService";
+import { AddressService } from "../../Services/AddressService";
 import "../../StyleSheets/NewAddress.css";
 
 const AddNewAddressComponent = () => {

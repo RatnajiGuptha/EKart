@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AddNewAddress from './AddNewAddressComponent';
-import AddressService from '../../Services/AddressService';
+import { AddressService } from '../../Services/AddressService';
 import "../../StyleSheets/AddressPage.css";
 
 const AddressComponent = () => {

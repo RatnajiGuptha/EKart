@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 // import Changepassword from "./Changepassword";
 import "../../StyleSheets/ManageProfile.css";
-import SecurityService from "../../Services/SecurityService";
+import { SecurityService } from "../../Services/SecurityService";
 
 const ProfileComponent = () => {
   const [showChangepassword, setChangepassword] = useState(false);

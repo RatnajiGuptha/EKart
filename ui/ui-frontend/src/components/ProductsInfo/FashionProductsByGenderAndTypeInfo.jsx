@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import FashionProductService from "../../Services/FashionProductService";
+import { FashionProductService } from "../../Services/FashionProductService";
 import { useParams, useNavigate } from "react-router-dom";
-import CartService from "../../Services/CartService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/ProductInfo.css";
 
 const FashionProductsByGenderAndTypeInfo = () => {
@@ -53,7 +53,7 @@ const FashionProductsByGenderAndTypeInfo = () => {
 
     // console.log(datad.data);
     console.log(productsInfo.fashionId);
-    
+
     if (isLogin) {
       if (datad.data.cartId == null) {
         const cart = {
