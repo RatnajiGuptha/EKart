@@ -20,10 +20,12 @@ function AddFashionModule() {
     const [color, setColor] = useState('')
     const [qty, setQty] = useState('')
     const { fashionId } = useParams();
-    const { sellerName, setSellerName } = useState("");
+    const { sellerName, setSellerName } = useState();
 
     const saveOrUpdateProduct = (e) => {
         e.preventDefault();
+
+        setSellerName(localStorage.getItem("name"));
 
         const fashionProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
@@ -39,17 +41,14 @@ function AddFashionModule() {
 
         } else {
             FashionProductService.addFashionProduct(fashionProducts).then((response) => {
-
                 console.log(response.data)
             }).catch(error => {
                 console.log(error)
             })
         }
-
     }
 
     useEffect(() => {
-
         FashionProductService.getProductById(fashionId).then((response) => {
             setProductName(response.data.productName)
             setLogoImg(response.data.logoImg)
@@ -67,11 +66,12 @@ function AddFashionModule() {
             setProductImg5(response.data.productImg5)
             setColor(response.data.color)
             setQty(response.data.qty)
-            setSellerName(localStorage.getItem('name'))
+            setSellerName(response.data.sellerName)
+
         }).catch(error => {
             console.log(error)
         })
-    }, [fashionId])
+    }, [fashionId,setSellerName])
 
     const title = () => {
 
