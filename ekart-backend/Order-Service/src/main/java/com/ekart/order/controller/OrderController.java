@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import com.ekart.common.DTO.OrderRequestDTO;
 import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.entity.Cart;
 import com.ekart.order.entity.PurchaseOrder;
+import com.ekart.order.service.AddressService;
 import com.ekart.order.service.CartService;
 import com.ekart.order.service.OrderService;
 
@@ -28,9 +30,14 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private AddressService addressService;
+	
 
-	@PostMapping("/createOrder/{userName}/{email}")
-	public PurchaseOrder saveOrder(@PathVariable String userName,@PathVariable  String email ) {
+	@PostMapping("/createOrder/{userName}/{addressId}/{email}")
+	public PurchaseOrder saveOrder(@PathVariable String userName,@PathVariable int addressId,@PathVariable  String email ) {
+
 		List<Cart> cartList = cartService.getByUserName(userName);
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
 		orderRequestDTO.setUserName(userName);
@@ -72,7 +79,7 @@ public class OrderController {
 		orderRequestDTO.setColor(color);
 		orderRequestDTO.setSellerName(sellerName);
 		orderRequestDTO.setPrice(amount);
-
+		orderRequestDTO.setAddressId(addressId);
 		return orderService.createOrders(orderRequestDTO);
 
 	}

@@ -1,10 +1,10 @@
-package com.ekart.gateway.service;
+package com.ekart.order.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ekart.gateway.entity.Address;
+import com.ekart.order.entity.Address;
 
 @Service
 public interface AddressService {
@@ -14,7 +14,9 @@ public interface AddressService {
 	public List<Address> getAllAddress();
 
 	public Address fetchById(int id);
+
+	public String deleteByAddressId(int id);
 	
-	public String deleteAddressByReceiverName(String ReceiverName);
+	public List<Address> fetchByUserName(String userName);
 
 }

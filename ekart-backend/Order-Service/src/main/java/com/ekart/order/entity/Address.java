@@ -1,4 +1,4 @@
-package com.ekart.gateway.entity;
+package com.ekart.order.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,11 +12,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//@Component
 public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int addessId;
+	public int addressId;
+	public String userName;
 	public String receiverName;
 	public String receiverPhoneNumber;
 	public String buildingNo;
