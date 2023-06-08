@@ -76,9 +76,9 @@ export const FashionProductService = {
 
     async updateFashionProducts(fashionId, fashionProducts) {
         const res = await api.request({
-            url: `/api/fashionProducts/updateProducts/${fashionId}`,
+            url: `/api/fashionProducts/updateSellerProducts/${fashionId}`,
             method: "PUT",
-            body: fashionProducts,
+            data: fashionProducts,
         });
         return res;
     },
@@ -87,7 +87,7 @@ export const FashionProductService = {
         const res = await api.request({
             url: `/api/fashionProducts/add`,
             method: "POST",
-            body: fashionProducts,
+            data: fashionProducts,
         });
         return res;
     },

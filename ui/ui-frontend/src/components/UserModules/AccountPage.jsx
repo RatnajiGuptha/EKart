@@ -6,6 +6,7 @@ import Accessories from "../Products/Accessories";
 import AddressComponent from "./AddressComponent";
 import { useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import MyOrdersComponent from "./MyOrdersComponent";
 
 
 const AccountPage = () => {
@@ -61,7 +62,7 @@ const AccountPage = () => {
         <div className="main-profile-right">
           {page === 'info' && <div>{<ProfileComponent />}</div>}
           {page === 'address' && <div>{<AddressComponent />}</div>}
-          {page === 'orders' && <div>{<Footwear />}</div>}
+          {page === 'orders' && <div>{<MyOrdersComponent />}</div>}
           {page === 'wallet' && <div>{<Accessories />}</div>}
         </div>
       </div>

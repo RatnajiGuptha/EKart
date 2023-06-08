@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AddressService } from "../../Services/AddressService";
+import {AddressService} from "../../Services/AddressService";
 import "../../StyleSheets/NewAddress.css";
 
 const AddNewAddressComponent = () => {
@@ -19,6 +19,7 @@ const AddNewAddressComponent = () => {
         e.preventDefault();
         setAddNewAddress(false)
         AddressService.addNewAddress({
+            userName: localStorage.getItem("username"),
             receiverName: Name,
             receiverPhoneNumber: ContactNumber,
             buildingNo: buildingNo,

@@ -20,13 +20,14 @@ function AddFashionModule() {
     const [color, setColor] = useState('')
     const [qty, setQty] = useState('')
     const { fashionId } = useParams();
+    const { sellerName, setSellerName } = useState("");
 
     const saveOrUpdateProduct = (e) => {
         e.preventDefault();
 
         const fashionProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
-            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty
+            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty, sellerName
         }
 
         if (fashionId) {
@@ -66,6 +67,7 @@ function AddFashionModule() {
             setProductImg5(response.data.productImg5)
             setColor(response.data.color)
             setQty(response.data.qty)
+            setSellerName(localStorage.getItem('name'))
         }).catch(error => {
             console.log(error)
         })
@@ -121,7 +123,7 @@ function AddFashionModule() {
                                     </input>
                                 </div>
                                 <div className='form-container'>
-                                    <label for="type">Choose Fashion Type:</label>
+                                    <label htmlFor="type">Choose Fashion Type:</label>
                                     <select name="type" id="type" style={{ width: '100%', height: '40px' }} value={type} onChange={(e) => setType(e.target.value)}>
                                         <option value="" disabled selected hidden>Choose Fashion Type..</option>
                                         <option value="SportsWear">SportsWear</option>
@@ -139,7 +141,7 @@ function AddFashionModule() {
                                     </select>
                                 </div>
                                 <div className='form-container'>
-                                    <label for="suitablefor">Choose Suitable For:</label>
+                                    <label htmlFor="suitablefor">Choose Suitable For:</label>
                                     <select name="suitablefor" style={{ width: '100%', height: '40px' }} value={suitablefor} onChange={(e) => setSuitableFor(e.target.value)}>
                                         <option value="" disabled selected hidden>Choose Suitable for..</option>
                                         <option value="Male">Male</option>
@@ -155,7 +157,7 @@ function AddFashionModule() {
                                     </input>
                                 </div>
                                 <div className='form-container'>
-                                    <label for="size">Choose Size:</label>
+                                    <label htmlFor="size">Choose Size:</label>
                                     <select name="size" id="size" style={{ width: '100%', height: '40px' }} value={size} onChange={(e) => setSize(e.target.value)}>
                                         <option value="" disabled selected hidden>Choose Size..</option>
                                         <option value="FreeSize">FreeSize</option>

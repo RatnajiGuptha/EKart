@@ -6,7 +6,7 @@ export const FootwearService = {
             url: `/api/footWear/getAllFootWear`,
             method: 'GET'
         })
-        return res
+        return res;
     },
 
     async getFootwearById(footWearId) {
@@ -14,7 +14,7 @@ export const FootwearService = {
             url: `/api/footWear/getFootWearById/${footWearId}`,
             method: 'GET'
         })
-        return res
+        return res;
     },
 
     async getFootwearByType(type) {
@@ -22,7 +22,7 @@ export const FootwearService = {
             url: `/api/footWear/getFootWearByType/${type}`,
             method: 'GET'
         })
-        return res
+        return res;
     },
 
     async getFootwearByTypeAndId(type, id) {
@@ -30,7 +30,7 @@ export const FootwearService = {
             url: `/api/footWear/getFootWearByTypeAndId/type/${type}/${id}`,
             method: 'GET'
         })
-        return res
+        return res;
     },
 
 
@@ -39,23 +39,25 @@ export const FootwearService = {
             url: `/api/footWear/getFootWearBySellerName/${sellerName}`,
             method: 'GET'
         })
-        return res
+        return res;
     },
 
     async updateFootWearProducts(footWearId, footwearProducts) {
         const res = await api.request({
-            url: `/api/footWear/updateProducts/${footWearId}`, footwearProducts,
-            method: 'PUT'
+            url: `/api/footWear/updateSellerProducts/${footWearId}`, footwearProducts,
+            method: 'PUT',
+            data: footwearProducts
         })
-        return res
+        return res;
     },
 
     async saveFootWare(footWears) {
         const res = await api.request({
             url: `/api/footWear/add`, footWears,
-            method: 'POST'
+            method: 'POST',
+            data: footWears
         })
-        return res
+        return res;
     },
 }
 

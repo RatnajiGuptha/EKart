@@ -5,31 +5,31 @@ function HomeCategories() {
         <div className='categories-container'>
             <Link to="/fashion" className="link">
                 <div className='card-info'>
-                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683279944/fashion1_drwetu.png" alt="/" className="w-100" />
+                    <img src="https://res.cloudinary.com/dmanaxtze/image/upload/v1686028336/fashion1_drwetu-removebg-preview_nt1iwn.png" alt="/" className="w-100" />
                     <p className='card-names'> Fashion </p>
                 </div>
             </Link>
             <Link to="/fashionByType/KidsWear" className="link"> 
                 <div className='card-info'>
-                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280396/kids_wear_xgdhkr.png" alt="/" className='w-75' />
+                    <img src="https://res.cloudinary.com/dmanaxtze/image/upload/v1686029756/kids_wear_xgdhkr-removebg-preview_vewfbc.png" alt="/" className='w-75' />
                     <p className='card-names'> Kids wear</p>
                 </div>
             </Link>
             <Link to="/accessories" className="link">
                 <div className='card-info'>
-                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280111/accesories_yqpt8o.png" alt="/" className='w-75' />
+                    <img src="https://res.cloudinary.com/dmanaxtze/image/upload/v1686029898/accesories_yqpt8o-removebg-preview_barrmr.png" alt="/" className='w-75' />
                     <p className='card-names'>  Accessories</p>
                 </div>
             </Link>
             <Link to="/toys" className="link">
                 <div className='card-info'>
-                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280398/toys_zyfzq2.png" alt="/" className='w-75' />
+                    <img src="https://res.cloudinary.com/dmanaxtze/image/upload/v1686029897/toys_zyfzq2-removebg-preview_yij2eg.png" alt="/" className='w-75' />
                     <p className='card-names'>   Toys </p>
                 </div>
             </Link>
             <Link to="/beauty" className="link">
                 <div className='card-info'>
-                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280205/beauty_rbw6fv.png" alt="/" className='w-75' />
+                    <img src="https://res.cloudinary.com/dmanaxtze/image/upload/v1686029984/beauty_rbw6fv-removebg-preview_vwfybg.png" alt="/" className='w-75' />
                     <p className='card-names'>  Beauty </p>
                 </div>
             </Link>
@@ -42,7 +42,7 @@ function HomeCategories() {
 
             <Link to="/electronicsBy/Appliances" className="link">
                 <div className='card-info'>
-                    <img src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683280343/appliances_zxbxbl.png" alt="/" className='w-75 p-1' />
+                    <img src="https://res.cloudinary.com/dmanaxtze/image/upload/v1686030174/appliances_zxbxbl-removebg-preview_1_ejrszv.png" alt="/" className='w-75 p-1' />
                     <p className='card-names'>   Appliances</p>
                 </div>
             </Link>
@@ -55,7 +55,7 @@ function HomeCategories() {
 
             <Link to="/footwear" className="link">
                 <div className='card-info'>
-                    <img src="https://rukminim1.flixcart.com/image/612/612/ktizdzk0/shoe/y/b/x/7-ws-9310-tying-grey-original-imag6ut3hzm2zyqm.jpeg?q=70" alt="/" className='w-75' />
+                    <img src="https://res.cloudinary.com/dmanaxtze/image/upload/v1686030089/7-ws-9310-tying-grey-original-imag6ut3hzm2zyqm-removebg-preview_qc6mqb.png" alt="/" className='w-75' />
                     <p className='card-names img'>  Footwear </p>
                 </div>
             </Link>

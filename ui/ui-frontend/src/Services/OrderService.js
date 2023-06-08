@@ -2,9 +2,10 @@ import { authenticateApi, api } from "./axiosConfig";
 
 export const OrderService = {
 
-    async createOrderForCart(userName,email) {
+
+    async createOrderForCart(userName, addressId, email) {
         const res = await api.request({
-            url: `/api/createOrder/${userName}/${email}`,
+            url: `/api/createOrder/${userName}/${addressId}/${email}`,
             method: "POST"
         })
         return res
@@ -18,6 +19,16 @@ export const OrderService = {
         })
         return res
 
+    },
+
+    async getAllOrdersAfterPayment() {
+        const res = await api.request({
+            url: `/api/getOrders`,
+            method: "GET"
+        })
+        return res
+
     }
+
 }
 

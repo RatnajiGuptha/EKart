@@ -10,10 +10,11 @@ export const AddressService = {
         return res;
     },
 
-    async getAllAddress() {
+    async getAllAddress(userName) {
         const res = await api.request({
-            url: `/api/address/getAllAddress`,
-            method: 'GET'
+            url: `/api/address/getAllAddress/${userName}`,
+            method: 'GET',
+            data: userName
         });
         return res;
     },

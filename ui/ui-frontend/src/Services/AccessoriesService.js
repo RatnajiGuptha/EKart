@@ -19,7 +19,7 @@ export const AccessoriesService = {
 
     async getAccessoriesByType(type) {
         const res = await api.request({
-            url: `/api/accessoriesProducts/getAccessories/type/${type}`,
+            url: `/api/accessoriesProducts/getAccessoriesByType/type/${type}`,
             method: 'GET'
         })
         return res;
@@ -27,33 +27,35 @@ export const AccessoriesService = {
 
     async getAccessoriesByTypeAndId(type, id) {
         const res = await api.request({
-            url: `/api/accessoriesProducts/getAccessories/type/${type}/${id}`,
+            url: `/api/accessoriesProducts/getAccessoriesByTypeAndId/type/${type}/${id}`,
             method: 'GET'
         })
-        return res
+        return res;
     },
 
     async getAccessoriesProductsBySellerName(sellerName) {
         const res = await api.request({
-            url: `/api/accessoriesProducts/getAccessories/sellerName/${sellerName}`,
+            url: `/api/accessoriesProducts/getAccessoriesBySellerName/sellerName/${sellerName}`,
             method: 'GET'
         })
-        return res
+        return res;
     },
 
     async updateAccessoriesProducts(accessoryId, accessoriesProducts) {
         const res = await api.request({
-            url: `/api/accessoriesProducts/updateProducts/${accessoryId}`, accessoriesProducts,
-            method: "PUT"
+            url: `/api/accessoriesProducts/updateSellerProducts/${accessoryId}`, accessoriesProducts,
+            method: "PUT",
+            data: accessoriesProducts
         })
-        return res
+        return res;
     },
 
     async addProduct(accessoriesProducts) {
         const res = await api.request({
             url: `/api/accessoriesProducts/add`, accessoriesProducts,
-            method: "POST"
+            method: "POST",
+            data: accessoriesProducts
         })
-        return res
+        return res;
     }
 }

@@ -10,7 +10,7 @@ import FooterComponent from './FooterComponent';
 
 function HomeComponent() {
     return (
-        <div>
+        <div className='HomePage' style={{ backgroundColor: "#E6E6E6" }}>
             <HomeCategories />
             <HomeCarousels />
             <ProductsFilterComponent />
