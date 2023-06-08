@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { OrderService } from '../../Services/OrderService';
+import {OrderService} from '../../Services/OrderService';
 import "../../StyleSheets/Checkout.css";
-import { AddressService } from '../../Services/AddressService';
-import { UserBalanceService } from "../../Services/UserBalanceService"
+import {UserBalanceService} from '../../Services/UserBalanceService';
+import {AddressService} from '../../Services/AddressService';
 
 
 const CheckoutComponent = () => {
@@ -25,12 +25,12 @@ const CheckoutComponent = () => {
             console.log(Response.data);
         });
 
-        AddressService.getAllAddress().then((Response) => {
+        AddressService.getAllAddress(userName).then((Response) => {
             setAddressList(Response.data);
             console.log(Response.data);
         })
 
-    }, [userName]);
+    }, []);
 
     // let id = 0;
     const handleOnChange = (e) => {
@@ -49,11 +49,8 @@ const CheckoutComponent = () => {
     }
 
 
-
-
-
     const paymentFromCart = () => {
-        OrderService.createOrderForCart(userName).then((Response) => {
+        OrderService.createOrderForCart(userName, address.addressId).then((Response) => {
             setPurchaseOrder(Response.data);
             return Response.data;
         }).then((data) => {
@@ -71,10 +68,10 @@ const CheckoutComponent = () => {
         <div>
             <div className="d-flex align-content-center flex-column">
 
-                <div className="d-flex align-items-start flex-column" style={{ height: 300 }}>
-
-
-                    <div className='card1' style={{ overflowY: "scroll" }}>
+            <div className="d-flex align-items-start flex-column" style={{ height: 300 }}>
+                
+                    
+                        <div className='card1' style={{overflowY: "scroll"}}>
                         <p><strong>Please select delivery address</strong></p>
                         <form>
                             < div className="table-responsive">
@@ -84,9 +81,9 @@ const CheckoutComponent = () => {
                                             < div className="Address" >
                                                 <td >
                                                     <input type="radio"
-                                                        id={item.addessId}
+                                                        id={item.addressId}
                                                         name="Address"
-                                                        value={item.addessId}
+                                                        value={item.addressId}
                                                         //checked={Address === {item.addessId}}                                                        
                                                         onChange={handleOnChange} />
                                                 </td>
@@ -105,8 +102,8 @@ const CheckoutComponent = () => {
                                 </table>
                             </div>
                         </form>
-
-                    </div>
+                       
+                        </div>
                     {/* </div> */}
                 </div>
 
@@ -115,8 +112,8 @@ const CheckoutComponent = () => {
                 <div className="d-flex align-items-start flex-column" >
                     {/* <div className="card mt-50 mb-50 ml-50"> */}
                     <div className='card2'>
-                        {/* <a href="/addAddress">Add address</a> */}
-                        {address.addessId ?
+                    {/* <a href="/addAddress">Add address</a> */}
+                        {address.addressId ?
                             <div className="address-container">
                                 <div className="addr">
                                     <h5>{address.receiverName}- {address.receiverPhoneNumber}</h5>
@@ -129,7 +126,7 @@ const CheckoutComponent = () => {
                         <form className='cashClass'>
                             <table className='addressTable2'>
                                 <tr style={{ border: "2px solid black" }}>
-                                    <td><img className="img-fluid" alt="/" src="https://www.pngkit.com/png/full/332-3321940_wallet-icon-control-money-icon-png.png" /></td>
+                                    <td><img className="img-fluid" src="https://www.pngkit.com/png/full/332-3321940_wallet-icon-control-money-icon-png.png" /></td>
                                     <td> congrats you have  <strong >Rs.{balance}</strong> in wallet</td>
                                 </tr>
                             </table>
@@ -142,7 +139,7 @@ const CheckoutComponent = () => {
                 </div>
             </div>
 
-        </div >
+         </div >
 
 
     )

@@ -59,6 +59,7 @@ import ListToysDetails from "./components/SellerModules/ListToysDetails"
 import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
 
 import AccountPage from "./components/UserModules/AccountPage";
+import InvoiceComponent from "./components/UserModules/InvoiceComponent";
 
 function App() {
 
@@ -149,6 +150,7 @@ function App() {
           <Route path="/profile" element={<AccountPage />}></Route>
           <Route path="/profile/:type" element={<AccountPage />}></Route>
           <Route path="/orderStatus/:id" element={<CheckMark />}></Route>
+          <Route path="/invoice/:purchaseOrderId" element={<InvoiceComponent />}></Route>
         </Routes >
       </Router >
     </div >

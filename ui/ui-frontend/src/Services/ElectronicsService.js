@@ -36,15 +36,15 @@ export const ElectronicsService = {
 
     async getElectronicsBySellerName(sellerName) {
         const res = await api.request({
-            url: `/api/electronicsProducts/getElectronics/sellerName/${sellerName}`,
+            url: `/api/electronicsProducts/getElectronicsBySellerName/sellerName/${sellerName}`,
             method: "GET",
         });
-        return res
+        return res;
     },
 
     async updateElectronicsProducts(electronicsId, electronicsProducts) {
         const res = await api.request({
-            url: `/api/electronicsProducts/updateProducts/${electronicsId}`,
+            url: `/api/electronicsProducts/updateSellerProducts/${electronicsId}`,
             method: "PUT",
             data: electronicsProducts,
         });

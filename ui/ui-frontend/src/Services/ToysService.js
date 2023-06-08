@@ -19,7 +19,7 @@ export const ToysService = {
 
     async getToysBySellerName(sellerName) {
         const res = await api.request({
-            url: `/api/Toys/getToys/sellerName/${sellerName}`,
+            url: `/api/Toys/getToysBySellerName/sellerName/${sellerName}`,
             method: 'GET'
         })
         return res;
@@ -27,7 +27,7 @@ export const ToysService = {
 
     async updateToyProducts(toyId, toys) {
         const res = await api.request({
-            url: `/api/Toys/updateProducts/${toyId}`,
+            url: `/api/Toys/updateSellerProducts/${toyId}`,
             method: 'PUT',
             data: toys
         })

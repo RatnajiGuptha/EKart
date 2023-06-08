@@ -28,7 +28,7 @@ export const BeautyService = {
 
     async updateBeautyProducts(beautyId, beauty) {
         const res = await api.request({
-            url: `/api/beauty/updateProducts/${beautyId}`,
+            url: `/api/beauty/updateSellerProducts/${beautyId}`,
             method: 'PUT',
             data: beauty
         });

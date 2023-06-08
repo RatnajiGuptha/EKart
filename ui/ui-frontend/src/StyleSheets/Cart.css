@@ -67,9 +67,10 @@
    position: sticky;
    top: 0;
    flex: 0 0 auto;
-   height: 25vh;
+   height: 35vh;
    margin: 10px;
    padding: 20px;
+   background-color: #efefef;
 
 }
 
@@ -80,13 +81,13 @@
 }
 
 .checkout-btn {
-   height: 40px;
+   height: 35px;
    border-radius: 12px;
    background-color: green;
    color: #fff;
    font-weight: bolder;
    border: none;
-
+   width: 160px;
 
 }
 

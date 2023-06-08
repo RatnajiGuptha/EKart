@@ -37,7 +37,7 @@ export const CartService = {
   async updateQuantity(id, userName, qty) {
     const res = await api.request({
       url: `/api/cart/${id}/${userName}/${qty}`,
-      method: "PUT",
+      method: "PUT"
     });
     return res;
   },

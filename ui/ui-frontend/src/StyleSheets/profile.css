@@ -6,8 +6,9 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
-    background-color: #fff;
-    align-items: center;
+    background: #fefefe;
+    
+        align-items: center;
     flex: 100%;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -23,19 +24,19 @@
     text-align: start;
     align-items: center;
     margin-left: 10px;
-    font-weight: 600;
+        font-weight: 600;
 }
 
 .main-profile {
     display: flex;
     flex-direction: row;
     justify-content: left;
-    background-color: #efefef;
+    background-color: #DBDFEA;
     flex: 100%;
     padding: 50px 30px;
     width: 100%;
-    height: 100%;
-    /* flex-wrap: wrap; */
+        height: 100%;
+        /* flex-wrap: wrap; */
 }
 
 .main-profile-left {
@@ -53,7 +54,7 @@
     justify-content: left;
     cursor: pointer;
     background-color: #fff;
-    border-radius: 10px;
+        border-radius: 10px;
 }
 
 .main-profile-side {
@@ -72,8 +73,8 @@
     padding: 10px;
     text-decoration: none;
     color: black;
+    background: #fefefe;
 }
-
 .accounts {
 
     background-color: bisque;
