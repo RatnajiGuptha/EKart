@@ -4,11 +4,9 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOriginPatterns: "*"
+            allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
-            allowCredentials: true
-            maxAge: 3600
             
       routes:
         - id : inventory-service
@@ -221,10 +219,6 @@ spring:
           predicates:
           - Path=/api/Toys/setQuantity/**
           
-         
-          
-          
-          
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
@@ -298,170 +292,112 @@ spring:
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=GET
           - Path=/api/cart/getProducts
-          filters:
-          - AuthenticationFilter
-          
+         
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=GET
           - Path=/api/cart/getByUserName/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=GET
           - Path=/api/cart/getByProductId/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=GET
           - Path=/api/cart/getProductCategoryAndProductId/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=GET
           - Path=/api/cart/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=DELETE
           - Path=/api/cart/deleteProductInCartByProductId/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=DELETE
           - Path=/api/cart/DeleteAllItemsInCart
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=DELETE
           - Path=/api/cart/deleteProductInCart/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=POST
           - Path=/api/createOrder/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=GET
           - Path=/api/getOrders/**
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=GET
           - Path=/api/getOrders
-          filters:
-          - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
-          - Method=POST
           - Path=/api/cart/addMutlipleProducts
-          filters:
-          - AuthenticationFilter
         
         - id : payment-service
           uri : http://localhost:8083
           predicates:
-          - Method=POST
           - Path=/api/add
-          filters:
-          - AuthenticationFilter
           
         - id : payment-service
           uri : http://localhost:8083
           predicates:
-          - Method=GET
           - Path=/api/userBalance/getUserBalance
-          filters:
-          - AuthenticationFilter
           
         - id : payment-service
           uri : http://localhost:8083
           predicates:
-          - Method=GET
           - Path=/api/userBalance/getBalanceByUserName/**
-          filters:
-          - AuthenticationFilter
           
         - id : payment-service
           uri : http://localhost:8083
           predicates:
-          - Method=GET
           - Path=/api/userBalance/getDetails
-          filters:
-          - AuthenticationFilter
-          
-#        - id : user-service
-#          uri : http://localhost:8400
-#          predicates:
-#          - Method=GET
-#          - Path=/getUserName/**
-#          filters:
-#          - AuthenticationFilter
-#        
-#        - id : user-service
-#          uri : http://localhost:8400
-#          predicates:
-#          - Method=GET
-#          - Path=/getUserByContactNumber/**
-#          filters:
-#          - AuthenticationFilter
-#          
-#        - id : user-service
-#          uri : http://localhost:8400
-#          predicates:
-#          - Method=GET
-#          - Path=/getUserByMail/**
-#          filters:
-#          - AuthenticationFilter
-#          
-#        - id : user-service
-#          uri : http://localhost:8400
-#          predicates:
-#          - Method=GET
-#          - Path=/getUserInfo/**
-#          filters:
-#          - AuthenticationFilter
           
         - id : user-service
           uri : http://localhost:8400
           predicates:
-          - Method=PUT
+          - Path=/getUserName/**
+
+        - id : user-service
+          uri : http://localhost:8400
+          predicates:
+          - Path=/getUserByContactNumber/**
+          
+        - id : user-service
+          uri : http://localhost:8400
+          predicates:
+          - Path=/getUserByMail/**
+          
+        - id : user-service
+          uri : http://localhost:8400
+          predicates:
+          - Path=/getUserInfo/**
+          
+        - id : user-service
+          uri : http://localhost:8400 
+          predicates:
           - Path=/updateUserData/**
-          filters:
-          - AuthenticationFilter
+          
+        - id : user-service
+          uri : http://localhost:8400 
+          predicates:
+          - Path=/login
        
         
       
