@@ -12,20 +12,9 @@ const BeautyProductsInfo = () => {
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [isLogin, setIsLogin] = useState(false);
   const [productsInfo, setProductInfo] = useState({ id: null });
 
-
-
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-
     BeautyService.getBeautyProductsById(beautyId).then((response) => {
       console.log(response);
       setProductInfo(response.data);
@@ -56,7 +45,7 @@ const BeautyProductsInfo = () => {
     );
 
     console.log(datad.data);
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
 
 
       if (datad.data.cartId == null) {

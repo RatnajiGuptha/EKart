@@ -8,7 +8,6 @@ const ElectronicsProductsInfo = () => {
 
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
   const { electronicsId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
@@ -20,13 +19,6 @@ const ElectronicsProductsInfo = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
     ElectronicsService.getElectronicsById(electronicsId).then((response) => {
       console.log(response);
       setProductInfo(response.data);
@@ -51,7 +43,7 @@ const ElectronicsProductsInfo = () => {
     );
 
     console.log(datad.data);
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.electronicsId,

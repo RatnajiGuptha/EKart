@@ -8,7 +8,6 @@ const AccessoriesProductsByTpeInfo = () => {
 
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
   const { type, accessoryId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
@@ -16,14 +15,6 @@ const AccessoriesProductsByTpeInfo = () => {
   const [category, setCategory] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-
     AccessoriesService.getAccessoriesByTypeAndId(type, accessoryId).then(
       (response) => {
         console.log(response);

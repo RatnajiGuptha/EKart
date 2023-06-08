@@ -7,7 +7,6 @@ import "../../StyleSheets/ProductInfo.css";
 const AccessoriesProductsInfo = () => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
   const { accessoryId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
@@ -20,14 +19,6 @@ const AccessoriesProductsInfo = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-
     AccessoriesService.getAccessoriesProductById(accessoryId).then((response) => {
       console.log(response);
       setProductInfo(response.data);
@@ -53,7 +44,7 @@ const AccessoriesProductsInfo = () => {
     );
 
     console.log(datad.data);
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.accessoryId,
@@ -72,7 +63,7 @@ const AccessoriesProductsInfo = () => {
         //   console.log(cart.productId);
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
-          
+
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
             alert("Item added successfully");

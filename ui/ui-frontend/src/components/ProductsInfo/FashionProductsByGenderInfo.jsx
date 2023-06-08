@@ -7,7 +7,6 @@ import "../../StyleSheets/ProductInfo.css";
 const FashionProductsByGenderInfo = () => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
   const { suitablefor, productId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
@@ -19,14 +18,6 @@ const FashionProductsByGenderInfo = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-
     FashionProductService.getProductByGenderId(suitablefor, productId).then(
       (response) => {
         console.log(response);
@@ -56,7 +47,7 @@ const FashionProductsByGenderInfo = () => {
     // console.log(datad.data);
     console.log(productsInfo.fashionId);
 
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.fashionId,
