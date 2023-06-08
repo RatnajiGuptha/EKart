@@ -14,6 +14,7 @@ spring:
           predicates:
           - Path= /api/accessoriesProducts/getAllAccessoriesProduct
           
+          
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
@@ -38,16 +39,22 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Path= /api/accessoriesProducts/add
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/accessoriesProducts/addMultipleProducts
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/accessoriesProducts/setQuantity/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
@@ -63,16 +70,22 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Path=/api/beauty/add
+          filters:
+            - AuthenticationFilter
             
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/beauty/addMultipleBeautyProducts
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/beauty/setQuantity/**
+          filters:
+            - AuthenticationFilter
         
         - id : inventory-service
           uri : http://localhost:8200
@@ -118,16 +131,22 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Path=/api/fashionProducts/setQuantity/**
+          filters:
+            - AuthenticationFilter
                    
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/fashionProducts/add
+          filters:
+            - AuthenticationFilter
          
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/fashionProducts/addMultipleProducts
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
@@ -158,11 +177,15 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Path=/api/electronicsProducts/add
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/electronicsProducts/addMultipleElectronics
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
@@ -193,16 +216,22 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Path=/api/footWear/setQuantity/**
+          filters:
+            - AuthenticationFilter
         
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/footWear/add
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/footWear/addMultipleFootWear 
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
@@ -218,181 +247,253 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Path=/api/Toys/setQuantity/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/Toys/add
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/Toys/addMultipleToys
+          filters:
+            - AuthenticationFilter
                
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/accessoriesProducts/getAccessoriesBySellerName/sellerName/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/accessoriesProducts/updateSellerProducts/**
+          filters:
+            - AuthenticationFilter
          
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/beauty/getBeautyBySellerName/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/beauty/updateSellerProducts/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/electronicsProducts/getElectronicsBySellerName/sellerName/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/electronicsProducts/updateSellerProducts/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/fashionProducts/getSellerProducts/sellerName/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/fashionProducts/updateSellerProducts/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/footWear/getFootWearBySellerName/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/footWear/updateSellerProducts/**
+          filters:
+            - AuthenticationFilter
        
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/Toys/getToysBySellerName/sellerName/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
           - Path=/api/Toys/updateSellerProducts/**
+          filters:
+            - AuthenticationFilter
        
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/getProducts
+          filters:
+            - AuthenticationFilter
          
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/getByUserName/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/getByProductId/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/getProductCategoryAndProductId/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/deleteProductInCartByProductId/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/DeleteAllItemsInCart
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/deleteProductInCart/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/createOrder/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/getOrders/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/getOrders
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/addMutlipleProducts
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/add
+          filters:
+            - AuthenticationFilter
         
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/address/addAddress
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/address/getAllAddress/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/address/deleteAddressById/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/address/GetAddressById/**  
+          filters:
+            - AuthenticationFilter
         
         - id : payment-service
           uri : http://localhost:8083
           predicates:
           - Path=/api/userBalance/getUserBalance
+          filters:
+            - AuthenticationFilter
           
         - id : payment-service
           uri : http://localhost:8083
           predicates:
           - Path=/api/userBalance/getBalanceByUserName/**
+          filters:
+            - AuthenticationFilter
           
         - id : payment-service
           uri : http://localhost:8083
           predicates:
           - Path=/api/userBalance/getDetails
+          filters:
+            - AuthenticationFilter
           
         - id : payment-service
           uri : http://localhost:8083
           predicates:
           - Path=/api/add
+          filters:
+            - AuthenticationFilter
           
         - id : user-service
           uri : http://localhost:8400
@@ -418,6 +519,8 @@ spring:
           uri : http://localhost:8400 
           predicates:
           - Path=/updateUserData/**
+          filters:
+            - AuthenticationFilter
           
         - id : user-service
           uri : http://localhost:8400 
