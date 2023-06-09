@@ -23,4 +23,7 @@ public interface AccessoriesProductService {
 	public List<AccessoriesProducts> GetAccessoriesProductsBySellerName(String sellerName);
 
 	public String saveSellerAccessoriesProducts(AccessoriesProducts updateAccessoriesProducts);
+
+	public List<AccessoriesProducts> GetAccessoriesProductsBySellerNameAndType(String sellerName,
+			AccessoriesTypes type);
 }

@@ -118,5 +118,13 @@ public class AccessoriesProductsController {
 
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateAccessoriesProducts);
 	}
+	
+	@GetMapping("/getAccessoriesBySellerNameAndType/sellerName/{sellerName}/type/{type}")
+	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySellerNameAndType(
+			@PathVariable String sellerName,@PathVariable AccessoriesTypes type) {
+		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
+				.GetAccessoriesProductsBySellerNameAndType(sellerName,type);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
+	}
 
 }

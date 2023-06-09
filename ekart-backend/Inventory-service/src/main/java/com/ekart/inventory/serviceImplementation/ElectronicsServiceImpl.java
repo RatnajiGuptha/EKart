@@ -49,6 +49,12 @@ public class ElectronicsServiceImpl implements ElectronicsService{
 		electronicsRepo.save(updateElectronicsProducts);
 		return "seller electronic products saved";
 	}
+	
+	@Override
+	public List<ElectronicsProducts> GetElectronicsBySellerNameAndType(String sellerName, ElectronicsTypes type) {
+		List<ElectronicsProducts> electronicsProductsBySellerName = electronicsRepo.findBySellerNameAndType(sellerName,type);
+		return electronicsProductsBySellerName;
+	}
 
 	
 

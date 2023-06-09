@@ -65,6 +65,13 @@ public class AccessoriesProductServiceImpl implements AccessoriesProductService 
 		return "seller accessroies products saved";
 	}
 	
+	@Override
+	public List<AccessoriesProducts> GetAccessoriesProductsBySellerNameAndType(String sellerName,
+			AccessoriesTypes type) {
+		List<AccessoriesProducts> accessoriesProducts=accessoriesRepo.findBySellerNameAndType(sellerName,type);
+		return accessoriesProducts;
+	}
+	
 	
 
 }

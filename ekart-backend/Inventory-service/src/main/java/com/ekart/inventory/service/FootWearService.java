@@ -30,4 +30,6 @@ public interface FootWearService {
 
 	public String saveSellerFootWearProducts(FootWear updateFootWearProducts);
 
+	public List<FootWear> GetFootWearBySellerNameAndType(String sellerName, FootWearType type);
+
 }

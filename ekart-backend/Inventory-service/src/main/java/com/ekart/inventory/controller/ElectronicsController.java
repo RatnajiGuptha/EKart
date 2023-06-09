@@ -102,5 +102,11 @@ public class ElectronicsController {
 
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateElectronicsProducts);
     }
+	
+	@GetMapping("/getElectronicsBySellerNameAndType/sellerName/{sellerName}/type/{type}")
+	public ResponseEntity<List<ElectronicsProducts>> getElectronicsBySellerNameAndType(@PathVariable String sellerName,@PathVariable ElectronicsTypes type) {
+		List<ElectronicsProducts> electronicsProducts = electronicsService.GetElectronicsBySellerNameAndType(sellerName,type);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProducts);
+	}
 
 }

@@ -136,4 +136,10 @@ public class FashionProductsController {
 
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateFashionProducts);
     }
+	
+	@GetMapping("/getProductsBySellerNameAndType/sellerName/{sellerName}/type/{type}")
+	public ResponseEntity<List<FashionProducts>> getFashionProductsBySellerNameAndType(@PathVariable String sellerName,@PathVariable FashionTypes type){
+		List<FashionProducts> fashionProducts = fashionService.GetFashionProductsBySellerNameAndType(sellerName,type);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProducts);
+	}
 }

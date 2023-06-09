@@ -23,4 +23,6 @@ public interface FashionProductsRepository extends JpaRepository<FashionProducts
 	public FashionProducts findBySuitableforAndTypeAndFashionId(Suitable suitable, FashionTypes type, int productId);
 
 	public List<FashionProducts> findBySellerName(String sellerName);
+
+	public List<FashionProducts> findBySellerNameAndType(String sellerName, FashionTypes type);
 }

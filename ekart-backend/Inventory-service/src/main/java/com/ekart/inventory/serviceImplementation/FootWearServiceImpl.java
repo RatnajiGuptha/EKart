@@ -71,5 +71,11 @@ public class FootWearServiceImpl implements FootWearService {
 		footWearRepository.save(updateFootWearProducts);
 		return "seller footwear products saved";
 	}
+	
+	@Override
+	public List<FootWear> GetFootWearBySellerNameAndType(String sellerName, FootWearType type) {
+		List<FootWear>footWearList = footWearRepository.findBySellerNameAndType(sellerName,type);
+		return footWearList;
+	}
 
 }

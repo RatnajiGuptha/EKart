@@ -114,5 +114,12 @@ public class FootWearController {
 
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateFootWearProducts);
     }
+	
+	@GetMapping("/getFootWearBySellerNameAndType/sellerName/{sellerName}/type/{type}")
+	public ResponseEntity<List<FootWear>> fetchBySellerNameAndType(@PathVariable String sellerName,@PathVariable FootWearType type) {
+		List<FootWear> footWearList = footWearService.GetFootWearBySellerNameAndType(sellerName,type);
+
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(footWearList);
+	}
 
 }

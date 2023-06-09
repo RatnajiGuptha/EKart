@@ -89,4 +89,10 @@ public class FashionProductServiceImpl implements FashionProductService {
 		fashionProductsRepo.save(updateFashionProducts);
 		return "seller fashion products saved";
 	}
+	
+	@Override
+	public List<FashionProducts> GetFashionProductsBySellerNameAndType(String sellerName, FashionTypes type) {
+		List<FashionProducts>fashionProducts=fashionProductsRepo.findBySellerNameAndType(sellerName,type);
+		return fashionProducts;
+	}
 }

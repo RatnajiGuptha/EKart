@@ -36,4 +36,6 @@ public interface FashionProductService {
 
 	public String saveSellerFashionProducts(FashionProducts updateFashionProducts);
 
+	public List<FashionProducts> GetFashionProductsBySellerNameAndType(String sellerName, FashionTypes type);
+
 }

@@ -17,4 +17,6 @@ public interface AccessoriesProductsRepository extends JpaRepository<Accessories
 	public AccessoriesProducts findByTypeAndAccessoryId(AccessoriesTypes type, int accessoryId);
 
 	public List<AccessoriesProducts> findBySellerName(String sellerName);
+
+	public List<AccessoriesProducts> findBySellerNameAndType(String sellerName, AccessoriesTypes type);
 }
