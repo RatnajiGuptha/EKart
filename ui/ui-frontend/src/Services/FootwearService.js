@@ -59,5 +59,13 @@ export const FootwearService = {
         })
         return res;
     },
+
+    async getFootWearBySellerNameAndType(sellerName, type){
+        const res = await authenticateApi.request({
+            url: `/api/footWear/getFootWearBySellerNameAndType/sellerName/${sellerName}/type/${type}`,
+            method: "GET"
+        });
+        return res;
+    }
 }
 

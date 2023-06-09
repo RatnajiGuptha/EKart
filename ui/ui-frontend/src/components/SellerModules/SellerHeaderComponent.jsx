@@ -37,7 +37,15 @@ function HeaderComponent() {
                             </NavDropdown>
                             {
                                 localStorage.getItem("token") ? <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
+                                    <NavDropdown.Item href="/dashboard">
+
+                                        {" "}
+
+                                        Dashboard
+
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
                                     : <Nav.Link href="/login" onClick={handleLogin}><FaSignInAlt className="icon" />{" "} Login</Nav.Link>}
                         </Nav>
                     </Container>
