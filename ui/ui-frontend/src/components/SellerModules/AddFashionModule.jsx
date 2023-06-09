@@ -26,6 +26,8 @@ function AddFashionModule() {
     const saveOrUpdateProduct = (e) => {
         e.preventDefault();
 
+        setSellerName(localStorage.getItem("name"));
+
         const fashionProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
             productImg1, productImg2, productImg3, productImg4, productImg5, color, qty, sellerName
@@ -40,13 +42,11 @@ function AddFashionModule() {
 
         } else {
             FashionProductService.addFashionProduct(fashionProducts).then((response) => {
-
                 console.log(response.data)
             }).catch(error => {
                 console.log(error)
             })
         }
-
     }
 
     useEffect(() => {

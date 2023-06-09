@@ -7,7 +7,6 @@ import "../../StyleSheets/Home.css";
 const FootwearProductsInfo = () => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
   const { footWearId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
@@ -29,14 +28,6 @@ const FootwearProductsInfo = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-
     FootwearService.getFootwearById(footWearId).then((response) => {
       console.log(response);
       setProductInfo(response.data);
@@ -53,7 +44,7 @@ const FootwearProductsInfo = () => {
 
     console.log(datad.data);
 
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.footWearId,

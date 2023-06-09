@@ -19,7 +19,7 @@ export const BeautyService = {
     },
 
     async getBeautyBySellerName(sellerName) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/beauty/getBeautyBySellerName/${sellerName}`,
             method: 'GET'
         });
@@ -27,7 +27,7 @@ export const BeautyService = {
     },
 
     async updateBeautyProducts(beautyId, beauty) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/beauty/updateSellerProducts/${beautyId}`,
             method: 'PUT',
             data: beauty
@@ -36,7 +36,7 @@ export const BeautyService = {
     },
 
     async saveAllBeautyProducts(beautyProductsList) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/beauty/addMultipleBeautyProducts`,
             method: 'POST',
             data: beautyProductsList
@@ -45,7 +45,7 @@ export const BeautyService = {
     },
 
     async saveBeautyProducts(beautyProductsList) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/beauty/add`,
             method: 'POST',
             data: beautyProductsList

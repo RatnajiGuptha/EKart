@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AddNewAddress from './AddNewAddressComponent';
-import { AddressService } from '../../Services/AddressService';
+import {AddressService} from '../../Services/AddressService';
 import "../../StyleSheets/AddressPage.css";
 
 const AddressComponent = () => {
@@ -9,7 +9,7 @@ const AddressComponent = () => {
 
 
     useEffect(() => {
-        AddressService.getAllAddress().then((response) => {
+        AddressService.getAllAddress(localStorage.getItem("username")).then((response) => {
             console.log(response.data.length);
             setAddressList(response.data);
 

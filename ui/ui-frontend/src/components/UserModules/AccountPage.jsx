@@ -1,4 +1,3 @@
-import Footwear from "../Products/Footwear";
 import React, { useState } from "react";
 import "../../StyleSheets/profile.css";
 import ProfileComponent from "./ProfileComponent";
@@ -16,7 +15,7 @@ const AccountPage = () => {
   if (!type) {
     type = "info";
   }
-  
+
   const navigate = useNavigate();
   const userName = localStorage.getItem("username");
 
@@ -37,7 +36,7 @@ const AccountPage = () => {
 
   useEffect(() => {
     setPages(assignType)
-  }, []);
+  }, [assignType]);
 
   return (
     <div className="accounts">

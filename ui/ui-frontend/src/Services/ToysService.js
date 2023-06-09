@@ -26,7 +26,7 @@ export const ToysService = {
     },
 
     async updateToyProducts(toyId, toys) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/Toys/updateSellerProducts/${toyId}`,
             method: 'PUT',
             data: toys
@@ -35,7 +35,7 @@ export const ToysService = {
     },
 
     async saveToys(toysList) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/Toys/add`,
             method: 'POST',
             data: toysList

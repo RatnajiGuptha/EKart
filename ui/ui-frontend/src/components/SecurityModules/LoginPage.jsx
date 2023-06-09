@@ -31,6 +31,7 @@ function LoginPage() {
             console.log(i);
             localStorage.setItem("role", i.roles);
             localStorage.setItem("name", i.fullName);
+            localStorage.setItem("userEmail", i.email );
 
         })
     }

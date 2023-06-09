@@ -7,7 +7,6 @@ import "../../StyleSheets/Home.css";
 const ElectronicsProductsByTpeInfo = () => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
   const { type, electronicsId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
@@ -29,14 +28,6 @@ const ElectronicsProductsByTpeInfo = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-
     ElectronicsService.getElectronicsByTypeWithId(type, electronicsId).then(
       (response) => {
         console.log(response);
@@ -55,7 +46,7 @@ const ElectronicsProductsByTpeInfo = () => {
 
     console.log(datad.data);
 
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.electronicsId,

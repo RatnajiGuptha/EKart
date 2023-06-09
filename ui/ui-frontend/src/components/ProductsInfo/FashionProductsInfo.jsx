@@ -7,7 +7,6 @@ import "../../StyleSheets/Home.css";
 const FashionProductsInfo = () => {
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
   const { type, productId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
@@ -18,13 +17,6 @@ const FashionProductsInfo = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
     FashionProductService.getProductFilterTypeById(type, productId).then(
       (response) => {
         console.log(response);
@@ -53,7 +45,7 @@ const FashionProductsInfo = () => {
 
     // console.log(datad.data);
     console.log(productsInfo.fashionId);
-    if (isLogin) {
+    if (localStorage.getItem('token')) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.fashionId,

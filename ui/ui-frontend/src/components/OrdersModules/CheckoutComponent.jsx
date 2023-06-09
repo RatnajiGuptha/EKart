@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {OrderService} from '../../Services/OrderService';
+import { OrderService } from '../../Services/OrderService';
 import "../../StyleSheets/Checkout.css";
-import {UserBalanceService} from '../../Services/UserBalanceService';
-import {AddressService} from '../../Services/AddressService';
+
+import { UserBalanceService } from '../../Services/UserBalanceService';
+import { AddressService } from '../../Services/AddressService';
+
 
 
 const CheckoutComponent = () => {
@@ -13,16 +15,14 @@ const CheckoutComponent = () => {
     const navigate = useNavigate();
     const [purchaseOrder, setPurchaseOrder] = useState([]);
     const [balance, setBalance] = useState(0);
-
     const [isChecked, setIsChecked] = useState(false);
     const [address, setAddress] = useState([]);
-
     const [addressList, setAddressList] = useState([]);
 
     useEffect(() => {
         UserBalanceService.getUserBalance(userName).then((Response) => {
             setBalance(Response.data);
-            console.log(Response.data);
+            console.log("Balance", Response.data);
         });
 
         AddressService.getAllAddress(userName).then((Response) => {
@@ -30,7 +30,8 @@ const CheckoutComponent = () => {
             console.log(Response.data);
         })
 
-    }, []);
+
+    }, [userName]);
 
     // let id = 0;
     const handleOnChange = (e) => {
@@ -49,9 +50,14 @@ const CheckoutComponent = () => {
     }
 
 
+
+    const Email = localStorage.getItem("userEmail");
+    console.log("email", Email);
+    console.log(address.addressId)
     const paymentFromCart = () => {
-        OrderService.createOrderForCart(userName, address.addressId).then((Response) => {
+        OrderService.createOrderForCart(userName, address.addressId, Email).then((Response) => {
             setPurchaseOrder(Response.data);
+            console.log(purchaseOrder);
             return Response.data;
         }).then((data) => {
             console.log(data?.purchaseOrderId)
@@ -61,17 +67,16 @@ const CheckoutComponent = () => {
             const i = data?.purchaseOrderId;
             navigate(`/orderStatus/${i}`);
 
+
         });
+        // console.log(Email);
     }
 
     return (
-        <div>
+        <div className='paymentPage'>
             <div className="d-flex align-content-center flex-column">
-
-            <div className="d-flex align-items-start flex-column" style={{ height: 300 }}>
-                
-                    
-                        <div className='card1' style={{overflowY: "scroll"}}>
+                <div className="d-flex align-items-start flex-column" style={{ height: 300 }}>
+                    <div className='card1' style={{ overflowY: "scroll" }}>
                         <p><strong>Please select delivery address</strong></p>
                         <form>
                             < div className="table-responsive">
@@ -102,8 +107,8 @@ const CheckoutComponent = () => {
                                 </table>
                             </div>
                         </form>
-                       
-                        </div>
+
+                    </div>
                     {/* </div> */}
                 </div>
 
@@ -112,7 +117,7 @@ const CheckoutComponent = () => {
                 <div className="d-flex align-items-start flex-column" >
                     {/* <div className="card mt-50 mb-50 ml-50"> */}
                     <div className='card2'>
-                    {/* <a href="/addAddress">Add address</a> */}
+                        {/* <a href="/addAddress">Add address</a> */}
                         {address.addressId ?
                             <div className="address-container">
                                 <div className="addr">
@@ -126,7 +131,7 @@ const CheckoutComponent = () => {
                         <form className='cashClass'>
                             <table className='addressTable2'>
                                 <tr style={{ border: "2px solid black" }}>
-                                    <td><img className="img-fluid" src="https://www.pngkit.com/png/full/332-3321940_wallet-icon-control-money-icon-png.png" /></td>
+                                    <td><img className="img-fluid" alt="/" src="https://www.pngkit.com/png/full/332-3321940_wallet-icon-control-money-icon-png.png" /></td>
                                     <td> congrats you have  <strong >Rs.{balance}</strong> in wallet</td>
                                 </tr>
                             </table>
@@ -139,7 +144,7 @@ const CheckoutComponent = () => {
                 </div>
             </div>
 
-         </div >
+        </div >
 
 
     )
