@@ -60,7 +60,7 @@ export const AccessoriesService = {
     },
 
     async getAccessoriesBySellerNameAndType(sellerName, type) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/accessoriesProducts/getAccessoriesBySellerNameAndType/sellerName/${sellerName}/type/${type}`,
             method: "GET",
         })

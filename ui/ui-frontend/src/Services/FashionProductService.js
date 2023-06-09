@@ -92,4 +92,12 @@ export const FashionProductService = {
         return res;
     },
 
+    async getBySellerNameAndType(sellerName, type){
+        const res = await authenticateApi.request({
+            url: `/api/fashionProducts/getProductsBySellerNameAndType/sellerName/${sellerName}/type/${type}`,
+            method: "GET"
+        });
+        return res;
+    }
+
 }

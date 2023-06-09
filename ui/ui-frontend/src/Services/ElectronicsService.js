@@ -60,5 +60,13 @@ export const ElectronicsService = {
         return res;
     },
 
+    async getElectronicsBySellerNameAndType(sellerName, type){
+        const res = await authenticateApi.request({
+            url: `/api/electronicsProducts/getElectronicsBySellerNameAndType/sellerName/${sellerName}/type/${type}`,
+            method: "GET"
+        });
+        return res;
+    }
+
 }
 

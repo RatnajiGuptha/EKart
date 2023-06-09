@@ -60,7 +60,7 @@ import SellerHomeCategories from "./components/SellerModules/SellerHomeCategorie
 
 import AccountPage from "./components/UserModules/AccountPage";
 import InvoiceComponent from "./components/UserModules/InvoiceComponent";
-
+import TypesOfProductsBySeller from "./components/SellerModules/SellerGraphs/TypesOfProductsBySeller";
 function App() {
 
   const role = localStorage.getItem('role');
@@ -151,6 +151,8 @@ function App() {
           <Route path="/profile/:type" element={<AccountPage />}></Route>
           <Route path="/orderStatus/:id" element={<CheckMark />}></Route>
           <Route path="/invoice/:purchaseOrderId" element={<InvoiceComponent />}></Route>
+
+          <Route path="/dashboard" element={<TypesOfProductsBySeller />}></Route>
         </Routes >
       </Router >
     </div >
