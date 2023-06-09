@@ -38,7 +38,6 @@ function AddAccessoriesModule() {
 
         } else {
             AccessoriesService.addProduct(accessoriesProducts).then((response) => {
-
                 console.log(response.data)
             }).catch(error => {
                 console.log(error)
@@ -85,9 +84,7 @@ function AddAccessoriesModule() {
             <div className='container'>
                 <div className='row'>
                     <div className='card col-md-6 offset-md-3 offset-md-3 mt-4'>
-                        {
-                            titleAccessories()
-                        }
+                        {titleAccessories()}
                         <div className='card-body'>
                             <form>
                                 <div className='form-container'>

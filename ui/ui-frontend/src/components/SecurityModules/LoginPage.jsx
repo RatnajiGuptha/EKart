@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../../StyleSheets/Login.css"
 import { useNavigate, Link } from "react-router-dom";
 import { SecurityService } from "../../Services/SecurityService";
+import { toast } from 'react-toastify';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -18,11 +19,13 @@ function LoginPage() {
             navigate("/");
             window.location.reload(true);
             console.log(token);
+            toast.info("Welcome Back")
         })
             .catch((error) => {
                 if (error.response && error.response.status === 400) {
                     setErrorMsg("Invalid Credentials");
                     console.log("Invalid Credentials")
+                    toast.error("Invalid credentials / User not found!");
                 }
             })
 
@@ -31,8 +34,7 @@ function LoginPage() {
             console.log(i);
             localStorage.setItem("role", i.roles);
             localStorage.setItem("name", i.fullName);
-            localStorage.setItem("userEmail", i.email );
-
+            localStorage.setItem("userEmail", i.email);
         })
     }
 

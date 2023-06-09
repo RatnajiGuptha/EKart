@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { FaSearch, FaHome, FaShoppingCart, FaUser, FaSignInAlt, FaTh } from "react-icons/fa";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
@@ -6,22 +5,52 @@ import "../StyleSheets/Home.css"
 import { useNavigate } from "react-router-dom";
 
 function HeaderComponent() {
-
   const username = localStorage.getItem('username');
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
   const handleSearch = (e) => {
-    setSearch(e.target.value);
+    const { id, value } = e.target;
+    if (id === "search") {
+      setSearch(value)
+    }
+  }
+  let firstWord = search.charAt(0).toUpperCase()
+  let secondWord = search.slice(1)
+  let newWord = firstWord + secondWord;
+  console.log(newWord)
+  newWord = newWord.replace(/ /g, "_");
+  const displayResultsForSearch = () => {
+    if (newWord === "Toys") {
+      navigate(`/${newWord}`)
+    }
+    else if (newWord === "Flats" || newWord === "Shoes" || newWord === "FormalShoes" || newWord === "Heels") {
+      navigate(`/footwearBy/${newWord}`)
+    }
+    else if (newWord === "Mobiles" || newWord === "Refrigerators" || newWord === "Air_Conditioners" || newWord === "Headphones" || newWord === "Laptops" || newWord === "TV" || newWord === "Washing_Machines" || newWord === "Appliances") {
+      navigate(`/electronicsBy/${newWord}`)
+    }
+    else if (newWord === "Beauty") {
+      navigate(`/beauty`)
+    }
+    else if (newWord === "Jewellery" || newWord === "HandBags" || newWord === "Watches" || newWord === "Sunglasses") {
+      navigate(`/accessoriesBy/${newWord}`)
+    }
+    else if (newWord === "KurthaSets" || newWord === "Sarees" || newWord === "Tshirt" || newWord === "ActiveWear" || newWord === "KidsWear" || newWord === "JumpSuits") {
+      navigate(`/fashionBy/suitablefor/Female/${newWord}`)
+    }
+    else if (newWord === "SportsWear" || newWord === "Shirts" || newWord === "Trousers" || newWord === "Jeans" || newWord === "EthnicWear" || newWord === "Suits") {
+      navigate(`/fashionBy/suitablefor/Male/${newWord}`)
+    }
+    else {
+    }
+    console.log(search);
   }
   const handleLogin = (e) => {
     navigate("/")
   }
-
   const handleLogout = () => {
     localStorage.clear();
   }
-
 
   return (
     <Navbar className="navbar navbar-dark bg-dark" expand="lg">
@@ -30,11 +59,14 @@ function HeaderComponent() {
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
         <Navbar.Collapse id="basic-navbar-nav">
           <Container className="search-bar">
-            < input type="text"
-              placeholder="Search"
-              value={search}
-              onChange={handleSearch} />
-            <FaSearch className="search-icon" />
+            <form onSubmit={displayResultsForSearch}>
+              < input type="text"
+                placeholder="Search"
+                id="search"
+                value={search}
+                onChange={(e) => handleSearch(e)} />
+            </form>
+            <FaSearch className="search-icon" onClick={displayResultsForSearch} />
           </Container>
           <Container className="d-flex flex-row justify-content-end">
             <Nav >
@@ -62,9 +94,9 @@ function HeaderComponent() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-
   );
 }
 
-
 export default HeaderComponent;
+
+

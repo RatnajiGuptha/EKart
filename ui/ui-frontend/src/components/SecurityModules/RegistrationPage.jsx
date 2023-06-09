@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../StyleSheets/Login.css";
 import { SecurityService } from "../../Services/SecurityService";
 
 function Registrationpage() {
-
+    const navigate = useNavigate();
+    
     const [registerData, setRegisterData] = useState({
         userName: '',
         fullName: '',
@@ -92,6 +93,7 @@ function Registrationpage() {
         if (await validateForm()) {
             SecurityService.addUser(registerData).then((res) => {
                 console.log(res.data);
+                navigate("/login")
             })
         }
     }
