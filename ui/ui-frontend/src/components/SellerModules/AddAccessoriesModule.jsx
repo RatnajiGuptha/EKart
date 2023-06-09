@@ -19,6 +19,7 @@ function AddAccessoriesModule() {
     const [productImg5, setProductImg5] = useState('')
     const [color, setColor] = useState('')
     const [qty, setQty] = useState('')
+    const [sellerName, setSellerName] = useState('');
     const { accessoryId } = useParams();
 
     const saveOrUpdateAccessories = (e) => {
@@ -26,7 +27,7 @@ function AddAccessoriesModule() {
 
         const accessoriesProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
-            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty
+            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty,sellerName
         }
 
         if (accessoryId) {
@@ -48,6 +49,8 @@ function AddAccessoriesModule() {
     }
 
     useEffect(() => {
+        const name = localStorage.getItem("name");
+        setSellerName(name);
 
         AccessoriesService.getAccessoriesProductById(accessoryId).then((response) => {
             setProductName(response.data.productName)
@@ -66,6 +69,7 @@ function AddAccessoriesModule() {
             setProductImg5(response.data.productImg5)
             setColor(response.data.color)
             setQty(response.data.qty)
+            setSellerName(localStorage.getItem("name"))
         }).catch(error => {
             console.log(error)
         })

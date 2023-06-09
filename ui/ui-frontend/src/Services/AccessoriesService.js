@@ -57,5 +57,14 @@ export const AccessoriesService = {
             data: accessoriesProducts
         })
         return res;
-    }
+    },
+
+    async getAccessoriesBySellerNameAndType(sellerName, type) {
+        const res = await api.request({
+            url: `/api/accessoriesProducts/getAccessoriesBySellerNameAndType/sellerName/${sellerName}/type/${type}`,
+            method: "GET",
+        })
+        return res;
+    
+      }
 }

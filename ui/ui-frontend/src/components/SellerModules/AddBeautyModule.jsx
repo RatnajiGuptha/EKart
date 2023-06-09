@@ -17,6 +17,7 @@ function AddBeautyModule() {
     const [productImg3, setProductImg3] = useState('')
     const [productImg4, setProductImg4] = useState('')
     const [qty, setQty] = useState('')
+    const [sellerName, setSellerName] = useState('');
     const { beautyId } = useParams();
 
     const saveOrUpdateBeauty = (e) => {
@@ -24,7 +25,7 @@ function AddBeautyModule() {
 
         const beauty = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
-            productImg1, productImg2, productImg3, productImg4, qty
+            productImg1, productImg2, productImg3, productImg4, qty,sellerName
         }
 
         if (beautyId) {
@@ -45,6 +46,8 @@ function AddBeautyModule() {
     }
 
     useEffect(() => {
+        const name = localStorage.getItem("name");
+        setSellerName(name);
 
         BeautyService.getBeautyProductsById(beautyId).then((response) => {
             setProductName(response.data.productName)
@@ -61,6 +64,7 @@ function AddBeautyModule() {
             setProductImg3(response.data.productImg3)
             setProductImg4(response.data.productImg4)
             setQty(response.data.qty)
+            setSellerName(localStorage.getItem("name"))
         }).catch(error => {
             console.log(error)
         })
