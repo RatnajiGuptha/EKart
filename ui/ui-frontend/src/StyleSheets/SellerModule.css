@@ -1,3 +1,10 @@
+.addProduct-container {
+    background-color: #E6E6E6;
+    background-size: cover;
+    height: 100%;
+}
+
+
 .form-container {
     margin-bottom: 10px;
     font-weight: bold;
@@ -28,31 +35,31 @@
     /* background-color: #f5f5f5; */
 }
 
-.heading{
+.heading {
     font-family: 'sans-serif';
     font-weight: bold;
-}   
-
-.paragraph{
-    font-weight:bold;
 }
 
-.view-image{
-    height:95px;
-    width:90px;
+.paragraph {
+    font-weight: bold;
 }
 
-.para{
+.view-image {
+    height: 95px;
+    width: 90px;
+}
+
+.para {
     text-align: left;
     margin-left: 10px;
 }
 
-.horizantal{
-    width:100%;
-    text-align:left;
+.horizantal {
+    width: 100%;
+    text-align: left;
 }
 
-.add-button{
+.add-button {
     display: flex;
     justify-content: flex-start;
     margin-left: 10px;
@@ -99,7 +106,7 @@
 .product-info {
     text-align: center;
     font-size: 25px;
-    font-family:'Arial';
+    font-family: 'Arial';
     font-weight: 200px;
 }
 
@@ -107,6 +114,6 @@
     margin: 5px 0;
 }
 
-.link{
+.link {
     text-decoration: none;
 }

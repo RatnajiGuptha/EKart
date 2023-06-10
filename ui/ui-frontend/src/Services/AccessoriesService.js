@@ -34,7 +34,7 @@ export const AccessoriesService = {
     },
 
     async getAccessoriesProductsBySellerName(sellerName) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/accessoriesProducts/getAccessoriesBySellerName/sellerName/${sellerName}`,
             method: 'GET'
         })
@@ -65,6 +65,6 @@ export const AccessoriesService = {
             method: "GET",
         })
         return res;
-    
-      }
+
+    }
 }

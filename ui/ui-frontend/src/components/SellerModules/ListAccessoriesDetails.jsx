@@ -41,7 +41,7 @@ function ListAccessoriesDetails() {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(function (item, i) {
+                        {products.map((item, i) => {
                             return (
                                 <tr key={item.accessoryId}>
                                     <td>{i + 1}</td>

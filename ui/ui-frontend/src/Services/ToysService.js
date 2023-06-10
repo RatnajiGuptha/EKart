@@ -18,7 +18,7 @@ export const ToysService = {
     },
 
     async getToysBySellerName(sellerName) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/Toys/getToysBySellerName/sellerName/${sellerName}`,
             method: 'GET'
         })

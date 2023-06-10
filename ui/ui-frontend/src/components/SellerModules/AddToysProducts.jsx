@@ -81,12 +81,10 @@ function AddToysProducts() {
     }
     return (
         <div>
-            <div className='container'>
+            <div className='addProduct-container'>
                 <div className='row'>
                     <div className='card col-md-6 offset-md-3 offset-md-3 mt-4'>
-                        {
-                            title()
-                        }
+                        {title()}
                         <div className='card-body'>
                             <form>
                                 <div className='form-container'>

@@ -26,6 +26,7 @@ function ListBeautyDetails() {
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th> S.No</th>
                             <th> Product Name</th>
                             <th> Product Image</th>
                             <th> Product Price</th>
@@ -38,9 +39,10 @@ function ListBeautyDetails() {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(function (item) {
+                        {products.map((item, i) => {
                             return (
                                 <tr key={item.beautyId}>
+                                    <td>{i + 1}</td>
                                     <td> {item.productName}</td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>

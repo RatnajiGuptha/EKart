@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "../../StyleSheets/SellerModule.css";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { AccessoriesService } from '../../Services/AccessoriesService';
 function AddAccessoriesModule() {
     const [productName, setProductName] = useState('')
@@ -21,18 +21,20 @@ function AddAccessoriesModule() {
     const [qty, setQty] = useState('')
     const [sellerName, setSellerName] = useState('');
     const { accessoryId } = useParams();
+    const navigate = useNavigate("");
 
     const saveOrUpdateAccessories = (e) => {
         e.preventDefault();
 
         const accessoriesProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
-            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty,sellerName
+            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty, sellerName
         }
 
         if (accessoryId) {
             AccessoriesService.updateAccessoriesProducts(accessoryId, accessoriesProducts).then((response) => {
                 console.log(response.data)
+                navigate("/listAccessoriesProducts")
             }).catch(error => {
                 console.log(error)
             })
@@ -40,6 +42,7 @@ function AddAccessoriesModule() {
         } else {
             AccessoriesService.addProduct(accessoriesProducts).then((response) => {
                 console.log(response.data)
+                navigate("/listAccessoriesProducts")
             }).catch(error => {
                 console.log(error)
             })
@@ -68,7 +71,7 @@ function AddAccessoriesModule() {
             setProductImg5(response.data.productImg5)
             setColor(response.data.color)
             setQty(response.data.qty)
-            setSellerName(localStorage.getItem("name"))
+            setSellerName(response.data.sellerName)
         }).catch(error => {
             console.log(error)
         })
