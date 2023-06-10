@@ -34,7 +34,7 @@ const InvoiceComponent = () => {
                         <h1 className="left">E-Kart</h1>
                         <div>
                             <p className="orderId">Order Id: {orderss.purchaseOrderId}</p>
-                            <p className="">Order Date: { }</p>
+                            <p className="">Order Date: {orderss.orderDate }</p>
                         </div>
                     </div>
                     <div>
