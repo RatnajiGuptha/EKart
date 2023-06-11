@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-// import Changepassword from "./Changepassword";
-import "../../StyleSheets/ManageProfile.css";
+import React, { useState, useEffect } from "react";
 import { SecurityService } from "../../Services/SecurityService";
+import { useNavigate } from "react-router-dom";
+import "../../StyleSheets/ManageProfile.css";
 
 const ProfileComponent = () => {
   const [showChangepassword, setChangepassword] = useState(false);
@@ -12,19 +11,21 @@ const ProfileComponent = () => {
   const [contactNumber, setContactNumber] = useState('');
   const [displayProfile, setDisplayProfile] = useState(true);
   const [editProfile, setEditProfile] = useState(false);
-
-
+  const navigate = useNavigate("")
 
   useEffect(() => {
-
     SecurityService.getUserInfo(userName).then((response) => {
       setFullName(response.data.fullName)
       setEmail(response.data.email)
       setContactNumber(response.data.contactNumber)
 
       console.log(response.data)
+    }).catch((err) => {
+      console.log(err.response.data)
+      navigate("/login")
+      localStorage.clear();
     })
-  }, [userName]);
+  }, [userName, navigate]);
 
   const toggleChangepassword = (event) => {
     setChangepassword(!showChangepassword);

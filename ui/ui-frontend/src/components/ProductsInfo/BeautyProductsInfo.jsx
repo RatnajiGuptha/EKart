@@ -20,7 +20,7 @@ const BeautyProductsInfo = () => {
       setProductInfo(response.data);
       setImage(response.data.productImg1);
       setCategory("Beauty");
-    });
+    })
 
   }, [beautyId]);
 
@@ -41,10 +41,12 @@ const BeautyProductsInfo = () => {
   const handleCardItems = async () => {
 
     if (localStorage.getItem('token')) {
-      const datad = await CartService.getProductCategoryAndProductId(
-        category,
-        beautyId
-      );
+      const datad = await CartService.getProductCategoryAndProductId(category, beautyId).then()
+        .catch((err) => {
+          console.log(err)
+          navigate("/login")
+          localStorage.clear();
+        });
 
       console.log(datad.data);
 
@@ -69,15 +71,24 @@ const BeautyProductsInfo = () => {
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
             alert("Item added successfully");
+          }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
           });
         } else {
-          alert(`${productsInfo.qty}`, " products Left");
+          alert(" products Left");
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty);
-        alert("Cart contains " + qty + " " + datad.data.productName);
+        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
+          alert("Cart contains " + qty + " " + datad.data.productName);
+        }).catch((err) => {
+          console.log(err.response.data)
+          navigate("/login")
+          localStorage.clear();
+        });
       }
     }
     else {

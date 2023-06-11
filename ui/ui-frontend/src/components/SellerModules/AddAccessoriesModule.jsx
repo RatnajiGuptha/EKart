@@ -37,6 +37,7 @@ function AddAccessoriesModule() {
                 navigate("/listAccessoriesProducts")
             }).catch(error => {
                 console.log(error)
+                
             })
 
         } else {

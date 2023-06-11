@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import {AddressService} from "../../Services/AddressService";
+import { AddressService } from "../../Services/AddressService";
 import "../../StyleSheets/NewAddress.css";
+import { useNavigate } from "react-router-dom";
 
 const AddNewAddressComponent = () => {
 
@@ -13,7 +14,7 @@ const AddNewAddressComponent = () => {
     const [State, setState] = useState('');
     const [District, setDistrict] = useState('');
     const [Pincode, setPincode] = useState('');
-
+    const navigate = useNavigate("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,6 +31,10 @@ const AddNewAddressComponent = () => {
             pincode: Pincode
         }).then((response) => {
             console.log(response.data)
+        }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
         })
         console.log(Name, ContactNumber, Area, City, State, District, Pincode);
         window.location.reload(false)

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/Cart.css";
 
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
   const username = localStorage.getItem('username');
+  const navigate = useNavigate("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,21 +14,28 @@ const CartComponent = () => {
         const response = await CartService.getCartItemsByUser(username)
         setCartItems(response.data);
         // console.log(response.data);
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err.response.data)
+        navigate("/login")
+        localStorage.clear();
       }
     }
     fetchData();
-  }, [username]);
+  }, [username, navigate]);
 
   const checkoutFromCart = () => {
-    window.location.assign(`paymentPage/${username}`)
+    navigate(`/paymentPage/${username}`)
   };
 
   const deleteItemFromCarttt = async (cartId) => {
-    CartService.deleteItemFromCart(cartId);
-    // alert("Item Deleted Successfully");
-    window.location.reload(false);
+    await CartService.deleteItemFromCart(cartId).then(() => {
+      // alert("Item Deleted Successfully");
+      window.location.reload(false);
+    }).catch((err) => {
+      console.log(err.response.data)
+      navigate("/login")
+      localStorage.clear();
+    })
   };
 
 

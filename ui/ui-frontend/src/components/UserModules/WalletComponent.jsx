@@ -1,20 +1,22 @@
-import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react';
-
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { UserBalanceService } from '../../Services/UserBalanceService';
 
 const WalletComponent = () => {
-
     const [balance, setBalance] = useState("");
     const userName = localStorage.getItem("username");
+    const navigate = useNavigate("")
 
     useEffect(() => {
         UserBalanceService.getUserBalance(userName).then((Response) => {
             setBalance(Response.data);
             console.log("Balance", Response.data);
+        }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
         });
-    }, [userName])
+    }, [userName, navigate])
 
 
     return (

@@ -1,13 +1,9 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, React } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { OrderService } from '../../Services/OrderService';
-import "../../StyleSheets/Checkout.css";
-
 import { UserBalanceService } from '../../Services/UserBalanceService';
 import { AddressService } from '../../Services/AddressService';
-
-
+import { OrderService } from '../../Services/OrderService';
+import "../../StyleSheets/Checkout.css";
 
 const CheckoutComponent = () => {
     const { userName } = useParams();
@@ -23,15 +19,23 @@ const CheckoutComponent = () => {
         UserBalanceService.getUserBalance(userName).then((Response) => {
             setBalance(Response.data);
             console.log("Balance", Response.data);
+        }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
         });
 
         AddressService.getAllAddress(userName).then((Response) => {
             setAddressList(Response.data);
             console.log(Response.data);
+        }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
         })
 
 
-    }, [userName]);
+    }, [userName, navigate]);
 
     // let id = 0;
     const handleOnChange = (e) => {
@@ -42,32 +46,37 @@ const CheckoutComponent = () => {
         // id = e.target.value;
         recievingAddress(e.target.value);
     };
-    const recievingAddress = (e) => {
-        AddressService.getAddressById(e).then((Response) => {
+
+    const recievingAddress = async (e) => {
+        await AddressService.getAddressById(e).then((Response) => {
             console.log(Response.data);
             setAddress(Response.data);
+        }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
         })
     }
-
-
 
     const Email = localStorage.getItem("userEmail");
     console.log("email", Email);
     console.log(address.addressId)
-    const paymentFromCart = () => {
-        OrderService.createOrderForCart(userName, address.addressId, Email).then((Response) => {
+
+    const paymentFromCart = async () => {
+        await OrderService.createOrderForCart(userName, address.addressId, Email).then((Response) => {
             setPurchaseOrder(Response.data);
             console.log(purchaseOrder);
             return Response.data;
         }).then((data) => {
             console.log(data?.purchaseOrderId)
             console.log(data)
-
             console.log("...........receivedData.........");
             const i = data?.purchaseOrderId;
             navigate(`/orderStatus/${i}`);
-
-
+        }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
         });
         // console.log(Email);
     }
@@ -107,7 +116,6 @@ const CheckoutComponent = () => {
                                 </table>
                             </div>
                         </form>
-
                     </div>
                     {/* </div> */}
                 </div>

@@ -39,10 +39,12 @@ const FootwearProductsInfo = () => {
   const handleCardItems = async () => {
 
     if (localStorage.getItem('token')) {
-      const datad = await CartService.getProductCategoryAndProductId(
-        category,
-        footWearId
-      );
+      const datad = await CartService.getProductCategoryAndProductId(category, footWearId).then()
+        .catch((err) => {
+          console.log(err.response.data)
+          navigate("/login")
+          localStorage.clear();
+        });
 
       console.log(datad.data);
 
@@ -64,59 +66,55 @@ const FootwearProductsInfo = () => {
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
+            //   console.log(response);
             alert("Item added successfully");
+          }).catch((err) => {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
           });
         } else {
-          alert(`${productsInfo.qty}`, " products Left");
+          alert(" products Left");
         }
       } else {
+        //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty);
-        alert("Cart contains " + qty + " " + datad.data.productName);
+        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
+          alert("Cart contains " + qty + " " + datad.data.productName);
+        }).catch((err) => {
+          console.log(err.response.data)
+          navigate("/login")
+          localStorage.clear();
+        });
       }
     }
     else {
       navigate("/login");
-
     }
   };
+
   return (
     <div className="product-info-container">
       <div className="product-image-container">
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg1)}
-          src={productsInfo.productImg1}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg1)}
+          src={productsInfo.productImg1} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg2)}
-          src={productsInfo.productImg2}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg2)}
+          src={productsInfo.productImg2} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg3)}
-          src={productsInfo.productImg3}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg3)}
+          src={productsInfo.productImg3} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg4)}
-          src={productsInfo.productImg4}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg4)}
+          src={productsInfo.productImg4} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg5)}
-          src={productsInfo.productImg5}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg5)}
+          src={productsInfo.productImg5} />
       </div>
       <div className="product-main-image-container">
         <img className="product-main-image" src={image} alt="/"></img>
