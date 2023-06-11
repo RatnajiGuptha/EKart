@@ -38,14 +38,15 @@ const FashionProductsInfo = () => {
   };
 
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      productsInfo.fashionId
-    );
-
-    // console.log(datad.data);
-    console.log(productsInfo.fashionId);
+   
     if (localStorage.getItem('token')) {
+      const datad = await CartService.getProductCategoryAndProductId(
+        category,
+        productsInfo.fashionId
+      );
+  
+      // console.log(datad.data);
+      console.log(productsInfo.fashionId);
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.fashionId,

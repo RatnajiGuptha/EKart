@@ -37,13 +37,12 @@ const ElectronicsProductsInfo = () => {
     setQuantity(quantity + 1);
   };
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      electronicsId
-    );
-
-    console.log(datad.data);
     if (localStorage.getItem('token')) {
+      const datad = await CartService.getProductCategoryAndProductId(
+        category,
+        electronicsId
+      );
+      console.log(datad.data);
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.electronicsId,

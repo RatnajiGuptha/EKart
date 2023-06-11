@@ -35,14 +35,13 @@ const ToysProductsInfo = () => {
   }, [toyId]);
 
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      toyId
-    );
-
-    console.log(datad.data);
-
     if (localStorage.getItem('token')) {
+      const datad = await CartService.getProductCategoryAndProductId(
+        category,
+        toyId
+      );
+
+      console.log(datad.data);
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.toyId,
@@ -61,7 +60,7 @@ const ToysProductsInfo = () => {
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
-            //   console.log(response);
+              console.log(response);
             alert("Item added successfully");
           });
         } else {

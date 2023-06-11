@@ -37,14 +37,15 @@ const FootwearProductsInfo = () => {
   }, [footWearId]);
 
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      footWearId
-    );
-
-    console.log(datad.data);
 
     if (localStorage.getItem('token')) {
+      const datad = await CartService.getProductCategoryAndProductId(
+        category,
+        footWearId
+      );
+
+      console.log(datad.data);
+
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.footWearId,
