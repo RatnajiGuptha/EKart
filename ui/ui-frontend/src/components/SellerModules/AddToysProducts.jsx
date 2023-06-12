@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import { ToysService } from '../../Services/ToysService';
 function AddToysProducts() {
@@ -19,35 +19,48 @@ function AddToysProducts() {
     const [productImg5, setProductImg5] = useState('')
     const [color, setColor] = useState('')
     const [qty, setQty] = useState('')
+    const [sellerName, setSellerName]=useState('')
     const { toyId } = useParams();
+    const navigate=useNavigate('');
 
     const saveOrUpdateToy = (e) => {
         e.preventDefault();
 
         const toyProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
-            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty
+            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty, sellerName
         }
 
         if (toyId) {
             ToysService.updateToyProducts(toyId, toyProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listToysProducts")
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
 
         } else {
-            ToysService.saveAllToys(toyProducts).then((response) => {
-
+            ToysService.saveToys(toyProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listToysProducts")
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
 
     }
 
     useEffect(() => {
+        const name = localStorage.getItem("name");
+        setSellerName(name);
 
         ToysService.getToysById(toyId).then((response) => {
             setProductName(response.data.productName)
@@ -66,6 +79,7 @@ function AddToysProducts() {
             setProductImg5(response.data.productImg5)
             setColor(response.data.color)
             setQty(response.data.qty)
+            setSellerName(response.data.sellerName)
         }).catch(error => {
             console.log(error)
         })
@@ -74,9 +88,9 @@ function AddToysProducts() {
     const title = () => {
 
         if (toyId) {
-            return <h2 className="text-center">Update Toy Products</h2>
+            return <h2 className="text-center p-2">Update Toy Products</h2>
         } else {
-            return <h2 className="text-center">Add Toy Products</h2>
+            return <h2 className="text-center p-2">Add Toy Products</h2>
         }
     }
     return (
@@ -184,6 +198,10 @@ function AddToysProducts() {
                                 </div>
 
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateToy(e)} >Submit </button>
+                            
+                                <Link to="/listToysProducts">
+                                    <button className='btn btn-warning m-3'>Back</button>
+                                </Link>
                             </form>
                         </div>
                     </div>

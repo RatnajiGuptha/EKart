@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import { FashionProductService } from '../../Services/FashionProductService';
 function AddFashionModule() {
@@ -21,7 +21,7 @@ function AddFashionModule() {
     const [qty, setQty] = useState('')
     const { fashionId } = useParams()
     const [sellerName, setSellerName] = useState('');
-
+    const navigate = useNavigate('');
 
     const saveOrUpdateProduct = (e) => {
         e.preventDefault();
@@ -36,15 +36,25 @@ function AddFashionModule() {
         if (fashionId) {
             FashionProductService.updateFashionProducts(fashionId, fashionProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listFashionProducts")
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
 
         } else {
             FashionProductService.addFashionProduct(fashionProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listFashionProducts")
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
     }
@@ -83,9 +93,9 @@ function AddFashionModule() {
     const title = () => {
 
         if (fashionId) {
-            return <h2 className="text-center">Update Fashion Products</h2>
+            return <h2 className="text-center p-2">Update Fashion Products</h2>
         } else {
-            return <h2 className="text-center">Add Fashion Products</h2>
+            return <h2 className="text-center p-2">Add Fashion Products</h2>
         }
     }
 
@@ -223,6 +233,10 @@ function AddFashionModule() {
                                 </div>
 
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateProduct(e)} >Submit </button>
+
+                                <Link to="/listFashionProducts">
+                                    <button className='btn btn-warning m-3'>Back</button>
+                                </Link>
                             </form>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import { BeautyService } from '../../Services/BeautyService';
 function AddBeautyModule() {
@@ -19,27 +19,38 @@ function AddBeautyModule() {
     const [qty, setQty] = useState('')
     const [sellerName, setSellerName] = useState('');
     const { beautyId } = useParams();
+    const navigate = useNavigate('');
 
     const saveOrUpdateBeauty = (e) => {
         e.preventDefault();
 
         const beauty = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
-            productImg1, productImg2, productImg3, productImg4, qty,sellerName
+            productImg1, productImg2, productImg3, productImg4, qty, sellerName
         }
 
         if (beautyId) {
             BeautyService.updateBeautyProducts(beautyId, beauty).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listBeautyProducts");
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
 
         } else {
             BeautyService.saveBeautyProducts(beauty).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listBeautyProducts");
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
 
@@ -55,7 +66,7 @@ function AddBeautyModule() {
             setProductPrice(response.data.productPrice)
             setProductDescription(response.data.productDescription)
             setBrandName(response.data.brandName)
-            setType(response.data.type)
+            setType("Beauty")
             setSuitableFor(response.data.suitablefor)
             setManufactureDate(response.data.manufactureDate)
             setSize(response.data.size)
@@ -73,9 +84,9 @@ function AddBeautyModule() {
     const title = () => {
 
         if (beautyId) {
-            return <h2 className="text-center">Update Beauty Products</h2>
+            return <h2 className="text-center p-2">Update Beauty Products</h2>
         } else {
-            return <h2 className="text-center">Add Beauty Products</h2>
+            return <h2 className="text-center p-2">Add Beauty Products</h2>
         }
     }
     return (
@@ -171,6 +182,10 @@ function AddBeautyModule() {
                                 </div>
 
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateBeauty(e)} >Submit </button>
+
+                                <Link to='/listBeautyProducts'>
+                                    <button className='btn btn-warning m-3'>Back</button>
+                                </Link>
                             </form>
                         </div>
                     </div>

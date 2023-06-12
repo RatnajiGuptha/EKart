@@ -1,33 +1,40 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { BeautyService } from "../../Services/BeautyService";
 import "../../StyleSheets/SellerModule.css"
 function ListBeautyDetails() {
     const [products, setProducts] = useState([]);
     const name = localStorage.getItem("name");
+    const navigate=useNavigate("");
 
     useEffect(() => {
         BeautyService.getBeautyBySellerName(name).then((res) => {
             console.log(res.data)
             setProducts(res.data);
+        }).catch(err => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
-    }, [name])
+    }, [name,navigate])
 
     return (
-        <div>
+        <div className="container">
             <br></br>
             <h2 className="text-center">Beauty Products List</h2>
-            <div className="add-button">
+            <div className="add-button mb-2">
                 <Link to={`/addBeauty`}>
                     <button className="btn btn-primary"> Add Product</button>
                 </Link>
             </div>
-            <div className="row p-4">
+            <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th> S.No</th>
-                            <th> Product Name</th>
+                            <th style={{width:"200px"}}> Product Name</th>
                             <th> Product Image</th>
                             <th> Product Price</th>
                             <th>Brand Name</th>
@@ -43,7 +50,7 @@ function ListBeautyDetails() {
                             return (
                                 <tr key={item.beautyId}>
                                     <td>{i + 1}</td>
-                                    <td> {item.productName}</td>
+                                    <td style={{textAlign:"left"}}> {item.productName}</td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
