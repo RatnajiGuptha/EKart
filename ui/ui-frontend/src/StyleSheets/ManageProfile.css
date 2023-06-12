@@ -8,6 +8,19 @@
 .myprofile-profile-form h6 {
   text-align: left;
 }
+.myprofile-profile-form label {
+  text-align: left;
+  font-weight: 500;
+}
+
+.myprofile-profile-form label input {
+  text-align: left;
+  display: block;
+}
+
+.label-myprofile {
+  text-align: left;
+}
 .myprofile-profile-form p {
   text-align: left;
   border: 1.5px solid black;
@@ -32,9 +45,9 @@
   flex-direction: row;
   justify-content: center;
 }
-.myprofile-profile-form-buttons button {
-  background-color: #efefef;
+.myprofile-profile-form button {
   border-radius: 7px;
   margin: 5px;
 }
+
 
