@@ -14,9 +14,12 @@ const AddressComponent = () => {
             console.log(response.data.length);
             setAddressList(response.data);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
+
         })
     }, [navigate])
 
@@ -30,8 +33,11 @@ const AddressComponent = () => {
             console.log("address deleted successfully")
             window.location.reload(false);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
 
     }

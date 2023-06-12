@@ -19,9 +19,11 @@ const CheckMark = () => {
                 console.log(Response.data.paymentStatus);
                 setPaymentStatus(Response.data.paymentStatus);
             }).catch((err) => {
-                console.log(err.response.data)
-                navigate("/login")
-                localStorage.clear();
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
             setIsLoading(false);
         }, 5000);

@@ -13,9 +13,11 @@ const MyOrdersComponent = () => {
             console.log(response.data);
             // console.log(order);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         });
     }, [navigate]);
 

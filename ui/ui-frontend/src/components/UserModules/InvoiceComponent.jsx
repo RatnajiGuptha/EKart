@@ -16,8 +16,11 @@ const InvoiceComponent = () => {
             console.log(response.data);
             // console.log(response.data.brandName[0]);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         });
     }, [purchaseOrderId,navigate]);
 

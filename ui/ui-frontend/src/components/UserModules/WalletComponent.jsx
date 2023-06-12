@@ -12,9 +12,11 @@ const WalletComponent = () => {
             setBalance(Response.data);
             console.log("Balance", Response.data);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data);
+                navigate("/login");
+                localStorage.clear();
+            }
         });
     }, [userName, navigate])
 

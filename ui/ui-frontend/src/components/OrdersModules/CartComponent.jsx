@@ -15,9 +15,11 @@ const CartComponent = () => {
         setCartItems(response.data);
         // console.log(response.data);
       } catch (err) {
-        console.log(err.response.data)
-        navigate("/login")
-        localStorage.clear();
+        if (err.response.status === 401) {
+          console.log(err.response.data)
+          navigate("/login")
+          localStorage.clear();
+        }
       }
     }
     fetchData();
@@ -32,9 +34,11 @@ const CartComponent = () => {
       // alert("Item Deleted Successfully");
       window.location.reload(false);
     }).catch((err) => {
-      console.log(err.response.data)
-      navigate("/login")
-      localStorage.clear();
+      if (err.response.status === 401) {
+        console.log(err.response.data)
+        navigate("/login")
+        localStorage.clear();
+      }
     })
   };
 

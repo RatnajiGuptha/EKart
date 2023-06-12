@@ -32,9 +32,11 @@ const AddNewAddressComponent = () => {
         }).then((response) => {
             console.log(response.data)
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
         console.log(Name, ContactNumber, Area, City, State, District, Pincode);
         window.location.reload(false)

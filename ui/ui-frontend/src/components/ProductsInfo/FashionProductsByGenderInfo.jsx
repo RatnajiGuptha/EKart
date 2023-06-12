@@ -43,9 +43,11 @@ const FashionProductsByGenderInfo = () => {
     if (localStorage.getItem('token')) {
       const datad = await CartService.getProductCategoryAndProductId(category, productId).then()
         .catch((err) => {
-          console.log(err.response.data)
-          navigate("/login")
-          localStorage.clear();
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+        }
         });
 
       // console.log(datad.data);
@@ -72,9 +74,11 @@ const FashionProductsByGenderInfo = () => {
             //   console.log(response);
             alert("Item added successfully");
           }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+              console.log(err.response.data)
+              navigate("/login")
+              localStorage.clear();
+          }
           });
         } else {
           alert(" products Left");
@@ -85,9 +89,11 @@ const FashionProductsByGenderInfo = () => {
         await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
           alert("Cart contains " + qty + " " + datad.data.productName);
         }).catch((err) => {
-          console.log(err.response.data)
-          navigate("/login")
-          localStorage.clear();
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+        }
         });
       }
     }

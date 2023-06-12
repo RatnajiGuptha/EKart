@@ -20,18 +20,22 @@ const CheckoutComponent = () => {
             setBalance(Response.data);
             console.log("Balance", Response.data);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         });
 
         AddressService.getAllAddress(userName).then((Response) => {
             setAddressList(Response.data);
             console.log(Response.data);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
 
 
@@ -52,9 +56,11 @@ const CheckoutComponent = () => {
             console.log(Response.data);
             setAddress(Response.data);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
     }
 
@@ -74,9 +80,11 @@ const CheckoutComponent = () => {
             const i = data?.purchaseOrderId;
             navigate(`/orderStatus/${i}`);
         }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         });
         // console.log(Email);
     }

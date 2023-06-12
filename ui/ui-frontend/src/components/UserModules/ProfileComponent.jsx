@@ -21,9 +21,11 @@ const ProfileComponent = () => {
 
       console.log(response.data)
     }).catch((err) => {
-      console.log(err.response.data)
-      navigate("/login")
-      localStorage.clear();
+      if (err.response.status === 401) {
+        console.log(err.response.data)
+        navigate("/login")
+        localStorage.clear();
+      }
     })
   }, [userName, navigate]);
 
@@ -43,6 +45,13 @@ const ProfileComponent = () => {
     SecurityService.updateUserByUserName(userName, fullName, email, contactNumber).then((response) => {
       console.log(response.data)
     })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          console.log(err.response.data)
+          navigate("/login")
+          localStorage.clear();
+        }
+      })
     console.log(userName, fullName, email, contactNumber);
   };
 

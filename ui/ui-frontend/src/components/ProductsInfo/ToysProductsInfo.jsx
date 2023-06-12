@@ -39,9 +39,11 @@ const ToysProductsInfo = () => {
     if (localStorage.getItem('token')) {
       const datad = await CartService.getProductCategoryAndProductId(category, toyId).then()
         .catch((err) => {
-          console.log(err.response.data)
-          navigate("/login")
-          localStorage.clear();
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
         });
 
       console.log(datad.data);
@@ -66,9 +68,11 @@ const ToysProductsInfo = () => {
             //   console.log(response);
             alert("Item added successfully");
           }).catch((err) => {
-            console.log(err.response.data)
-            navigate("/login")
-            localStorage.clear();
+            if (err.response.status === 401) {
+              console.log(err.response.data)
+              navigate("/login")
+              localStorage.clear();
+            }
           });
         } else {
           alert(" products Left");
@@ -79,9 +83,11 @@ const ToysProductsInfo = () => {
         await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
           alert("Cart contains " + qty + " " + datad.data.productName);
         }).catch((err) => {
-          console.log(err.response.data)
-          navigate("/login")
-          localStorage.clear();
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
         });
       }
     }
