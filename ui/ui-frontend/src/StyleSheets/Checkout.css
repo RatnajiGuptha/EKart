@@ -1,29 +1,37 @@
+.paymentPage{
+    align-items: center;
+    /* background-color: lightblue; */
+    /* min-height: 100vh; */
+}
+
 .card1 {
     margin: auto;
-    width: 800px;
-    padding: 3rem 3.5rem;
+    width: 400px;
+    padding: 2rem 2.5rem;
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     background-color: #DBDFEA; 
-     align-items: center; 
+    background-color: #e6e6e6; 
+    align-items: center; 
 
 }
 
 .card2{
     margin: auto;
     /* margin-left: 20px; */
-    margin-top: 25px;
-    width: 800px;
+    margin-top: 45px;
+    min-height: 300px;
+    width: 500px;
     padding: 3rem 3.5rem;
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     justify-content: center;
     align-items: center;
-    background-color: #DBDFEA; 
+    background-color: #e6e6e6; 
+    margin-left: 70px;
 }
 
 
 table {
     background-color: white;
-    width: 50vw;
+    width: 300px;
     height: 15vh;
     border-radius: 15px;
     /* border-color: black; */
@@ -37,29 +45,55 @@ form .img-fluid {
 payment-btn {
     margin-top: 50vh;
 }
-
-p .AddressText {
-    line-height: 0.7;
+.AddressText {
+    font-size: 14px;
+    font-family: Garamond, serif;
+    line-height: 10%;
 }
 
-.address-container {
+.address-container1 {
     display: flex;
-    flex-direction: row;
     text-align: start;
     border: 2px solid black;
-    width: 50vw;
+    width: 350px;
     border-radius: 2px;
     margin-bottom: 50px;
+    margin-left: 10px;
+    line-height: 80%;
+    background-color: white;
+   
 }
-.addr{
-    background-color: white
+.addr1{
+    background-color: white;
+    margin-top : 10px;
+    width:300px;
+    padding: 10px;
 }
 .addressTable2{
-    margin-left: 100px;
-    width: 40vw;
+    margin-left: 10px;
+    width: 350px;
     text-align: center;
 }
 .cashClass{
     align-items: center;
 
+}
+.paymentGif{
+margin-left: 70px;
+}
+.changeBtn{
+     margin-left:-15px; 
+    margin-top: 20px;
+   
+}
+.edit-icon{
+ width: 60px;
+ height:20px;
+ margin-top: 30px;
+ 
+}
+.addressText2{
+    font-family: Garamond, serif;
+    font-weight: bold;
+    line-height: 50%;
 }
