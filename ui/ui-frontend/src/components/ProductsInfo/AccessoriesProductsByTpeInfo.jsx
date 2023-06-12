@@ -7,12 +7,12 @@ import "../../StyleSheets/ProductInfo.css";
 const AccessoriesProductsByTpeInfo = () => {
 
   const username = localStorage.getItem("username");
-  const navigate = useNavigate();
   const { type, accessoryId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     AccessoriesService.getAccessoriesByTypeAndId(type, accessoryId).then(
@@ -22,7 +22,7 @@ const AccessoriesProductsByTpeInfo = () => {
         setImage(response.data.productImg1);
         setCategory("Accessories");
       }
-    );
+    )
   }, [type, accessoryId]);
 
   const handleClick = (imgSrc) => {
@@ -42,13 +42,18 @@ const AccessoriesProductsByTpeInfo = () => {
   const handleCardItems = async () => {
 
     if (localStorage.getItem('token')) {
-      const datad = await CartService.getProductCategoryAndProductId(
-        category,
-        accessoryId
-      );
+      const datad = await CartService.getProductCategoryAndProductId(category, accessoryId).then()
+        .catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+        }
+        });
 
       console.log(datad.data);
-      if (datad.data.cartId == null) {
+
+      if (datad.data.cartId === null) {
         const cart = {
           productId: productsInfo.accessoryId,
           userName: username,
@@ -67,8 +72,14 @@ const AccessoriesProductsByTpeInfo = () => {
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
-            //   console.log(response);
+            console.log(response);
             alert("Item added successfully");
+          }).catch((err) => {
+            if (err.response.status === 401) {
+              console.log(err.response.data)
+              navigate("/login")
+              localStorage.clear();
+          }
           });
         } else {
           alert(" products Left");
@@ -76,52 +87,45 @@ const AccessoriesProductsByTpeInfo = () => {
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty);
-        alert("Cart contains " + qty + " " + datad.data.productName);
+        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
+          alert("Cart contains " + qty + " " + datad.data.productName);
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+        }
+        });
       }
     }
     else {
       navigate("/login");
-
     }
   };
+
   return (
     <div className="product-info-container">
       <div className="product-image-container">
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg1)}
-          src={productsInfo.productImg1}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg1)}
+          src={productsInfo.productImg1} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg2)}
-          src={productsInfo.productImg2}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg2)}
+          src={productsInfo.productImg2} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg3)}
-          src={productsInfo.productImg3}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg3)}
+          src={productsInfo.productImg3} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg4)}
-          src={productsInfo.productImg4}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg4)}
+          src={productsInfo.productImg4} />
 
-        <img
-          className="card-images"
-          alt="/"
+        <img className="card-images" alt="/"
           onClick={() => handleClick(productsInfo.productImg5)}
-          src={productsInfo.productImg5}
-        />
+          src={productsInfo.productImg5} />
+
       </div>
       <div className="product-main-image-container">
         <img className="product-main-image" src={image} alt="/"></img>

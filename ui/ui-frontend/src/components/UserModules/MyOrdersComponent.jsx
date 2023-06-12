@@ -2,18 +2,24 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { OrderService } from "../../Services/OrderService";
 import "../../StyleSheets/MyOrders.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyOrdersComponent = () => {
     const [order, setOrder] = useState([]);
-
+    const navigate = useNavigate("")
     useEffect(() => {
         OrderService.getAllOrdersAfterPayment().then((response) => {
             setOrder(response.data.reverse());
             console.log(response.data);
             // console.log(order);
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         });
-    }, []);
+    }, [navigate]);
 
 
     return (

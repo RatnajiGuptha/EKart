@@ -84,6 +84,7 @@ function App() {
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
           <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
+          <Route path="/paymentPage/:userName/:addressId" element={<CheckoutComponent />}></Route>
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>

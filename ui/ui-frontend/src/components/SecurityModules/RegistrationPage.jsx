@@ -5,7 +5,7 @@ import { SecurityService } from "../../Services/SecurityService";
 
 function Registrationpage() {
     const navigate = useNavigate();
-    
+
     const [registerData, setRegisterData] = useState({
         userName: '',
         fullName: '',
@@ -79,8 +79,8 @@ function Registrationpage() {
         if (!registerData.password || registerData.password.trim().length < 8) {
             newError.password = 'Password should have at least 8 characters';
             valid = false;
-        } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$]+$/.test(registerData.password)) {
-            newError.password = 'Password should at least one letter, one number and one special character';
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(registerData.password)) {
+            newError.password = 'Password should at least one letter, one number';
             valid = false;
         }
 

@@ -10,7 +10,7 @@ const FooterComponent = () => {
             <div className='d-flex'>
                 <p className='footer-names'>Home</p>
                 <p className='footer-names'>About </p>
-                <p className='footer-names'>Blog </p>
+                {/* <p className='footer-names'>Blog </p> */}
                 <p className='footer-names'>Contact</p>
             </div>
             <div className='logos-container'>

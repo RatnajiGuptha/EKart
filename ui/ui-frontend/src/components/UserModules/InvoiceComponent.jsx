@@ -2,21 +2,27 @@ import React from "react";
 import "../../StyleSheets/Invoice.css";
 import "../../StyleSheets/SellerModule.css";
 import { OrderService } from "../../Services/OrderService";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 const InvoiceComponent = () => {
     const { purchaseOrderId } = useParams();
     const [orderss, setOrderss] = useState([]);
+    const navigate = useNavigate("")
 
     useEffect(() => {
         OrderService.getOrderDetails(purchaseOrderId).then((response) => {
             setOrderss(response.data);
             console.log(response.data);
             // console.log(response.data.brandName[0]);
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         });
-    }, [purchaseOrderId]);
+    }, [purchaseOrderId,navigate]);
 
     const calculateTotalAmount = (qty, price) => {
         let totalAmount = 0;
@@ -34,7 +40,7 @@ const InvoiceComponent = () => {
                         <h1 className="left">E-Kart</h1>
                         <div>
                             <p className="orderId">Order Id: {orderss.purchaseOrderId}</p>
-                            <p className="">Order Date: {orderss.orderDate }</p>
+                            <p className="">Order Date: {orderss.orderDate}</p>
                         </div>
                     </div>
                     <div>
