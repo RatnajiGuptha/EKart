@@ -564,6 +564,11 @@ spring:
           - Path=/api/accessoriesProducts/getAccessoriesBySellerNameAndType/sellerName/**
           filters:
             - AuthenticationFilter
+            
+        - id : user-service
+          uri : http://localhost:8400 
+          predicates:
+          - Path=/updatePasswordByUserName/**
        
         
       
