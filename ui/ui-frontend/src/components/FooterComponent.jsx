@@ -8,10 +8,9 @@ const FooterComponent = () => {
                 <h1> Ekart</h1>
             </div>
             <div className='d-flex'>
-                <p className='footer-names'>Home</p>
-                <p className='footer-names'>About </p>
-                {/* <p className='footer-names'>Blog </p> */}
-                <p className='footer-names'>Contact</p>
+                <a href="/" className='footer-names'>Home</a>
+                <a href='/aboutUs' className='footer-names'>About </a>
+                <a href="/aboutUs" className='footer-names'>Contact</a>
             </div>
             <div className='logos-container'>
                 <div className='logos'>

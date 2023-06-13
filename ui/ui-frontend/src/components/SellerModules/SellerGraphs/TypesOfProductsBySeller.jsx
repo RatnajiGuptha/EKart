@@ -31,26 +31,22 @@ const TypesOfProductsBySeller = () => {
   const [selectedLabel, setSelectedLabel] = useState("");
 
   useEffect(() => {
-    FashionProductService.getFashionProductsBySellerName(sellername).then(
-      (response) => {
-        if (length < response.data.length) {
-          setSelectedLabel("Fashion");
-          setLength(response.data.length);
-        }
-        console.log(response.data.length);
-        setFashionItems(response.data.length);
+    FashionProductService.getFashionProductsBySellerName(sellername).then((response) => {
+      if (length < response.data.length) {
+        setSelectedLabel("Fashion");
+        setLength(response.data.length);
       }
-    );
-    AccessoriesService.getAccessoriesProductsBySellerName(sellername).then(
-      (response) => {
-        if (length < response.data.length) {
-          setSelectedLabel("Accessories");
-          setLength(response.data.length);
-        }
-        console.log(response.data.length);
-        setAccessoriesItems(response.data.length);
+      console.log(response.data.length);
+      setFashionItems(response.data.length);
+    });
+    AccessoriesService.getAccessoriesProductsBySellerName(sellername).then((response) => {
+      if (length < response.data.length) {
+        setSelectedLabel("Accessories");
+        setLength(response.data.length);
       }
-    );
+      console.log(response.data.length);
+      setAccessoriesItems(response.data.length);
+    });
 
     FootwearService.fetchBySellerName(sellername).then((response) => {
       if (length < response.data.length) {
@@ -60,16 +56,14 @@ const TypesOfProductsBySeller = () => {
       console.log(response.data.length);
       setFootWearItems(response.data.length);
     });
-    ElectronicsService.getElectronicsBySellerName(sellername).then(
-      (response) => {
-        if (length < response.data.length) {
-          setSelectedLabel("Electronics");
-          setLength(response.data.length);
-        }
-        console.log(response.data.length);
-        setElectronicsItems(response.data.length);
+    ElectronicsService.getElectronicsBySellerName(sellername).then((response) => {
+      if (length < response.data.length) {
+        setSelectedLabel("Electronics");
+        setLength(response.data.length);
       }
-    );
+      console.log(response.data.length);
+      setElectronicsItems(response.data.length);
+    });
     ToysService.getToysBySellerName(sellername).then((response) => {
       if (length < response.data.length) {
         setSelectedLabel("Toys");
@@ -86,7 +80,7 @@ const TypesOfProductsBySeller = () => {
       console.log(response.data.length);
       setBeautyItems(response.data.length);
     });
-  }, [sellername]);
+  }, [sellername, length]);
 
   const data = {
     labels: [
@@ -136,15 +130,7 @@ const TypesOfProductsBySeller = () => {
   const chartRef = useRef();
   const onClick = (event) => {
     if (getElementAtEvent(chartRef.current, event).length > 0) {
-      // const datasetIndexnum = getElementAtEvent(chartRef.current, event)[0].datasetIndex;
       const index = getElementAtEvent(chartRef.current, event)[0].index;
-      // console.log(`dataset: ${datasetIndexnum} and Data :${index}`);
-      // window.open(
-      //   "http://localhost:3000" + data.datasets[datasetIndexnum].link[index]
-      // );
-      // setLink(data.datasets[datasetIndexnum].link[index]);
-
-      // setLabel(data.labels[index]);
       setSelectedLabel(data.labels[index]);
     }
   };

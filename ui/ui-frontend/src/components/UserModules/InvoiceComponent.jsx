@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useCallback } from "react";
+import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { OrderService } from "../../Services/OrderService";
 import { AddressService } from "../../Services/AddressService";
@@ -29,7 +29,7 @@ const InvoiceComponent = () => {
             }
         });
 
-    }, [navigate]);
+    }, [purchaseOrderId, navigate]);
 
 
     const calculateTotalAmount = (qty, price) => {
@@ -100,7 +100,7 @@ const InvoiceComponent = () => {
                     <hr className="mt-0" />
                     <div className="price-details">
                         <ul className="list-unstyled">
-F                            <li>Grand Total: ₹ <span>{orderss.price} /-</span></li>
+                            <li>Grand Total: ₹ <span>{orderss.price} /-</span></li>
                         </ul>
                     </div>
                 </div >

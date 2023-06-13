@@ -10,11 +10,9 @@ import {
   MDBModalFooter,
 } from 'mdb-react-ui-kit';
 import { UserBalanceService } from '../../Services/UserBalanceService';
-import { useNavigate } from "react-router-dom";
 
 export default function UpdateWalletComponent(props) {
   const [centredModal, setCentredModal] = useState(false);
-  const navigate = useNavigate("");
   const toggleShow = () => setCentredModal(!centredModal);
 
   const userName = localStorage.getItem("username");
@@ -33,7 +31,6 @@ export default function UpdateWalletComponent(props) {
       console.log(Response.data);
 
     })
-    // navigate("/profile/wallet");
     window.location.reload(true);
     setCentredModal(!centredModal)
 

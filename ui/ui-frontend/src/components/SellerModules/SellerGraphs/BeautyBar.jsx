@@ -1,16 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { BeautyService } from "../../../Services/BeautyService";
-import {
-  Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, } from "chart.js";
 import { Bar } from "react-chartjs-2";
+
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
 const BeautyBar = () => {
   const [beauty, setBeauty] = useState();
   const sellerName = localStorage.getItem("name");
@@ -36,7 +31,7 @@ const BeautyBar = () => {
     BeautyService.getBeautyBySellerName(sellerName).then((response) => {
       setBeauty(response.data.length);
     });
-  }, []);
+  }, [sellerName]);
 
   return (
     <div
