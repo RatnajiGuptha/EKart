@@ -1,83 +1,86 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .accounts {
-    background-color: bisque;
-    height: 100%;
-    background-size: auto;
+  background-color: bisque;
+  height: 100%;
+  background-size: auto;
 }
 
 .profile {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    background: #fefefe;
-    align-items: center;
-    flex: 100%;
-    margin-bottom: 10px;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  background: aliceblue;
+  align-items: center;
+  flex: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 .profile-img {
-    flex: 20%;
-    padding: 10px;
+  flex: 20%;
+  padding: 10px;
 }
 
 .username {
-    flex: 80%;
-    text-align: start;
-    align-items: center;
-    margin-left: 10px;
-    font-weight: 600;
+  flex: 80%;
+  text-align: start;
+  align-items: center;
+  margin-left: 10px;
+  font-weight: 600;
 }
 
 .main-profile {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    background-color: #DBDFEA;
-    height: 100%;
-    background-size: auto;
-    flex: 100%;
-    padding: 50px 30px;
-    width: 100%;
-    /* flex-wrap: wrap; */
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  background-color: #dbdfea;
+  height: 100%;
+  background-size: auto;
+  flex: 100%;
+  padding: 50px 30px;
+  width: 100%;
 }
 
 .main-profile-left {
-    flex: 20%
+  flex: 20%;
+  width: 30%;
+  padding: 20px;
 }
 
 .main-profile-right {
-    flex: 80%;
-    /* scroll-snap-type: y mandatory; */
+  flex: 80%;
+  /* scroll-snap-type: y mandatory; */
 }
 
 .profile-categories {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    cursor: pointer;
-    background-color: #fff;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  cursor: pointer;
+  background-color: aliceblue;
+  border-radius: 10px;
 }
 
 .main-profile-side {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-profile-right {
-    background-color: #fff;
-    border-radius: 10px;
-    margin: 0px 20px;
+  background-color: aliceblue;
+  border-radius: 10px;
+  margin: 0px 20px;
 }
 
 .category {
-    text-align: left;
-    padding: 10px;
-    text-decoration: none;
-    color: black;
-    background: #fefefe;
+  text-align: left;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  background: aliceblue;
+  border-radius: 16px;
 }

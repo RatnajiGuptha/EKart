@@ -1,5 +1,5 @@
 import React from "react";
-import {AccessoriesService} from "../../../Services/AccessoriesService";
+import { AccessoriesService } from "../../../Services/AccessoriesService";
 import { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
@@ -54,15 +54,25 @@ const AccessoriesBar = () => {
     ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false,
+        position: "relative",
+        align: "center",
       },
     },
   };
 
   return (
-    <div>
+    <div
+      style={{
+        alignItems: "center",
+        width: "600px",
+        height: "400px",
+        marginTop: "70px",
+      }}
+    >
       <Bar data={data} options={options}></Bar>
     </div>
   );

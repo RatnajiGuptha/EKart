@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {FootwearService} from "../../../Services/FootwearService";
+import { FootwearService } from "../../../Services/FootwearService";
 import {
   Chart as ChartJS,
   BarElement,
@@ -44,9 +44,8 @@ const FootWearBar = () => {
     labels: ["Shoes", "FormalShoes", "Heels", "Flats"],
     datasets: [
       {
-        label: "shoes",
         data: [shoes, formalShoes, heels, flats],
-        backgroundColor: ["green", "red", "yellow", "blue"],
+        backgroundColor: ["red", "green", "yellow", "blue"],
         borderColor: "black",
       },
     ],
@@ -54,12 +53,22 @@ const FootWearBar = () => {
   const options = {
     plugins: {
       legend: {
-        display: false,
+        marginTop: "13%",
+        display: "relative",
+        height: "70%",
+        width: "100%",
       },
     },
   };
   return (
-    <div>
+    <div
+      style={{
+        alignItems: "center",
+        width: "600px",
+        height: "400px",
+        marginTop: "70px",
+      }}
+    >
       <Bar data={data} options={options}></Bar>
     </div>
   );

@@ -11,18 +11,17 @@ const CheckoutComponent = () => {
 
     console.log(userName);
     console.log(addressId);
-    // console.log(userName);
     const navigate = useNavigate();
     const [purchaseOrder, setPurchaseOrder] = useState([]);
     const [balance, setBalance] = useState(0);
-    const [isChecked, setIsChecked] = useState(false);
+    // const [isChecked, setIsChecked] = useState(false);
     const [address, setAddress] = useState([]);
     const [addressList, setAddressList] = useState([]);
-    const[defaultAddId, setDefaultAddId] = useState();
+    const [defaultAddId, setDefaultAddId] = useState();
 
 
     console.log("defaultid : ", defaultAddId);
-
+    console.log(addressList)
 
     useEffect(() => {
         UserBalanceService.getUserBalance(userName).then((Response) => {
@@ -52,26 +51,34 @@ const CheckoutComponent = () => {
             AddressService.getAddressById(defaultAddId).then((Response) => {
                 console.log(Response.data);
                 setAddress(Response.data);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
         else {
             AddressService.getAddressById(addressId).then((Response) => {
                 console.log(Response.data);
                 setAddress(Response.data);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
-
-
-    },[userName, addressId,defaultAddId]);
-
-    
+    }, [userName, addressId, defaultAddId, navigate]);
 
     const Email = localStorage.getItem("userEmail");
     console.log("email", Email);
     console.log(address.addressId)
 
     const paymentFromCart = async () => {
-        if(addressId === undefined){
+        if (addressId === undefined) {
             addressId = defaultAddId;
         }
         await OrderService.createOrderForCart(userName, address.addressId, Email).then((Response) => {
@@ -91,32 +98,23 @@ const CheckoutComponent = () => {
                 localStorage.clear();
             }
         });
-        // console.log(Email);
     }
 
     return (
         <div className='paymentPage'>
             <div className="d-flex align-content-center flex">
-
-
-
-
                 <div className="d-flex align-items-center flex-column" >
-                    {/* <div className="card mt-50 mb-50 ml-50"> */}
                     <div className='card2'>
-                        {/* <a href="/addAddress">Add address</a> */}
                         <div className="address-container1">
                             <div className="d-flex align-content-center flex">
                                 <div>
                                     {(addressId || defaultAddId) ?
-
                                         <div className="addr1">
                                             <p className='addressText2'>{address.receiverName}, {address.buildingNo}</p>
                                             <p className='addressText2'>{address.street1},{address.city}</p>
                                             <p className='addressText2'>{address.district},{address.state}</p>
                                             <p className='addressText2'>{address.receiverPhoneNumber}, Pin - {address.pincode},</p>
                                         </div>
-
                                         : <AddressSelectionCompoonent userName={userName} />
                                     }
                                 </div>
@@ -134,13 +132,8 @@ const CheckoutComponent = () => {
                             </table>
                         </form>
 
-
-
                         <button className="btn btn-info mt-3" onClick={() => paymentFromCart()}>Proceed For payment</button>
                     </div>
-
-                    {/* </div> */}
-
                 </div>
                 <div className="d-flex align-items-start flex-column" >
                     <div className='paymentGif'>
@@ -148,10 +141,7 @@ const CheckoutComponent = () => {
                     </div>
                 </div>
             </div>
-
         </div >
-
-
     )
 }
 

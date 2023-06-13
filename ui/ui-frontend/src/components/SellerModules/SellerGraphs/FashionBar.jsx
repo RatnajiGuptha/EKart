@@ -1,5 +1,6 @@
 import React from "react";
-import {FashionProductService} from "../../../Services/FashionProductService";
+import "../../../StyleSheets/Bar.css";
+import { FashionProductService } from "../../../Services/FashionProductService";
 import { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
@@ -118,7 +119,6 @@ const FashionBar = () => {
     ],
     datasets: [
       {
-        label: "369",
         data: [
           sportsWear,
           kurthaSets,
@@ -154,12 +154,21 @@ const FashionBar = () => {
   const options = {
     plugins: {
       legend: {
-        display: false,
+        position: "relative",
+        align: "center",
+        marginTop: "20px",
       },
     },
   };
   return (
-    <div>
+    <div
+      style={{
+        alignItems: "center",
+        width: "600px",
+        height: "400px",
+        marginTop: "70px",
+      }}
+    >
       <Bar data={data} options={options}></Bar>
     </div>
   );
