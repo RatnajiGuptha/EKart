@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { OrderService } from "../../Services/OrderService";
 import { AddressService } from "../../Services/AddressService";
@@ -13,8 +13,14 @@ const InvoiceComponent = () => {
     useEffect(() => {
 
         OrderService.getOrderDetails(purchaseOrderId).then((response) => {
+            console.log("addressid --> ", response.data.addressId)
+            console.log("response.data--->", response.data)
             setOrderss(response.data);
 
+            AddressService.getAddressById(response.data.addressId).then((res) => {
+                setAddress(res.data)
+                console.log("res.data", res.data)
+            })
         }).catch((err) => {
             if (err.response.status === 401) {
                 console.log(err.response.data)
@@ -23,17 +29,7 @@ const InvoiceComponent = () => {
             }
         });
 
-    }, [purchaseOrderId, navigate]);
-
-    const shippingAddress = () => {
-        AddressService.getAddressById(orderss.addressId).then((res) => {
-            setAddress(res.data)
-        })
-        console.log("address -->", address)
-        // conosle.log(address)
-    }
-
-    // console.log(orderss.addressId);
+    }, [navigate]);
 
 
     const calculateTotalAmount = (qty, price) => {
@@ -42,7 +38,7 @@ const InvoiceComponent = () => {
         return { totalAmount };
     };
 
-    console.log(orderss);
+    // console.log(orderss);
 
 
     return (
@@ -55,9 +51,9 @@ const InvoiceComponent = () => {
                             <h4 ><strong>Shipping Address</strong></h4>
                             <ul className="list-unstyled">
                                 <li>Receiver Name:<span>{address.receiverName}</span> </li>
-                                <li>Address: <span></span></li>
-                                <li>City and pincode: <span></span></li>
-                                <li>Phone number:<span></span></li>
+                                <li>Address: <span>{address.buildingNo} {" "} {address.street1}</span></li>
+                                <li>City and pincode: <span>{address.city}{"-"}{address.pincode}</span></li>
+                                <li>Phone number:<span>{address.receiverPhoneNumber}</span></li>
                             </ul>
                         </div>
 
@@ -75,8 +71,9 @@ const InvoiceComponent = () => {
                         <table className="table table-condensed nomargin">
                             <thead>
                                 <tr>
-                                    <th>S.no</th>
-                                    <th>Item Description</th>
+                                    <th>Product Details</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
                                     <th>Total Price</th>
@@ -86,11 +83,12 @@ const InvoiceComponent = () => {
                                 {orderss.productName?.map((items, index) => {
                                     return (
                                         <tr>
-                                            <td>{index + 1}</td>
-                                            <td className="data">{items}</td>
-                                            <td className="data">{orderss.qty[index]}</td>
-                                            <td className="data">₹ {orderss.priceList[index]} /-</td>
-                                            <td className="data"> ₹ {calculateTotalAmount(
+                                            <td >{items}</td>
+                                            <td >{orderss.size[index]}</td>
+                                            <td>{orderss.color[index]} </td>
+                                            <td >{orderss.qty[index]}</td>
+                                            <td>₹ {orderss.priceList[index]} /-</td>
+                                            <td> ₹ {calculateTotalAmount(
                                                 orderss.qty[index], orderss.priceList[index]).totalAmount} /-
                                             </td>
                                         </tr>

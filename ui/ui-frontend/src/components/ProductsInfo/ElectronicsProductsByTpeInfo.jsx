@@ -60,7 +60,7 @@ const ElectronicsProductsByTpeInfo = () => {
           productName: productsInfo.productName,
           logoImg: productsInfo.logoImg,
           productPrice: productsInfo.productPrice,
-          size: productsInfo.size,
+          size: productsInfo.capacity,
           color: productsInfo.color,
           qty: quantity,
           productCategories: category,

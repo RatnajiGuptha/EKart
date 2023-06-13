@@ -45,7 +45,7 @@ const ElectronicsProductsInfo = () => {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
 
 
@@ -58,7 +58,7 @@ const ElectronicsProductsInfo = () => {
           productName: productsInfo.productName,
           logoImg: productsInfo.logoImg,
           productPrice: productsInfo.productPrice,
-          size: productsInfo.size,
+          size: productsInfo.capacity,
           color: productsInfo.color,
           qty: quantity,
           productCategories: category,
@@ -76,7 +76,7 @@ const ElectronicsProductsInfo = () => {
               console.log(err.response.data)
               navigate("/login")
               localStorage.clear();
-          }
+            }
           });
         } else {
           alert(" products Left");
@@ -91,7 +91,7 @@ const ElectronicsProductsInfo = () => {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
       }
     }

@@ -48,7 +48,7 @@ const AccessoriesProductsByTpeInfo = () => {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
 
       console.log(datad.data);
@@ -79,7 +79,7 @@ const AccessoriesProductsByTpeInfo = () => {
               console.log(err.response.data)
               navigate("/login")
               localStorage.clear();
-          }
+            }
           });
         } else {
           alert(" products Left");
@@ -94,7 +94,7 @@ const AccessoriesProductsByTpeInfo = () => {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
       }
     }

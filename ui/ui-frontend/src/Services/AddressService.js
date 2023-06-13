@@ -25,9 +25,8 @@ export const AddressService = {
         });
         return res;
     },
-    
+
     async getAddressById(id) {
-        
         const res = await authenticateApi.request({
             url: `/api/address/GetAddressById/${id}`,
             method: 'GET'
