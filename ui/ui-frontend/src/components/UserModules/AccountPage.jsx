@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "../../StyleSheets/profile.css";
 import ProfileComponent from "./ProfileComponent";
 import WalletComponent from "./WalletComponent";
 import AddressComponent from "./AddressComponent";
 import { useParams, useNavigate } from 'react-router-dom';
 import MyOrdersComponent from "./MyOrdersComponent";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faAddressCard, faList, faWallet, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import "../../StyleSheets/profile.css";
 
 const AccountPage = () => {
   let { type } = useParams();
@@ -49,11 +50,11 @@ const AccountPage = () => {
               <div className="username">{userName}</div>
             </div>
             <div className="profile-categories">
-              <a className="category" href="/profile/info" onClick={() => { handlePage("info") }}> Manage Profile</a>
-              <a className="category" href="/profile/address" type="submit" onClick={() => { handlePage('address'); }}> Manage Address</a>
-              <a className="category" href="/profile/orders" type="submit" onClick={() => { handlePage('orders'); }}>My Orders</a>
-              <a className="category" href="/profile/wallet" type="submit" onClick={() => { handlePage('wallet'); }}>wallet</a>
-              <a className="category" href="/" onClick={handleLogout}>Logout</a>
+              <a className="category" href="/profile/info" onClick={() => { handlePage("info") }}> <FontAwesomeIcon icon={faUser} /> &ensp; Manage Profile</a>
+              <a className="category" href="/profile/address" type="submit" onClick={() => { handlePage('address'); }}> <FontAwesomeIcon icon={faAddressCard} />&ensp;  Manage Address</a>
+              <a className="category" href="/profile/orders" type="submit" onClick={() => { handlePage('orders'); }}><FontAwesomeIcon icon={faList} /> &ensp;  My Orders</a>
+              <a className="category" href="/profile/wallet" type="submit" onClick={() => { handlePage('wallet'); }}><FontAwesomeIcon icon={faWallet} />&ensp;  Wallet</a>
+              <a className="category" href="/" onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} /> &ensp; Logout</a>
             </div>
           </div>
         </div>

@@ -4,8 +4,8 @@
 
 .accounts {
     background-color: bisque;
-    height: 100%;
     background-size: auto;
+    height: 100vh;
 }
 
 .profile {
@@ -50,7 +50,6 @@
 
 .main-profile-right {
     flex: 80%;
-    /* scroll-snap-type: y mandatory; */
 }
 
 .profile-categories {

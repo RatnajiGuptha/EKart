@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-// import Changepassword from "./Changepassword";
-import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { useNavigate } from "react-router-dom";
+import "../../StyleSheets/ManageProfile.css";
 
 const ProfileComponent = () => {
   const userName = localStorage.getItem('username');

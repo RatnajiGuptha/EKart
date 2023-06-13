@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { AddressService } from "../../Services/AddressService";
-import "../../StyleSheets/NewAddress.css";
 import { useNavigate } from "react-router-dom";
-
+import "../../StyleSheets/NewAddress.css";
 const AddNewAddressComponent = () => {
 
     const [addNewAddress, setAddNewAddress] = useState(true)
@@ -93,12 +92,10 @@ const AddNewAddressComponent = () => {
                     <input value={District} onChange={(e) => handleAddress(e)} placeholder="District" type="text" id="District" className="passw" />
                     <label htmlFor="Pincode" className="texted" >Pincode</label>
                     <input value={Pincode} onChange={(e) => handleAddress(e)} placeholder="Pincode" type="text" id="Pincode" className="passw" />
-
-
-
-
-                    <button className="new-address-buttons" onClick={(e) => { handleSubmit(e) }}>Save</button>
-                    <button className="new-address-buttons" onClick={(e) => { handleAddressCancel(e) }}>Cancel</button>
+                    <div className="btn-container">
+                        <button className="btn btn-success m-2" onClick={(e) => { handleSubmit(e) }}>save</button>
+                        <button className="btn btn-warning m-2" onClick={(e) => { handleAddressCancel(e) }}>cancel</button>
+                    </div>
                 </form>
             }
         </div>
