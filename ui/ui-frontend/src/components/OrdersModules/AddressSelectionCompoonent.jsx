@@ -32,18 +32,16 @@ function AddressSelectionCompoonent(props) {
                 localStorage.clear();
             }
         });
-
-
     },);
 
-    
+
 
     const handleOnChange = (e) => {
         console.log(e.target.value);
         setIsChecked(!isChecked);
         console.log(isChecked);
 
-        let i = e.target.value;
+        // let i = e.target.value;
         setId(e.target.value);
         console.log(id);
         // recievingAddress(e.target.value);
@@ -58,8 +56,8 @@ function AddressSelectionCompoonent(props) {
     return (
         <>
             <div className='changeBtn'>
-            {/* <FontAwesomeIcon icon={faMoneyCheckPen} /> */}
-            <FontAwesomeIcon icon={faEdit} className="edit-icon" onClick={() => setShow(true)}/>
+                {/* <FontAwesomeIcon icon={faMoneyCheckPen} /> */}
+                <FontAwesomeIcon icon={faEdit} className="edit-icon" onClick={() => setShow(true)} />
                 {/* <button className='btn btn-warning ml-5 mt-4'>change</button> */}
             </div>
 
@@ -116,7 +114,7 @@ function AddressSelectionCompoonent(props) {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        
+
                         <button className='btn btn-info' onClick={() => nextPage()}>
                             save
                         </button>

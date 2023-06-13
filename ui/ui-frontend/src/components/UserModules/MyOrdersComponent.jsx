@@ -1,8 +1,7 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { OrderService } from "../../Services/OrderService";
-import "../../StyleSheets/MyOrders.css";
 import { Link, useNavigate } from "react-router-dom";
+import "../../StyleSheets/MyOrders.css";
 
 const MyOrdersComponent = () => {
     const [order, setOrder] = useState([]);
@@ -23,32 +22,34 @@ const MyOrdersComponent = () => {
 
 
     return (
-        <div>
+        <div className="order-container">
             {order.map((item) => {
                 return (
-                    <Link key={item.purchaseOrderId} to={`/invoice/${item.purchaseOrderId}`}>
-                        <div className="orders table container">
-                            <div className="d-flex raju">
+                    <Link key={item.purchaseOrderId} to={`/invoice/${item.purchaseOrderId}`} className="link">
+                        <div className="orders-info">
+                            <div className="products-info table">
                                 {item.productName.map((item1) => {
                                     return (
-                                        <div className="product-names table">
-                                            <p className="product-names table">{item1}</p>
-                                        </div>
+                                        <li className="products-name">{item1}</li>
                                     );
                                 })}
                             </div>
-                            <div>
-                                <p className="m-5">₹ {item.price}/-</p>
+
+                            <div className="table">
+                                <p className="order-price">₹ {item.price}/-</p>
                             </div>
-                            <div>
+                            <div className="table">
+                                <p className="order-date">{item.orderDate}</p>
+                            </div>
+                            <div className="table">
                                 {item.paymentStatus === "PAYMENT_COMPLETED" ? (
-                                    <div>
-                                        <p className="greendot"></p>
-                                        <p>{item.paymentStatus}</p>
+                                    <div className="payment-status">
+                                        <span className="greendot"></span>
+                                        <p className="payment">{item.paymentStatus}</p>
                                     </div>
                                 ) : (
                                     <div>
-                                        {/* <p className="reddot"></p> */}
+                                        <span className="reddot"></span>
                                         <p>{item.paymentStatus}</p>
                                     </div>
                                 )}

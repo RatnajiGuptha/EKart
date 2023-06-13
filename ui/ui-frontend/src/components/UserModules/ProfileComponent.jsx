@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+// import Changepassword from "./Changepassword";
 import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { useNavigate } from "react-router-dom";
@@ -10,9 +11,6 @@ const ProfileComponent = () => {
   const [email, setEmail] = useState('');
   const [contactNumber, setContactNumber] = useState('');
 
-  const [newFullName, setNewFullName] = useState('');
-  const [newEmail, setNewEmail] = useState("")
-  const [newContactNumber, setNewContactNumber] = useState("");
   const [displayProfile, setDisplayProfile] = useState(true);
   const [editProfile, setEditProfile] = useState(false);
   const [showChangepassword, setChangepassword] = useState(false);
@@ -32,7 +30,6 @@ const ProfileComponent = () => {
 
       console.log(response.data)
     })
-
   }, [userName]);
 
   const validateForm = async () => {
@@ -40,36 +37,36 @@ const ProfileComponent = () => {
     const newError = {};
 
 
-    const userEmailExists = await SecurityService.getUserByEmail(newEmail);
+    const userEmailExists = await SecurityService.getUserByEmail(email);
     console.log("email =", userEmailExists.data);
-    if (!newEmail || !newEmail.trim()) {
+    if (!email || !email.trim()) {
       newError.email = "Email is required";
       valid = false;
     } else if (userEmailExists.data !== null) {
       newError.email = "Email address already exists";
       valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(newEmail)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newError.email = "Invalid Email address";
       valid = false;
     }
 
-    const contactNumberExists = await SecurityService.getUserByContactNumber(newContactNumber);
+    const contactNumberExists = await SecurityService.getUserByContactNumber(contactNumber);
     console.log(contactNumberExists.data);
-    if (!newContactNumber.trim() || newContactNumber.trim().length !== 10) {
+    if (!contactNumber.trim() || contactNumber.trim().length !== 10) {
       newError.contactNumber = 'Mobile number should have 10 digits'
       valid = false;
     } else if (contactNumberExists.data !== null) {
       newError.contactNumber = "Mobile number already exists";
       valid = false;
-    } else if (!/^[0-9]+$/.test(newContactNumber)) {
+    } else if (!/^[0-9]+$/.test(contactNumber)) {
       newError.contactNumber = 'Mobile number should only contain numbers'
       valid = false;
     }
 
-    if (!newFullName || fullName.trim().length < 3) {
+    if (!fullName || fullName.trim().length < 3) {
       newError.fullName = 'Full name should have at least 3 characters';
       valid = false;
-    } else if (!/^[a-zA-Z ]+$/.test(newFullName)) {
+    } else if (!/^[a-zA-Z ]+$/.test(fullName)) {
       newError.fullName = 'Invalid Name';
       valid = false;
     }
@@ -113,7 +110,7 @@ const ProfileComponent = () => {
     if (await validateForm()) {
       setDisplayProfile(true)
       setEditProfile(false)
-      SecurityService.updateUserByUserName(userName, newFullName, newEmail, newContactNumber).then((response) => {
+      SecurityService.updateUserByUserName(userName, fullName, email, contactNumber).then((response) => {
         console.log(response.data)
       }).catch((err) => {
         if (err.response.status === 401) {
@@ -122,6 +119,7 @@ const ProfileComponent = () => {
           localStorage.clear();
         }
       })
+      window.location.reload(false)
     }
     console.log(userName, fullName, email, contactNumber);
   };
@@ -138,29 +136,13 @@ const ProfileComponent = () => {
   }
 
   const cancelChanges = (e) => {
+    window.location.reload(false)
     setDisplayProfile(true)
     setEditProfile(false)
     setChangepassword(false)
-  }
-  const handleUserData = (e) => {
-    const { name, value } = e.target;
 
-    if (name === 'fullName') {
-      setNewFullName(value)
-    }
-    if (name === 'email') {
-      setNewEmail(value)
-    }
-    if (name === 'contactNumber') {
-      setNewContactNumber(value)
-    }
-    if (name === 'newPassword') {
-      setNewPassword(value)
-    }
-    if (name === 're-enterNewPassword') {
-      setReenterNewPassword(value)
-    }
   }
+
   return (
     <div className="myprofile">
       <div className="myprofile-profile">
@@ -190,20 +172,17 @@ const ProfileComponent = () => {
           editProfile &&
           <form className="myprofile-profile-form">
             <h2> My Profile</h2>
-            <label>User Name
-              <input type="text" name="userName" value={userName} placeholder="Enter a username" />
-            </label>
             <label>Full Name
-              <input type="text" name="fullName" onChange={(e) => { handleUserData(e) }} placeholder="Enter full name" />
+              <input type="text" name="fullName" value={fullName} onChange={(e) => { setFullName(e.target.value) }} placeholder="Enter full name" />
               {errors.fullName && <span>{errors.fullName}</span>}
             </label>
             <label>Email
-              <input type="text" name="email" onChange={(e) => { handleUserData(e) }} placeholder="Enter email" />
+              <input type="text" name="email" value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter email" />
               {errors.email && <span>{errors.email}</span>}
             </label>
 
             <label>Contact number
-              <input type="text" name="contactNumber" onChange={(e) => { handleUserData(e) }} placeholder="Enter contact number" />
+              <input type="text" name="contactNumber" value={contactNumber} onChange={(e) => { setContactNumber(e.target.value) }} placeholder="Enter contact number" />
               {errors.contactNumber && <span>{errors.contactNumber}</span>}
             </label>
             <div className="myprofile-profile-form-buttons">
@@ -217,11 +196,11 @@ const ProfileComponent = () => {
           <form className="myprofile-profile-form">
             <h2> My Profile </h2>
             <label> New Password
-              <input type="password" name="newPassword" onChange={(e) => { handleUserData(e) }} placeholder="Enter new Password" />
+              <input type="password" name="newPassword" onChange={(e) => { setNewPassword(e.target.value) }} placeholder="Enter new Password" />
               {errors.password && <span>{errors.password}</span>}
             </label>
             <label> Re-enter new password
-              <input type="password" name="re-enterNewPassword" onChange={(e) => { handleUserData(e) }} placeholder="Re-enter new Password" />
+              <input type="password" name="re-enterNewPassword" onChange={(e) => { setReenterNewPassword(e.target.value) }} placeholder="Re-enter new Password" />
               {errors.password && <span>{errors.password}</span>}
             </label>
             {errors.passwordMatch && <span>{errors.passwordMatch}</span>}

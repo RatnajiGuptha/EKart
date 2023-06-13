@@ -34,11 +34,9 @@ const CartComponent = () => {
       // alert("Item Deleted Successfully");
       window.location.reload(false);
     }).catch((err) => {
-      if (err.response.status === 401) {
-        console.log(err.response.data)
-        navigate("/login")
-        localStorage.clear();
-      }
+      console.log(err.response.data)
+      navigate("/login")
+      localStorage.clear();
     })
   };
 
@@ -70,7 +68,7 @@ const CartComponent = () => {
   }
 
   return (
-    <div className="d-flex justify-content-center">
+    <div className="cart-page">
       <div className="cart-container">
         {cartItems.map((item) => (
           <div key={item.cartId} className="items-container">
@@ -79,7 +77,6 @@ const CartComponent = () => {
             </div>
             <div className="cart-item-details">
               <h5 className="product-name">{item.productName}</h5>
-              <p className="product-description"> {item.productDescription}</p>
               <div className="d-flex">
                 <div className={`size-selector`}>
                   <span className="size-text"> Color:{item.color} </span>
@@ -103,8 +100,7 @@ const CartComponent = () => {
               </p>
             </div>
             <div className="m-2">
-              <button
-                className="btn btn-danger"
+              <button className="btn btn-danger"
                 onClick={() => deleteItemFromCarttt(item.cartId)}              >
                 Remove From Cart
               </button>
