@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie, getElementAtEvent } from "react-chartjs-2";
 import { useRef } from "react";
-
-import {AccessoriesService} from "../../../Services/AccessoriesService";
-import {BeautyService} from "../../../Services/BeautyService";
-import {ToysService} from "../../../Services/ToysService";
-import {FashionProductService} from "../../../Services/FashionProductService";
-import {FootwearService} from "../../../Services/FootwearService";
-import {ElectronicsService} from "../../../Services/ElectronicsService";
+import "../../../StyleSheets/Bar.css";
+import { AccessoriesService } from "../../../Services/AccessoriesService";
+import { BeautyService } from "../../../Services/BeautyService";
+import { ToysService } from "../../../Services/ToysService";
+import { FashionProductService } from "../../../Services/FashionProductService";
+import { FootwearService } from "../../../Services/FootwearService";
+import { ElectronicsService } from "../../../Services/ElectronicsService";
 import FashionBar from "./FashionBar";
 import FootWearBar from "./FootWearBar";
 import ElectronicsBar from "./ElectronicsBar";
@@ -31,29 +31,33 @@ const TypesOfProductsBySeller = () => {
   const [selectedLabel, setSelectedLabel] = useState("");
 
   useEffect(() => {
-    AccessoriesService.getAccessoriesProductsBySellerName(sellername).then(
-      (response) => {
-        if (length < response.data.length) {
-          setSelectedLabel("Accessories");
-          setLength(response.data.length);
-        }
-        setAccessoriesItems(response.data.length);
-      }
-    );
     FashionProductService.getFashionProductsBySellerName(sellername).then(
       (response) => {
         if (length < response.data.length) {
           setSelectedLabel("Fashion");
           setLength(response.data.length);
         }
+        console.log(response.data.length);
         setFashionItems(response.data.length);
       }
     );
+    AccessoriesService.getAccessoriesProductsBySellerName(sellername).then(
+      (response) => {
+        if (length < response.data.length) {
+          setSelectedLabel("Accessories");
+          setLength(response.data.length);
+        }
+        console.log(response.data.length);
+        setAccessoriesItems(response.data.length);
+      }
+    );
+
     FootwearService.fetchBySellerName(sellername).then((response) => {
       if (length < response.data.length) {
         setSelectedLabel("Footwear");
         setLength(response.data.length);
       }
+      console.log(response.data.length);
       setFootWearItems(response.data.length);
     });
     ElectronicsService.getElectronicsBySellerName(sellername).then(
@@ -62,6 +66,7 @@ const TypesOfProductsBySeller = () => {
           setSelectedLabel("Electronics");
           setLength(response.data.length);
         }
+        console.log(response.data.length);
         setElectronicsItems(response.data.length);
       }
     );
@@ -70,6 +75,7 @@ const TypesOfProductsBySeller = () => {
         setSelectedLabel("Toys");
         setLength(response.data.length);
       }
+      console.log(response.data.length);
       setToyItems(response.data.length);
     });
     BeautyService.getBeautyBySellerName(sellername).then((response) => {
@@ -77,6 +83,7 @@ const TypesOfProductsBySeller = () => {
         setSelectedLabel("Beauty");
         setLength(response.data.length);
       }
+      console.log(response.data.length);
       setBeautyItems(response.data.length);
     });
   }, [sellername]);
@@ -114,6 +121,8 @@ const TypesOfProductsBySeller = () => {
     ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom",
@@ -142,21 +151,21 @@ const TypesOfProductsBySeller = () => {
 
   return (
     <div className="d-flex">
-      <div
-        style={{
-          padding: "1%",
-          marginTop: "70px",
-          width: "35%",
-        }}
-      >
+      <div>
         <Pie
+          style={{
+            alignItems: "center",
+            width: "600px",
+            height: "400px",
+            marginTop: "70px",
+          }}
           data={data}
           options={options}
           onClick={onClick}
           ref={chartRef}
         ></Pie>
       </div>
-      <div style={{ width: "80%", marginTop: "5%" }}>
+      <div>
         {selectedLabel === "Fashion" && <FashionBar />}
         {selectedLabel === "Footwear" && <FootWearBar />}
         {selectedLabel === "Electronics" && <ElectronicsBar />}

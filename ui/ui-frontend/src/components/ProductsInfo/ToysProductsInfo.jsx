@@ -42,7 +42,7 @@ const ToysProductsInfo = () => {
 
     console.log(datad.data);
 
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem("token")) {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.toyId,
@@ -56,7 +56,7 @@ const ToysProductsInfo = () => {
           qty: quantity,
           productCategories: category,
           type: productsInfo.type,
-          sellerName: productsInfo.sellerName
+          sellerName: productsInfo.sellerName,
         };
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
@@ -72,10 +72,8 @@ const ToysProductsInfo = () => {
         await CartService.updateQuantity(datad.data.cartId, username, qty);
         alert("Cart contains " + qty + " " + datad.data.productName);
       }
-    }
-    else {
+    } else {
       navigate("/login");
-
     }
   };
 

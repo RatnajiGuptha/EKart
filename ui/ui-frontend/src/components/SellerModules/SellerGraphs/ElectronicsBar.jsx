@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {ElectronicsService} from "../../../Services/ElectronicsService";
+import { ElectronicsService } from "../../../Services/ElectronicsService";
 import {
   Chart as ChartJS,
   BarElement,
@@ -72,7 +72,7 @@ const ElectronicsBar = () => {
       setAppliances(response3.data.length);
     });
   }, [sellername]);
-  console.log(sellername)
+  console.log(sellername);
   const data = {
     labels: [
       "Mobiles",
@@ -86,6 +86,7 @@ const ElectronicsBar = () => {
     ],
     datasets: [
       {
+        label: "Fashion",
         data: [
           mobiles,
           refrigerators,
@@ -118,7 +119,14 @@ const ElectronicsBar = () => {
     },
   };
   return (
-    <div>
+    <div
+      style={{
+        alignItems: "center",
+        width: "600px",
+        height: "400px",
+        marginTop: "70px",
+      }}
+    >
       <Bar data={data} options={options}></Bar>
     </div>
   );

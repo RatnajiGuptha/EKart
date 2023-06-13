@@ -5,23 +5,23 @@ import "../../StyleSheets/Cart.css";
 
 const CartComponent = () => {
   const [cartItems, setCartItems] = useState([]);
-  const username = localStorage.getItem('username');
+  const username = localStorage.getItem("username");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await CartService.getCartItemsByUser(username)
+        const response = await CartService.getCartItemsByUser(username);
         setCartItems(response.data);
         // console.log(response.data);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     fetchData();
   }, [username]);
 
   const checkoutFromCart = () => {
-    window.location.assign(`paymentPage/${username}`)
+    window.location.assign(`paymentPage/${username}`);
   };
 
   const deleteItemFromCarttt = async (cartId) => {
@@ -29,7 +29,6 @@ const CartComponent = () => {
     // alert("Item Deleted Successfully");
     window.location.reload(false);
   };
-
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -45,16 +44,22 @@ const CartComponent = () => {
 
   console.log(cartItems.length);
   if (cartItems.length === 0) {
-    return (<div>
-      <img src="https://www.adanione.com/~/media/Foundation/Adani/emptyImages/empty_cart.gif" alt="Fail to load data"></img>
-      <div className="emptyCart">
-        Your cart looks empty.
-        Let’s fill it with some goodness!
+    return (
+      <div>
+        <img
+          src="https://www.adanione.com/~/media/Foundation/Adani/emptyImages/empty_cart.gif"
+          alt="Fail to load data"
+        ></img>
+        <div className="emptyCart">
+          Your cart looks empty. Let’s fill it with some goodness!
+        </div>
+        <div className="contButton">
+          <Link to={"/"}>
+            <button className="btn btn-danger">Continue Shoping</button>
+          </Link>
+        </div>
       </div>
-      <div className="contButton">
-        <Link to={'/'} ><button className="btn btn-danger">Continue Shoping</button></Link>
-      </div>
-    </div>)
+    );
   }
 
   return (
@@ -63,7 +68,11 @@ const CartComponent = () => {
         {cartItems.map((item) => (
           <div key={item.cartId} className="items-container">
             <div>
-              <img src={item.logoImg} className="cart-product-img" alt="/"  ></img>
+              <img
+                src={item.logoImg}
+                className="cart-product-img"
+                alt="/"
+              ></img>
             </div>
             <div className="cart-item-details">
               <h5 className="product-name">{item.productName}</h5>
@@ -78,7 +87,9 @@ const CartComponent = () => {
               </div>
             </div>
             <div className="product-qty-container">
-              <p className="product-price">  Quantity:{" "}
+              <p className="product-price">
+                {" "}
+                Quantity:{" "}
                 <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
                   {item.qty}
                 </span>
@@ -93,7 +104,8 @@ const CartComponent = () => {
             <div className="m-2">
               <button
                 className="btn btn-danger"
-                onClick={() => deleteItemFromCarttt(item.cartId)}              >
+                onClick={() => deleteItemFromCarttt(item.cartId)}
+              >
                 Remove From Cart
               </button>
             </div>
@@ -113,12 +125,13 @@ const CartComponent = () => {
             </span>
           </p>
 
-          <button className="checkout-btn" onClick={() => checkoutFromCart()}>Checkout</button>
+          <button className="checkout-btn" onClick={() => checkoutFromCart()}>
+            Checkout
+          </button>
         </div>
       </div>
     </div>
   );
-}
-
+};
 
 export default CartComponent;

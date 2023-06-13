@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {ToysService} from "../../../Services/ToysService";
+import { ToysService } from "../../../Services/ToysService";
 import {
   Chart as ChartJS,
   BarElement,
@@ -24,7 +24,7 @@ const ToysBar = () => {
     labels: ["Number Of Toys"],
     datasets: [
       {
-        label: "Toys",
+        label: "data",
         data: [toys],
         backgroundColor: "blue",
         borderColor: "black",
@@ -39,7 +39,14 @@ const ToysBar = () => {
     },
   };
   return (
-    <div>
+    <div
+      style={{
+        alignItems: "center",
+        width: "600px",
+        height: "400px",
+        marginTop: "70px",
+      }}
+    >
       <Bar data={data} options={options}></Bar>
     </div>
   );
