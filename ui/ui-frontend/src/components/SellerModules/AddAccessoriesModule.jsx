@@ -133,8 +133,8 @@ function AddAccessoriesModule() {
                                     </input>
                                 </div>
                                 <div className='form-container'>
-                                    <label for="AccessoriesTypes">Choose Type:</label>
-                                    <select name="AccessoriesTypes" accessoryId="AccessoriesTypes" style={{ waccessoryIdth: '100%', height: '40px' }} value={type} onChange={(e) => setType(e.target.value)}>
+                                    <label htmlFor="AccessoriesTypes">Choose Type:</label>
+                                    <select name="AccessoriesTypes" accessoryId="AccessoriesTypes" style={{ width: '100%', height: '40px' }} value={type} onChange={(e) => setType(e.target.value)}>
                                         <option value="" disabled selected haccessoryIdden>Choose Type..</option>
                                         <option value="Jewellery">Jewellery</option>
                                         <option value="Handbags">Handbags</option>
@@ -144,8 +144,8 @@ function AddAccessoriesModule() {
                                     </select>
                                 </div>
                                 <div className='form-container'>
-                                    <label for="suitablefor">Choose Suitable For:</label>
-                                    <select name="suitablefor" style={{ waccessoryIdth: '100%', height: '40px' }} value={suitablefor} onChange={(e) => setSuitableFor(e.target.value)}>
+                                    <label htmlFor="suitablefor">Choose Suitable For:</label>
+                                    <select name="suitablefor" style={{ width: '100%', height: '40px' }} value={suitablefor} onChange={(e) => setSuitableFor(e.target.value)}>
                                         <option value="" disabled selected haccessoryIdden>Choose Suitable for..</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -160,8 +160,8 @@ function AddAccessoriesModule() {
                                     </input>
                                 </div>
                                 <div className='form-container'>
-                                    <label for="size">Choose Size:</label>
-                                    <select name="size" accessoryId="size" style={{ waccessoryIdth: '100%', height: '40px' }} value={size} onChange={(e) => setSize(e.target.value)}>
+                                    <label htmlFor="size">Choose Size:</label>
+                                    <select name="size" accessoryId="size" style={{ width: '100%', height: '40px' }} value={size} onChange={(e) => setSize(e.target.value)}>
                                         <option value="" disabled selected haccessoryIdden>Choose Size..</option>
                                         <option value="FreeSize">FreeSize</option>
                                         <option value="Onesize">Onesize</option>

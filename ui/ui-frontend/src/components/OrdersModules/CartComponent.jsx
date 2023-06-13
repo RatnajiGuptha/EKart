@@ -30,18 +30,17 @@ const CartComponent = () => {
   };
 
   const deleteItemFromCarttt = async (cartId) => {
-    await CartService.deleteItemFromCart(cartId).then(() => {
-      // alert("Item Deleted Successfully");
-      window.location.reload(false);
-    }).catch((err) => {
-      if (err.response.status === 401) {
-        console.log(err.response.data)
-        navigate("/login")
+    await CartService.deleteItemFromCart(cartId)
+      .then(() => {
+        // alert("Item Deleted Successfully");
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        navigate("/login");
         localStorage.clear();
-      }
-    })
+      });
   };
-
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -105,7 +104,7 @@ const CartComponent = () => {
             <div className="m-2">
               <button
                 className="btn btn-danger"
-                onClick={() => deleteItemFromCarttt(item.cartId)}              >
+                onClick={() => deleteItemFromCarttt(item.cartId)}>
                 Remove From Cart
               </button>
             </div>

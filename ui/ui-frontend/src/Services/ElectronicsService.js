@@ -51,11 +51,11 @@ export const ElectronicsService = {
         return res;
     },
 
-    async saveElectronics(products) {
+    async saveElectronics(product) {
         const res = await authenticateApi.request({
             url: `/api/electronicsProducts/add`,
             method: "POST",
-            data: products,
+            data: product,
         });
         return res;
     },

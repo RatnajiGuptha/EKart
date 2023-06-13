@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FootwearService } from "../../Services/FootwearService";
 import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/Home.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FootwearProductsByTypeInfo = () => {
   const username = localStorage.getItem("username");
@@ -68,7 +70,7 @@ const FootwearProductsByTypeInfo = () => {
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
-            alert("Item added successfully");
+            toast.success("Item added successfully",{theme:"dark"});
           }).catch((err) => {
             if (err.response.status === 401) {
               console.log(err.response.data)
@@ -77,13 +79,13 @@ const FootwearProductsByTypeInfo = () => {
           }
           });
         } else {
-          alert(" products Left");
+          toast.warning(" products Left",{theme:"dark"});
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
         await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
-          alert("Cart contains " + qty + " " + datad.data.productName);
+          toast.success("Cart contains " + qty + " " + datad.data.productName,{theme:"dark"});
         }).catch((err) => {
           if (err.response.status === 401) {
             console.log(err.response.data)
@@ -168,6 +170,7 @@ const FootwearProductsByTypeInfo = () => {
           <button className="btn btn-warning" onClick={handleCardItems}>
             Add to cart
           </button>{" "}
+          <ToastContainer />
         </div>
       </div>
     </div>

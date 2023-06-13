@@ -17,7 +17,7 @@ function HomeCarousels() {
             </Link>
           </Carousel.Item>
           <Carousel.Item>
-          <Link to = "/accessories">
+          <Link to = "accessoriesBy/Jewellery">
             <img
               className="d-block w-100 carousalImgClass"
               src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1686044162/carousel-accessories_culdg0.png"
@@ -30,7 +30,7 @@ function HomeCarousels() {
             <Link to= "/footwear">
             <img
               className="d-block w-100 carousalImgClass"
-              src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1683522373/caurosel-img3_pvatjv.png"
+              src="https://res.cloudinary.com/dx7zsxo2g/image/upload/v1686645856/carousel-footwear_ovswoq.png"
               alt="Third slide"
             />
             </Link>
