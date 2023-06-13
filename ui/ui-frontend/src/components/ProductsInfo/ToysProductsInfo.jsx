@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToysService } from "../../Services/ToysService";
 import { CartService } from "../../Services/CartService";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../StyleSheets/Home.css";
 
 const ToysProductsInfo = () => {
@@ -35,14 +37,21 @@ const ToysProductsInfo = () => {
   }, [toyId]);
 
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      toyId
-    );
-
-    console.log(datad.data);
-
     if (localStorage.getItem("token")) {
+      const datad = await CartService.getProductCategoryAndProductId(
+        category,
+        toyId
+      )
+        .then()
+        .catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data);
+            navigate("/login");
+            localStorage.clear();
+          }
+        });
+
+      console.log(datad.data);
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.toyId,
@@ -60,17 +69,37 @@ const ToysProductsInfo = () => {
         };
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
-          await CartService.addItemsToCart(cart).then((response) => {
-            //   console.log(response);
-            alert("Item added successfully");
-          });
+          await CartService.addItemsToCart(cart)
+            .then((response) => {
+              //   console.log(response);
+              toast.success("Item added successfully", { theme: "dark" });
+            })
+            .catch((err) => {
+              if (err.response.status === 401) {
+                console.log(err.response.data);
+                navigate("/login");
+                localStorage.clear();
+              }
+            });
         } else {
-          alert(`${productsInfo.qty}`, " products Left");
+          toast.warning(" products Left");
         }
       } else {
+        //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty);
-        alert("Cart contains " + qty + " " + datad.data.productName);
+        await CartService.updateQuantity(datad.data.cartId, username, qty)
+          .then(() => {
+            toast.success(
+              "Cart contains " + qty + " " + datad.data.productName
+            );
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              console.log(err.response.data);
+              navigate("/login");
+              localStorage.clear();
+            }
+          });
       }
     } else {
       navigate("/login");
@@ -162,6 +191,7 @@ const ToysProductsInfo = () => {
           <button className="btn btn-warning" onClick={handleCardItems}>
             Add to cart
           </button>{" "}
+          <ToastContainer />
         </div>
       </div>
     </div>

@@ -96,6 +96,10 @@ function App() {
             path="/paymentPage/:userName"
             element={<CheckoutComponent />}
           ></Route>
+          <Route
+            path="/paymentPage/:userName/:addressId"
+            element={<CheckoutComponent />}
+          ></Route>
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>

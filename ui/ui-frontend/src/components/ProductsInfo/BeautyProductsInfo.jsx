@@ -20,7 +20,7 @@ const BeautyProductsInfo = () => {
       setProductInfo(response.data);
       setImage(response.data.productImg1);
       setCategory("Beauty");
-    });
+    })
 
   }, [beautyId]);
 
@@ -39,14 +39,18 @@ const BeautyProductsInfo = () => {
   };
 
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      beautyId
-    );
 
-    console.log(datad.data);
     if (localStorage.getItem('token')) {
+      const datad = await CartService.getProductCategoryAndProductId(category, beautyId).then()
+        .catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
+        });
 
+      console.log(datad.data);
 
       if (datad.data.cartId == null) {
         const cart = {
@@ -69,15 +73,28 @@ const BeautyProductsInfo = () => {
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
             alert("Item added successfully");
+          }).catch((err) => {
+            if (err.response.status === 401) {
+              console.log(err.response.data)
+              navigate("/login")
+              localStorage.clear();
+            }
           });
         } else {
-          alert(`${productsInfo.qty}`, " products Left");
+          alert(" products Left");
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty);
-        alert("Cart contains " + qty + " " + datad.data.productName);
+        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
+          alert("Cart contains " + qty + " " + datad.data.productName);
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
+        });
       }
     }
     else {

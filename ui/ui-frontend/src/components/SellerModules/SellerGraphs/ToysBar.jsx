@@ -24,7 +24,7 @@ const ToysBar = () => {
     labels: ["Number Of Toys"],
     datasets: [
       {
-        label: "data",
+        label: "Toys",
         data: [toys],
         backgroundColor: "blue",
         borderColor: "black",

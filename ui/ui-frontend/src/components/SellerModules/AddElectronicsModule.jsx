@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import { ElectronicsService } from '../../Services/ElectronicsService';
+
 function AddElectronicsModule() {
     const [productName, setProductName] = useState('')
     const [logoImg, setLogoImg] = useState('')
@@ -18,34 +19,47 @@ function AddElectronicsModule() {
     const [productImg5, setProductImg5] = useState('')
     const [color, setColor] = useState('')
     const [qty, setQty] = useState('')
+    const [sellerName, setSellerName] = useState('');
     const { electronicsId } = useParams();
+    const navigate = useNavigate('');
 
     const saveOrUpdateElectronics = (e) => {
         e.preventDefault();
 
         const electronicsProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, manufactureDate, capacity,
-            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty
+            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty, sellerName
         }
 
         if (electronicsId) {
             ElectronicsService.updateElectronicsProducts(electronicsId, electronicsProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listElectronicProducts");
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
-
         } else {
             ElectronicsService.saveElectronics(electronicsProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listElectronicProducts");
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
 
     }
 
     useEffect(() => {
+        const name = localStorage.getItem("name");
+        setSellerName(name);
 
         ElectronicsService.getElectronicsById(electronicsId).then((response) => {
             setProductName(response.data.productName)
@@ -63,6 +77,7 @@ function AddElectronicsModule() {
             setProductImg5(response.data.productImg5)
             setColor(response.data.color)
             setQty(response.data.qty)
+            setSellerName(name)
         }).catch(error => {
             console.log(error)
         })
@@ -71,9 +86,9 @@ function AddElectronicsModule() {
     const title = () => {
 
         if (electronicsId) {
-            return <h2 className="text-center">Update Electronic Products</h2>
+            return <h2 className="text-center p-2">Update Electronic Products</h2>
         } else {
-            return <h2 className="text-center">Add Electronic Products</h2>
+            return <h2 className="text-center p-2">Add Electronic Products</h2>
         }
     }
     return (
@@ -188,7 +203,14 @@ function AddElectronicsModule() {
                                     </input>
                                 </div>
 
+
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateElectronics(e)} >Submit </button>
+
+                                <Link to="/listElectronicProducts">
+                                    <button className='btn btn-warning m-3'>Back</button>
+                                </Link>
+
+
                             </form>
                         </div>
                     </div>

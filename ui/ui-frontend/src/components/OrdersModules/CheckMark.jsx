@@ -1,32 +1,35 @@
-import React from 'react'
-import { Checkmark } from 'react-checkmark'
-import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useState, useEffect, React } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { OrderService } from '../../Services/OrderService';
 import { Roller } from 'react-awesome-spinners';
+import { Checkmark } from 'react-checkmark';
+
 const CheckMark = () => {
 
     const { id } = useParams();
     console.log(id);
     const [paymentStatus, setPaymentStatus] = useState("");
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate("")
 
     useEffect(() => {
-
         setTimeout(() => {
             OrderService.getOrderDetails(id).then((Response) => {
                 console.log(Response.data);
-                //  console.log(Response.data[0]);
                 console.log(Response.data.paymentStatus);
                 setPaymentStatus(Response.data.paymentStatus);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
             setIsLoading(false);
         }, 5000);
-
-    }, [id]);
+    }, [id, navigate]);
 
     if (isLoading) {
-
         return (
             <div style={{ marginTop: 200 }} >
                 <div><Roller /></div>
@@ -37,7 +40,6 @@ const CheckMark = () => {
                 {/* <h1>............LOADING........</h1> */}
             </div>
         )
-
     }
 
     if (paymentStatus === "PAYMENT_FAILED") {
@@ -55,7 +57,6 @@ const CheckMark = () => {
 
                 </div>
             </div>
-
         )
     }
 

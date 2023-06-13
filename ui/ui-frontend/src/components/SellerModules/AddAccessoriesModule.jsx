@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import "../../StyleSheets/SellerModule.css";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AccessoriesService } from '../../Services/AccessoriesService';
+
 function AddAccessoriesModule() {
     const [productName, setProductName] = useState('')
     const [logoImg, setLogoImg] = useState('')
@@ -35,16 +36,23 @@ function AddAccessoriesModule() {
             AccessoriesService.updateAccessoriesProducts(accessoryId, accessoriesProducts).then((response) => {
                 console.log(response.data)
                 navigate("/listAccessoriesProducts")
-            }).catch(error => {
-                console.log(error)
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
-
         } else {
             AccessoriesService.addProduct(accessoriesProducts).then((response) => {
                 console.log(response.data)
                 navigate("/listAccessoriesProducts")
-            }).catch(error => {
-                console.log(error)
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
 
@@ -80,9 +88,9 @@ function AddAccessoriesModule() {
     const titleAccessories = () => {
 
         if (accessoryId) {
-            return <h2 className="text-center">Update Accessories Products</h2>
+            return <h2 className="text-center p-2">Update Accessories Products</h2>
         } else {
-            return <h2 className="text-center">Add Accessories Products</h2>
+            return <h2 className="text-center p-2">Add Accessories Products</h2>
         }
     }
 
@@ -204,6 +212,11 @@ function AddAccessoriesModule() {
                                 </div>
 
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateAccessories(e)} >Submit </button>
+
+                                <Link to="/listAccessoriesProducts">
+                                    <button className='btn btn-warning m-3'>Back</button>
+                                </Link>
+
                             </form>
                         </div>
                     </div>

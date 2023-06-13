@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import { React, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AddressService } from '../../Services/AddressService';
 import AddNewAddress from './AddNewAddressComponent';
-import {AddressService} from '../../Services/AddressService';
 import "../../StyleSheets/AddressPage.css";
 
 const AddressComponent = () => {
     const [showAddNewAddress, setAddNewAddress] = useState(false);
     const [addressList, setAddressList] = useState([]);
-
+    const navigate = useNavigate("")
 
     useEffect(() => {
         AddressService.getAllAddress(localStorage.getItem("username")).then((response) => {
             console.log(response.data.length);
             setAddressList(response.data);
-
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
 
         })
-    }, [])
+    }, [navigate])
 
     const toggleAddNewAddress = (event) => {
         setAddNewAddress(!showAddNewAddress);
@@ -23,9 +29,17 @@ const AddressComponent = () => {
     };
     const removeAddress = async (addressId) => {
 
-        AddressService.deleteAddress(addressId);
-        console.log("address deleted successfully")
-        window.location.reload(false);
+        await AddressService.deleteAddress(addressId).then(() => {
+            console.log("address deleted successfully")
+            window.location.reload(false);
+        }).catch((err) => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
+        })
+
     }
     return (
         <div className="address-box">

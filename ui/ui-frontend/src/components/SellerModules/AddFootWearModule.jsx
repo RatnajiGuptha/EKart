@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import { FootwearService } from '../../Services/FootwearService';
 function AddFootWearModule() {
@@ -19,34 +19,48 @@ function AddFootWearModule() {
     const [productImg5, setProductImg5] = useState('')
     const [color, setColor] = useState('')
     const [qty, setQty] = useState('')
+    const [sellerName, setSellerName] = useState('');
     const { footWearId } = useParams();
+    const navigate=useNavigate('');
 
     const saveOrUpdateFootwear = (e) => {
         e.preventDefault();
 
         const footwearProducts = {
             productName, logoImg, productPrice, productDescription, brandName, type, suitablefor, manufactureDate, size,
-            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty
+            productImg1, productImg2, productImg3, productImg4, productImg5, color, qty, sellerName
         }
 
         if (footWearId) {
             FootwearService.updateFootWearProducts(footWearId, footwearProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listFootWearProducts")
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
 
         } else {
             FootwearService.saveFootWare(footwearProducts).then((response) => {
                 console.log(response.data)
-            }).catch(error => {
-                console.log(error)
+                navigate("/listFootWearProducts")
+            }).catch(err => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
             })
         }
 
     }
 
     useEffect(() => {
+        const name = localStorage.getItem("name");
+        setSellerName(name);
 
         FootwearService.getFootwearById(footWearId).then((response) => {
             setProductName(response.data.productName)
@@ -65,6 +79,7 @@ function AddFootWearModule() {
             setProductImg5(response.data.productImg5)
             setColor(response.data.color)
             setQty(response.data.qty)
+            setSellerName(response.data.sellerName)
         }).catch(error => {
             console.log(error)
         })
@@ -73,9 +88,9 @@ function AddFootWearModule() {
     const title = () => {
 
         if (footWearId) {
-            return <h2 className="text-center">Update Footwear Products</h2>
+            return <h2 className="text-center p-2">Update Footwear Products</h2>
         } else {
-            return <h2 className="text-center">Add Footwear Products</h2>
+            return <h2 className="text-center p-2">Add Footwear Products</h2>
         }
     }
     return (
@@ -204,6 +219,10 @@ function AddFootWearModule() {
                                 </div>
 
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateFootwear(e)} >Submit </button>
+
+                                <Link to="/listFootWearProducts">
+                                <button className='btn btn-warning m-3'>Back</button>
+                                </Link>
                             </form>
                         </div>
                     </div>

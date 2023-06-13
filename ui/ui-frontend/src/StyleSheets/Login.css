@@ -2,10 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
   background-image: url("https://res.cloudinary.com/dx7zsxo2g/image/upload/v1685961369/login-bg_chqubm.png");
   background-size: cover;
-  /* background-image: url("https://img.freepik.com/free-vector/hand-drawn-shopping-pattern-design_23-2149628723.jpg?w=740&t=st=1685959686~exp=1685960286~hmac=d2cf5b3ed3c3d72bbe8b2cf29088a1f11e460256ab3348c855b8e66dd44c2bb9") ; */
 }
 
 .forms {
@@ -83,6 +81,7 @@
   margin-top: 0px;
   font-style: italic;
 }
+
 .card4 {
   background: white;
 }

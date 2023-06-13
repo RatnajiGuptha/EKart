@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../../StyleSheets/Login.css";
 import { SecurityService } from "../../Services/SecurityService";
 
 function Registrationpage() {
-  const navigate = useNavigate();
-
   const [registerData, setRegisterData] = useState({
     userName: "",
     fullName: "",
@@ -46,7 +44,7 @@ function Registrationpage() {
     const userEmailExists = await SecurityService.getUserByEmail(
       registerData.email
     );
-    console.log("email =", userEmailExists.data);
+    console.log(userEmailExists.data);
     if (!registerData.email || !registerData.email.trim()) {
       newError.email = "Email is required";
       valid = false;
@@ -58,24 +56,6 @@ function Registrationpage() {
       valid = false;
     }
 
-    const contactNumberExists = await SecurityService.getUserByContactNumber(
-      registerData.contactNumber
-    );
-    console.log(contactNumberExists.data);
-    if (
-      !registerData.contactNumber.trim() ||
-      registerData.contactNumber.trim().length !== 10
-    ) {
-      newError.contactNumber = "Mobile number should have 10 digits";
-      valid = false;
-    } else if (contactNumberExists.data !== null) {
-      newError.contactNumber = "Mobile number already exists";
-      valid = false;
-    } else if (!/^[0-9]+$/.test(registerData.contactNumber)) {
-      newError.contactNumber = "Mobile number should have 10 digits";
-      valid = false;
-    }
-
     if (!registerData.fullName || registerData.fullName.trim().length < 3) {
       newError.fullName = "Full name should have at least 3 characters";
       valid = false;
@@ -84,13 +64,22 @@ function Registrationpage() {
       valid = false;
     }
 
+    if (
+      !registerData.contactNumber.trim() ||
+      registerData.contactNumber.trim().length !== 10
+    ) {
+      newError.contactNumber = "Mobile number should have 10 digits";
+      valid = false;
+    } else if (!/^[0-9]+$/.test(registerData.contactNumber)) {
+      newError.contactNumber = "Mobile number should have 10 digits";
+      valid = false;
+    }
+
     if (!registerData.password || registerData.password.trim().length < 8) {
       newError.password = "Password should have at least 8 characters";
       valid = false;
-    } else if (
-      !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(registerData.password)
-    ) {
-      newError.password = "Password should at least one letter, one number";
+    } else if (!/[a-zA-Z@#$%&.]/.test(registerData.password)) {
+      newError.password = "Password should contian specical characterts(@#$%&)";
       valid = false;
     }
 
@@ -103,7 +92,6 @@ function Registrationpage() {
     if (await validateForm()) {
       SecurityService.addUser(registerData).then((res) => {
         console.log(res.data);
-        navigate("/login");
       });
     }
   };
@@ -138,7 +126,7 @@ function Registrationpage() {
         <label>
           Email
           <input
-            type="email"
+            type="text"
             name="email"
             placeholder="Enter Email"
             value={registerData.email}
@@ -162,9 +150,9 @@ function Registrationpage() {
         <label>
           Contact Number
           <input
-            type="number"
+            type="text"
             name="contactNumber"
-            placeholder="Enter Contact Number"
+            placeholder="Enter Contactnumber"
             value={registerData.contactNumber}
             onChange={handleChange}
           />
