@@ -5,8 +5,7 @@ import { CartService } from "../../Services/CartService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../StyleSheets/Home.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 const ToysProductsInfo = () => {
   const username = localStorage.getItem("username");

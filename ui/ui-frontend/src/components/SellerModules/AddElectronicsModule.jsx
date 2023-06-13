@@ -133,7 +133,7 @@ function AddElectronicsModule() {
                                 </div>
                                 <div className='form-container'>
                                     <label htmlFor="ElectronicsTypes">Choose Type:</label>
-                                    <select name="ElectronicsTypes" id="ElectronicsTypes" style={{ width: '100%', height: '40px' }}> value = {type} onChange = {(e) => setType(e.target.value)}
+                                    <select name="ElectronicsTypes" id="ElectronicsTypes" style={{ width: '100%', height: '40px' }} value = {type} onChange = {(e) => setType(e.target.value)}> 
                                         <option value="" disabled selected hidden>Choose Type..</option>
                                         <option value="Mobiles">Mobiles</option>
                                         <option value="Refrigerators">Refrigerators</option>
