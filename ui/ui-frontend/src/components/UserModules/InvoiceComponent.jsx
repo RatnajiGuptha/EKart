@@ -97,14 +97,10 @@ const InvoiceComponent = () => {
                             </tbody>
                         </table>
                     </div>
-
                     <hr className="mt-0" />
                     <div className="price-details">
                         <ul className="list-unstyled">
-                            <li>Total Amount: ₹ <span>{orderss.price} /- </span></li>
-                            <li>Promo code:  <span>Na</span></li>
-                            <li>Discount: ₹ <span>0 /-</span></li>
-                            <li>Grand Total: ₹ <span>{orderss.price} /-</span></li>
+F                            <li>Grand Total: ₹ <span>{orderss.price} /-</span></li>
                         </ul>
                     </div>
                 </div >

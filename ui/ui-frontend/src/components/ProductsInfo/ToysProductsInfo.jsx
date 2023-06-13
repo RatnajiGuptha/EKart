@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToysService } from "../../Services/ToysService";
 import { CartService } from "../../Services/CartService";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../StyleSheets/Home.css";
 
 const ToysProductsInfo = () => {
@@ -37,13 +37,16 @@ const ToysProductsInfo = () => {
   }, [toyId]);
 
   const handleCardItems = async () => {
-
-    if (localStorage.getItem('token')) {
-      const datad = await CartService.getProductCategoryAndProductId(category, toyId).then()
+    if (localStorage.getItem("token")) {
+      const datad = await CartService.getProductCategoryAndProductId(
+        category,
+        toyId
+      )
+        .then()
         .catch((err) => {
           if (err.response.status === 401) {
-            console.log(err.response.data)
-            navigate("/login")
+            console.log(err.response.data);
+            navigate("/login");
             localStorage.clear();
           }
         });
@@ -62,7 +65,7 @@ const ToysProductsInfo = () => {
           qty: quantity,
           productCategories: category,
           type: productsInfo.type,
-          sellerName: productsInfo.sellerName
+          sellerName: productsInfo.sellerName,
         };
         console.log(cart.productCategories);
         if (productsInfo.qty > quantity) {
@@ -77,13 +80,13 @@ const ToysProductsInfo = () => {
             }
           });
         } else {
-          toast.warning(" products Left");
+          toast.warning(" products Left", { theme: "dark" });
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
         await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
-          toast.success("Cart contains " + qty + " " + datad.data.productName);
+          toast.success("Cart contains " + qty + " " + datad.data.productName, { theme: "dark" });
         }).catch((err) => {
           if (err.response.status === 401) {
             console.log(err.response.data)
@@ -92,8 +95,7 @@ const ToysProductsInfo = () => {
           }
         });
       }
-    }
-    else {
+    } else {
       navigate("/login");
     }
   };
@@ -101,25 +103,40 @@ const ToysProductsInfo = () => {
   return (
     <div className="product-info-container">
       <div className="product-image-container">
-        <img className="card-images"
-          alt="/" onClick={() => handleClick(productsInfo.productImg1)}
-          src={productsInfo.productImg1} />
+        <img
+          className="card-images"
+          alt="/"
+          onClick={() => handleClick(productsInfo.productImg1)}
+          src={productsInfo.productImg1}
+        />
 
-        <img className="card-images"
-          alt="/" onClick={() => handleClick(productsInfo.productImg2)}
-          src={productsInfo.productImg2} />
+        <img
+          className="card-images"
+          alt="/"
+          onClick={() => handleClick(productsInfo.productImg2)}
+          src={productsInfo.productImg2}
+        />
 
-        <img className="card-images"
-          alt="/" onClick={() => handleClick(productsInfo.productImg3)}
-          src={productsInfo.productImg3} />
+        <img
+          className="card-images"
+          alt="/"
+          onClick={() => handleClick(productsInfo.productImg3)}
+          src={productsInfo.productImg3}
+        />
 
-        <img className="card-images"
-          alt="/" onClick={() => handleClick(productsInfo.productImg4)}
-          src={productsInfo.productImg4} />
+        <img
+          className="card-images"
+          alt="/"
+          onClick={() => handleClick(productsInfo.productImg4)}
+          src={productsInfo.productImg4}
+        />
 
-        <img className="card-images"
-          alt="/" onClick={() => handleClick(productsInfo.productImg5)}
-          src={productsInfo.productImg5} />
+        <img
+          className="card-images"
+          alt="/"
+          onClick={() => handleClick(productsInfo.productImg5)}
+          src={productsInfo.productImg5}
+        />
       </div>
       <div className="product-main-image-container">
         <img className="product-main-image" src={image} alt="/"></img>
@@ -149,9 +166,11 @@ const ToysProductsInfo = () => {
         <h5 className="seller-name">Seller : {productsInfo.sellerName}</h5>
         <div className="quantity">
           <div>
-            <button className="quantity-button"
+            <button
+              className="quantity-button"
               disabled={quantity === 1}
-              onClick={quantityDec} >
+              onClick={quantityDec}
+            >
               {" "}
               -{" "}
             </button>

@@ -4,6 +4,9 @@ import { AccessoriesService } from "../../Services/AccessoriesService";
 import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/ProductInfo.css";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const AccessoriesProductsByTpeInfo = () => {
 
   const username = localStorage.getItem("username");
@@ -17,10 +20,12 @@ const AccessoriesProductsByTpeInfo = () => {
   useEffect(() => {
     AccessoriesService.getAccessoriesByTypeAndId(type, accessoryId).then(
       (response) => {
-        console.log(response);
+        console.log(accessoryId)
+        console.log(response.data);
         setProductInfo(response.data);
         setImage(response.data.productImg1);
         setCategory("Accessories");
+        
       }
     )
   }, [type, accessoryId]);
@@ -41,19 +46,21 @@ const AccessoriesProductsByTpeInfo = () => {
 
   const handleCardItems = async () => {
 
+    
+
     if (localStorage.getItem('token')) {
       const datad = await CartService.getProductCategoryAndProductId(category, accessoryId).then()
         .catch((err) => {
           if (err.response.status === 401) {
-            console.log(err.response.data)
+            console.log(err.response.datad)
             navigate("/login")
             localStorage.clear();
           }
         });
 
-      console.log(datad.data);
+        console.log(datad.data);
 
-      if (datad.data.cartId === null) {
+      if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.accessoryId,
           userName: username,
@@ -73,7 +80,7 @@ const AccessoriesProductsByTpeInfo = () => {
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
             console.log(response);
-            alert("Item added successfully");
+            toast.success("Item added successfully",{theme:"dark"});
           }).catch((err) => {
             if (err.response.status === 401) {
               console.log(err.response.data)
@@ -82,13 +89,13 @@ const AccessoriesProductsByTpeInfo = () => {
             }
           });
         } else {
-          alert(" products Left");
+          toast.warning(" products Left",{theme:"dark"});
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
         await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
-          alert("Cart contains " + qty + " " + datad.data.productName);
+          toast.success("Cart contains " + qty + " " + datad.data.productName,{theme:"dark"});
         }).catch((err) => {
           if (err.response.status === 401) {
             console.log(err.response.data)
@@ -168,6 +175,7 @@ const AccessoriesProductsByTpeInfo = () => {
           <button className="btn btn-warning" onClick={handleCardItems}>
             Add to cart
           </button>{" "}
+          <ToastContainer />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {BeautyService} from "../../../Services/BeautyService";
+import { BeautyService } from "../../../Services/BeautyService";
 import {
   Chart as ChartJS,
   BarElement,
@@ -18,7 +18,6 @@ const BeautyBar = () => {
     labels: ["Number Of Beauty Products"],
     datasets: [
       {
-        label: "Beauty",
         data: [beauty],
         backgroundColor: "blue",
         borderColor: "black",
@@ -40,7 +39,14 @@ const BeautyBar = () => {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        alignItems: "center",
+        width: "600px",
+        height: "400px",
+        marginTop: "70px",
+      }}
+    >
       <Bar data={data} options={options}></Bar>
     </div>
   );
