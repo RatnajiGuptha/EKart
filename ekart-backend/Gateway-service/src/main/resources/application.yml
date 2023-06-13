@@ -491,7 +491,14 @@ spring:
         - id : payment-service
           uri : http://localhost:8083
           predicates:
-          - Path=/api/add
+          - Path=/api/userBalance/updateBalance/**
+          filters:
+            - AuthenticationFilter
+            
+        - id : payment-service
+          uri : http://localhost:8083
+          predicates:
+          - Path=/api/updateBalance/
           filters:
             - AuthenticationFilter
           
