@@ -1,82 +1,48 @@
-.addNew-address {
-    font-size: 20px;
-    /* color: #2874f0; */
-    font-weight: 500;
-    padding: 16px 0;
-    cursor: pointer;
+.address-contianer {
+    height: 100%;
+    padding: 20px;
+
 }
 
-.address-container {
-    display: flex;
-    flex-direction: row;
-    text-align: start;
-    border: 1px solid #e0e0e0;
-    background: #fff;
-    border-radius: 2px;
-    margin-bottom: 50px;
+.from-container {
+    height: 100%;
+    padding: 10px;
 }
 
-.addNew-address,
-._1g8pEu {
+.add-address-btn {
     text-align: left;
 }
 
-.Manage {
-    /* max-width: 400px; */
-    padding: 50px;
-    background-color: #fff;
-    text-align: center;
-
-    margin-left: 10px;
-    border: solid black;
+.add-address-btn button:hover {
+    text-decoration: underline;
+}
+.add-address-btn span {
+    font-style: italic;
+    font-weight: 600;
 }
 
-.addr {
-    text-align: start;
-    font-size: 18px;
-    color: black;
-    font-weight: 400;
-    padding: 16px 8px;
-    cursor: pointer;
-    flex: 90%
+.address-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 500px;
+    border: 2px solid gray;
+    border-radius: 12px;
+    margin: 10px;
+    padding: 10px;
 }
 
-.remove-address {
-    flex: 10%;
-    align-self: center;
-    border: 2px solid #e0e0e0;
-    padding: 0px 5px;
-    margin: 2px;
-    border-radius: 5px;
-
+.address-info-container li {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.remove-address:hover {
-    cursor: pointer;
+.address-info-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
-.addr p {
-    margin: 0px;
-    font-size: 15px;
-}
-
-.managess {
-    text-align: start;
-}
-
-.address-box {
-    text-align: start;
-    /* margin-top: 50px;
-    margin-left: 50px; */
-    margin: 50px;
-    /* height: 80vh; */
-    /* margin-left: 500px; */
-    /*
-    min-height: 100vh;
-  max-width: 800px;
-  padding:20px;
-  margin-left:10px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow:2px 2px 2px rgba(0, 0, 0, 0.3); */
+.address-info-card p {
+    margin-bottom: 5px;
 }

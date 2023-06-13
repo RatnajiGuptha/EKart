@@ -1,6 +1,8 @@
 import { React, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AddressService } from '../../Services/AddressService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import AddNewAddress from './AddNewAddressComponent';
 import "../../StyleSheets/AddressPage.css";
 
@@ -28,7 +30,6 @@ const AddressComponent = () => {
         event.preventDefault();
     };
     const removeAddress = async (addressId) => {
-
         await AddressService.deleteAddress(addressId).then(() => {
             console.log("address deleted successfully")
             window.location.reload(false);
@@ -42,31 +43,27 @@ const AddressComponent = () => {
 
     }
     return (
-        <div className="address-box">
-            <form className="Manage">
-                <h3 className='managess'> Manage Address</h3>
-                <div className="qkYgWG">
-                    <div>
-                        <div className="addNew-address">
-                            <button onClick={toggleAddNewAddress}>
-                                <img height="18" width="18" alt="/" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMyMTc1RkYiIGQ9Ik0xMS4yNSA2Ljc1aC00LjV2NC41aC0xLjV2LTQuNUguNzV2LTEuNWg0LjVWLjc1aDEuNXY0LjVoNC41Ii8+PHBhdGggZD0iTS0zLTNoMTh2MThILTMiLz48L2c+PC9zdmc+" className="_1g8pEu" />
-                                ADD A NEW ADDRESS
-                            </button>
-                            {showAddNewAddress && <AddNewAddress />}
-                        </div>
-                    </div>
+        <div className="address-contianer">
+            <form className="form-contianer">
+                <h3> Manage Address</h3>
+                <div className="add-address-btn">
+                    <button onClick={toggleAddNewAddress} className='btn'>
+                        <FontAwesomeIcon icon={faEdit} />{" "}
+                        <span> Add new address </span>      </button>
+                    {showAddNewAddress && <AddNewAddress />}
                 </div>
                 {addressList.map((item) => (
-                    <div className="address-container">
-
-                        <div className="addr">
-                            <h5>{item.receiverName}- {item.receiverPhoneNumber}</h5>
-                            <p>{item.buildingNo},{item.street1}</p>
-                            <p>{item.city},{item.district},{item.state}-{item.pincode}</p>
+                    <div className="address-info-container">
+                        <ul className="list-unstyled">
+                            <li>{item.receiverName}- {item.receiverPhoneNumber}</li>
+                            <li>{item.buildingNo},{item.street1}</li>
+                            <li>{item.city},{item.district},{item.state}-{item.pincode}</li>
+                        </ul>
+                        <div>
+                            <button className='btn' onClick={() => removeAddress(item.addressId)}>
+                                <FontAwesomeIcon icon={faTrash} /> </button>
                         </div>
-                        <p className='remove-address' onClick={() => removeAddress(item.addressId)}>
-                            delete
-                        </p>
+
                     </div>
                 ))}
             </form>
