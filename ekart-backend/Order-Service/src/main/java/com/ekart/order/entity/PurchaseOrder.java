@@ -1,5 +1,6 @@
 package com.ekart.order.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +26,7 @@ public class PurchaseOrder {
 	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private UUID purchaseOrderId;
-	private Date orderDate=new Date();
+	private String orderDate = (new SimpleDateFormat("dd/MM/yyyy hh:mm:ss")).format(new Date());
 	private String userName;
 	private String email;
 	private List<Integer> productIds;
@@ -35,7 +36,7 @@ public class PurchaseOrder {
 	
 	private List<Integer> priceList;
 	private List<String> productName;
-	private List<String> brandName;
+	private List<String> brandName;	
 
 	private List<String> size;
 	private List<String> color;
