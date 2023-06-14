@@ -466,6 +466,10 @@ spring:
           - Path=/api/address/GetAddressById/**  
           filters:
             - AuthenticationFilter
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/generateOTP/**  
         
         - id : payment-service
           uri : http://localhost:8083
@@ -576,6 +580,11 @@ spring:
           uri : http://localhost:8400 
           predicates:
           - Path=/updatePasswordByUserName/**
+        
+        - id : user-service
+          uri : http://localhost:8400 
+          predicates:
+          - Path=/updatePasswordByEmail/**
        
         
       

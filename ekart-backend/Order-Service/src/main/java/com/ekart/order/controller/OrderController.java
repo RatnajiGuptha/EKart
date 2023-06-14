@@ -19,6 +19,7 @@ import com.ekart.order.entity.Cart;
 import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.AddressService;
 import com.ekart.order.service.CartService;
+import com.ekart.order.service.EmailSenderService;
 import com.ekart.order.service.OrderService;
 
 //@CrossOrigin(origins="http://localhost:3000/")
@@ -34,6 +35,10 @@ public class OrderController {
 	@Autowired
 	private AddressService addressService;
 	
+	@Autowired
+	private EmailSenderService emailSenderService;
+	
+	String sessionOtp;
 
 	@PostMapping("/createOrder/{userName}/{addressId}/{email}")
 	public PurchaseOrder saveOrder(@PathVariable String userName,@PathVariable int addressId,@PathVariable  String email ) {
@@ -94,5 +99,15 @@ public class OrderController {
 	public PurchaseOrder getOrderById(@PathVariable UUID Id) {
 		return orderService.fetchOrderById(Id);
 	}
-
+	
+	@GetMapping("/generateOTP/{email}")
+	public String generateOtp(@PathVariable String email) {
+		String otp="";
+		if(email !=null) {
+			otp = emailSenderService.generateOtp();
+			emailSenderService.sendOtp(email, otp);			
+		}
+		
+		return otp;		
+	}
 }
