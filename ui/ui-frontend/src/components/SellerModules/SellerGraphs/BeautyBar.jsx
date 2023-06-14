@@ -42,11 +42,11 @@ const BeautyBar = () => {
 
   return (
     <div
-      style={{
+       style={{
         alignItems: "center",
-        width: "600px",
-        height: "400px",
-        marginTop: "70px",
+        width: "700px",
+        height: "450px",
+        marginTop: "100px",
       }}
     >
       <Bar data={data} options={options}></Bar>
