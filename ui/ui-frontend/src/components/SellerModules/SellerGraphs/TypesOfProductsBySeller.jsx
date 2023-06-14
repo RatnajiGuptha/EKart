@@ -31,22 +31,26 @@ const TypesOfProductsBySeller = () => {
   const [selectedLabel, setSelectedLabel] = useState("");
 
   useEffect(() => {
-    FashionProductService.getFashionProductsBySellerName(sellername).then((response) => {
-      if (length < response.data.length) {
-        setSelectedLabel("Fashion");
-        setLength(response.data.length);
+    FashionProductService.getFashionProductsBySellerName(sellername).then(
+      (response) => {
+        if (length < response.data.length) {
+          setSelectedLabel("Fashion");
+          setLength(response.data.length);
+        }
+        console.log(response.data.length);
+        setFashionItems(response.data.length);
       }
-      console.log(response.data.length);
-      setFashionItems(response.data.length);
-    });
-    AccessoriesService.getAccessoriesProductsBySellerName(sellername).then((response) => {
-      if (length < response.data.length) {
-        setSelectedLabel("Accessories");
-        setLength(response.data.length);
+    );
+    AccessoriesService.getAccessoriesProductsBySellerName(sellername).then(
+      (response) => {
+        if (length < response.data.length) {
+          setSelectedLabel("Accessories");
+          setLength(response.data.length);
+        }
+        console.log(response.data.length);
+        setAccessoriesItems(response.data.length);
       }
-      console.log(response.data.length);
-      setAccessoriesItems(response.data.length);
-    });
+    );
 
     FootwearService.fetchBySellerName(sellername).then((response) => {
       if (length < response.data.length) {
@@ -56,14 +60,16 @@ const TypesOfProductsBySeller = () => {
       console.log(response.data.length);
       setFootWearItems(response.data.length);
     });
-    ElectronicsService.getElectronicsBySellerName(sellername).then((response) => {
-      if (length < response.data.length) {
-        setSelectedLabel("Electronics");
-        setLength(response.data.length);
+    ElectronicsService.getElectronicsBySellerName(sellername).then(
+      (response) => {
+        if (length < response.data.length) {
+          setSelectedLabel("Electronics");
+          setLength(response.data.length);
+        }
+        console.log(response.data.length);
+        setElectronicsItems(response.data.length);
       }
-      console.log(response.data.length);
-      setElectronicsItems(response.data.length);
-    });
+    );
     ToysService.getToysBySellerName(sellername).then((response) => {
       if (length < response.data.length) {
         setSelectedLabel("Toys");
@@ -141,7 +147,7 @@ const TypesOfProductsBySeller = () => {
         <Pie
           style={{
             alignItems: "center",
-            width: "600px",
+            width: "500px",
             height: "400px",
             marginTop: "70px",
           }}

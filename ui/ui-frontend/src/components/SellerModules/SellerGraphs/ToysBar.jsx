@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { ToysService } from "../../../Services/ToysService";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, } from "chart.js";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { Bar } from "react-chartjs-2";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -27,9 +34,13 @@ const ToysBar = () => {
     ],
   };
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false,
+        position: "bottom",
+        align: "center",
+        marginTop: "20px",
       },
     },
   };
@@ -43,6 +54,7 @@ const ToysBar = () => {
       }}
     >
       <Bar data={data} options={options}></Bar>
+      <h4>Toy</h4>
     </div>
   );
 };

@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { BeautyService } from "../../../Services/BeautyService";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, } from "chart.js";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -43,6 +50,7 @@ const BeautyBar = () => {
       }}
     >
       <Bar data={data} options={options}></Bar>
+      <h4>Beauty</h4>
     </div>
   );
 };
