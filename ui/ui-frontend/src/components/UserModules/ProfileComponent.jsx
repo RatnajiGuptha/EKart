@@ -1,8 +1,11 @@
+
 import React, { useState } from "react";
 import { useEffect } from "react";
+// import Changepassword from "./Changepassword";
+import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { useNavigate } from "react-router-dom";
-import "../../StyleSheets/ManageProfile.css";
+import ChangePassword from "../SecurityModules/ChangePassword";
 
 const ProfileComponent = () => {
   const userName = localStorage.getItem('username');
@@ -13,9 +16,6 @@ const ProfileComponent = () => {
   const [displayProfile, setDisplayProfile] = useState(true);
   const [editProfile, setEditProfile] = useState(false);
   const [showChangepassword, setChangepassword] = useState(false);
-
-  const [newPassword, setNewPassword] = useState("");
-  const [reenterNewPassword, setReenterNewPassword] = useState("");
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate('')
@@ -74,24 +74,6 @@ const ProfileComponent = () => {
     return valid;
   }
 
-  const validatePassword = async () => {
-    let valid = true;
-    const newError = {};
-    if (newPassword !== reenterNewPassword) {
-      newError.passwordMatch = "passwords did not match"
-      valid = false;
-    } else if (!newPassword || newPassword.trim().length < 8) {
-      newError.password = 'Password should have at least 8 characters';
-      valid = false;
-    } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(newPassword)) {
-      newError.password = 'Password should at least one letter, one number and one special character';
-      valid = false;
-    }
-
-    setErrors(newError);
-    return valid;
-  }
-
   const toggleChangepassword = (event) => {
     setChangepassword(!showChangepassword);
     setDisplayProfile(false)
@@ -123,16 +105,7 @@ const ProfileComponent = () => {
     console.log(userName, fullName, email, contactNumber);
   };
 
-  const saveNewPassword = async (e) => {
-    e.preventDefault();
-    if (await validatePassword()) {
-      setDisplayProfile(true)
-      setChangepassword(!showChangepassword)
-      await SecurityService.updatePassword(userName, newPassword).then((res) => {
-        console.log(res)
-      })
-    }
-  }
+
 
   const cancelChanges = (e) => {
     window.location.reload(false)
@@ -194,19 +167,8 @@ const ProfileComponent = () => {
           showChangepassword &&
           <form className="myprofile-profile-form">
             <h2> My Profile </h2>
-            <label> New Password
-              <input type="password" name="newPassword" onChange={(e) => { setNewPassword(e.target.value) }} placeholder="Enter new Password" />
-              {errors.password && <span>{errors.password}</span>}
-            </label>
-            <label> Re-enter new password
-              <input type="password" name="re-enterNewPassword" onChange={(e) => { setReenterNewPassword(e.target.value) }} placeholder="Re-enter new Password" />
-              {errors.password && <span>{errors.password}</span>}
-            </label>
-            {errors.passwordMatch && <span>{errors.passwordMatch}</span>}
-            <div>
-              <button className="btn btn-success" onClick={saveNewPassword}>save</button>
-              <button className="btn btn-warning" onClick={cancelChanges}>cancel</button>
-            </div>
+
+              <ChangePassword />
 
           </form>
 
@@ -217,3 +179,4 @@ const ProfileComponent = () => {
 };
 
 export default ProfileComponent;
+

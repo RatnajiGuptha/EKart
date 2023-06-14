@@ -13,7 +13,7 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const ToysBar = () => {
-  const [toys, setToys] = useState();
+  const [toys, setToys] = useState("");
   const sellername = localStorage.getItem("name");
 
   useEffect(() => {
@@ -21,12 +21,10 @@ const ToysBar = () => {
       setToys(response.data.length);
     });
   }, [sellername]);
-
+console.log(toys)
   const data = {
-    labels: ["Number Of Toys"],
     datasets: [
       {
-        label: "Toys",
         data: [toys],
         backgroundColor: "blue",
         borderColor: "black",
@@ -34,8 +32,6 @@ const ToysBar = () => {
     ],
   };
   const options = {
-    responsive: true,
-    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "bottom",

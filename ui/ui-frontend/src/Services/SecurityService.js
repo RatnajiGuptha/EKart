@@ -1,3 +1,4 @@
+
 import { authenticateApi, api } from "./axiosConfig";
 
 export const SecurityService = {
@@ -67,7 +68,22 @@ export const SecurityService = {
             method: 'PUT',
         });
         return res;
+    },
+
+    async updatePasswordByUsername(username,password){
+        const res = await authenticateApi.request({
+            url:`/updatePasswordByUserName/${username}/${password}`,
+            method:'PUT'
+        })
+        return res;
+    },
+
+    async updatePasswordByEmail(email,password){
+        const res = await api.request({
+            url:`/updatePasswordByEmail/${email}/${password}`,
+            method:'PUT'
+        })
+        return res;
     }
 
 }
-

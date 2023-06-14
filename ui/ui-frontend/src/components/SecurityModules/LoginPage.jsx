@@ -3,6 +3,7 @@ import "../../StyleSheets/Login.css"
 import { useNavigate, Link } from "react-router-dom";
 import { SecurityService } from "../../Services/SecurityService";
 import { toast } from 'react-toastify';
+import { ForgotPassword } from "../SecurityModules/ForgotPassword";
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ function LoginPage() {
             localStorage.setItem('token', token);
             localStorage.setItem('username', userName);
             navigate("/");
-            window.location.reload(true);
+            window.location.reload(false);
             console.log(token);
             toast.info("Welcome Back")
         })
@@ -48,7 +49,7 @@ function LoginPage() {
 
     return (
         <div className="login-page">
-            <form className='forms' onSubmit={handleLogin}>
+            <div className='forms' >
                 <label >  User Name
                     <input type="text" name="userName" value={userName} onChange={handleUserName} placeholder="Enter a username" />
                 </label>
@@ -57,14 +58,15 @@ function LoginPage() {
                 </label>
                 {errorMsg && <span>{errorMsg}</span>}
                 <div className='text-center mt-2 mb-2'>
-                    <button type='submit' className='login-button' >  Login </button>
+                    <button type='submit' className='login-button' onClick={handleLogin} >  Login </button>
                     <Link to="/registration">
                         <button className='signup-button'> Sign Up</button>
                     </Link>
                 </div>
-                <p style={{ fontStyle: 'italic' }}>Become a seller?<a href="/addSeller"> <span style={{ color: "blue" }} >register here</span></a></p>
-            </form>
 
+                <p style={{ fontStyle: 'italic' }}><div className='d-flex'><div>Forgot password?</div><div><ForgotPassword /></div></div></p>
+                <p style={{ fontStyle: 'italic' }}>Become a seller?<a href="/addSeller"> <span style={{ color: "blue" }} >register here</span></a></p>
+            </div>
         </div>
     )
 }

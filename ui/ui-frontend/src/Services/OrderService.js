@@ -1,4 +1,4 @@
-import { authenticateApi } from "./axiosConfig";
+import { authenticateApi,api } from "./axiosConfig";
 
 export const OrderService = {
 
@@ -27,7 +27,14 @@ export const OrderService = {
         })
         return res
 
-    }
+    },
+    async generateOtp(email) {
+        const res = await api.request({
+          url: `/api/generateOTP/${email}`,
+          method: "GET",
+        });
+        return res;
+      }
 
 }
 
