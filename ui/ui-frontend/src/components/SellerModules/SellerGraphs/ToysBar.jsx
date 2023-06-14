@@ -16,37 +16,41 @@ const ToysBar = () => {
   const [toys, setToys] = useState("");
   const sellername = localStorage.getItem("name");
 
-  useEffect(() => {
-    ToysService.getToysBySellerName(sellername).then((response) => {
-      setToys(response.data.length);
-    });
-  }, [sellername]);
-console.log(toys)
   const data = {
+  labels: ["Number Of Toys"],
     datasets: [
-      {
+      { 
         data: [toys],
-        backgroundColor: "blue",
+        backgroundColor: "violet",
         borderColor: "black",
       },
     ],
   };
   const options = {
-    plugins: {
+   plugins: {
       legend: {
+        marginTop: "13%",
+        display: false,
+        height: "70%",
+        width: "300px",
         position: "bottom",
         align: "center",
         marginTop: "20px",
       },
     },
   };
+   useEffect(() => {
+    ToysService.getToysBySellerName(sellername).then((response) => {
+      setToys(response.data.length);
+    });
+  }, [sellername]);
   return (
     <div
       style={{
         alignItems: "center",
-        width: "600px",
-        height: "400px",
-        marginTop: "70px",
+        width: "700px",
+        height: "450px",
+        marginTop: "100px",
       }}
     >
       <Bar data={data} options={options}></Bar>

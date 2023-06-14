@@ -168,7 +168,7 @@ const FashionBar = () => {
         alignItems: "center",
         width: "700px",
         height: "400px",
-        marginTop: "120px",
+        marginTop: "100px",
       }}
     >
       <Bar data={data} options={options}></Bar>

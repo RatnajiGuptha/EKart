@@ -74,7 +74,7 @@ const AccessoriesBar = () => {
         alignItems: "center",
         width: "700px",
         height: "400px",
-        marginTop: "70px",
+        marginTop: "100px",
         marginLeft: "20px",
       }}
     >
