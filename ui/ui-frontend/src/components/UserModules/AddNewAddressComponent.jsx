@@ -73,26 +73,32 @@ const AddNewAddressComponent = () => {
         setAddNewAddress(false)
     }
     return (
-        <div>
+        <div className="mb-3">
             {addNewAddress &&
                 <form className="addr-form">
-                    <label htmlFor="Name" className="texted">Name </label>
-                    <input value={Name} onChange={(e) => handleAddress(e)} placeholder="Name" type="text" id="Name" className="passw" />
-                    <label htmlFor="ContactNumber" className="texted">ContactNumber</label>
-                    <input value={ContactNumber} onChange={(e) => handleAddress(e)} placeholder="10-digit number" type="text" id="ContactNumber" className="passw" />
-                    <label htmlFor="buildingNo" className="texted">BuildingNo</label>
-                    <input value={buildingNo} onChange={(e) => handleAddress(e)} placeholder="buildingNo" type="text" id="buildingNo" className="passw" />
-                    <label htmlFor="Area" className="texted">Area</label>
-                    <input value={Area} onChange={(e) => handleAddress(e)} placeholder="Area" type="text" id="Area" className="passw" />
-                    <label htmlFor="City" className="texted">City</label>
-                    <input value={City} onChange={(e) => handleAddress(e)} placeholder="City" type="text" id="City" className="passw" />
-                    <label htmlFor="State" className="texted" >State</label>
-                    <input value={State} onChange={(e) => handleAddress(e)} placeholder="State" type="text" id="State" className="passw" />
-                    <label htmlFor="District" className="texted" >District</label>
-                    <input value={District} onChange={(e) => handleAddress(e)} placeholder="District" type="text" id="District" className="passw" />
-                    <label htmlFor="Pincode" className="texted" >Pincode</label>
-                    <input value={Pincode} onChange={(e) => handleAddress(e)} placeholder="Pincode" type="text" id="Pincode" className="passw" />
-                    <div className="btn-container">
+                    <div className="add-address-container">
+                        <div>
+                            <label htmlFor="Name" className="texted">Name </label><br />
+                            <input value={Name} onChange={(e) => handleAddress(e)} placeholder="Name" type="text" id="Name"/><br />
+                            <label htmlFor="ContactNumber" className="texted">ContactNumber</label><br />
+                            <input value={ContactNumber} onChange={(e) => handleAddress(e)} placeholder="10-digit number" type="text" id="ContactNumber" required /><br />
+                            <label htmlFor="buildingNo" className="texted">BuildingNo</label><br />
+                            <input value={buildingNo} onChange={(e) => handleAddress(e)} placeholder="buildingNo" type="text" id="buildingNo" required /><br />
+                            <label htmlFor="Area" className="texted">Area</label><br />
+                            <input value={Area} onChange={(e) => handleAddress(e)} placeholder="Area" type="text" id="Area" required /><br />
+                        </div>
+                        <div>
+                            <label htmlFor="City" className="texted">City</label><br />
+                            <input value={City} onChange={(e) => handleAddress(e)} placeholder="City" type="text" id="City" required /><br />
+                            <label htmlFor="State" className="texted" >State</label><br />
+                            <input value={State} onChange={(e) => handleAddress(e)} placeholder="State" type="text" id="State" required /><br />
+                            <label htmlFor="District" className="texted" >District</label><br />
+                            <input value={District} onChange={(e) => handleAddress(e)} placeholder="District" type="text" id="District" required /><br />
+                            <label htmlFor="Pincode" className="texted" >Pincode</label><br />
+                            <input value={Pincode} onChange={(e) => handleAddress(e)} placeholder="Pincode" type="text" id="Pincode" required /><br />
+                        </div>
+                    </div>
+                    <div className="btn-container m-2">
                         <button className="btn btn-success m-2" onClick={(e) => { handleSubmit(e) }}>save</button>
                         <button className="btn btn-warning m-2" onClick={(e) => { handleAddressCancel(e) }}>cancel</button>
                     </div>

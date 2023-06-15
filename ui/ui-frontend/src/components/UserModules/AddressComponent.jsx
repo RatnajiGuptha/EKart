@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AddressService } from '../../Services/AddressService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,6 @@ const AddressComponent = () => {
                 navigate("/login")
                 localStorage.clear();
             }
-
         })
     }, [navigate])
 
@@ -52,20 +51,21 @@ const AddressComponent = () => {
                         <span> Add new address </span>      </button>
                     {showAddNewAddress && <AddNewAddress />}
                 </div>
-                {addressList.map((item) => (
-                    <div className="address-info-container">
-                        <ul className="list-unstyled">
-                            <li>{item.receiverName}- {item.receiverPhoneNumber}</li>
-                            <li>{item.buildingNo},{item.street1}</li>
-                            <li>{item.city},{item.district},{item.state}-{item.pincode}</li>
-                        </ul>
-                        <div>
-                            <button className='btn' onClick={() => removeAddress(item.addressId)}>
-                                <FontAwesomeIcon icon={faTrash} /> </button>
+                <div className='address-card'>
+                    {addressList.map((item) => (
+                        <div className="address-info-container">
+                            <ul className="list-unstyled">
+                                <li>{item.receiverName}- {item.receiverPhoneNumber}</li>
+                                <li>{item.buildingNo},{item.street1}</li>
+                                <li>{item.city},{item.district},{item.state}-{item.pincode}</li>
+                            </ul>
+                            <div>
+                                <button className='btn' onClick={() => removeAddress(item.addressId)}>
+                                    <FontAwesomeIcon icon={faTrash} /> </button>
+                            </div>
                         </div>
-
-                    </div>
-                ))}
+                    ))}
+                </div>
             </form>
         </div>
     )

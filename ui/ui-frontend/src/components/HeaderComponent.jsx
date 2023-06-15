@@ -5,7 +5,7 @@ import "../StyleSheets/Home.css";
 import { useNavigate } from "react-router-dom";
 
 function HeaderComponent() {
-  const username = localStorage.getItem("username");
+  const username = localStorage.getItem("name");
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const handleSearch = (e) => {

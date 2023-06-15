@@ -37,7 +37,7 @@ export default function UpdateWalletComponent(props) {
   }
 
   return (
-    <div>
+    <div className='update-balance'> 
       <button className="btn btn-info mt-5" onClick={toggleShow}>Add Money to Wallet</button>
 
       <MDBModal tabIndex='-1' show={centredModal} setShow={setCentredModal}>

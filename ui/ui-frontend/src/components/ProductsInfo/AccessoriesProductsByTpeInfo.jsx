@@ -175,6 +175,7 @@ const AccessoriesProductsByTpeInfo = () => {
           <button className="btn btn-warning" onClick={handleCardItems}>
             Add to cart
           </button>{" "}
+          
           <ToastContainer />
         </div>
       </div>

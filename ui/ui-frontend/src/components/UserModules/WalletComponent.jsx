@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserBalanceService } from "../../Services/UserBalanceService";
 import UpdateWalletComponent from "./UpdateWalletComponent";
-
+import "../../StyleSheets/Wallet.css";
 const WalletComponent = () => {
   const [balance, setBalance] = useState(0);
   const userName = localStorage.getItem("username");
@@ -27,21 +27,14 @@ const WalletComponent = () => {
   }, [userName, navigate]);
 
   return (
-    <div className="container m-2 p-2">
-      <form className="cashClass">
-        <table className="addressTable2" style={{ marginLeft: "270px" }}>
-          <tr style={{ border: "2px solid black" }}>
-            {/* <td><img className="img-fluid" alt="/" src="https://www.pngkit.com/png/full/332-3321940_wallet-icon-control-money-icon-png.png" /></td> */}
-            <td>
-              {" "}
-              congrats you have <strong>Rs.{balance}</strong> in wallet
-            </td>
-          </tr>
-        </table>
-      </form>
-      {/* <ChangeComponent /> */}
-      <UpdateWalletComponent balance={balance} />
-      {/* {window.location.reload()} */}
+    <div className="wallet-container">
+      <div className="image-container"></div>
+      <div className="card-container">
+        <h4>
+          congrats you have <strong>Rs.{balance}</strong> in wallet
+        </h4>
+        <UpdateWalletComponent balance={balance} />
+      </div>
     </div>
   );
 };
