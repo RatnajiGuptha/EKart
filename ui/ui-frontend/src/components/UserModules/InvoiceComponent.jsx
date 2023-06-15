@@ -1,26 +1,26 @@
 import { React, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { OrderService } from "../../Services/OrderService";
-import { AddressService } from "../../Services/AddressService";
 import "../../StyleSheets/Invoice.css";
 
 const InvoiceComponent = () => {
     const { purchaseOrderId } = useParams();
     const [orderss, setOrderss] = useState([]);
-    const [address, setAddress] = useState([]);
+    const [receiverNamee, setReceiverNamee] = useState("")
+    const [address, setAddress] = useState("")
+    const [locality, setLocality] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
     const navigate = useNavigate("")
 
     useEffect(() => {
-
         OrderService.getOrderDetails(purchaseOrderId).then((response) => {
-            console.log("addressid --> ", response.data.addressId)
             console.log("response.data--->", response.data)
             setOrderss(response.data);
+            setReceiverNamee(response.data.address[2])
+            setAddress(response.data.address[4] + " " + response.data.address[5])
+            setLocality(response.data.address[6] + "-" + response.data.address[9])
+            setPhoneNumber(response.data.address[3])
 
-            AddressService.getAddressById(response.data.addressId).then((res) => {
-                setAddress(res.data)
-                console.log("res.data", res.data)
-            })
         }).catch((err) => {
             if (err.response.status === 401) {
                 console.log(err.response.data)
@@ -38,9 +38,6 @@ const InvoiceComponent = () => {
         return { totalAmount };
     };
 
-    // console.log(orderss);
-
-
     return (
         <div className="container">
             <div className="invoice-container">
@@ -50,10 +47,10 @@ const InvoiceComponent = () => {
                         <div>
                             <h4 ><strong>Shipping Address</strong></h4>
                             <ul className="list-unstyled">
-                                <li>Receiver Name:<span>{address.receiverName}</span> </li>
-                                <li>Address: <span>{address.buildingNo} {" "} {address.street1}</span></li>
-                                <li>City and pincode: <span>{address.city}{"-"}{address.pincode}</span></li>
-                                <li>Phone number:<span>{address.receiverPhoneNumber}</span></li>
+                                <li>Receiver Name:<span>{receiverNamee}</span> </li>
+                                <li>Address: <span>{address}</span></li>
+                                <li>City and pincode: <span>{locality}</span></li>
+                                <li>Phone number:<span>{phoneNumber}</span></li>
                             </ul>
                         </div>
 

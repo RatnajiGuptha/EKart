@@ -13,7 +13,6 @@ const CartComponent = () => {
       try {
         const response = await CartService.getCartItemsByUser(username);
         setCartItems(response.data);
-        // console.log(response.data);
       } catch (err) {
         if (err.response.status === 401) {
           console.log(err.response.data);
@@ -32,7 +31,6 @@ const CartComponent = () => {
   const deleteItemFromCarttt = async (cartId) => {
     await CartService.deleteItemFromCart(cartId)
       .then(() => {
-        // alert("Item Deleted Successfully");
         window.location.reload(false);
       })
       .catch((err) => {
@@ -50,7 +48,6 @@ const CartComponent = () => {
       totalPrice += item.productPrice * item.qty;
       count += 1;
     }
-
     return { totalPrice, count };
   };
 
@@ -58,10 +55,8 @@ const CartComponent = () => {
   if (cartItems.length === 0) {
     return (
       <div>
-        <img
-          src="https://www.adanione.com/~/media/Foundation/Adani/emptyImages/empty_cart.gif"
-          alt="Fail to load data"
-        ></img>
+        <img src="https://www.adanione.com/~/media/Foundation/Adani/emptyImages/empty_cart.gif"
+          alt="Fail to load data" ></img>
         <div className="emptyCart">
           Your cart looks empty. Let’s fill it with some goodness!
         </div>
@@ -80,11 +75,7 @@ const CartComponent = () => {
         {cartItems.map((item) => (
           <div key={item.cartId} className="items-container">
             <div>
-              <img
-                src={item.logoImg}
-                className="cart-product-img"
-                alt="/"
-              ></img>
+              <img src={item.logoImg} className="cart-product-img" alt="/"></img>
             </div>
             <div className="cart-item-details">
               <h5 className="product-name">{item.productName}</h5>
@@ -98,26 +89,16 @@ const CartComponent = () => {
               </div>
             </div>
             <div className="product-qty-container">
-              <p className="product-price">
-                {" "}
-                Quantity:{" "}
-                <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-                  {item.qty}
-                </span>
+              <p className="product-price">    {" "}  Quantity:{" "}
+                <span style={{ fontStyle: "italic", fontWeight: "bold" }}> {item.qty} </span>
               </p>
-              <p className="product-price">
-                Price: ₹{" "}
-                <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
-                  {item.productPrice}/-
-                </span>
+              <p className="product-price"> Price: ₹ {" "}
+                <span style={{ fontStyle: "italic", fontWeight: "bold" }}>{item.productPrice}/- </span>
               </p>
             </div>
             <div className="m-2">
-              <button
-                className="btn btn-danger"
-                onClick={() => deleteItemFromCarttt(item.cartId)}>
-                Remove From Cart
-              </button>
+              <button className="btn btn-danger" onClick={() => deleteItemFromCarttt(item.cartId)}>
+                Remove From Cart  </button>
             </div>
           </div>
         ))}
@@ -127,17 +108,10 @@ const CartComponent = () => {
           <h3> Price Details</h3>
           <p> Total Products: {calculateTotalPrice().count}</p>
           <p className="total-price">
-            {" "}
-            Total Price:
-            <span style={{ fontStyle: "italic" }}>
-              {" "}
-              ₹ {calculateTotalPrice().totalPrice}/-{" "}
-            </span>
+            {" "}Total Price:
+            <span style={{ fontStyle: "italic" }}>  {" "}  ₹ {calculateTotalPrice().totalPrice}/-{" "}  </span>
           </p>
-
-          <button className="checkout-btn" onClick={() => checkoutFromCart()}>
-            Checkout
-          </button>
+          <button className="checkout-btn" onClick={() => checkoutFromCart()}> Checkout   </button>
         </div>
       </div>
     </div>

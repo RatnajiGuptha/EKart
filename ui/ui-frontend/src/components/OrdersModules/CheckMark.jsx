@@ -33,11 +33,9 @@ const CheckMark = () => {
         return (
             <div style={{ marginTop: 200 }} >
                 <div><Roller /></div>
-
                 <div style={{ color: "black", marginTop: 40 }} className="ugb-highlight">
                     Payment is beeing processed, please wait
                 </div>
-                {/* <h1>............LOADING........</h1> */}
             </div>
         )
     }
@@ -50,11 +48,10 @@ const CheckMark = () => {
                     <img src='https://i0.wp.com/nrifuture.com/wp-content/uploads/2022/05/comp_3.gif?fit=800%2C600&ssl=1' alt="failed gif" width="400" height="300" />
                 </div>
                 <div style={{ color: "black", marginTop: 40 }} className="ugb-highlight">
-                    Oops!!!!, your payment could not be processed
+                    Oops!!!!, your payment could not be processed
                 </div>
                 <div style={{ marginTop: 70 }}>
                     <Link to={'/cart'} ><button className="btn btn-danger">Retry Payment</button></Link>
-
                 </div>
             </div>
         )
@@ -63,16 +60,16 @@ const CheckMark = () => {
     else {
         return (
             <div >
-                <div className='mt-5'>
-                    <Checkmark size='256px' />
-                </div>
+                <div className='mt-5'> <Checkmark size='256px' /> </div>
                 <div style={{ color: "black", marginTop: 40 }} className="ugb-highlight">
                     Your payment Completed sucessfully....
                 </div>
-                <div style={{ marginTop: 50 }}>
-                    <Link to={'/'} ><button className="btn btn-danger">Continue Shoping</button></Link>
+                <div className='d-flex justify-content-center mt-3'>
+                    <Link to={'/'} ><button className="btn btn-danger m-2">Continue Shoping</button></Link>
+                    <Link to={`/invoice/${id}`}>
+                        <button className="btn btn-success m-2" >View Invoice </button>
+                    </Link>
                 </div>
-                {/* </div> */}
             </div>
         )
     }
