@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.common.DTO.OrderRequestDTO;
 import com.ekart.common.DTO.ProductCategories;
+import com.ekart.order.entity.Address;
 import com.ekart.order.entity.Cart;
 import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.AddressService;
@@ -84,7 +85,20 @@ public class OrderController {
 		orderRequestDTO.setColor(color);
 		orderRequestDTO.setSellerName(sellerName);
 		orderRequestDTO.setPrice(amount);
-		orderRequestDTO.setAddressId(addressId);
+		Address address = addressService.fetchById(addressId);
+		List<String> addr = new ArrayList<String>();
+		addr.add(String.valueOf(addressId));
+		addr.add(address.getUserName());
+		addr.add(address.getReceiverName());
+		addr.add(address.getReceiverPhoneNumber());
+		addr.add(address.getBuildingNo());
+		addr.add(address.getStreet1());
+		addr.add(address.getCity());
+		addr.add(address.getDistrict());
+		addr.add(address.getState());
+		addr.add(String.valueOf(address.getPincode()));
+
+		orderRequestDTO.setAddress(addr);
 		return orderService.createOrders(orderRequestDTO);
 
 	}

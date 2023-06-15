@@ -22,6 +22,7 @@ public class PaymentRequestDTO {
 	private List<String> productName;
 	private List<String> brandName;
 
+	private List<String> address;
 	private List<String> size;
 	private List<String> color;
 	private List<String> sellerName;

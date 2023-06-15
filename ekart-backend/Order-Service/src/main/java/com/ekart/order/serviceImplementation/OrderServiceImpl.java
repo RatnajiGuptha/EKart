@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 		purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
 		purchaseOrder.setEmail(dto.getEmail());
 	
-		purchaseOrder.setAddressId(dto.getAddressId());
+		purchaseOrder.setAddress(dto.getAddress());
 
 		return purchaseOrder;
 	}

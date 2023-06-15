@@ -42,7 +42,7 @@ public class PurchaseOrder {
 	private List<String> color;
 	private List<String> sellerName;
 	
-	private int addressId;
+	private List<String> address;
 	
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;

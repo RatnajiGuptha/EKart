@@ -101,6 +101,7 @@ public class OrderStatusUpdateHandler {
 		orderRequestDTO.setSellerName(purchaseOrder.getSellerName());
 		orderRequestDTO.setEmail(purchaseOrder.getEmail());
 		orderRequestDTO.setPrice(purchaseOrder.getPrice());
+		orderRequestDTO.setAddress(purchaseOrder.getAddress());
 		return orderRequestDTO;
 	}
 
