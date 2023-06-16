@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import FootwearService from "../../Services/FootwearService";
+import {FootwearService} from "../../Services/FootwearService";
+import "../../StyleSheets/products.css";
 
 
 const FootwearByType = () => {

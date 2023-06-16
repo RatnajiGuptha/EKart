@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-
-import { useParams } from "react-router-dom";
-
+import { useParams, useNavigate } from "react-router-dom";
+import { FootwearService } from "../../Services/FootwearService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/Home.css";
-
-import FootwearService from "../../Services/FootwearService";
-import CartService from "../../Services/CartService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FootwearProductsByTypeInfo = () => {
+  const username = localStorage.getItem("username");
+  const navigate = useNavigate();
   const { type, footWearId } = useParams();
-
   const [productsInfo, setProductInfo] = useState({ id: null });
   const [quantity, setQuantity] = useState(1);
   const [image, setImage] = useState("");
-  const username = localStorage.getItem("username");
   const [category, setCategory] = useState("");
   const handleClick = (imgSrc) => {
     setImage(imgSrc);
@@ -41,78 +40,88 @@ const FootwearProductsByTypeInfo = () => {
   }, [type, footWearId]);
 
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      footWearId
-    );
-
-    console.log(datad.data);
-    if (datad.data.cartId == null) {
-      const cart = {
-        productId: productsInfo.footWearId,
-        userName: username,
-        brandName: productsInfo.brandName,
-        productName: productsInfo.productName,
-        logoImg: productsInfo.logoImg,
-        productPrice: productsInfo.productPrice,
-        size: productsInfo.size,
-        color: productsInfo.color,
-        qty: quantity,
-        productCategories: category,
-        type: productsInfo.type,
-        sellerName: productsInfo.sellerName
-      };
-      console.log(cart.productCategories);
-      if (productsInfo.qty > quantity) {
-        await CartService.addItemsToCart(cart).then((response) => {
-          alert("Item added successfully");
+    if (localStorage.getItem('token')) {
+      const datad = await CartService.getProductCategoryAndProductId(category, footWearId).then()
+        .catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+        }
         });
+
+      console.log(datad.data);
+      if (datad.data.cartId == null) {
+        const cart = {
+          productId: productsInfo.footWearId,
+          userName: username,
+          brandName: productsInfo.brandName,
+          productName: productsInfo.productName,
+          logoImg: productsInfo.logoImg,
+          productPrice: productsInfo.productPrice,
+          size: productsInfo.size,
+          color: productsInfo.color,
+          qty: quantity,
+          productCategories: category,
+          type: productsInfo.type,
+          sellerName: productsInfo.sellerName
+        };
+        console.log(cart.productCategories);
+        if (productsInfo.qty > quantity) {
+          await CartService.addItemsToCart(cart).then((response) => {
+            //   console.log(response);
+            toast.success("Item added successfully",{theme:"dark"});
+          }).catch((err) => {
+            if (err.response.status === 401) {
+              console.log(err.response.data)
+              navigate("/login")
+              localStorage.clear();
+          }
+          });
+        } else {
+          toast.warning(" products Left",{theme:"dark"});
+        }
       } else {
-        alert(`${productsInfo.qty}`, " products Left");
+        //   console.log(datad.data.cartId);
+        const qty = datad.data.qty + quantity;
+        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
+          toast.success("Cart contains " + qty + " " + datad.data.productName,{theme:"dark"});
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+        }
+        });
       }
-    } else {
-      const qty = datad.data.qty + quantity;
-      await CartService.updateQuantity(datad.data.cartId, username, qty);
-      alert("Cart contains " + qty + " " + datad.data.productName);
+    }
+    else {
+      navigate("/login");
     }
   };
+
   return (
     <div className="product-info-container">
       <div className="product-image-container">
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg1)}
-          src={productsInfo.productImg1}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg1)}
+          src={productsInfo.productImg1} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg2)}
-          src={productsInfo.productImg2}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg2)}
+          src={productsInfo.productImg2} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg3)}
-          src={productsInfo.productImg3}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg3)}
+          src={productsInfo.productImg3} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg4)}
-          src={productsInfo.productImg4}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg4)}
+          src={productsInfo.productImg4} />
 
-        <img
-          className="card-images"
-          alt="/"
-          onClick={() => handleClick(productsInfo.productImg5)}
-          src={productsInfo.productImg5}
-        />
+        <img className="card-images"
+          alt="/" onClick={() => handleClick(productsInfo.productImg5)}
+          src={productsInfo.productImg5} />
       </div>
       <div className="product-main-image-container">
         <img className="product-main-image" src={image} alt="/"></img>
@@ -161,6 +170,7 @@ const FootwearProductsByTypeInfo = () => {
           <button className="btn btn-warning" onClick={handleCardItems}>
             Add to cart
           </button>{" "}
+          <ToastContainer />
         </div>
       </div>
     </div>

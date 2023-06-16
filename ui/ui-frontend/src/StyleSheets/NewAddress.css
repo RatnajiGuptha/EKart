@@ -1,0 +1,27 @@
+.addr-form {
+    text-align: left;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid gray;
+}
+
+.add-address-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.addr-form input {
+    border-radius: 10px;
+    width: 300px;
+}
+
+.texted {
+    text-align: left;
+    font-size: 18px;
+    padding: 0px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}

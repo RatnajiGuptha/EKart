@@ -1,5 +1,6 @@
 import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import AboutUs from "./components/AboutUs";
 
 import Accessories from "./components/Products/Accessories";
 import AccessoriesProductsInfo from "./components/ProductsInfo/AccessoriesProductsInfo";
@@ -12,6 +13,8 @@ import ElectronicsProductsInfo from "./components/ProductsInfo/ElectronicsProduc
 import ElectronicProductsByCategory from "./components/Products/ElectronicProductsByCategory";
 import ElectronicsProductsByTpeInfo from "./components/ProductsInfo/ElectronicsProductsByTpeInfo";
 
+import FashionComponent from "./components/FashionComponent";
+import FashionProductsByGenderAndTypeInfo from "./components/ProductsInfo/FashionProductsByGenderAndTypeInfo";
 import FashionProductByGender from "./components/Products/FashionProductByGender";
 import FashionProductsByGenderInfo from "./components/ProductsInfo/FashionProductsByGenderInfo";
 import FashionProductByCategory from "./components/Products/FashionProductByCategory";
@@ -21,20 +24,24 @@ import FashionProductByGenderAndType from "./components/Products/FashionProductB
 import Footware from "./components/Products/Footwear";
 import FootwearProductsInfo from "./components/ProductsInfo/FootwearProductsInfo";
 
+import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
+import Toys from "./components/Products/Toys";
+
 import HeaderComponent from "./components/HeaderComponent.jsx";
 import HomeComponent from "../../ui-frontend/src/components/HomeComponent";
 
 import LoginPage from "./components/SecurityModules/LoginPage";
 import Registrationpage from "./components/SecurityModules/RegistrationPage";
+import SellerRegistration from "./components/SecurityModules/SellerRegistration";
+import SellerHeaderComponent from "./components/SellerModules/SellerHeaderComponent";
 
-import ToysProductsInfo from "./components/ProductsInfo/ToysProductsInfo";
-import Toys from "./components/Products/Toys";
-import FashionComponent from "./components/FashionComponent";
-import FashionProductsByGenderAndTypeInfo from "./components/ProductsInfo/FashionProductsByGenderAndTypeInfo";
 import AccessoriesByType from "./components/Products/AccessoriesByType";
 import AccessoriesProductsByTpeInfo from "./components/ProductsInfo/AccessoriesProductsByTpeInfo";
+
 import FootwearByType from "./components/Products/FootwearByType";
 import FootwearProductsByTypeInfo from "./components/ProductsInfo/FootwearProductsByTpeInfo";
+
+import CheckMark from "./components/OrdersModules/CheckMark";
 import CheckoutComponent from "./components/OrdersModules/CheckoutComponent";
 import CartComponent from "./components/OrdersModules/CartComponent";
 
@@ -49,33 +56,45 @@ import ListAccessoriesDetails from "./components/SellerModules/ListAccessoriesDe
 import ListBeautyDetails from "./components/SellerModules/ListBeautyDetails";
 import ListElectronicsDetails from "./components/SellerModules/ListElectronicsDetails";
 import ListFootWearDetails from "./components/SellerModules/ListFootWearDetails";
-import ListToysDetails from "./components/SellerModules/ListToysDetails"
-import ViewFashionDetails from "./components/SellerModules/ViewFashionDetails";
-import CheckMark from "./components/OrdersModules/CheckMark";
+import ListToysDetails from "./components/SellerModules/ListToysDetails";
+import SellerHomeCategories from "./components/SellerModules/SellerHomeCategories";
+
+import AccountPage from "./components/UserModules/AccountPage";
+import InvoiceComponent from "./components/UserModules/InvoiceComponent";
+import TypesOfProductsBySeller from "./components/SellerModules/SellerGraphs/TypesOfProductsBySeller";
 
 function App() {
+  const role = localStorage.getItem("role");
+  const header =
+    role === "SELLER" ? (<SellerHeaderComponent forceRefresh={true} />) : (<HeaderComponent forceRefresh={true} />);
+  const home = role === "SELLER" ? (<SellerHomeCategories forceRefresh={true} />) : (<HomeComponent forceRefresh={true} />);
+
   return (
     <div className="App">
       <Router>
-        <HeaderComponent />
+        {/* <HeaderComponent /> */}
+        {header}
         <Routes>
-          <Route path="/" element={<HomeComponent />}></Route>
+          <Route path="/" element={home}></Route>
+          {/* <Route path="/" element={<HomeComponent />} ></Route> */}
 
           {/* security  */}
           <Route path="/login" element={<LoginPage />}></Route>
-          <Route path='/registration' element={<Registrationpage />}></Route>
+          <Route path="/registration" element={<Registrationpage />}></Route>
+          <Route path="/addSeller" element={<SellerRegistration />}></Route>
 
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
           <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
+          <Route path="/paymentPage/:userName/:addressId" element={<CheckoutComponent />}></Route>
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>
-          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />} ></Route>
+          <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
           <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
-          <Route path="/fashionByType/:type" element={<FashionProductByCategory />} ></Route>
-          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />} ></Route>
-          <Route path="/fashionBy/suitablefor/:suitablefor/:type" element={<FashionProductByGenderAndType />} ></Route>
+          <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>
+          <Route path="/fashion/:type/:productId" element={<FashionProductsInfo />}></Route>
+          <Route path="/fashionBy/suitablefor/:suitablefor/:type" element={<FashionProductByGenderAndType />}></Route>
           <Route path="/fashionBy/suitablefor/:suitablefor/:type/id/:productId" element={<FashionProductsByGenderAndTypeInfo />}></Route>
 
           {/* toys products  */}
@@ -105,7 +124,7 @@ function App() {
           <Route path="/electronicsBy/:type/:electronicsId" element={<ElectronicsProductsByTpeInfo />}></Route>
 
           {/* list seller products seller routes */}
-          <Route path='/listFashionProducts' element={<ListFashionDetails />}></Route>
+          <Route path="/listFashionProducts" element={<ListFashionDetails />}></Route>
           <Route path="/listAccessoriesProducts" element={<ListAccessoriesDetails />}></Route>
           <Route path="/listBeautyProducts" element={<ListBeautyDetails />}></Route>
           <Route path="/listElectronicProducts" element={<ListElectronicsDetails />}></Route>
@@ -121,13 +140,24 @@ function App() {
           <Route path="/addFashion" element={<AddFashionModule />}></Route>
 
           {/* update products seller routes */}
-          <Route path="/updateEmployee/:fashionId" element={<AddFashionModule/>}></Route>
+          <Route path="/updateFashion/:fashionId" element={<AddFashionModule />}></Route>
+          <Route path="/updateAccessories/:accessoryId" element={<AddAccessoriesModule />}></Route>
+          <Route path="/updateBeauty/:beautyId" element={<AddBeautyModule />}></Route>
+          <Route path="/updateElectronics/:electronicsId" element={<AddElectronicsModule />}></Route>
+          <Route path="/updateFootwear/:footWearId" element={<AddFootWearModule />}></Route>
+          <Route path="/updateToys/:toyId" element={<AddToysProducts />}></Route>
 
-          {/* view products seller routes */}
-          <Route path="/viewFashionDetails/:fashionId" element={<ViewFashionDetails/>}></Route>
-          
-          
-          <Route path="/paymentCompleted/:id" element={<CheckMark />}></Route> 
+          {/* seller home page routes */}
+          <Route path="/sellerFashion" element={<SellerHomeCategories />}></Route>
+
+          {/* profile and order details */}
+          <Route path="/profile" element={<AccountPage />}></Route>
+          <Route path="/profile/:type" element={<AccountPage />}></Route>
+          <Route path="/orderStatus/:id" element={<CheckMark />}></Route>
+          <Route path="/invoice/:purchaseOrderId" element={<InvoiceComponent />}></Route>
+
+          <Route path="/dashboard" element={<TypesOfProductsBySeller />}></Route>
+          <Route path="/aboutUs" element={<AboutUs />}></Route>
         </Routes>
       </Router>
     </div>

@@ -1,25 +1,40 @@
 import { useEffect, useState } from "react";
-import "../../StyleSheets/SellerModule.css"
-import FootwearService from "../../Services/FootwearService";
+import "../../StyleSheets/SellerModule.css";
+import { Link, useNavigate } from "react-router-dom";
+import { FootwearService } from "../../Services/FootwearService";
 function ListFootWearDetails() {
 
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("name");
+    const navigate =  useNavigate("");
+
     useEffect(() => {
-        FootwearService.fetchBySellerName("U.S.POLO ASSN").then((res) => {
+        FootwearService.fetchBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
+        }).catch(err => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
-    }, [])
-    return (
+    }, [userName,navigate])
 
-        <div>
+    return (
+        <div className="container">
             <br></br>
             <h2 className="text-center">FootWear Products List</h2>
-            <div className="row p-4">
+            <div className="add-button mb-2">
+                <Link to={`/addFootWear`}>
+                    <button className="btn btn-primary"> Add Product</button>
+                </Link>
+            </div>
+            <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th>S.No</th>
                             <th> Product Name</th>
                             <th> Product Image</th>
                             <th> Product Price</th>
@@ -33,10 +48,11 @@ function ListFootWearDetails() {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(function (item) {
+                        {products.map(function (item,i) {
                             return (
-                                <tr key={item.fashionId}>
-                                    <td> {item.productName}     </td>
+                                <tr key={item.footWearId}>
+                                    <td>{i + 1}</td>
+                                    <td style={{textAlign:"left"}}> {item.productName}     </td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
@@ -46,30 +62,16 @@ function ListFootWearDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                        <button className="btn btn-info">Update </button>
-                                        <br />
-                                        <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
+                                        <Link to={`/updateFootwear/${item.footWearId}`}>
+                                            <button className="btn btn-info mt-0">Update </button>
+                                        </Link>
                                     </td>
-
                                 </tr>)
-
                         })}
-
                     </tbody>
-
                 </table>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
 
     )
 }

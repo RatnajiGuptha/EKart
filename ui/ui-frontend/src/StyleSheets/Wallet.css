@@ -1,0 +1,38 @@
+.wallet-container {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    border-radius: 16px;
+    height: 80vh;
+    align-self: center;
+    justify-content: center;
+}
+
+.image-container {
+    background-image: url("https://res.cloudinary.com/dmanaxtze/image/upload/v1686844281/db54ada7-182b-4027-a409-d04dfe0c6f2c-transformed_wxertg.png");
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    height: 100%;
+    /* width: 100%; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-container {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-weight: bold;
+    border: 3px solid gray;
+    position: absolute;
+    padding: 20px;
+    text-align: center;
+    margin: 100px;
+    border-radius: 12px;
+    box-shadow: 15px 15px 15px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+
+}

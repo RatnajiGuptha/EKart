@@ -1,31 +1,41 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import FashionProductService from "../../Services/FashionProductService";
+import { Link, useNavigate } from "react-router-dom";
+import { FashionProductService } from "../../Services/FashionProductService";
 import "../../StyleSheets/SellerModule.css"
 function ListFashionDetails() {
-    const { fashionId } = useParams();
+
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("name");
+    const navigate = useNavigate("");
+    console.log(userName)
+
     useEffect(() => {
-        FashionProductService.getFashionProductsBySellerName("Libas pvt Ltd").then((res) => {
+        FashionProductService.getFashionProductsBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
+        }).catch(err => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
-    }, [])
+    }, [userName, navigate])
 
     return (
-        <div>
+        <div className="container">
             <br></br>
             <h2 className="text-center">Fashion Products List</h2>
-            <div className="add-button">
+            <div className="add-button mb-2">
                 <Link to={`/addFashion`}>
                     <button className="btn btn-primary"> Add Product</button>
                 </Link>
             </div>
-            <div className="row p-4">
+            <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>id</th>
+                            <th> S.No</th>
                             <th> Product Name</th>
                             <th> Product Image</th>
                             <th> Product Price</th>
@@ -43,7 +53,7 @@ function ListFashionDetails() {
                             return (
                                 <tr key={item.fashionId}>
                                     <td>{i + 1}</td>
-                                    <td> {item.productName}     </td>
+                                    <td style={{textAlign:"left"}}> {item.productName}     </td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
@@ -53,12 +63,8 @@ function ListFashionDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                        <Link to={`/updateEmployee/${item.fashionId}`}>
-                                            <button className="btn btn-info">Update </button>
-                                        </Link>
-                                        <br />
-                                        <Link to={`/viewFashionDetails/${item.fashionId}`}>
-                                            <button className="btn btn-secondary" style={{ marginTop: '10px', width: '78px' }}>View </button>
+                                        <Link to={`/updateFashion/${item.fashionId}`}>
+                                            <button className="btn btn-info mt-0">Update </button>
                                         </Link>
                                     </td >
                                 </tr >)

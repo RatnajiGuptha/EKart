@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import FootwearService from "../../Services/FootwearService";
+import {FootwearService} from "../../Services/FootwearService";
+import "../../StyleSheets/products.css";
 
 
 const Footwear = () => {

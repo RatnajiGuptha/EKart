@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
-
-import { useParams } from "react-router-dom";
-
+import { useParams, useNavigate } from "react-router-dom";
+import { BeautyService } from "../../Services/BeautyService";
+import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/ProductInfo.css";
-import BeautyService from "../../Services/BeautyService";
-import CartService from "../../Services/CartService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BeautyProductsInfo = () => {
-  const { beautyId } = useParams();
 
-  const [productsInfo, setProductInfo] = useState({ id: null });
-  const [quantity, setQuantity] = useState(1);
-
-  const [image, setImage] = useState("");
   const username = localStorage.getItem("username");
+  const navigate = useNavigate();
+  const { beautyId } = useParams();
+  const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
-
-  const handleClick = (imgSrc) => {
-    setImage(imgSrc);
-  };
+  const [quantity, setQuantity] = useState(1);
+  const [productsInfo, setProductInfo] = useState({ id: null });
 
   useEffect(() => {
     BeautyService.getBeautyProductsById(beautyId).then((response) => {
@@ -26,8 +22,13 @@ const BeautyProductsInfo = () => {
       setProductInfo(response.data);
       setImage(response.data.productImg1);
       setCategory("Beauty");
-    });
+    })
+
   }, [beautyId]);
+
+  const handleClick = (imgSrc) => {
+    setImage(imgSrc);
+  };
 
   const quantityDec = () => {
     if (quantity > 1) {
@@ -40,44 +41,71 @@ const BeautyProductsInfo = () => {
   };
 
   const handleCardItems = async () => {
-    const datad = await CartService.getProductCategoryAndProductId(
-      category,
-      beautyId
-    );
 
-    console.log(datad.data);
-    if (datad.data.cartId == null) {
-      const cart = {
-        productId: productsInfo.beautyId,
-        userName: username,
-        brandName: productsInfo.brandName,
-        productName: productsInfo.productName,
-        logoImg: productsInfo.logoImg,
-        productPrice: productsInfo.productPrice,
-        size: productsInfo.size,
-        color: "NA",
-        qty: quantity,
-        productCategories: category,
-        type: productsInfo.type,
-        sellerName: productsInfo.sellerName
-      };
-      //   console.log(cart.productId);
-      console.log(cart.productCategories);
-      if (productsInfo.qty > quantity) {
-        await CartService.addItemsToCart(cart).then((response) => {
-          //   console.log(response);
-          alert("Item added successfully");
+    if (localStorage.getItem('token')) {
+      const datad = await CartService.getProductCategoryAndProductId(category, beautyId).then()
+        .catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
         });
+
+      console.log(datad.data);
+
+      if (datad.data.cartId == null) {
+        const cart = {
+          productId: productsInfo.beautyId,
+          userName: username,
+          brandName: productsInfo.brandName,
+          productName: productsInfo.productName,
+          logoImg: productsInfo.logoImg,
+          productPrice: productsInfo.productPrice,
+          size: productsInfo.size,
+          color: "NA",
+          qty: quantity,
+          productCategories: category,
+          type: productsInfo.type,
+          sellerName: productsInfo.sellerName
+        };
+        //   console.log(cart.productId);
+        console.log(cart.productCategories);
+        if (productsInfo.qty > quantity) {
+          await CartService.addItemsToCart(cart).then((response) => {
+            //   console.log(response);
+            toast.success("Item added successfully",{theme:"dark"});
+          }).catch((err) => {
+            if (err.response.status === 401) {
+              console.log(err.response.data)
+              navigate("/login")
+              localStorage.clear();
+            }
+          });
+        } else {
+          toast.warning(" products Left",{theme:"dark"});
+        }
       } else {
-        alert(`${productsInfo.qty}`, " products Left");
+        //   console.log(datad.data.cartId);
+        const qty = datad.data.qty + quantity;
+        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
+          toast.success("Cart contains " + qty + " " + datad.data.productName,{theme:"dark"});
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
+        });
       }
-    } else {
-      //   console.log(datad.data.cartId);
-      const qty = datad.data.qty + quantity;
-      await CartService.updateQuantity(datad.data.cartId, username, qty);
-      alert("Cart contains " + qty + " " + datad.data.productName);
+    }
+    else {
+      navigate("/login");
+
     }
   };
+
+
   return (
     <div className="product-info-container">
       <div className="product-image-container">
@@ -152,6 +180,7 @@ const BeautyProductsInfo = () => {
           <button className="btn btn-warning" onClick={handleCardItems}>
             Add to cart
           </button>{" "}
+          <ToastContainer />
         </div>
       </div>
     </div>

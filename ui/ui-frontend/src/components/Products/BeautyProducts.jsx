@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import BeautyService from "../../Services/BeautyService";
+import {BeautyService} from "../../Services/BeautyService";
 import { Link } from "react-router-dom";
-
+import "../../StyleSheets/products.css";
 
 const BeautyProducts = () => {
     const [beautyProducts, setBeautyProducts] = useState([]);

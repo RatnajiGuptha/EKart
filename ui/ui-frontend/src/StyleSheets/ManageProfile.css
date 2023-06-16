@@ -1,0 +1,62 @@
+.myprofile-profile {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.myprofile-profile-form h6 {
+  text-align: left;
+}
+
+.myprofile-profile-form label {
+  text-align: left;
+  font-weight: 500;
+}
+
+.myprofile-profile-form label input {
+  text-align: left;
+  display: block;
+}
+
+.myprofile-profile span {
+  color: orangered;
+  margin-top: 0px;
+  font-style: italic;
+}
+
+.label-myprofile {
+  text-align: left;
+}
+
+.myprofile-profile-form p {
+  text-align: left;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.myprofile-profile-form {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+}
+
+.myprofile-profile-form input {
+  text-align: left;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0px 0px 16px;
+}
+
+.myprofile-profile-form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.myprofile-profile-form button {
+  border-radius: 7px;
+  margin: 5px;
+}

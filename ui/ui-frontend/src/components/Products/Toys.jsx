@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ToysService from '../../Services/ToysService';
+import { ToysService } from '../../Services/ToysService';
 import { Link } from "react-router-dom";
+import "../../StyleSheets/products.css";
 
 
 const Toys = () => {

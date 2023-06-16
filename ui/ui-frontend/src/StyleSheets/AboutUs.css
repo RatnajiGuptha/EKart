@@ -1,0 +1,92 @@
+/* .AboutUsPage {
+    text-align: center;
+    background-color: seashell;
+}
+
+.page {
+
+    margin-left: 100px;
+
+}
+
+.all {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.pic {
+    /* margin-left:5rem; */
+/* height: 200px;
+    width: 200px;
+    background-size: cover; */
+/*margin: 10px;
+    border-radius: 18px;
+    border: 1px solid #eee;
+    transition: transform 0.3s ease-in-out;*/
+/* float: left;
+}
+
+.description {
+    margin-left: 40px;
+    font-size: large;
+    font-style: oblique;
+    width: 800px;
+    margin-top: 40px;
+}
+
+.description1 {
+    margin-left: 60px;
+    font-size: large;
+    font-style: oblique;
+    width: 800px;
+    margin-top: 80px; */
+/* } */
+.bg-container {
+    background-color: seashell;
+    padding: 10px;
+}
+
+.page-contianer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+
+}
+
+.images {
+    border-radius: 24px;
+    height: 200px;
+    width: 200px;
+    background-size: cover;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.cards-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+    max-width: 400px;
+}
+
+.cards-info p {
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* text-align: left; */
+}
+
+.card-container-last {
+    display: flex;
+    justify-content: flex-start;
+}

@@ -1,25 +1,39 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../StyleSheets/SellerModule.css"
-import ToysService from "../../Services/ToysService";
+import {ToysService} from "../../Services/ToysService";
 function ListFashionDetails() {
-
     const [products, setProducts] = useState([]);
+    const userName = localStorage.getItem("name");
+    const navigate=useNavigate("");
+
     useEffect(() => {
-        ToysService.getToysBySellerName("Baby Moo pvt Ltd").then((res) => {
+        ToysService.getToysBySellerName(userName).then((res) => {
             console.log(res.data)
             setProducts(res.data);
-
+        }).catch(err => {
+            if (err.response.status === 401) {
+                console.log(err.response.data)
+                navigate("/login")
+                localStorage.clear();
+            }
         })
-    }, [])
-    return (
+    }, [userName,navigate])
 
-        <div>
+    return (
+        <div className="container">
             <br></br>
-            <h2 className="text-center">Toys Products List</h2> 
-            <div className="row p-4">
+            <h2 className="text-center">Toys Products List</h2>
+            <div className="add-button mb-2">
+                <Link to={`/addToys`}>
+                    <button className="btn btn-primary"> Add Product</button>
+                </Link>
+            </div>
+            <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th>S.No</th>
                             <th> Product Name</th>
                             <th> Product Image</th>
                             <th> Product Price</th>
@@ -33,10 +47,11 @@ function ListFashionDetails() {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(function (item) {
+                        {products.map(function (item,i) {
                             return (
-                                <tr key={item.fashionId}>
-                                    <td> {item.productName}     </td>
+                                <tr key={item.toyId}>
+                                    <td>{i + 1}</td>
+                                    <td style={{textAlign:"left"}}> {item.productName}     </td>
                                     <td><img src={item.logoImg} alt="/" className="img-seller"></img></td>
                                     <td>{item.productPrice}</td>
                                     <td>{item.brandName}</td>
@@ -46,17 +61,13 @@ function ListFashionDetails() {
                                     <td>{item.color}</td>
                                     <td>{item.qty}</td>
                                     <td>
-                                        <button className="btn btn-info">Update </button>
-                                        <br />
-                                        <button className="btn btn-primary" style={{ marginTop: '10px', width: '78px' }}>View </button>
+                                        <Link to={`/updateToys/${item.toyId}`}>
+                                            <button className="btn btn-info mt-0">Update </button>
+                                        </Link>
                                     </td>
-
                                 </tr>)
-
                         })}
-
                     </tbody>
-
                 </table>
             </div>
         </div>

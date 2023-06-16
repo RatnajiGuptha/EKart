@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ElectronicsService from '../../Services/ElectronicsService';
+import { ElectronicsService } from '../../Services/ElectronicsService';
 import { Link } from "react-router-dom";
-
+import "../../StyleSheets/products.css";
 
 const ElectronicsProducts = () => {
     const [electronicsProducts, setElectronicsProducts] = useState([]);
@@ -9,7 +9,7 @@ const ElectronicsProducts = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await ElectronicsService.getAllElctronicProducts();
+                const response = await ElectronicsService.getAllElectronicProducts();
                 console.log(response.data);
                 setElectronicsProducts(response.data);
             } catch (error) {
@@ -17,7 +17,7 @@ const ElectronicsProducts = () => {
             }
         }
         fetchData();
-    }, []);
+    }, [electronicsProducts]);
 
     return (
         <div className="cards-container">

@@ -1,0 +1,63 @@
+.address-contianer {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: aliceblue;
+    border-radius: 16px;
+}
+
+.update-balance {
+    color: black;
+}
+
+/* .from-container {
+    height: 100vh;   
+    display: flex;
+    padding: 10px;
+} */
+
+.address-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.add-address-btn {
+    text-align: left;
+}
+
+.add-address-btn button:hover {
+    text-decoration: underline;
+}
+
+.add-address-btn span {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.address-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 400px;
+    max-width: 400px;
+    border: 2px solid gray;
+    border-radius: 12px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.address-info-container li {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.address-info-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.address-info-card p {
+    margin-bottom: 5px;
+}

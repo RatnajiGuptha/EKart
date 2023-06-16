@@ -1,0 +1,56 @@
+.invoice-container {
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid gray;
+    padding: 10px;
+    box-shadow: 5px 5px 5px gray;
+    margin-top: 10px;
+}
+
+.invoice-container h3 {
+    text-align: center;
+    font-style: oblique;
+}
+
+.invoice-container h4 {
+    text-align: left;
+}
+
+.header {
+    padding: 10px;
+}
+
+.order-status-container span {
+    font-style: italic;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: gray;
+    font-weight: 900;
+}
+
+.order-status-container li {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+.price-details {
+    display: flex;
+    justify-content: right;
+    margin-right: 20px;
+}
+
+.order-status-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-details li {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+
+.price-details span {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: mediumblue;
+    font-weight: 600;
+}

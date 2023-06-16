@@ -1,91 +1,126 @@
-import React, { useEffect, useState } from "react";
-// import {FaSearch} from "react-icons/fa";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import "../StyleSheets/Home.css"
+import React, { useState } from "react";
+import { FaSearch, FaHome, FaShoppingCart, FaUser, FaSignInAlt, FaTh, } from "react-icons/fa";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import "../StyleSheets/Home.css";
 import { useNavigate } from "react-router-dom";
 
 function HeaderComponent() {
+  const username = localStorage.getItem("name");
   const [search, setSearch] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
-
-  const username = localStorage.getItem('username');
-
   const handleSearch = (e) => {
-    setSearch(e.target.value);
-  }
+    const { id, value } = e.target;
+    if (id === "search") {
+      setSearch(value);
+    }
+  };
+  let firstWord = search.charAt(0).toUpperCase();
+  let secondWord = search.slice(1);
+  let newWord = firstWord + secondWord;
+  console.log(newWord);
+  newWord = newWord.replace(/ /g, "_");
+  const displayResultsForSearch = () => {
+    if (newWord === "Toys") {
+      navigate(`/${newWord}`);
+    } else if (
+      newWord === "Flats" ||
+      newWord === "Shoes" ||
+      newWord === "FormalShoes" ||
+      newWord === "Heels"
+    ) {
+      navigate(`/footwearBy/${newWord}`);
+    } else if (
+      newWord === "Mobiles" ||
+      newWord === "Refrigerators" ||
+      newWord === "Air_Conditioners" ||
+      newWord === "Headphones" ||
+      newWord === "Laptops" ||
+      newWord === "TV" ||
+      newWord === "Washing_Machines" ||
+      newWord === "Appliances"
+    ) {
+      navigate(`/electronicsBy/${newWord}`);
+    } else if (newWord === "Beauty") {
+      navigate(`/beauty`);
+    } else if (
+      newWord === "Jewellery" ||
+      newWord === "HandBags" ||
+      newWord === "Watches" ||
+      newWord === "Sunglasses"
+    ) {
+      navigate(`/accessoriesBy/${newWord}`);
+    } else if (
+      newWord === "KurthaSets" ||
+      newWord === "Sarees" ||
+      newWord === "Tshirt" ||
+      newWord === "ActiveWear" ||
+      newWord === "KidsWear" ||
+      newWord === "JumpSuits"
+    ) {
+      navigate(`/fashionBy/suitablefor/Female/${newWord}`);
+    } else if (
+      newWord === "SportsWear" ||
+      newWord === "Shirts" ||
+      newWord === "Trousers" ||
+      newWord === "Jeans" ||
+      newWord === "EthnicWear" ||
+      newWord === "Suits"
+    ) {
+      navigate(`/fashionBy/suitablefor/Male/${newWord}`);
+    } else {
+    }
+    console.log(search);
+  };
   const handleLogin = (e) => {
-    navigate("/")
-  }
-
+    navigate("/");
+  };
   const handleLogout = () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
-  }
+    localStorage.clear();
+  };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      setIsLogin(true)
-    }
-    else {
-      setIsLogin(false)
-    }
-
-  })
   return (
-    <Navbar className="navbar navbar-dark bg-dark">
+    <Navbar className="navbar navbar-dark bg-dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/">
-          E-Kart
-        </Navbar.Brand>
+        <Navbar.Brand href="/"> E-Kart </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav " />
+
         <Navbar.Collapse id="basic-navbar-nav">
-          {/* <Container className="search-bar">
-            < input
-              type="text"
-              placeholder="Search"
-              value={search}
-              onChange={handleSearch}
-            />
-            <FaSearch className="search-icon" />
-          </Container> */}
+          <Container className="search-bar">
+            <form onSubmit={displayResultsForSearch}>
+              <input type="text" placeholder="Search"
+                id="search" value={search} onChange={(e) => handleSearch(e)} />
+            </form>
+            <FaSearch className="search-icon" onClick={displayResultsForSearch} />
+          </Container>
+
           <Container className="d-flex flex-row justify-content-end">
-            <Nav >
-              <Nav.Link href="/"> Home</Nav.Link>
-              <NavDropdown title="Categories" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/accessories">Accessories</NavDropdown.Item>
+            <Nav>
+              <Nav.Link href="/"> <FaHome className="icon" /> Home</Nav.Link>
+              <NavDropdown title={<span> <FaTh className="icon" /> Categories </span>} id="basic-nav-dropdown" >
+                <NavDropdown.Item href="/accessories"> Accessories </NavDropdown.Item>
                 <NavDropdown.Item href="/beauty">Beauty</NavDropdown.Item>
-                <NavDropdown.Item href="/electronics">Electronics</NavDropdown.Item>
-                <NavDropdown.Item href="/fashionBy/Male">Men's Fashion</NavDropdown.Item>
+                <NavDropdown.Item href="/electronics">  Electronics</NavDropdown.Item>
+                <NavDropdown.Item href="/fashionBy/Male"> Men's Fashion</NavDropdown.Item>
                 <NavDropdown.Item href="/fashionBy/Female">Women's Fashion</NavDropdown.Item>
                 <NavDropdown.Item href="/footwear">Footwear</NavDropdown.Item>
-                <NavDropdown.Item href="/electronicsBy/Appliances">Appliances</NavDropdown.Item>
-                <NavDropdown.Item href="/electronicsBy/Mobiles">Mobiles</NavDropdown.Item>
+                <NavDropdown.Item href="/electronicsBy/Appliances"> Appliances</NavDropdown.Item>
+                <NavDropdown.Item href="/electronicsBy/Mobiles"> Mobiles</NavDropdown.Item>
                 <NavDropdown.Item href="/toys">Toys</NavDropdown.Item>
                 <NavDropdown.Item href="/fashionByType/KidsWear">Kidswear</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/cart">Cart</Nav.Link>
-              {
-                isLogin ? <NavDropdown title={`${username}`} id="basic-nav-dropdown">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-person-circle profile-logo" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                  </svg>
-                  <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
-
-                  : <Nav.Link href="/login" onClick={handleLogin}>Login</Nav.Link>}
+              <Nav.Link href="/cart">{" "}<FaShoppingCart className="icon" /> Cart</Nav.Link>
+              {localStorage.getItem("token") ?
+                (<NavDropdown title={<span> <FaUser className="icon" /> {username}</span>} id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/" onClick={handleLogout}>  Logout</NavDropdown.Item>
+                </NavDropdown>) :
+                (<Nav.Link href="/login" onClick={handleLogin}>  <FaSignInAlt className="icon" /> Login</Nav.Link>)}
             </Nav>
           </Container>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-
   );
 }
-
 
 export default HeaderComponent;
