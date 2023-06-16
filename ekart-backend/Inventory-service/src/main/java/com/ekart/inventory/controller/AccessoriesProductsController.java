@@ -19,7 +19,6 @@ import com.ekart.inventory.enums.Suitable;
 import com.ekart.inventory.service.AccessoriesProductService;
 
 @RestController
-//@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/accessoriesProducts")
 public class AccessoriesProductsController {
 
@@ -38,13 +37,13 @@ public class AccessoriesProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
-	@GetMapping("/getAccessories/type/{type}")
+	@GetMapping("/getAccessoriesByType/type/{type}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductByType(@PathVariable AccessoriesTypes type) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProductsByType(type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
-	@GetMapping("/getAccessories/type/{type}/{accessoryId}")
+	@GetMapping("/getAccessoriesByTypeAndId/type/{type}/{accessoryId}")
 	public ResponseEntity<AccessoriesProducts> getAccessoriesProductByTypeandId(@PathVariable AccessoriesTypes type,
 			@PathVariable int accessoryId) {
 		AccessoriesProducts acccessoryProductById = accessoriesProductService.getAccessoriesByTpeAndProductById(type,
@@ -52,7 +51,7 @@ public class AccessoriesProductsController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(acccessoryProductById);
 	}
 
-	@GetMapping("/getAccessories/suitableFor/{suitable}")
+	@GetMapping("/getAccessoriesBySuitable/suitableFor/{suitable}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySuitable(@PathVariable Suitable suitable) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
 				.GetAccessoriesProductsBySuitable(suitable);
@@ -83,39 +82,49 @@ public class AccessoriesProductsController {
 		accessoriesProductService.saveAccessoriesProducts(accessoriesProducts);
 	}
 
-	@GetMapping("/getAccessories/sellerName/{sellerName}")
+	@GetMapping("/getAccessoriesBySellerName/sellerName/{sellerName}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySellerName(
 			@PathVariable String sellerName) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
 				.GetAccessoriesProductsBySellerName(sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
-	
-	@PutMapping("/updateProducts/{accessoryId}")
-    public ResponseEntity<AccessoriesProducts> updateAccessoriesProducts(@PathVariable int accessoryId,@RequestBody AccessoriesProducts accessoriesProducts) {
-        
-        AccessoriesProducts updateAccessoriesProducts=accessoriesProductService.getAccessoriesProductById(accessoryId);
-            
-        updateAccessoriesProducts.setProductName(accessoriesProducts.getProductName());
-        updateAccessoriesProducts.setProductPrice(accessoriesProducts.getProductPrice());
-        updateAccessoriesProducts.setLogoImg(accessoriesProducts.getLogoImg());
-        updateAccessoriesProducts.setProductDescription(accessoriesProducts.getProductDescription());
-        updateAccessoriesProducts.setBrandName(accessoriesProducts.getBrandName());
-        updateAccessoriesProducts.setType(accessoriesProducts.getType());
-        updateAccessoriesProducts.setSuitablefor(accessoriesProducts.getSuitablefor());
-        updateAccessoriesProducts.setSize(accessoriesProducts.getSize());
-        updateAccessoriesProducts.setColor(accessoriesProducts.getColor());
-        updateAccessoriesProducts.setManufactureDate(accessoriesProducts.getManufactureDate());
-        updateAccessoriesProducts.setQty(accessoriesProducts.getQty());
-        updateAccessoriesProducts.setProductImg1(accessoriesProducts.getProductImg1());
-        updateAccessoriesProducts.setProductImg2(accessoriesProducts.getProductImg2());
-        updateAccessoriesProducts.setProductImg3(accessoriesProducts.getProductImg3());
-        updateAccessoriesProducts.setProductImg4(accessoriesProducts.getProductImg4());
-        updateAccessoriesProducts.setProductImg5(accessoriesProducts.getProductImg5());
-        
-        accessoriesProductService.saveSellerAccessoriesProducts(updateAccessoriesProducts);
 
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateAccessoriesProducts);
-    }
+	@PutMapping("/updateSellerProducts/{accessoryId}")
+	public ResponseEntity<AccessoriesProducts> updateAccessoriesProducts(@PathVariable int accessoryId,
+			@RequestBody AccessoriesProducts accessoriesProducts) {
+
+		AccessoriesProducts updateAccessoriesProducts = accessoriesProductService
+				.getAccessoriesProductById(accessoryId);
+
+		updateAccessoriesProducts.setProductName(accessoriesProducts.getProductName());
+		updateAccessoriesProducts.setProductPrice(accessoriesProducts.getProductPrice());
+		updateAccessoriesProducts.setLogoImg(accessoriesProducts.getLogoImg());
+		updateAccessoriesProducts.setProductDescription(accessoriesProducts.getProductDescription());
+		updateAccessoriesProducts.setBrandName(accessoriesProducts.getBrandName());
+		updateAccessoriesProducts.setType(accessoriesProducts.getType());
+		updateAccessoriesProducts.setSuitablefor(accessoriesProducts.getSuitablefor());
+		updateAccessoriesProducts.setSize(accessoriesProducts.getSize());
+		updateAccessoriesProducts.setColor(accessoriesProducts.getColor());
+		updateAccessoriesProducts.setManufactureDate(accessoriesProducts.getManufactureDate());
+		updateAccessoriesProducts.setQty(accessoriesProducts.getQty());
+		updateAccessoriesProducts.setProductImg1(accessoriesProducts.getProductImg1());
+		updateAccessoriesProducts.setProductImg2(accessoriesProducts.getProductImg2());
+		updateAccessoriesProducts.setProductImg3(accessoriesProducts.getProductImg3());
+		updateAccessoriesProducts.setProductImg4(accessoriesProducts.getProductImg4());
+		updateAccessoriesProducts.setProductImg5(accessoriesProducts.getProductImg5());
+
+		accessoriesProductService.saveSellerAccessoriesProducts(updateAccessoriesProducts);
+
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateAccessoriesProducts);
+	}
+	
+	@GetMapping("/getAccessoriesBySellerNameAndType/sellerName/{sellerName}/type/{type}")
+	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySellerNameAndType(
+			@PathVariable String sellerName,@PathVariable AccessoriesTypes type) {
+		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
+				.GetAccessoriesProductsBySellerNameAndType(sellerName,type);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
+	}
 
 }

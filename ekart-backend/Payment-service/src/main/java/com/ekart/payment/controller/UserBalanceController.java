@@ -24,4 +24,20 @@ public class UserBalanceController {
     public List<UserBalance> getUserBalance(){
         return userBalanceRepository.findAll();
     }
+
+    @GetMapping("/getBalanceByUserName/{userName}")
+    public int getBalanceByName(@PathVariable String userName){
+        UserBalance userBalance = userBalanceRepository.findByUserName(userName);
+
+        return userBalance.getPrice();
+    }
+    
+    @PutMapping("/updateBalance/{userName}/{amount}")
+    public  String updateUserBalance(@PathVariable String userName,@PathVariable int amount){
+        UserBalance ub = userBalanceRepository.findByUserName(userName);
+        ub.setPrice(ub.getPrice() + amount);
+        userBalanceRepository.save(ub);
+        return "user Balance Updated";
+    }
+
 }

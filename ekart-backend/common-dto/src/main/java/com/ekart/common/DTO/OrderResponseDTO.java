@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class OrderResponseDTO {
 	private UUID orderId;
 	private String userName;
+	private String email;
 	private List<Integer> qty;
 	private List<Integer> productIds;
 	private List<ProductCategories> categoryNames;
@@ -22,6 +23,7 @@ public class OrderResponseDTO {
 	private List<String> productName;
 	private List<String> brandName;
 
+	private List<String> address;
 	private List<String> size;
 	private List<String> color;
 	private List<String> sellerName;

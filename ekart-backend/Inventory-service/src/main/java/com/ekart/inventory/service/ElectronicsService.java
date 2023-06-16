@@ -19,4 +19,6 @@ public interface ElectronicsService {
 
 	public String saveSellerElectronicProducts(ElectronicsProducts updateElectronicsProducts);
 
+	public List<ElectronicsProducts> GetElectronicsBySellerNameAndType(String sellerName, ElectronicsTypes type);
+
 }

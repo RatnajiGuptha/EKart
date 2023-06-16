@@ -4,18 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ekart.common.DTO.OrderRequestDTO;
 import com.ekart.common.DTO.ProductCategories;
+import com.ekart.order.entity.Address;
 import com.ekart.order.entity.Cart;
 import com.ekart.order.entity.PurchaseOrder;
+import com.ekart.order.service.AddressService;
 import com.ekart.order.service.CartService;
+import com.ekart.order.service.EmailSenderService;
 import com.ekart.order.service.OrderService;
 
 //@CrossOrigin(origins="http://localhost:3000/")
@@ -27,12 +32,22 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private AddressService addressService;
+	
+	@Autowired
+	private EmailSenderService emailSenderService;
+	
+	String sessionOtp;
 
-	@PostMapping("/createOrder/{userName}")
-	public PurchaseOrder saveOrder(@PathVariable String userName) {
+	@PostMapping("/createOrder/{userName}/{addressId}/{email}")
+	public PurchaseOrder saveOrder(@PathVariable String userName,@PathVariable int addressId,@PathVariable  String email ) {
+
 		List<Cart> cartList = cartService.getByUserName(userName);
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
 		orderRequestDTO.setUserName(userName);
+		orderRequestDTO.setEmail(email);
 
 		List<Integer> productIds = new ArrayList<>();
 		List<ProductCategories> categories = new ArrayList<>();
@@ -70,7 +85,20 @@ public class OrderController {
 		orderRequestDTO.setColor(color);
 		orderRequestDTO.setSellerName(sellerName);
 		orderRequestDTO.setPrice(amount);
+		Address address = addressService.fetchById(addressId);
+		List<String> addr = new ArrayList<String>();
+		addr.add(String.valueOf(addressId));
+		addr.add(address.getUserName());
+		addr.add(address.getReceiverName());
+		addr.add(address.getReceiverPhoneNumber());
+		addr.add(address.getBuildingNo());
+		addr.add(address.getStreet1());
+		addr.add(address.getCity());
+		addr.add(address.getDistrict());
+		addr.add(address.getState());
+		addr.add(String.valueOf(address.getPincode()));
 
+		orderRequestDTO.setAddress(addr);
 		return orderService.createOrders(orderRequestDTO);
 
 	}
@@ -80,9 +108,20 @@ public class OrderController {
 		return orderService.fetchOrders();
 	}
 
+
 	@GetMapping("/getOrders/{Id}")
 	public PurchaseOrder getOrderById(@PathVariable UUID Id) {
 		return orderService.fetchOrderById(Id);
 	}
-
+	
+	@GetMapping("/generateOTP/{email}")
+	public String generateOtp(@PathVariable String email) {
+		String otp="";
+		if(email !=null) {
+			otp = emailSenderService.generateOtp();
+			emailSenderService.sendOtp(email, otp);			
+		}
+		
+		return otp;		
+	}
 }

@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-import com.ekart.common.DTO.ProductCategories;
-import com.ekart.order.controller.CartController;
-import com.ekart.order.proxy.InventoryServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +17,9 @@ import com.ekart.order.config.OrderStatusPublisher;
 import com.ekart.order.controller.CartController;
 import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.proxy.InventoryServiceProxy;
+import com.ekart.order.service.EmailSenderService;
+
+import jakarta.mail.MessagingException;
 
 @Configuration
 public class OrderStatusUpdateHandler {
@@ -34,7 +34,6 @@ public class OrderStatusUpdateHandler {
 
 	@Autowired
 	private InventoryServiceProxy inventoryServiceProxy;
-
 
 	@Transactional
 	public void updateOrder(UUID id, Consumer<PurchaseOrder> consumer) {
@@ -52,7 +51,8 @@ public class OrderStatusUpdateHandler {
 				+ "..................");
 
 		if (ispaymentComplete) {
-
+			String email = purchaseOrder.getEmail();
+			UUID id = purchaseOrder.getPurchaseOrderId();
 			List<Integer> prodIdList = purchaseOrder.getProductIds();
 			List<Integer> quantityList = purchaseOrder.getQty();
 			List<ProductCategories> categoriesList = purchaseOrder.getCategoryNames();
@@ -75,7 +75,11 @@ public class OrderStatusUpdateHandler {
 				cartController.deleteAllCartItems();
 
 			}
-
+			try {
+				triggerMail(id, email);
+			} catch (MessagingException e) {
+				throw new RuntimeException(e);
+			}
 		}
 		if (!ispaymentComplete) {
 			publisher.publishOrderEvent(convertEntityToDto(purchaseOrder), newOrderStatus);
@@ -95,8 +99,21 @@ public class OrderStatusUpdateHandler {
 		orderRequestDTO.setSize(purchaseOrder.getSize());
 		orderRequestDTO.setColor(purchaseOrder.getColor());
 		orderRequestDTO.setSellerName(purchaseOrder.getSellerName());
-
+		orderRequestDTO.setEmail(purchaseOrder.getEmail());
 		orderRequestDTO.setPrice(purchaseOrder.getPrice());
+		orderRequestDTO.setAddress(purchaseOrder.getAddress());
 		return orderRequestDTO;
+	}
+
+	@Autowired
+	private EmailSenderService senderService;
+
+//	@EventListener(ApplicationReadyEvent.class)
+	public void triggerMail(UUID id, String email) throws MessagingException {
+		senderService.sendSimpleEmail(email, "Order Placed Successfully",
+				"Congratulations your order with ID : " + id + " is placed successfully and will soon deliver to you"
+						+ "\n" + "please click here for invoice " + "http://localhost:3000/invoice/" + id
+						+ " For more information");
+
 	}
 }

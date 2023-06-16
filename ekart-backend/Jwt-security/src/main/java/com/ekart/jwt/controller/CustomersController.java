@@ -8,9 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +21,6 @@ import com.ekart.jwt.security.CustomerDetailsService;
 import com.ekart.jwt.security.JwtService;
 
 @RestController
-@CrossOrigin("*")
 public class CustomersController {
 
 	@Autowired
@@ -43,12 +40,9 @@ public class CustomersController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> createToken(@RequestBody JwtRequest jwtRequest) throws Exception {
-
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(jwtRequest.getUserName(), jwtRequest.getPassword()));
-		} catch (UsernameNotFoundException e) {
-			return ResponseEntity.badRequest().body("User not found");
 		} catch (BadCredentialsException e) {
 			return ResponseEntity.badRequest().body("Bad Credential");
 		}
@@ -72,6 +66,21 @@ public class CustomersController {
 		customerRepo.save(customerEntity);
 
 		return ResponseEntity.ok("User added sucessfully");
+	}
+
+	@PostMapping("/addSeller")
+	public ResponseEntity<?> addSeller(@RequestBody CustomerEntity customerEntity) {
+		Optional<CustomerEntity> name = customerRepo.findByUserName(customerEntity.getUserName());
+
+		if (!name.isEmpty()) {
+			return ResponseEntity.badRequest().body("User already Exists");
+		}
+
+		customerEntity.setRoles("SELLER");
+		customerEntity.setPassword(encoder.encode(customerEntity.getPassword()));
+		customerRepo.save(customerEntity);
+
+		return ResponseEntity.ok("Seller added sucessfully");
 	}
 
 }

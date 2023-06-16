@@ -11,4 +11,6 @@ public interface ElectronicsRepository extends JpaRepository<ElectronicsProducts
 	public List<ElectronicsProducts> findByType(ElectronicsTypes type);
 
 	public List<ElectronicsProducts> findBySellerName(String sellerName);
+
+	public List<ElectronicsProducts> findBySellerNameAndType(String sellerName, ElectronicsTypes type);
 }

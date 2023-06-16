@@ -18,7 +18,6 @@ import com.ekart.inventory.service.BeautyService;
 
 @RestController
 @RequestMapping("/api/beauty")
-//@CrossOrigin("http://localhost:3000/")
 public class BeautyController {
 
 	@Autowired
@@ -39,7 +38,7 @@ public class BeautyController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
 	}
 
-	@GetMapping("/getBeautyProducts")
+	@GetMapping("/getAllBeautyProducts")
 	public ResponseEntity<List<Beauty>> fetchAllBeautyProducts() {
 		List<Beauty> beautyProductsList = beautyService.getAllBeautyProducts();
 
@@ -69,7 +68,7 @@ public class BeautyController {
 		
 	}
 	
-	@PutMapping("/updateProducts/{beautyId}")
+	@PutMapping("/updateSellerProducts/{beautyId}")
     public ResponseEntity<Beauty> updateBeautyProducts(@PathVariable int beautyId,@RequestBody Beauty beauty) {
         
         Beauty updateBeautyProducts=beautyService.getBeautyById(beautyId);

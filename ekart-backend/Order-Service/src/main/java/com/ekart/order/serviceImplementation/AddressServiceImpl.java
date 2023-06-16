@@ -1,13 +1,13 @@
-package com.ekart.gateway.serviceImpl;
+package com.ekart.order.serviceImplementation;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ekart.gateway.Repository.AddressRepository;
-import com.ekart.gateway.entity.Address;
-import com.ekart.gateway.service.AddressService;
+import com.ekart.order.Repository.AddressRepository;
+import com.ekart.order.entity.Address;
+import com.ekart.order.service.AddressService;
 
 @Service
 public class AddressServiceImpl implements AddressService {
@@ -31,6 +31,18 @@ public class AddressServiceImpl implements AddressService {
 	public Address fetchById(int id) {
 
 		return addressRepository.findById(id).get();
+	}
+
+	@Override
+	public String deleteByAddressId(int id) {
+		addressRepository.deleteById(id);
+		return "address deleted successfully";
+	}
+
+	@Override
+	public List<Address> fetchByUserName(String userName) {
+		List<Address> addressList = addressRepository.findByUserName(userName);
+		return addressList;
 	}
 
 }

@@ -14,26 +14,20 @@ import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.OrderService;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
 	@Autowired
 	private OrderStatusPublisher orderStatusPublisher;
-	
-	
-	@Override
-	public PurchaseOrder createOrder(OrderRequestDTO orderRequestDTO) {
-		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
-		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
-		orderStatusPublisher.publishOrderEvent(orderRequestDTO, OrderStatus.ORDER_CREATED);
-		return purchaseOrder;
-		
-	}
+
+
 
 	@Override
 	public PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO) {
 		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
+//		purchaseOrder.setEmail(email);
 		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
 		orderStatusPublisher.publishOrderEvent(orderRequestDTO, OrderStatus.ORDER_CREATED);
 		return purchaseOrder;
@@ -41,10 +35,9 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public List<PurchaseOrder> fetchOrders() {
-		List<PurchaseOrder> orders=orderRepository.findAll();
+		List<PurchaseOrder> orders = orderRepository.findAll();
 		return orders;
 	}
-
 
 	private PurchaseOrder convertDtoToEntity(OrderRequestDTO dto) {
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
@@ -61,12 +54,16 @@ public class OrderServiceImpl implements OrderService{
 		purchaseOrder.setPrice(dto.getPrice());
 		purchaseOrder.setSellerName(dto.getSellerName());
 		purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
+		purchaseOrder.setEmail(dto.getEmail());
 	
+		purchaseOrder.setAddress(dto.getAddress());
+
 		return purchaseOrder;
 	}
+
 	@Override
 	public PurchaseOrder fetchOrderById(UUID id) {
-	return orderRepository.findById(id).get();
+		return orderRepository.findById(id).get();
 	}
 
 }
