@@ -9,7 +9,7 @@ import com.ekart.order.entity.Address;
 @Service
 public interface AddressService {
 
-	public String addNewAddress(Address address);
+	public int addNewAddress(Address address);
 
 	public List<Address> getAllAddress();
 
