@@ -17,9 +17,9 @@ const ToysBar = () => {
   const sellername = localStorage.getItem("name");
 
   const data = {
-  labels: ["Number Of Toys"],
+    labels: ["Number Of Toys"],
     datasets: [
-      { 
+      {
         data: [toys],
         backgroundColor: "violet",
         borderColor: "black",
@@ -27,9 +27,8 @@ const ToysBar = () => {
     ],
   };
   const options = {
-   plugins: {
+    plugins: {
       legend: {
-        marginTop: "13%",
         display: false,
         height: "70%",
         width: "300px",
@@ -39,7 +38,7 @@ const ToysBar = () => {
       },
     },
   };
-   useEffect(() => {
+  useEffect(() => {
     ToysService.getToysBySellerName(sellername).then((response) => {
       setToys(response.data.length);
     });

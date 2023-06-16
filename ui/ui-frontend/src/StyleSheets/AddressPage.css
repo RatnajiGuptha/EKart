@@ -10,10 +10,11 @@
     color: black;
 }
 
-.from-container {
-    height: 100vh;
+/* .from-container {
+    height: 100vh;   
+    display: flex;
     padding: 10px;
-}
+} */
 
 .address-card {
     display: flex;

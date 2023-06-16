@@ -115,7 +115,7 @@ const CheckoutComponent = () => {
                                             <p className='addressText2'>{address.district},{address.state}</p>
                                             <p className='addressText2'>{address.receiverPhoneNumber}, Pin - {address.pincode},</p>
                                         </div>
-                                        : <AddressSelectionCompoonent userName={userName} />
+                                        : <p>Add address Here</p>
                                     }
                                 </div>
                                 <div>

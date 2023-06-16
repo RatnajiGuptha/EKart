@@ -57,7 +57,6 @@ const FootWearBar = () => {
   const options = {
     plugins: {
       legend: {
-        marginTop: "13%",
         display: false,
         height: "70%",
         width: "100%",
