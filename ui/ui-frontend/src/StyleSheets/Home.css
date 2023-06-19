@@ -86,15 +86,7 @@ border-radius: 12px;
 .top-picks {
   padding: 1rem;
   border-radius: 20rem;
-<<<<<<< HEAD
-<<<<<<< HEAD
   overflow: hidden;
-=======
-  overflow: hidden; 
->>>>>>> frontend
-=======
-  overflow: hidden;
->>>>>>> origin/frontend
   position: relative;
 }
 
