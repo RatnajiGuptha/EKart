@@ -22,6 +22,7 @@ import com.ekart.order.service.AddressService;
 import com.ekart.order.service.CartService;
 import com.ekart.order.service.EmailSenderService;
 import com.ekart.order.service.OrderService;
+import com.ekart.order.service.PromoCodesService;
 
 //@CrossOrigin(origins="http://localhost:3000/")
 @RestController
@@ -39,11 +40,19 @@ public class OrderController {
 	@Autowired
 	private EmailSenderService emailSenderService;
 	
+	@Autowired
+	private PromoCodesService promoService;
+	
 	String sessionOtp;
 
-	@PostMapping("/createOrder/{userName}/{addressId}/{email}")
-	public PurchaseOrder saveOrder(@PathVariable String userName,@PathVariable int addressId,@PathVariable  String email ) {
+	@PostMapping("/createOrder/{userName}/{addressId}/{promoCode}/{email}")
+	public PurchaseOrder saveOrder(@PathVariable String userName,@PathVariable int addressId,@PathVariable  String email,@PathVariable String promoCode ) {
 
+		int discountPrice = 0;
+		if (!(promoCode.equals("none"))) {
+			discountPrice = promoService.getDiscountPrice(promoCode);
+		}
+		
 		List<Cart> cartList = cartService.getByUserName(userName);
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
 		orderRequestDTO.setUserName(userName);
@@ -75,6 +84,8 @@ public class OrderController {
 			sellerName.add(cart.getSellerName());
 			amount += (cart.getProductPrice() * cart.getQty());
 		}
+		
+		amount -= discountPrice;
 		orderRequestDTO.setProductIds(productIds);
 		orderRequestDTO.setCategoryNames(categories);
 		orderRequestDTO.setQty(qtys);
@@ -85,6 +96,8 @@ public class OrderController {
 		orderRequestDTO.setColor(color);
 		orderRequestDTO.setSellerName(sellerName);
 		orderRequestDTO.setPrice(amount);
+		orderRequestDTO.setPromoCode(promoCode);
+		
 		Address address = addressService.fetchById(addressId);
 		List<String> addr = new ArrayList<String>();
 		addr.add(String.valueOf(addressId));

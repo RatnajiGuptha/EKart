@@ -466,10 +466,32 @@ spring:
           - Path=/api/address/GetAddressById/**  
           filters:
             - AuthenticationFilter
+            
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/generateOTP/**  
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/promocodes/addNewPromoCode 
+          filters:
+            - AuthenticationFilter
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/promocodes/getAllPromoCodes
+          filters:
+            - AuthenticationFilter
+        
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/promocodes/getDiscountPrice/**
+          filters:
+            - AuthenticationFilter
         
         - id : payment-service
           uri : http://localhost:8083

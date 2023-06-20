@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 public class PurchaseOrder {
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private UUID purchaseOrderId;
 	private String orderDate = (new SimpleDateFormat("dd/MM/yyyy hh:mm:ss")).format(new Date());
 	private String userName;
@@ -33,17 +32,18 @@ public class PurchaseOrder {
 	private List<Integer> qty;
 	private List<ProductCategories> categoryNames;
 	private int price;
-	
+
 	private List<Integer> priceList;
 	private List<String> productName;
-	private List<String> brandName;	
+	private List<String> brandName;
 
 	private List<String> size;
 	private List<String> color;
 	private List<String> sellerName;
-	
+
 	private List<String> address;
-	
+	private String promoCode;
+
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 	@Enumerated(EnumType.STRING)

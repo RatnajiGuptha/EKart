@@ -24,6 +24,7 @@ public class OrderRequestDTO {
 	private List<String> brandName;
 
 	private List<String> address;
+	private String promoCode;
 	private List<String> size;
 	private List<String> color;
 	private List<String> sellerName;
