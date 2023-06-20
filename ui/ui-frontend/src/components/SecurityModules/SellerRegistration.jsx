@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../StyleSheets/Login.css";
+import { ToastContainer, toast } from 'react-toastify';
 import { SecurityService } from "../../Services/SecurityService";
+import 'react-toastify/dist/ReactToastify.css';
+import "../../StyleSheets/Login.css";
+
 
 function SellerRegistration() {
 
@@ -80,12 +83,13 @@ function SellerRegistration() {
         if (!registerData.password || registerData.password.trim().length < 8) {
             newError.password = 'Password should have at least 8 characters';
             valid = false;
-        } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(registerData.password)) {
-            newError.password = 'Password should at least one letter, one number';
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(registerData.password)) {
+            newError.password = "Password should contains least one letter, one number and one special character";
             valid = false;
         }
 
         setErrors(newError);
+        toast.error("Check the required fields");
         return valid;
     }
 
@@ -158,6 +162,7 @@ function SellerRegistration() {
                     <Link to="/login">
                         <button className="btn btn-warning m-2" > Back</button>
                     </Link>
+                    <ToastContainer />
                 </div>
             </form >
         </div >

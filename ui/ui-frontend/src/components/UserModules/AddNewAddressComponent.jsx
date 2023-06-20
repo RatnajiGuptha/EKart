@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../../StyleSheets/NewAddress.css";
 import { AddressService } from "../../Services/AddressService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import "../../StyleSheets/NewAddress.css";
 
 function AddNewAddressComponent() {
     const [addNewAddress, setAddNewAddress] = useState(true);
+
     const [citys, setCitys] = useState([])
     const [selectCity, setSelectedCity] = useState("");
-    const navigate = useNavigate();
     const citiess = []
+
+    const [errors, setErrors] = useState({});
+
+    const navigate = useNavigate();
 
     const [addressData, setAddressData] = useState({
         Name: "",
@@ -22,6 +28,48 @@ function AddNewAddressComponent() {
         Pincode: "",
     });
 
+    const validateAddress = () => {
+        let valid = true;
+        const newError = {}
+
+        if (!addressData.Name || addressData.Name.trim().length < 5) {
+            newError.name = "User name should have at least 5 characters";
+            valid = false;
+        } else if (!/^[a-zA-Z]+$/.test(addressData.Name)) {
+            newError.userName = "Invalid user name";
+            valid = false;
+        }
+
+        if (!addressData.ContactNumber.trim() || addressData.ContactNumber.trim().length !== 10) {
+            newError.ContactNumber = "Mobile number should have 10 digits";
+            valid = false;
+        } else if (!/^[0-9]+$/.test(addressData.ContactNumber)) {
+            newError.ContactNumber = "Mobile number should have 10 digits";
+            valid = false;
+        }
+
+        if (!addressData.buildingNo.trim() || addressData.buildingNo.trim().length >= 1) {
+            newError.buildingNo = "Enter a valid street name";
+            valid = false;
+        }
+
+        if (!addressData.Area.trim() || addressData.Area.trim().length >= 1) {
+            newError.Area = "Enter a valid land Mark";
+            valid = false;
+        }
+
+        if (!addressData.Pincode.trim() || addressData.Pincode.trim().length == 6) {
+            newError.Pincode = "Enter a valid pincode";
+            valid = false;
+        } else if (!/^[1-9][0-9]{5}$/.test(addressData.Pincode)) {
+            newError.Pincode = "Enter a valid pincode";
+            valid = false;
+        }
+
+        setErrors(newError);
+        toast.error("Check the required fields");
+        return valid;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,7 +83,7 @@ function AddNewAddressComponent() {
                 District: pincodeData.District,
             }));
 
-            AddressService.addNewAddress({
+            await AddressService.addNewAddress({
                 userName: localStorage.getItem("username"),
                 receiverName: addressData.Name,
                 receiverPhoneNumber: addressData.ContactNumber,
@@ -55,6 +103,7 @@ function AddNewAddressComponent() {
                 }
             });
 
+
             console.log(addressData.Name, addressData.ContactNumber, addressData.Area, pincodeData.City, pincodeData.State, pincodeData.District, addressData.Pincode);
             window.location.reload(false);
         }
@@ -72,7 +121,6 @@ function AddNewAddressComponent() {
             if (pincodeData) {
                 setAddressData((prevData) => ({
                     ...prevData,
-                    City: pincodeData.City,
                     State: pincodeData.State,
                     District: pincodeData.District,
                 }));
@@ -112,8 +160,10 @@ function AddNewAddressComponent() {
         }
     };
 
-    console.log("cityes ---> ", citys);
     console.log(selectCity)
+
+
+
     return (
         <div className="mb-3">
             {addNewAddress && (
@@ -121,7 +171,8 @@ function AddNewAddressComponent() {
                     <div className="add-address-container">
                         <div>
                             <label htmlFor="Name"> Name <br />
-                                <input value={addressData.Name} onChange={handleAddress} placeholder="Name" type="text" id="Name" /></label>
+                                <input value={addressData.Name} onChange={handleAddress} placeholder="Name" type="text" id="Name" />
+                            </label>
                             <br />
 
                             <label htmlFor="ContactNumber"> Contact Number <br />
@@ -155,8 +206,6 @@ function AddNewAddressComponent() {
                                     )}
                                 </select>
 
-
-                                {/* <input value={addressData.City} placeholder="City" type="text" id="City" /> */}
                             </label>
                             <br />
 
@@ -176,6 +225,7 @@ function AddNewAddressComponent() {
                         <button type="submit" className="btn btn-success m-2" onClick={handleSubmit}> Save</button>
                         <button type="button" className="btn btn-warning m-2" onClick={handleAddressCancel}>  Cancel</button>
                     </div>
+                    <ToastContainer />
                 </div>
             )}
         </div>

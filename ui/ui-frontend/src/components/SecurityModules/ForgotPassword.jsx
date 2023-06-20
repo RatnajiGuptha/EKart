@@ -37,7 +37,6 @@ export const ForgotPassword = () => {
     }
 
     const checkOtp = () => {
-        // console.log("......otp")
         const newError = {}
         console.log(OTP)
 
@@ -54,8 +53,6 @@ export const ForgotPassword = () => {
 
         setErrors(newError);
     }
-
-
 
     return (
         <div>
