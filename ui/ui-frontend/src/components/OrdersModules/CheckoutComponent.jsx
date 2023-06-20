@@ -3,18 +3,17 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { UserBalanceService } from '../../Services/UserBalanceService';
 import { AddressService } from '../../Services/AddressService';
 import { OrderService } from '../../Services/OrderService';
-import "../../StyleSheets/Checkout.css";
 import AddressSelectionCompoonent from './AddressSelectionCompoonent';
+import "../../StyleSheets/Checkout.css";
 
 const CheckoutComponent = () => {
-    var { userName, addressId } = useParams();
+    var { userName, addressId, coupon } = useParams();
 
     console.log(userName);
     console.log(addressId);
     const navigate = useNavigate();
     const [purchaseOrder, setPurchaseOrder] = useState([]);
     const [balance, setBalance] = useState(0);
-    // const [isChecked, setIsChecked] = useState(false);
     const [address, setAddress] = useState([]);
     const [addressList, setAddressList] = useState([]);
     const [defaultAddId, setDefaultAddId] = useState();
@@ -81,7 +80,7 @@ const CheckoutComponent = () => {
         if (addressId === undefined) {
             addressId = defaultAddId;
         }
-        await OrderService.createOrderForCart(userName, address.addressId, Email).then((Response) => {
+        await OrderService.createOrderForCart(userName, address.addressId, coupon, Email).then((Response) => {
             setPurchaseOrder(Response.data);
             console.log(purchaseOrder);
             return Response.data;
@@ -119,7 +118,7 @@ const CheckoutComponent = () => {
                                     }
                                 </div>
                                 <div>
-                                    <AddressSelectionCompoonent userName={userName} />
+                                    <AddressSelectionCompoonent userName={userName} promoCode={coupon} />
                                 </div>
                             </div>
                         </div>

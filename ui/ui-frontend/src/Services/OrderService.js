@@ -1,10 +1,10 @@
-import { authenticateApi,api } from "./axiosConfig";
+import { authenticateApi, api } from "./axiosConfig";
 
 export const OrderService = {
 
-    async createOrderForCart(userName, addressId, email) {
+    async createOrderForCart(userName, addressId, coupon, email) {
         const res = await authenticateApi.request({
-            url: `/api/createOrder/${userName}/${addressId}/${email}`,
+            url: `/api/createOrder/${userName}/${addressId}/${coupon}/${email}`,
             method: "POST"
         })
         return res
@@ -30,11 +30,11 @@ export const OrderService = {
     },
     async generateOtp(email) {
         const res = await api.request({
-          url: `/api/generateOTP/${email}`,
-          method: "GET",
+            url: `/api/generateOTP/${email}`,
+            method: "GET",
         });
         return res;
-      }
+    }
 
 }
 

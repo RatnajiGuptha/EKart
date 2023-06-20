@@ -76,7 +76,6 @@ function App() {
         {header}
         <Routes>
           <Route path="/" element={home}></Route>
-          {/* <Route path="/" element={<HomeComponent />} ></Route> */}
 
           {/* security  */}
           <Route path="/login" element={<LoginPage />}></Route>
@@ -85,8 +84,8 @@ function App() {
 
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
-          <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
-          <Route path="/paymentPage/:userName/:addressId" element={<CheckoutComponent />}></Route>
+          <Route path="/paymentPage/:userName/:coupon" element={<CheckoutComponent />}></Route>
+          <Route path="/paymentPage/:userName/:addressId/:coupon" element={<CheckoutComponent />}></Route>
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>

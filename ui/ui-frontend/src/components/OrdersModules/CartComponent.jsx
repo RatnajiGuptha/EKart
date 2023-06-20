@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartService } from "../../Services/CartService";
+import { PromoCodesService } from '../../Services/PromoCodesService';
 import "../../StyleSheets/Cart.css";
 
 const CartComponent = () => {
+
   const [cartItems, setCartItems] = useState([]);
+  const [discountCodes, setDiscountCodes] = useState([])
+  const [coupon, setCoupon] = useState("none")
+  const [discountedPrice, setDiscountedPrice] = useState(0)
+
   const username = localStorage.getItem("username");
   const navigate = useNavigate("");
 
@@ -13,6 +19,9 @@ const CartComponent = () => {
       try {
         const response = await CartService.getCartItemsByUser(username);
         setCartItems(response.data);
+
+        const res = await PromoCodesService.getAllPromoCodes();
+        setDiscountCodes(res.data);
       } catch (err) {
         if (err.response.status === 401) {
           console.log(err.response.data);
@@ -25,8 +34,15 @@ const CartComponent = () => {
   }, [username, navigate]);
 
   const checkoutFromCart = () => {
-    navigate(`/paymentPage/${username}`);
+    navigate(`/paymentPage/${username}/${coupon}`);
   };
+
+  const applyCoupon = async () => {
+    const response = await PromoCodesService.getDiscountPrice(coupon)
+    console.log(response.data);
+    setDiscountedPrice(response.data)
+
+  }
 
   const deleteItemFromCarttt = async (cartId) => {
     await CartService.deleteItemFromCart(cartId)
@@ -43,13 +59,20 @@ const CartComponent = () => {
   const calculateTotalPrice = () => {
     let totalPrice = 0;
     let count = 0;
+    let grandPrice = 0;
 
     for (const item of cartItems) {
       totalPrice += item.productPrice * item.qty;
       count += 1;
     }
-    return { totalPrice, count };
+    grandPrice = totalPrice
+
+    if (coupon) {
+      grandPrice = totalPrice - discountedPrice
+    }
+    return { totalPrice, count, grandPrice };
   };
+
 
   console.log(cartItems.length);
   if (cartItems.length === 0) {
@@ -111,10 +134,37 @@ const CartComponent = () => {
             {" "}Total Price:
             <span style={{ fontStyle: "italic" }}>  {" "}  ₹ {calculateTotalPrice().totalPrice}/-{" "}  </span>
           </p>
+          <p className="total-price">            {" "}
+            Discounted Price:            <span style={{ fontStyle: "italic" }}>
+              {" "}              ₹ {discountedPrice}/-{" "}
+            </span>
+          </p>
+          <p className="total-price">
+            {" "}
+            Grand Price:
+            <span style={{ fontStyle: "italic" }}>
+              {" "}
+              ₹ {calculateTotalPrice().grandPrice}/-{" "}
+            </span>
+          </p>
           <button className="checkout-btn" onClick={() => checkoutFromCart()}> Checkout   </button>
         </div>
+        <div className="price-container table">
+          <h3> Available offers</h3>
+          <div className=''>
+            select a PromoCode for discount
+            <select onChange={(e) => setCoupon(e.target.value)}>
+              <option>Choose Coupon</option>
+              {discountCodes.map((item) =>
+                <option>{item.promoCode}</option>)}
+
+            </select>
+            <button className='btn btn-warning' onClick={applyCoupon}>apply coupon</button>
+
+          </div>
+        </div>
       </div>
-    </div>
+    </div >
   );
 };
 

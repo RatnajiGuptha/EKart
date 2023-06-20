@@ -32,6 +32,34 @@
     font-weight: bold;
 }
 
+.price-containers {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.saved-card {
+    margin-left: 200px;
+}
+
+.saved-card p {
+    font-style: italic;
+    margin-bottom: 2px;
+    font-weight: 800;
+}
+
+.saved-card h6 {
+    font-weight: bold;
+    font-style: italic;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.saved-card span {
+    color: darkgreen;
+    font-weight: 900;
+    font-style: italic;
+}
+
 .price-details {
     display: flex;
     justify-content: right;

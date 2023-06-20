@@ -133,8 +133,7 @@ nav {
 }
 
 input[type="text"],
-input[type="number"],
-select {
+input[type="number"] {
   padding: 0.6rem;
   width: 30rem;
   border: none;

@@ -110,6 +110,8 @@ function AddressSelectionCompoonent(props) {
 
     const navigate = useNavigate();
     const name = props.userName;
+    const coupon = props.promoCode;
+    console.log(coupon);
 
     const place = "checkout";
     // console.log(name);
@@ -141,7 +143,7 @@ function AddressSelectionCompoonent(props) {
     };
     //  console.log(id);
     const nextPage = () => {
-        navigate(`/paymentPage/${name}/${id}`);
+        navigate(`/paymentPage/${name}/${id}/${coupon}`);
         setShow(false);
     }
 
