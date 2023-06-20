@@ -19,7 +19,6 @@ const CartComponent = () => {
       try {
         const response = await CartService.getCartItemsByUser(username);
         setCartItems(response.data);
-
         const res = await PromoCodesService.getAllPromoCodes();
         setDiscountCodes(res.data);
       } catch (err) {
@@ -104,10 +103,10 @@ const CartComponent = () => {
               <h5 className="product-name">{item.productName}</h5>
               <div className="d-flex">
                 <div className={`size-selectors`}>
-                  <span className="size-text"> Color:{item.color} </span>
+                  <span className="size-text"> Color: {item.color} </span>
                 </div>
                 <div className={`size-selectors`}>
-                  <span className="size-text"> Size:{item.size} </span>
+                  <span className="size-text"> Size/Capacity: {item.size} </span>
                 </div>
               </div>
             </div>
@@ -126,43 +125,32 @@ const CartComponent = () => {
           </div>
         ))}
       </div>
+
       <div>
-        <div className="price-container table">
+        <div className="price-container">
           <h3> Price Details</h3>
-          <p> Total Products: {calculateTotalPrice().count}</p>
-          <p className="total-price">
-            {" "}Total Price:
-            <span style={{ fontStyle: "italic" }}>  {" "}  ₹ {calculateTotalPrice().totalPrice}/-{" "}  </span>
-          </p>
-          <p className="total-price">            {" "}
-            Discounted Price:            <span style={{ fontStyle: "italic" }}>
-              {" "}              ₹ {discountedPrice}/-{" "}
-            </span>
-          </p>
-          <p className="total-price">
-            {" "}
-            Grand Price:
-            <span style={{ fontStyle: "italic" }}>
-              {" "}
-              ₹ {calculateTotalPrice().grandPrice}/-{" "}
-            </span>
-          </p>
-          <button className="checkout-btn" onClick={() => checkoutFromCart()}> Checkout   </button>
-        </div>
-        <div className="price-container table">
-          <h3> Available offers</h3>
-          <div className=''>
-            select a PromoCode for discount
-            <select onChange={(e) => setCoupon(e.target.value)}>
-              <option>Choose Coupon</option>
-              {discountCodes.map((item) =>
-                <option>{item.promoCode}</option>)}
-
-            </select>
-            <button className='btn btn-warning' onClick={applyCoupon}>apply coupon</button>
-
+          <div>
+            <h6> Available offers </h6>
+            <div className='coupon-container'>
+              <select onChange={(e) => setCoupon(e.target.value)}>
+                <option>Choose Coupon</option>
+                {discountCodes.map((item) =>
+                  <option>{item.promoCode}</option>)}
+              </select>
+              <button className='btn btn-warning mb-2' onClick={applyCoupon}> Apply Coupon</button>
+            </div>
+          </div>
+          <ul className="list-unstyled">
+            <li className="total-price">{" "} Total Price: <span >{" "}₹ {calculateTotalPrice().totalPrice}/-{" "}</span> </li>
+            <li className="total-price">{" "} Discount: <span style={{ color: "darkgreen" }}>{" "} ₹ {discountedPrice}/-{" "}</span> </li>
+            <li className="total-price">{" "} Grand Price:  <span > {" "} ₹ {calculateTotalPrice().grandPrice}/-{" "}  </span></li>
+          </ul>
+          <p className="products-count-info"> Total Products: <span>{calculateTotalPrice().count}</span></p>
+          <div className="btn-container">
+            <button className="btn btn-success" onClick={() => checkoutFromCart()}> Place Order   </button>
           </div>
         </div>
+
       </div>
     </div >
   );
