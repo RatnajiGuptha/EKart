@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../StyleSheets/Login.css";
 import { SecurityService } from "../../Services/SecurityService";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Registrationpage() {
   const [registerData, setRegisterData] = useState({
     userName: "",
@@ -84,6 +85,7 @@ function Registrationpage() {
     }
 
     setErrors(newError);
+    toast.success("registered successfully");
     return valid;
   };
 
@@ -167,6 +169,7 @@ function Registrationpage() {
           >
             Register
           </button>
+          <ToastContainer />
           <Link to="/login">
             <button className="btn btn-warning m-2"> Back</button>
           </Link>

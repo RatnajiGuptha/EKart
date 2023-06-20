@@ -61,7 +61,7 @@ function LoginPage() {
                     <button type='submit' className='login-button' onClick={handleLogin} >  Login </button>
                     <Link to="/registration">
                         <button className='signup-button'> Sign Up</button>
-                    </Link>
+                    </Link>    
                 </div>
 
                 <p style={{ fontStyle: 'italic' }}><div className='d-flex'><div>Forgot password?</div><div><ForgotPassword /></div></div></p>
