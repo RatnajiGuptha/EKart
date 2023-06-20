@@ -80,10 +80,10 @@ const CartComponent = () => {
             <div className="cart-item-details">
               <h5 className="product-name">{item.productName}</h5>
               <div className="d-flex">
-                <div className={`size-selector`}>
+                <div className={`size-selectors`}>
                   <span className="size-text"> Color:{item.color} </span>
                 </div>
-                <div className={`size-selector`}>
+                <div className={`size-selectors`}>
                   <span className="size-text"> Size:{item.size} </span>
                 </div>
               </div>

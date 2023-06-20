@@ -23,7 +23,7 @@ function HeaderComponent() {
     return (
         <Navbar className="navbar navbar-dark bg-dark" expand="lg">
             <Container>
-                <Navbar.Brand href="/"> E-Kart </Navbar.Brand>
+                <Navbar.Brand> E-Kart </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav " />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Container className="d-flex flex-row justify-content-end">

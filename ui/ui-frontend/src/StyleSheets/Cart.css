@@ -1,7 +1,6 @@
 .cart-page {
   display: flex;
   justify-content: center;
-  /* background-color: aliceblue;    */
 }
 
 .cart-container {
@@ -117,4 +116,14 @@
 
 .contButton {
   margin-top: 20px;
+}
+
+.size-selectors {
+  display: flex;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-right: 10px;
+  cursor: pointer;
 }

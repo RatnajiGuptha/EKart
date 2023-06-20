@@ -52,8 +52,8 @@ const AddressComponent = () => {
                     {showAddNewAddress && <AddNewAddress />}
                 </div>
                 <div className='address-card'>
-                    {addressList.map((item) => (
-                        <div className="address-info-container">
+                    {addressList.map((item, i) => (
+                        <div className="address-info-container" key={i}>
                             <ul className="list-unstyled">
                                 <li>{item.receiverName}- {item.receiverPhoneNumber}</li>
                                 <li>{item.buildingNo},{item.street1}</li>

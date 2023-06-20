@@ -6,21 +6,16 @@
 }
 
 .card-info {
-  /* border-radius: 10px; */
-    background-color: transparent;
+  background-color: transparent;
   height: 100px;
   width: 100px;
   margin: 20px;
   margin-bottom: 0px;
   padding: 3px;
-  
+
 }
 
-/* .link :hover{
-transform: rotate3d();
-border: 3px solid #89A4C7;
-border-radius: 12px;
-} */
+
 .card-info img {
   width: 100px;
   height: 60px;
@@ -126,7 +121,7 @@ nav {
 }
 
 .search-bar {
-  position:relative;
+  position: relative;
   display: flex;
   align-items: center;
 }
@@ -137,7 +132,9 @@ nav {
   cursor: pointer;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"],
+select {
   padding: 0.6rem;
   width: 30rem;
   border: none;
@@ -146,6 +143,8 @@ input[type="text"] {
   background-color: #eee;
   margin-right: 10px;
 }
+
+
 
 input[type="text"]::placeholder {
   color: #999;

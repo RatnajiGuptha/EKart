@@ -51,9 +51,9 @@ const MyOrdersComponent = () => {
                     <p className="payment">{item.paymentStatus}</p>
                   </div>
                 ) : (
-                  <div>
+                  <div className="payment-status">
                     <span className="reddot"></span>
-                    <p>{item.paymentStatus}</p>
+                    <p className="payment">{item.paymentStatus}</p>
                   </div>
                 )}
               </div>
