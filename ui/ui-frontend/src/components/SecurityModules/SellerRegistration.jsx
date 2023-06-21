@@ -11,7 +11,6 @@ function SellerRegistration() {
     const navigate = useNavigate();
 
     const [registerData, setRegisterData] = useState({
-        userName: '',
         fullName: '',
         email: '',
         password: '',
@@ -32,19 +31,6 @@ function SellerRegistration() {
     const validateForm = async () => {
         let valid = true;
         const newError = {};
-
-        const userNameExists = await SecurityService.getUserByUsername(registerData.userName);
-        console.log(userNameExists.data);
-        if (!registerData.userName || registerData.userName.trim().length < 5) {
-            newError.userName = 'User name should have at least 5 characters';
-            valid = false;
-        } else if (userNameExists.data !== null) {
-            newError.userName = 'User name already exists';
-            valid = false;
-        } else if (!/^[a-zA-Z0-9]+$/.test(registerData.userName)) {
-            newError.userName = 'Invalid user name';
-            valid = false;
-        }
 
         const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
         console.log("email =", userEmailExists.data);
@@ -107,53 +93,24 @@ function SellerRegistration() {
     return (
         <div className="login-page">
             <form className='forms'>
-                <label >Username
-                    <input type="text"
-                        name="userName"
-                        placeholder="Enter user name"
-                        value={registerData.userName}
-                        onChange={handleChange}
-                    />
-                    {errors.userName && <span>{errors.userName}</span>}
-                </label>
 
                 <label >Fullname
-                    <input type="text"
-                        name="fullName"
-                        placeholder="Enter Fullname"
-                        value={registerData.fullName}
-                        onChange={handleChange}
-                    />
+                    <input type="text" name="fullName" placeholder="Enter Fullname" value={registerData.fullName} onChange={handleChange} />
                     {errors.fullName && <span>{errors.fullName}</span>}
                 </label>
 
                 <label >Email
-                    <input type="email"
-                        name="email"
-                        placeholder="Enter Email"
-                        value={registerData.email}
-                        onChange={handleChange}
-                    />
+                    <input type="email" name="email" placeholder="Enter Email" value={registerData.email} onChange={handleChange} />
                     {errors.email && <span>{errors.email}</span>}
                 </label>
 
                 <label >Password
-                    <input type="Password"
-                        name="password"
-                        placeholder="Enter Password"
-                        value={registerData.password}
-                        onChange={handleChange}
-                    />
+                    <input type="Password" name="password" placeholder="Enter Password" value={registerData.password} onChange={handleChange} />
                     {errors.password && <span>{errors.password}</span>}
                 </label>
 
                 <label >Contact Number
-                    <input type="number"
-                        name="contactNumber"
-                        placeholder="Enter Contact Number"
-                        value={registerData.contactNumber}
-                        onChange={handleChange}
-                    />
+                    <input type="number" name="contactNumber" placeholder="Enter Contact Number" value={registerData.contactNumber} onChange={handleChange} />
                     {errors.contactNumber && <span>{errors.contactNumber}</span>}
                 </label>
 

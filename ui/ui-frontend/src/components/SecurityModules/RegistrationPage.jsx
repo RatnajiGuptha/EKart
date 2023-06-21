@@ -5,9 +5,8 @@ import { SecurityService } from "../../Services/SecurityService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function Registrationpage() {
-  
+
   const [registerData, setRegisterData] = useState({
-    userName: "",
     fullName: "",
     email: "",
     password: "",
@@ -27,19 +26,6 @@ function Registrationpage() {
   const validateForm = async () => {
     let valid = true;
     const newError = {};
-
-    const userNameExists = await SecurityService.getUserByUsername(registerData.userName);
-    console.log(userNameExists.data);
-    if (!registerData.userName || registerData.userName.trim().length < 5) {
-      newError.userName = "User name should have at least 5 characters";
-      valid = false;
-    } else if (userNameExists.data !== null) {
-      newError.userName = "User name already exists";
-      valid = false;
-    } else if (!/^[a-zA-Z0-9]+$/.test(registerData.userName)) {
-      newError.userName = "Invalid user name";
-      valid = false;
-    }
 
     const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
     console.log(userEmailExists.data);
@@ -96,11 +82,6 @@ function Registrationpage() {
   return (
     <div className="login-page">
       <form className="forms">
-        <label> Username
-          <input type="text" name="userName" placeholder="Enter user name" value={registerData.userName} onChange={handleChange} />
-          {errors.userName && <span>{errors.userName}</span>}
-        </label>
-
         <label>  Fullname
           <input type="text" name="fullName" placeholder="Enter Fullname" value={registerData.fullName} onChange={handleChange} />
           {errors.fullName && <span>{errors.fullName}</span>}

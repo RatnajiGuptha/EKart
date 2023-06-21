@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const FashionProductsByGenderInfo = () => {
-  const username = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const { suitablefor, productId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
@@ -49,7 +49,7 @@ const FashionProductsByGenderInfo = () => {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
 
       // console.log(datad.data);
@@ -57,7 +57,7 @@ const FashionProductsByGenderInfo = () => {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.fashionId,
-          userName: username,
+          email: email,
           brandName: productsInfo.brandName,
           productName: productsInfo.productName,
           logoImg: productsInfo.logoImg,
@@ -74,28 +74,28 @@ const FashionProductsByGenderInfo = () => {
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
-            toast.success("Item added successfully",{theme:"dark"});
+            toast.success("Item added successfully", { theme: "dark" });
           }).catch((err) => {
             if (err.response.status === 401) {
               console.log(err.response.data)
               navigate("/login")
               localStorage.clear();
-          }
+            }
           });
         } else {
-          toast.warning(" products Left",{theme:"dark"});
+          toast.warning(" products Left", { theme: "dark" });
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
-          toast.success("Cart contains " + qty + " " + datad.data.productName,{theme:"dark"});
+        await CartService.updateQuantity(datad.data.cartId, email, qty).then(() => {
+          toast.success("Cart contains " + qty + " " + datad.data.productName, { theme: "dark" });
         }).catch((err) => {
           if (err.response.status === 401) {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
       }
     }

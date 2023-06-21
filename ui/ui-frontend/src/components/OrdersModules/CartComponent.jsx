@@ -11,13 +11,13 @@ const CartComponent = () => {
   const [coupon, setCoupon] = useState("none")
   const [discountedPrice, setDiscountedPrice] = useState(0)
 
-  const username = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
   const navigate = useNavigate("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await CartService.getCartItemsByUser(username);
+        const response = await CartService.getCartItemsByEmail(email);
         setCartItems(response.data);
         const res = await PromoCodesService.getAllPromoCodes();
         setDiscountCodes(res.data);
@@ -30,16 +30,18 @@ const CartComponent = () => {
       }
     };
     fetchData();
-  }, [username, navigate]);
+  }, [email, navigate]);
 
   const checkoutFromCart = () => {
-    navigate(`/paymentPage/${username}/${coupon}`);
+    navigate(`/paymentPage/${email}/${coupon}`);
   };
 
   const applyCoupon = async () => {
     const response = await PromoCodesService.getDiscountPrice(coupon)
     console.log(response.data);
-    setDiscountedPrice(response.data)
+    console.log(calculateTotalPrice().totalPrice*response.data)    
+    const distPrice =(calculateTotalPrice().totalPrice*response.data)
+    setDiscountedPrice(distPrice.toFixed(2))
 
   }
 

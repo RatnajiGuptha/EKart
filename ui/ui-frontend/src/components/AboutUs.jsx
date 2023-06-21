@@ -1,15 +1,8 @@
 import React from 'react'
 import "../StyleSheets/AboutUs.css";
 export const AboutUs = () => {
+    
     return (
-
-        //                     <div className="d-flex align-content-start flex" style={{ height: "300px" }}>
-        //                         <div className="d-flex align-items-start flex-column" >
-        //                             <h4 className='content'>Beauty</h4>
-        //                             
-        //                         </div>
-        //                        
-
 
         <div className='bg-container'>
             <h3>About us</h3>

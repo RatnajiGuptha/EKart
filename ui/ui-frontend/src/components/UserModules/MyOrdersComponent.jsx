@@ -7,11 +7,10 @@ const MyOrdersComponent = () => {
   const [order, setOrder] = useState([]);
   const navigate = useNavigate("");
   useEffect(() => {
-    OrderService.getAllOrdersAfterPayment()
+    OrderService.getByUserName(localStorage.getItem("email"))
       .then((response) => {
         setOrder(response.data);
         console.log(response.data);
-        // console.log(order);
       })
       .catch((err) => {
         if (err.response.status === 401) {

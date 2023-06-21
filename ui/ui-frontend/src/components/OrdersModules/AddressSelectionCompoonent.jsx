@@ -11,7 +11,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 function AddressSelectionCompoonent(props) {
     const [addNewAddress, setAddNewAddress] = useState(true)
-    // const [addressSuccesful, setAddressSuccesful] = useState(true)
+    const [addressSuccesful, setAddressSuccesful] = useState(true)
     const [Name, setName] = useState('');
     const [ContactNumber, setContactNumber] = useState('');
     const [buildingNo, setBuildingNo] = useState('')
@@ -20,17 +20,14 @@ function AddressSelectionCompoonent(props) {
     const [State, setState] = useState('');
     const [District, setDistrict] = useState('');
     const [Pincode, setPincode] = useState('');
-    const userName = localStorage.getItem("username");
+    const email = localStorage.getItem("email");
     const handleClose1 = () => setAddAddress(false);
-    // const handleClose2 = () => setAddressSuccesful(false);
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setAddNewAddress(false)
         AddressService.addNewAddress({
-            userName: localStorage.getItem("username"),
+            userName: localStorage.getItem("email"),
             receiverName: Name,
             receiverPhoneNumber: ContactNumber,
             buildingNo: buildingNo,
@@ -44,7 +41,7 @@ function AddressSelectionCompoonent(props) {
             let id = response.data;
 
 
-            navigate(`/paymentPage/${userName}/${id}`);
+            navigate(`/paymentPage/${email}/${id}`);
             handleClose1();
 
             window.location.reload(false)
@@ -109,7 +106,7 @@ function AddressSelectionCompoonent(props) {
     const [id, setId] = useState();
 
     const navigate = useNavigate();
-    const name = props.userName;
+    const name = props.email;
     const coupon = props.promoCode;
     console.log(coupon);
 

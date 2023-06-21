@@ -84,7 +84,7 @@ function AddNewAddressComponent() {
             }));
 
             await AddressService.addNewAddress({
-                userName: localStorage.getItem("username"),
+                email: localStorage.getItem("email"),
                 receiverName: addressData.Name,
                 receiverPhoneNumber: addressData.ContactNumber,
                 buildingNo: addressData.buildingNo,

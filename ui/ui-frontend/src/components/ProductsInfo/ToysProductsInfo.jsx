@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../StyleSheets/Home.css";
 
 const ToysProductsInfo = () => {
-  const username = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const { toyId } = useParams();
   const [productsInfo, setProductInfo] = useState({ id: null });
@@ -55,7 +55,7 @@ const ToysProductsInfo = () => {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.toyId,
-          userName: username,
+          email: email,
           brandName: productsInfo.brandName,
           productName: productsInfo.productName,
           logoImg: productsInfo.logoImg,
@@ -85,7 +85,7 @@ const ToysProductsInfo = () => {
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
+        await CartService.updateQuantity(datad.data.cartId, email, qty).then(() => {
           toast.success("Cart contains " + qty + " " + datad.data.productName, { theme: "dark" });
         }).catch((err) => {
           if (err.response.status === 401) {

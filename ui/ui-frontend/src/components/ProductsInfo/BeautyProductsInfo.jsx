@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const BeautyProductsInfo = () => {
 
-  const username = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const { beautyId } = useParams();
   const [image, setImage] = useState("");
@@ -57,7 +57,7 @@ const BeautyProductsInfo = () => {
       if (datad.data.cartId == null) {
         const cart = {
           productId: productsInfo.beautyId,
-          userName: username,
+          email: email,
           brandName: productsInfo.brandName,
           productName: productsInfo.productName,
           logoImg: productsInfo.logoImg,
@@ -74,7 +74,7 @@ const BeautyProductsInfo = () => {
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
-            toast.success("Item added successfully",{theme:"dark"});
+            toast.success("Item added successfully", { theme: "dark" });
           }).catch((err) => {
             if (err.response.status === 401) {
               console.log(err.response.data)
@@ -83,13 +83,13 @@ const BeautyProductsInfo = () => {
             }
           });
         } else {
-          toast.warning(" products Left",{theme:"dark"});
+          toast.warning(" products Left", { theme: "dark" });
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
-        await CartService.updateQuantity(datad.data.cartId, username, qty).then(() => {
-          toast.success("Cart contains " + qty + " " + datad.data.productName,{theme:"dark"});
+        await CartService.updateQuantity(datad.data.cartId, email, qty).then(() => {
+          toast.success("Cart contains " + qty + " " + datad.data.productName, { theme: "dark" });
         }).catch((err) => {
           if (err.response.status === 401) {
             console.log(err.response.data)

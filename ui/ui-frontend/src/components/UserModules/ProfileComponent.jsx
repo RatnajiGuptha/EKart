@@ -8,9 +8,8 @@ import { useNavigate } from "react-router-dom";
 import ChangePassword from "../SecurityModules/ChangePassword";
 
 const ProfileComponent = () => {
-  const userName = localStorage.getItem('username');
+  const email = localStorage.getItem('email');
   const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
   const [contactNumber, setContactNumber] = useState('');
 
   const [displayProfile, setDisplayProfile] = useState(true);
@@ -22,32 +21,30 @@ const ProfileComponent = () => {
 
   useEffect(() => {
 
-    SecurityService.getUserInfo(userName).then((response) => {
+    SecurityService.getUserInfo(email).then((response) => {
       setFullName(response.data.fullName)
-      setEmail(response.data.email)
       setContactNumber(response.data.contactNumber)
-
       console.log(response.data)
     })
-  }, [userName]);
+  }, [email]);
 
   const validateForm = async () => {
     let valid = true;
     const newError = {};
 
 
-    const userEmailExists = await SecurityService.getUserByEmail(email);
-    console.log("email =", userEmailExists.data);
-    if (!email || !email.trim()) {
-      newError.email = "Email is required";
-      valid = false;
-    } else if (userEmailExists.data !== null) {
-      newError.email = "Email address already exists";
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newError.email = "Invalid Email address";
-      valid = false;
-    }
+    // const userEmailExists = await SecurityService.getUserByEmail(email);
+    // console.log("email =", userEmailExists.data);
+    // if (!email || !email.trim()) {
+    //   newError.email = "Email is required";
+    //   valid = false;
+    // } else if (userEmailExists.data !== null) {
+    //   newError.email = "Email address already exists";
+    //   valid = false;
+    // } else if (!/\S+@\S+\.\S+/.test(email)) {
+    //   newError.email = "Invalid Email address";
+    //   valid = false;
+    // }
 
     const contactNumberExists = await SecurityService.getUserByContactNumber(contactNumber);
     console.log(contactNumberExists.data);
@@ -91,7 +88,7 @@ const ProfileComponent = () => {
     if (await validateForm()) {
       setDisplayProfile(true)
       setEditProfile(false)
-      SecurityService.updateUserByUserName(userName, fullName, email, contactNumber).then((response) => {
+      SecurityService.updateUserByemail(email, fullName, email, contactNumber).then((response) => {
         console.log(response.data)
       }).catch((err) => {
         if (err.response.status === 401) {
@@ -102,10 +99,8 @@ const ProfileComponent = () => {
       })
       window.location.reload(false)
     }
-    console.log(userName, fullName, email, contactNumber);
+    console.log(email, fullName, email, contactNumber);
   };
-
-
 
   const cancelChanges = (e) => {
     window.location.reload(false)
@@ -121,8 +116,6 @@ const ProfileComponent = () => {
         {displayProfile && <div>
           <form className="myprofile-profile-form">
             <h2> My Profile</h2>
-            <h6>User Name</h6>
-            <p>{userName}</p>
 
             <h6>Full Name</h6>
             <p>{fullName}</p>
@@ -138,7 +131,6 @@ const ProfileComponent = () => {
                 change password
               </button>
             </div>
-            {/* {showChangepassword && <Changepassword />} */}
           </form></div>}
         {
           editProfile &&
@@ -149,7 +141,7 @@ const ProfileComponent = () => {
               {errors.fullName && <span>{errors.fullName}</span>}
             </label>
             <label>Email
-              <input type="text" name="email" value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter email" />
+              <input type="text" name="email" value={email} placeholder="Enter email" />
               {errors.email && <span>{errors.email}</span>}
             </label>
 
@@ -159,7 +151,7 @@ const ProfileComponent = () => {
             </label>
             <div className="myprofile-profile-form-buttons">
               <button className="btn btn-success saveProfile" onClick={(e) => { saveUserProfile(e); }}>save</button>
-              <button className="btn btn-warning cancelChanges" onClick={(e) => { cancelChanges(e); }}>cancel</button>
+              <button className="btn btn-warning cancelChanges" onClick={(e) => { cancelChanges(e); }}>Back</button>
             </div>
           </form>
         }
@@ -168,7 +160,7 @@ const ProfileComponent = () => {
           <form className="myprofile-profile-form">
             <h2> My Profile </h2>
 
-              <ChangePassword />
+            <ChangePassword />
 
           </form>
 

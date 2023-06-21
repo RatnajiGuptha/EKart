@@ -110,14 +110,14 @@ const InvoiceComponent = () => {
                         <div>
                         </div>
                         <div className="saved-card">
-                            <p>You have saved <span> ₹ {discountPrice}/-</span> </p>
+                            <p>You have saved <span> ₹ {discountPrice*orderss.totalAmount}/-</span> </p>
                             <h6>Thank you for Shopping</h6>
                         </div>
                         <div className="price-details">
                             <ul className="list-unstyled">
-                                <li>Total price: ₹ <span>{orderss.price + discountPrice}/-</span></li>
+                                <li>Total price: ₹ <span>{orderss.totalAmount}/-</span></li>
                                 <li>Promo Code: <span>{promoCode}</span></li>
-                                <li>Discount amount: ₹ <span>{discountPrice}/-</span></li>
+                                <li>Discount amount: ₹ <span>{discountPrice*orderss.totalAmount}/-</span></li>
                                 <li>Grand Total: ₹ <span>{orderss.price}/-</span></li>
                             </ul>
                         </div>

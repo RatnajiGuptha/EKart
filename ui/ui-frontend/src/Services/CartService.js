@@ -24,6 +24,14 @@ export const CartService = {
     });
     return res;
   },
+  
+  async getCartItemsByEmail(email) {
+    const res = await authenticateApi.request({
+      url: `/api/cart/getByEmail/${email}`,
+      method: "GET",
+    });
+    return res;
+  },
 
   async addItemsToCart(cart) {
     const res = await authenticateApi.request({

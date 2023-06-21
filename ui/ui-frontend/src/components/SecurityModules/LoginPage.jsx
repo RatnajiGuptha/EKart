@@ -7,16 +7,16 @@ import { ForgotPassword } from "../SecurityModules/ForgotPassword";
 
 function LoginPage() {
     const navigate = useNavigate();
-    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState("");
 
     const handleLogin = (e) => {
         e.preventDefault();
-        SecurityService.loginUser({ userName, password }).then((response) => {
+        SecurityService.loginUser({ email, password }).then((response) => {
             const token = response.data.token;
             localStorage.setItem('token', token);
-            localStorage.setItem('username', userName);
+            localStorage.setItem('email', email);
             navigate("/");
             window.location.reload(false);
             console.log(token);
@@ -30,17 +30,16 @@ function LoginPage() {
                 }
             })
 
-        SecurityService.getUserInfo(userName).then((res) => {
+        SecurityService.getUserInfo(email).then((res) => {
             let i = res.data;
             console.log(i);
             localStorage.setItem("role", i.roles);
             localStorage.setItem("name", i.fullName);
-            localStorage.setItem("userEmail", i.email);
         })
     }
 
-    const handleUserName = (e) => {
-        setUserName(e.target.value);
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
     }
 
     const handlePassword = (e) => {
@@ -50,8 +49,8 @@ function LoginPage() {
     return (
         <div className="login-page">
             <div className='forms' >
-                <label >  User Name
-                    <input type="text" name="userName" value={userName} onChange={handleUserName} placeholder="Enter a username" />
+                <label >  Email
+                    <input type="text" name="email" value={email} onChange={handleEmail} placeholder="Enter a registred mail address" />
                 </label>
                 <label >   Password
                     <input type="password" name="password" value={password} onChange={handlePassword} placeholder="Enter a password" />
@@ -61,7 +60,7 @@ function LoginPage() {
                     <button type='submit' className='login-button' onClick={handleLogin} >  Login </button>
                     <Link to="/registration">
                         <button className='signup-button'> Sign Up</button>
-                    </Link>    
+                    </Link>
                 </div>
 
                 <p style={{ fontStyle: 'italic' }}><div className='d-flex'><div>Forgot password?</div><div><ForgotPassword /></div></div></p>

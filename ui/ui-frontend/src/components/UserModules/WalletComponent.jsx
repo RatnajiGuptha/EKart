@@ -5,13 +5,13 @@ import UpdateWalletComponent from "./UpdateWalletComponent";
 import "../../StyleSheets/Wallet.css";
 const WalletComponent = () => {
   const [balance, setBalance] = useState(0);
-  const userName = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
 
   const navigate = useNavigate("");
   // console.log(amount);
 
   useEffect(() => {
-    UserBalanceService.getUserBalance(userName)
+    UserBalanceService.getUserBalance(email)
       .then((Response) => {
         setBalance(Response.data);
         // localStorage.setItem('balance',Response.data);
@@ -24,7 +24,7 @@ const WalletComponent = () => {
           localStorage.clear();
         }
       });
-  }, [userName, navigate]);
+  }, [email, navigate]);
 
   return (
     <div className="wallet-container">

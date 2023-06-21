@@ -7,9 +7,10 @@ import AddressSelectionCompoonent from './AddressSelectionCompoonent';
 import "../../StyleSheets/Checkout.css";
 
 const CheckoutComponent = () => {
-    var { userName, addressId, coupon } = useParams();
+    const email = localStorage.getItem("email");
+    var { addressId, coupon } = useParams();
 
-    console.log(userName);
+    console.log(email);
     console.log(addressId);
     const navigate = useNavigate();
     const [purchaseOrder, setPurchaseOrder] = useState([]);
@@ -23,7 +24,7 @@ const CheckoutComponent = () => {
     console.log(addressList)
 
     useEffect(() => {
-        UserBalanceService.getUserBalance(userName).then((Response) => {
+        UserBalanceService.getUserBalance(email).then((Response) => {
             setBalance(Response.data);
             console.log("Balance", Response.data);
         }).catch((err) => {
@@ -34,7 +35,7 @@ const CheckoutComponent = () => {
             }
         });
 
-        AddressService.getAllAddress(userName).then((Response) => {
+        AddressService.getAllAddress(email).then((Response) => {
             setAddressList(Response.data);
             console.log(Response.data);
             setDefaultAddId(Response.data[0].addressId);
@@ -70,17 +71,16 @@ const CheckoutComponent = () => {
                 }
             })
         }
-    }, [userName, addressId, defaultAddId, navigate]);
+    }, [email, addressId, defaultAddId, navigate]);
 
-    const Email = localStorage.getItem("userEmail");
-    console.log("email", Email);
+    console.log("email", email);
     console.log(address.addressId)
 
     const paymentFromCart = async () => {
         if (addressId === undefined) {
             addressId = defaultAddId;
         }
-        await OrderService.createOrderForCart(userName, address.addressId, coupon, Email).then((Response) => {
+        await OrderService.createOrderForCart(address.addressId, coupon, email).then((Response) => {
             setPurchaseOrder(Response.data);
             console.log(purchaseOrder);
             return Response.data;
@@ -118,7 +118,7 @@ const CheckoutComponent = () => {
                                     }
                                 </div>
                                 <div>
-                                    <AddressSelectionCompoonent userName={userName} promoCode={coupon} />
+                                    <AddressSelectionCompoonent email={email} promoCode={coupon} />
                                 </div>
                             </div>
                         </div>
