@@ -12,8 +12,7 @@ spring:
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
-          - Path= /api/accessoriesProducts/getAllAccessoriesProduct
-          
+          - Path= /api/accessoriesProducts/getAllAccessoriesProduct         
           
         - id : inventory-service
           uri : http://localhost:8200

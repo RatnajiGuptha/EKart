@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import jakarta.validation.constraints.Email;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+//import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,8 @@ import com.ekart.order.service.OrderService;
 @RestController
 @RequestMapping("/api")
 public class OrderController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
 	@Autowired
 	private OrderService orderService;
@@ -80,18 +83,23 @@ public class OrderController {
 		orderRequestDTO.setSellerName(sellerName);
 		orderRequestDTO.setPrice(amount);
 		orderRequestDTO.setAddressId(addressId);
+		
+		LOGGER.info("Creating order for user name {} with email {} for address id {}",userName,email,addressId);
+		
 		return orderService.createOrders(orderRequestDTO);
 
 	}
 
 	@GetMapping("/getOrders")
 	public List<PurchaseOrder> getAllOrders() {
+		LOGGER.info("Returns all orders");
 		return orderService.fetchOrders();
 	}
 
 
 	@GetMapping("/getOrders/{Id}")
 	public PurchaseOrder getOrderById(@PathVariable UUID Id) {
+		LOGGER.info("Return order by id {}");
 		return orderService.fetchOrderById(Id);
 	}
 

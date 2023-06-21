@@ -2,6 +2,8 @@ package com.ekart.inventory.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import com.ekart.inventory.service.ElectronicsService;
 @RestController
 @RequestMapping("/api/electronicsProducts")
 public class ElectronicsController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ElectronicsController.class);
 
 	@Autowired
 	private ElectronicsService electronicsService;
@@ -27,6 +31,7 @@ public class ElectronicsController {
 	@PostMapping("/add")
 	public ResponseEntity<String> saveElectronics(@RequestBody ElectronicsProducts product) {
 		electronicsService.saveElectronics(product);
+		LOGGER.info("Adding single electronic products into database");
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Electronics product added");
 	}
 
@@ -35,18 +40,21 @@ public class ElectronicsController {
 		for (ElectronicsProducts prod : products) {
 			electronicsService.saveElectronics(prod);
 		}
+		LOGGER.info("Adding multiple electronic products into database");
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Electronic products added");
 	}
 
 	@GetMapping("/getAllElectronics")
 	public ResponseEntity<List<ElectronicsProducts>> getElectronics() {
 		List<ElectronicsProducts> electronicsProducts = electronicsService.fetchAllElectronics();
+		LOGGER.info("Returning all electronic products");
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProducts);
 	}
 
 	@GetMapping("/getElectronicsByType/{type}")
 	public ResponseEntity<List<ElectronicsProducts>> getElectronicsByType(@PathVariable ElectronicsTypes type) {
 		List<ElectronicsProducts> electronicsProductsByType = electronicsService.fetchByElectronicsType(type);
+		LOGGER.info("Returning electronic products by type {}",type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProductsByType);
 	}
 
@@ -54,12 +62,14 @@ public class ElectronicsController {
 	public ResponseEntity<ElectronicsProducts> getElectronicsByType(@PathVariable ElectronicsTypes type,
 			@PathVariable int electronicsId) {
 		ElectronicsProducts electronicsProductsById = electronicsService.fetchByElectronicsId(electronicsId);
+		LOGGER.info("Returning electronic products by type {} and id {}",type,electronicsId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProductsById);
 	}
 
 	@GetMapping("/getElectronicsById/{electronicsId}")
 	public ResponseEntity<ElectronicsProducts> getElectronicsById(@PathVariable int electronicsId) {
 		ElectronicsProducts electronicsProductsById = electronicsService.fetchByElectronicsId(electronicsId);
+		LOGGER.info("Returning electronic products by id {}",electronicsId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProductsById);
 	}
 
@@ -69,11 +79,13 @@ public class ElectronicsController {
 
 		electronicsProducts.setQty(electronicsProducts.getQty() - quantity);
 		electronicsService.saveElectronics(electronicsProducts);
+		LOGGER.info("Updated the quantity for id {}",prodId);
 	}
 
 	@GetMapping("/getElectronicsBySellerName/sellerName/{sellerName}")
 	public ResponseEntity<List<ElectronicsProducts>> getElectronicsBySellerName(@PathVariable String sellerName) {
 		List<ElectronicsProducts> electronicsProducts = electronicsService.GetElectronicsBySellerName(sellerName);
+		LOGGER.info("Returning all electronic products by seller name {}",sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProducts);
 	}
 	
@@ -99,13 +111,14 @@ public class ElectronicsController {
         updateElectronicsProducts.setProductImg5(electronicsProducts.getProductImg5());
         
         electronicsService.saveSellerElectronicProducts(updateElectronicsProducts);
-
+        LOGGER.info("Updated electronic products for id {}",electronicsId);
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateElectronicsProducts);
     }
 	
 	@GetMapping("/getElectronicsBySellerNameAndType/sellerName/{sellerName}/type/{type}")
 	public ResponseEntity<List<ElectronicsProducts>> getElectronicsBySellerNameAndType(@PathVariable String sellerName,@PathVariable ElectronicsTypes type) {
 		List<ElectronicsProducts> electronicsProducts = electronicsService.GetElectronicsBySellerNameAndType(sellerName,type);
+		LOGGER.info("Returning all electronic products by type {} and seller name {}",type,sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(electronicsProducts);
 	}
 

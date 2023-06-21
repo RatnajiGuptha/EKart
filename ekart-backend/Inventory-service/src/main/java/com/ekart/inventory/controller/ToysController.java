@@ -2,6 +2,8 @@ package com.ekart.inventory.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ import com.ekart.inventory.service.ToysService;
 @RestController
 @RequestMapping("/api/Toys")
 public class ToysController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ToysController.class);
 
 	@Autowired
 	private ToysService toysService;
@@ -29,26 +33,28 @@ public class ToysController {
 		for (Toys toys : toysList) {
 			toysService.addToys(toys);
 		}
+		LOGGER.info("Adding multiple toy products into database");
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Added multiple toys");
 	}
 
 	@PostMapping("/add")
 	public ResponseEntity<String> saveToys(@RequestBody Toys toys) {
 		String response = toysService.addToys(toys);
+		LOGGER.info("Adding a toy product into database");
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
 	}
 
 	@GetMapping("/getAllToys")
 	public ResponseEntity<List<Toys>> fetchAllToys() {
 		List<Toys> toysList = toysService.getAllToys();
-
+		LOGGER.info("Returning all toy products");
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toysList);
 	}
 
 	@GetMapping("/getToysById/{id}")
 	public ResponseEntity<Toys> fetchByToyId(@PathVariable int id) {
 		Toys toy = toysService.getToyById(id);
-
+		LOGGER.info("Returning toy products by id {}",id);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toy);
 	}
 
@@ -58,12 +64,13 @@ public class ToysController {
 		Toys toys = toysService.getToyById(prodId);
 		toys.setQty(toys.getQty() - quantity);
 		toysService.addToys(toys);
-
+		LOGGER.info("Update the quantity for id {}",prodId);
 	}
 
 	@GetMapping("/getToysBySellerName/sellerName/{sellerName}")
 	public ResponseEntity<List<Toys>> getToysBySellerName(@PathVariable String sellerName) {
 		List<Toys> toys = toysService.GetToysBySellerName(sellerName);
+		LOGGER.info("Return all toys by seller name {}",sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(toys);
 	}
 
@@ -90,7 +97,7 @@ public class ToysController {
 		updateToys.setProductImg5(toys.getProductImg5());
 
 		toysService.saveSellerToys(updateToys);
-
+		LOGGER.info("Update seller toys for id {}",toyId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateToys);
 	}
 
