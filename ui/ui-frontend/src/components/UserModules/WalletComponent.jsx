@@ -8,13 +8,11 @@ const WalletComponent = () => {
   const email = localStorage.getItem("email");
 
   const navigate = useNavigate("");
-  // console.log(amount);
 
   useEffect(() => {
     UserBalanceService.getUserBalance(email)
       .then((Response) => {
         setBalance(Response.data);
-        // localStorage.setItem('balance',Response.data);
         console.log("Balance", Response.data);
       })
       .catch((err) => {

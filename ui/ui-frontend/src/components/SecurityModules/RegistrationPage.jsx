@@ -4,6 +4,7 @@ import "../../StyleSheets/Login.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserBalanceService } from "../../Services/UserBalanceService";
 function Registrationpage() {
 
   const [registerData, setRegisterData] = useState({
@@ -75,6 +76,10 @@ function Registrationpage() {
       SecurityService.addUser(registerData).then((res) => {
         console.log(res.data);
         toast.success("registered successfully");
+
+        UserBalanceService.addMoneyTowallet({ email: registerData.email, price: 0 }).then((res) => {
+          console.log(res.data);
+        })
       });
     }
   };

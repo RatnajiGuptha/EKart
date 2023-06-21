@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "../../StyleSheets/Home.css";
 
 function HeaderComponent() {
-    const username = localStorage.getItem('username');
+    const name = localStorage.getItem('name');
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
@@ -23,7 +23,7 @@ function HeaderComponent() {
     return (
         <Navbar className="navbar navbar-dark bg-dark" expand="lg">
             <Container>
-                <Navbar.Brand> E-Kart </Navbar.Brand>
+                <Navbar.Brand href="/"> E-Kart </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav " />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Container className="d-flex flex-row justify-content-end">
@@ -39,7 +39,7 @@ function HeaderComponent() {
                                 <NavDropdown.Item href="/listFashionProducts">Fashion</NavDropdown.Item>
                             </NavDropdown>
                             {localStorage.getItem("token") ?
-                                <NavDropdown title={<span><FaUser className="icon" />{" "}{username}</span>} id="basic-nav-dropdown">
+                                <NavDropdown title={<span><FaUser className="icon" />{" "}{name}</span>} id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item></NavDropdown>
                                 : <Nav.Link href="/login" onClick={handleLogin}><FaSignInAlt className="icon" />{" "} Login</Nav.Link>}
                         </Nav>

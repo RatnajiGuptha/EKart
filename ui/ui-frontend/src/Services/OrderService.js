@@ -29,13 +29,6 @@ export const OrderService = {
 
     },
 
-    async getByUserName(userName) {
-        const res = await authenticateApi.request({
-            url: `/api/getByUserName/${userName}`,
-            method: "GET"
-        })
-        return res;
-    },
 
     async generateOtp(email) {
         const res = await api.request({
@@ -43,7 +36,10 @@ export const OrderService = {
             method: "GET",
         });
         return res;
-    }
+    },
+
+
+   
 
 }
 

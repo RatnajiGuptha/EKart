@@ -30,17 +30,9 @@ export const SecurityService = {
         return res;
     },
 
-    async getUserByUsername(username) {
+    async getUserInfo(email) {
         const res = await api.request({
-            url: `getUserName/${username}`,
-            method: 'GET',
-        });
-        return res;
-    },
-
-    async getUserInfo(username) {
-        const res = await api.request({
-            url: `/getUserInfo/${username}`,
+            url: `/getUserInfo/${email}`,
             method: 'GET',
         });
         return res;
@@ -62,26 +54,26 @@ export const SecurityService = {
         return res;
     },
 
-    async updateUserByUserName(username, fullName, email, contactNumber) {
+    async updateUserByUserName(fullName, email, contactNumber) {
         const res = await authenticateApi.request({
-            url: `/updateUserData/${username}/${fullName}/${email}/${contactNumber}`,
+            url: `/updateUserData/${fullName}/${email}/${contactNumber}`,
             method: 'PUT',
         });
         return res;
     },
 
-    async updatePasswordByUsername(username,password){
+    async updatePasswordByUsername(username, password) {
         const res = await authenticateApi.request({
-            url:`/updatePasswordByUserName/${username}/${password}`,
-            method:'PUT'
+            url: `/updatePasswordByUserName/${username}/${password}`,
+            method: 'PUT'
         })
         return res;
     },
 
-    async updatePasswordByEmail(email,password){
+    async updatePasswordByEmail(email, password) {
         const res = await api.request({
-            url:`/updatePasswordByEmail/${email}/${password}`,
-            method:'PUT'
+            url: `/updatePasswordByEmail/${email}/${password}`,
+            method: 'PUT'
         })
         return res;
     }

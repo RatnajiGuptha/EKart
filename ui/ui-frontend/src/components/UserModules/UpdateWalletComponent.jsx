@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  MDBBtn,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-} from 'mdb-react-ui-kit';
+import { MDBBtn, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, } from 'mdb-react-ui-kit';
 import { UserBalanceService } from '../../Services/UserBalanceService';
 
 export default function UpdateWalletComponent(props) {
@@ -48,10 +39,8 @@ export default function UpdateWalletComponent(props) {
               <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>
-              <input
-                type="number"
-                onChange={(e) => setUpdatedBalance(e.target.value)}
-              />
+              <input type="number"
+                onChange={(e) => setUpdatedBalance(e.target.value)} />
             </MDBModalBody>
             <MDBModalFooter>
               <MDBBtn color='secondary' onClick={toggleShow}>

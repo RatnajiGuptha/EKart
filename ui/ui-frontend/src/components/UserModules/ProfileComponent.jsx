@@ -1,7 +1,5 @@
-
 import React, { useState } from "react";
 import { useEffect } from "react";
-// import Changepassword from "./Changepassword";
 import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +8,7 @@ import ChangePassword from "../SecurityModules/ChangePassword";
 const ProfileComponent = () => {
   const email = localStorage.getItem('email');
   const [fullName, setFullName] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
   const [contactNumber, setContactNumber] = useState('');
 
   const [displayProfile, setDisplayProfile] = useState(true);
@@ -23,6 +22,7 @@ const ProfileComponent = () => {
 
     SecurityService.getUserInfo(email).then((response) => {
       setFullName(response.data.fullName)
+      setEmailAddress(response.data.email)
       setContactNumber(response.data.contactNumber)
       console.log(response.data)
     })
@@ -33,18 +33,18 @@ const ProfileComponent = () => {
     const newError = {};
 
 
-    // const userEmailExists = await SecurityService.getUserByEmail(email);
-    // console.log("email =", userEmailExists.data);
-    // if (!email || !email.trim()) {
-    //   newError.email = "Email is required";
-    //   valid = false;
-    // } else if (userEmailExists.data !== null) {
-    //   newError.email = "Email address already exists";
-    //   valid = false;
-    // } else if (!/\S+@\S+\.\S+/.test(email)) {
-    //   newError.email = "Invalid Email address";
-    //   valid = false;
-    // }
+    const userEmailExists = await SecurityService.getUserByEmail(email);
+    console.log("email =", userEmailExists.data);
+    if (!email || !email.trim()) {
+      newError.email = "Email is required";
+      valid = false;
+    } else if (userEmailExists.data !== null) {
+      newError.email = "Email address already exists";
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newError.email = "Invalid Email address";
+      valid = false;
+    }
 
     const contactNumberExists = await SecurityService.getUserByContactNumber(contactNumber);
     console.log(contactNumberExists.data);
@@ -88,7 +88,7 @@ const ProfileComponent = () => {
     if (await validateForm()) {
       setDisplayProfile(true)
       setEditProfile(false)
-      SecurityService.updateUserByemail(email, fullName, email, contactNumber).then((response) => {
+      SecurityService.updateUserByemail(fullName, emailAddress, contactNumber).then((response) => {
         console.log(response.data)
       }).catch((err) => {
         if (err.response.status === 401) {
@@ -99,7 +99,7 @@ const ProfileComponent = () => {
       })
       window.location.reload(false)
     }
-    console.log(email, fullName, email, contactNumber);
+    console.log(fullName, emailAddress, contactNumber);
   };
 
   const cancelChanges = (e) => {
@@ -141,7 +141,7 @@ const ProfileComponent = () => {
               {errors.fullName && <span>{errors.fullName}</span>}
             </label>
             <label>Email
-              <input type="text" name="email" value={email} placeholder="Enter email" />
+              <input type="text" name="email" value={emailAddress} onChange={(e) => { setEmailAddress(e.target.value) }} placeholder="Enter email" />
               {errors.email && <span>{errors.email}</span>}
             </label>
 
