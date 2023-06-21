@@ -10,7 +10,7 @@ import com.ekart.order.entity.PromoCodes;
 @Service
 public interface PromoCodesService {
 	
-	public int getDiscountPrice(@PathVariable String promoCode);
+	public double getDiscountPrice(@PathVariable String promoCode);
 	
 	public PromoCodes savePromocode(PromoCodes promoCode);
 	

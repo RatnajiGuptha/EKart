@@ -16,10 +16,10 @@ public class PromoCodesServiceImpl implements PromoCodesService{
 	private PromoCodesRepository promoRepo;
 
 	@Override
-	public int getDiscountPrice(String promoCode) {
+	public double getDiscountPrice(String promoCode) {
 		PromoCodes promo = new PromoCodes();
 		promo=promoRepo.findByPromoCode(promoCode);
-		int discountPrice = promo.getDiscountPrice();
+		double discountPrice = promo.getDiscountPrice();
 		return discountPrice;
 	}
 

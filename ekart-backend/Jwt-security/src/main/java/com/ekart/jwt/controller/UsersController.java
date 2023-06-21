@@ -19,20 +19,9 @@ public class UsersController {
 
 	@Autowired
 	private CustomerRepo customerRepo;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
-
-	@GetMapping("/getUserName/{userName}")
-	public ResponseEntity<?> getUserByUserName(@PathVariable String userName) {
-		Optional<CustomerEntity> user = customerRepo.findByUserName(userName);
-		if (user.isEmpty()) {
-			return ResponseEntity.ok("null");
-		} else {
-			System.out.println(user.get().getUserName());
-			return ResponseEntity.ok(user.get().getUserName());
-		}
-	}
 
 	@GetMapping("/getUserByMail/{email}")
 	public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
@@ -45,16 +34,16 @@ public class UsersController {
 		}
 	}
 
-
-	@GetMapping("/getUserInfo/{userName}")
-	public ResponseEntity<?> getUserByUserInfo(@PathVariable String userName) {
-		Optional<CustomerEntity> user = customerRepo.findByUserName(userName);
+	@GetMapping("/getUserInfo/{email}")
+	public ResponseEntity<?> getUserByUserInfo(@PathVariable String email) {
+		Optional<CustomerEntity> user = customerRepo.findByEmail(email);
 		return ResponseEntity.ok(user);
 	}
-	
-	@PutMapping("/updateUserData/{userName}/{fullName}/{email}/{contactNumber}")
-	public void updateUser(@PathVariable String userName,@PathVariable String fullName,@PathVariable String email,@PathVariable String contactNumber) {
-		CustomerEntity customer =customerRepo.findByUserName(userName).get();
+
+	@PutMapping("/updateUserData/{fullName}/{email}/{contactNumber}")
+	public void updateUser(@PathVariable String fullName, @PathVariable String email,
+			@PathVariable String contactNumber) {
+		CustomerEntity customer = customerRepo.findByEmail(email).get();
 		customer.setFullName(fullName);
 		customer.setEmail(email);
 		customer.setContactNumber(contactNumber);
@@ -71,31 +60,16 @@ public class UsersController {
 			return ResponseEntity.ok(user.get().getContactNumber());
 		}
 	}
-	
-	@PutMapping("/updatePasswordByUserName/{userName}/{password}")
-	public ResponseEntity<?> updatePassword(@PathVariable String userName, @PathVariable String password){
-		
-		CustomerEntity customer = customerRepo.findByUserName(userName).get();
-		
-		customer.setPassword(encoder.encode(password));
-		
-		customerRepo.save(customer);
-		
-		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("updated password");
-		
-	}
-	
+
 	@PutMapping("/updatePasswordByEmail/{email}/{password}")
 	public ResponseEntity<?> updatePasswordByEmail(@PathVariable String email, @PathVariable String password) {
 
 		CustomerEntity customer = customerRepo.findByEmail(email).get();
-
 		customer.setPassword(encoder.encode(password));
-
 		customerRepo.save(customer);
 
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("updated password");
 
 	}
-	
+
 }

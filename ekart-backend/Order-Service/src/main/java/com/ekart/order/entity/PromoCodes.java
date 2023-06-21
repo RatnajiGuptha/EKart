@@ -18,7 +18,7 @@ public class PromoCodes {
 	@Id
 	private int promoCodeId;
 	private String promoCode;
-	private int discountPrice;
+	private double discountPrice;
 	private String status;
 
 }

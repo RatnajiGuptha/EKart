@@ -22,8 +22,6 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderStatusPublisher orderStatusPublisher;
 
-
-
 	@Override
 	public PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO) {
 		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
@@ -42,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 	private PurchaseOrder convertDtoToEntity(OrderRequestDTO dto) {
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		purchaseOrder.setPurchaseOrderId(UUID.randomUUID());
-		purchaseOrder.setUserName(dto.getUserName());
+		
 		purchaseOrder.setProductIds(dto.getProductIds());
 		purchaseOrder.setQty(dto.getQty());
 		purchaseOrder.setCategoryNames(dto.getCategoryNames());
@@ -55,10 +53,10 @@ public class OrderServiceImpl implements OrderService {
 		purchaseOrder.setSellerName(dto.getSellerName());
 		purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
 		purchaseOrder.setEmail(dto.getEmail());
-	
+		purchaseOrder.setTotalAmount(dto.getTotalPrice());
+
 		purchaseOrder.setAddress(dto.getAddress());
 		purchaseOrder.setPromoCode(dto.getPromoCode());
-
 
 		return purchaseOrder;
 	}
@@ -66,6 +64,13 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public PurchaseOrder fetchOrderById(UUID id) {
 		return orderRepository.findById(id).get();
+	}
+
+	
+	@Override
+	public List<PurchaseOrder> fetchOrderByEmail(String email) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByEmail(email);
 	}
 
 }

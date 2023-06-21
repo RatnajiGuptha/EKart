@@ -410,6 +410,13 @@ spring:
           - Path=/api/createOrder/**
           filters:
             - AuthenticationFilter
+            
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/getByUserName/**
+          filters:
+            - AuthenticationFilter
           
         - id : order-service
           uri : http://localhost:8300
@@ -438,6 +445,15 @@ spring:
           - Path=/api/cart/add
           filters:
             - AuthenticationFilter
+            
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/cart/getByEmail/**
+          filters:
+            - AuthenticationFilter
+            
+                  
         
         - id : order-service
           uri : http://localhost:8300
@@ -470,6 +486,15 @@ spring:
         - id : order-service
           uri : http://localhost:8300
           predicates:
+          - Path=/api/address/getAllAddressByEmail/**  
+          filters:
+            - AuthenticationFilter
+            
+            
+                    
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
           - Path=/api/generateOTP/**  
           
         - id : order-service
@@ -490,6 +515,13 @@ spring:
           uri : http://localhost:8300
           predicates:
           - Path=/api/promocodes/getDiscountPrice/**
+          filters:
+            - AuthenticationFilter
+            
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/getByEmail/**
           filters:
             - AuthenticationFilter
         
@@ -518,6 +550,20 @@ spring:
           uri : http://localhost:8083
           predicates:
           - Path=/api/userBalance/updateBalance/**
+          filters:
+            - AuthenticationFilter
+            
+        - id : payment-service
+          uri : http://localhost:8083
+          predicates:
+          - Path=/api/userBalance/updateBalanceByEmail/**
+          filters:
+            - AuthenticationFilter
+            
+        - id : payment-service
+          uri : http://localhost:8083
+          predicates:
+          - Path=/api/userBalance/getBalanceByEmail/**
           filters:
             - AuthenticationFilter
             

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class PaymentRequestDTO {
 
 	private UUID orderId;
-	private String userName;
+	
 	private String email;
 	private List<Integer> productIds;
 	private List<Integer> qty;

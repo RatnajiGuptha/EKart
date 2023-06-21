@@ -16,7 +16,7 @@ public interface CartService {
 
 	String removeCartItem(int id);
 
-    List<Cart> getByUserName(String userName);
+   
 
 	Cart getByProductId(int productId);
 
@@ -24,5 +24,9 @@ public interface CartService {
 
 	Cart getByProductCategoriesAndProductId(ProductCategories category, int productId);
 	
-	Cart getByCartIdAndUserName(int id,String userName);
+	
+
+	List<Cart> getByEmail(String email);
+
+	Cart getByCartIdAndEmail(int id, String email);
 }

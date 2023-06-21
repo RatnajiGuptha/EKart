@@ -39,10 +39,12 @@ public class AddressServiceImpl implements AddressService {
 		return "address deleted successfully";
 	}
 
+	
+
 	@Override
-	public List<Address> fetchByUserName(String userName) {
-		List<Address> addressList = addressRepository.findByUserName(userName);
-		return addressList;
+	public List<Address> fetchByUserNameByEmail(String email) {
+		
+		return addressRepository.findByEmail(email);
 	}
 
 }

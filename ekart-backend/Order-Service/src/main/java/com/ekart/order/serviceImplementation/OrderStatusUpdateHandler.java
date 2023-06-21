@@ -89,7 +89,7 @@ public class OrderStatusUpdateHandler {
 	public OrderRequestDTO convertEntityToDto(PurchaseOrder purchaseOrder) {
 		OrderRequestDTO orderRequestDTO = new OrderRequestDTO();
 		orderRequestDTO.setOrderId(purchaseOrder.getPurchaseOrderId());
-		orderRequestDTO.setUserName(purchaseOrder.getUserName());
+		
 		orderRequestDTO.setProductIds(purchaseOrder.getProductIds());
 		orderRequestDTO.setQty(purchaseOrder.getQty());
 		orderRequestDTO.setCategoryNames(purchaseOrder.getCategoryNames());
@@ -103,6 +103,7 @@ public class OrderStatusUpdateHandler {
 		orderRequestDTO.setPrice(purchaseOrder.getPrice());
 		orderRequestDTO.setAddress(purchaseOrder.getAddress());
 		orderRequestDTO.setPromoCode(purchaseOrder.getPromoCode());
+		orderRequestDTO.setTotalPrice(purchaseOrder.getTotalAmount());
 
 		return orderRequestDTO;
 	}

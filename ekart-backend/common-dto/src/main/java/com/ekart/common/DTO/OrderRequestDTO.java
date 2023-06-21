@@ -12,12 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderRequestDTO {
 	private UUID orderId;
-	private String userName;
+	
 	private String email;
 	private List<Integer> productIds;
 	private List<Integer> qty;
 	private List<ProductCategories> categoryNames;
 	private int price;
+	private double totalPrice;
 	
 	private List<Integer> priceList;
 	private List<String> productName;

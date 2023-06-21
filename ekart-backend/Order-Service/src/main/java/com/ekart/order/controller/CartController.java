@@ -18,7 +18,6 @@ import com.ekart.common.DTO.ProductCategories;
 import com.ekart.order.entity.Cart;
 import com.ekart.order.service.CartService;
 
-//@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/cart")
 public class CartController {
@@ -32,11 +31,7 @@ public class CartController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cartList);
 	}
 
-	@GetMapping("/getByUserName/{userName}")
-	public ResponseEntity<List<Cart>> fetchCartByUserName(@PathVariable String userName) {
-		List<Cart> cartList = cartService.getByUserName(userName);
-		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cartList);
-	}
+	
 
 	@GetMapping("/getByProductId/{productId}")
 	public ResponseEntity<Cart> fetchCartByProdId(@PathVariable int productId) {
@@ -66,17 +61,7 @@ public class CartController {
 
 	}
 
-	@PutMapping("/{id}/{userName}/{qty}")
-	public ResponseEntity<Cart> fetchDataByQtyAndCategoryAndUserName(@PathVariable int id,
-			@PathVariable String userName, @PathVariable int qty) {
 
-		Cart cart = cartService.getByCartIdAndUserName(id, userName);
-		cart.setQty(qty);
-		cartService.saveItemsInCart(cart);
-
-		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(cart);
-
-	}
 
 	@DeleteMapping("/deleteProductInCartByProductId/{productId}")
 	public ResponseEntity<String> deleteCartItemByProduct(@PathVariable int productId) {
@@ -98,6 +83,24 @@ public class CartController {
 	public ResponseEntity<String> deleteCartItem(@PathVariable int id) {
 		String response = cartService.removeCartItem(id);
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
+	}
+	
+	@GetMapping("/getByEmail/{email}")
+	public ResponseEntity<List<Cart>> fetchCartByEmail(@PathVariable String email) {
+		List<Cart> cartList = cartService.getByEmail(email);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cartList);
+	}
+	
+	@PutMapping("/{id}/{email}/{qty}")
+	public ResponseEntity<Cart> fetchDataByQtyAndCategoryAndEmail(@PathVariable int id,
+			@PathVariable String email, @PathVariable int qty) {
+
+		Cart cart = cartService.getByCartIdAndEmail(id,email);
+		cart.setQty(qty);
+		cartService.saveItemsInCart(cart);
+
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(cart);
+
 	}
 
 }

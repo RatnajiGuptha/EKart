@@ -36,8 +36,14 @@ public class PromoCodesController {
 	
 	@GetMapping("/getDiscountPrice/{promoCode}")
 	public ResponseEntity<?> getDiscountPrice(@PathVariable String promoCode){
+		double discountPrice;
+		if(promoCode.equals("none")) {
+			discountPrice=0;
+		}
+		else {
+			discountPrice = promoService.getDiscountPrice(promoCode);
+		}
 		
-		int discountPrice = promoService.getDiscountPrice(promoCode);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(discountPrice);
 		
 	}

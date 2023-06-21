@@ -30,11 +30,7 @@ public class AddressController {
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
 	}
 	
-	@GetMapping("/getAllAddress/{userName}")
-	public ResponseEntity<List<Address>> fetchAllAddress(@PathVariable String userName){
-		List<Address> addressList = addressService.fetchByUserName(userName);
-		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(addressList);
-	}
+	
 	
 	@DeleteMapping("/deleteAddressById/{id}")
 	public ResponseEntity<String> deleteAddressById(@PathVariable int id){
@@ -47,6 +43,13 @@ public class AddressController {
 	public ResponseEntity<Address> fetchAddressById(@PathVariable int id){
 		Address address = addressService.fetchById(id);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(address);
+	}
+	
+	
+	@GetMapping("/getAllAddressByEmail/{email}")
+	public ResponseEntity<List<Address>> fetchAllAddressbyEmail(@PathVariable String email){
+		List<Address> addressList = addressService.fetchByUserNameByEmail(email);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(addressList);
 	}
 
 	

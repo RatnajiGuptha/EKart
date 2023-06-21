@@ -26,12 +26,14 @@ public class PurchaseOrder {
 	@Id
 	private UUID purchaseOrderId;
 	private String orderDate = (new SimpleDateFormat("dd/MM/yyyy hh:mm:ss")).format(new Date());
-	private String userName;
+	
 	private String email;
 	private List<Integer> productIds;
 	private List<Integer> qty;
 	private List<ProductCategories> categoryNames;
 	private int price;
+	
+	private double totalAmount;
 
 	private List<Integer> priceList;
 	private List<String> productName;

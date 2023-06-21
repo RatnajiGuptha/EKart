@@ -31,10 +31,7 @@ public class CartServiceImpl implements CartService {
         return "Item deleted from cart";
     }
 
-    @Override
-    public List<Cart> getByUserName(String userName) {
-        return cartRepository.findByUserName(userName);
-    }
+   
 
     @Override
     public Cart getByProductId(int productId) {
@@ -51,19 +48,24 @@ public class CartServiceImpl implements CartService {
     }
 
 
-//    @Override
-//    public Cart getByProductIdAndCategorie(int productId, ProductCategories category) {
-//        return cartRepository.findByProductIdAndProductCategories(productId,category);
-//    }
+
 
 	@Override
 	public Cart getByProductCategoriesAndProductId(ProductCategories category, int productId) {
 		return cartRepository.findByProductCategoriesAndProductId(category, productId);
 	}
 
+	
 	@Override
-	public Cart getByCartIdAndUserName(int id,String userName) {
-		return cartRepository.findByCartIdAndUserName(id,userName);
+	public List<Cart> getByEmail(String email) {
+		// TODO Auto-generated method stub
+		return cartRepository.findByEmail(email);
+	}
+
+	@Override
+	public Cart getByCartIdAndEmail(int id, String email) {
+		// TODO Auto-generated method stub
+		return cartRepository.findByCartIdAndEmail(id,email);
 	}
 
 	

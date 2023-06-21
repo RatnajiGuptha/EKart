@@ -25,19 +25,25 @@ public class UserBalanceController {
         return userBalanceRepository.findAll();
     }
 
-    @GetMapping("/getBalanceByUserName/{userName}")
-    public int getBalanceByName(@PathVariable String userName){
-        UserBalance userBalance = userBalanceRepository.findByUserName(userName);
+    
+    
+    @GetMapping("/getBalanceByEmail/{email}")
+    public int getBalanceByEmail(@PathVariable String email){
+        UserBalance userBalance = userBalanceRepository.findByEmail(email);
 
         return userBalance.getPrice();
     }
     
-    @PutMapping("/updateBalance/{userName}/{amount}")
-    public  String updateUserBalance(@PathVariable String userName,@PathVariable int amount){
-        UserBalance ub = userBalanceRepository.findByUserName(userName);
+    @PutMapping("/updateBalanceByEmail/{email}/{amount}")
+    public  String updateUserBalanceByEmail(@PathVariable String email,@PathVariable int amount){
+        UserBalance ub = userBalanceRepository.findByEmail(email);
         ub.setPrice(ub.getPrice() + amount);
         userBalanceRepository.save(ub);
         return "user Balance Updated";
     }
-
+    
+    
+    
+    
+   
 }

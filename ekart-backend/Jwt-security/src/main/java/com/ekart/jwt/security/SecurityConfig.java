@@ -57,7 +57,7 @@ public class SecurityConfig {
 		security.csrf().disable()			
 		.authorizeHttpRequests()
 				.requestMatchers("/login", "/addUser", "/getUserName/{userName}", "/getUserByMail/{email}",
-						"/addSeller", "/getUserByContactNumber/**", "/getUserInfo/{userName}",
+						"/addSeller", "/getUserByContactNumber/**", "/getUserInfo/{email}",
 						"/updateUserData/{userName}/{fullName}/{email}/{contactNumber}",
 						"/updatePasswordByUserName/${username}/${password}",
 						"/updatePasswordByEmail/{email}/{password}")

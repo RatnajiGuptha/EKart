@@ -21,7 +21,8 @@ public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartId;
-	private String userName;
+	
+	private String email;
 
 	private int productId;
 	@Enumerated(EnumType.STRING)

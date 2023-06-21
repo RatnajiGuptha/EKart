@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserBalanceRepository extends JpaRepository<UserBalance,Integer> {
 	
-    UserBalance findByUserName(String userName);
+
+	UserBalance findByEmail(String email);
 }
