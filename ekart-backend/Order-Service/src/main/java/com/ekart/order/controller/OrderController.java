@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,8 @@ import com.ekart.order.service.PromoCodesService;
 @RestController
 @RequestMapping("/api")
 public class OrderController {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
 	@Autowired
 	private OrderService orderService;
@@ -113,17 +117,20 @@ public class OrderController {
 		addr.add(String.valueOf(address.getPincode()));
 
 		orderRequestDTO.setAddress(addr);
+		LOGGER.info("Creating order for user name {} with email {} for address id {}",  email, addressId);
 		return orderService.createOrders(orderRequestDTO);
 
 	}
 
 	@GetMapping("/getOrders")
 	public List<PurchaseOrder> getAllOrders() {
+		LOGGER.info("Returns all orders");
 		return orderService.fetchOrders();
 	}
 
 	@GetMapping("/getOrders/{Id}")
 	public PurchaseOrder getOrderById(@PathVariable UUID Id) {
+		LOGGER.info("Return order by id {}");
 		return orderService.fetchOrderById(Id);
 	}
 
