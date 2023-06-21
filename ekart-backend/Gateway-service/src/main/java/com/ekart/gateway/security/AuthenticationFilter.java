@@ -30,7 +30,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 	}
 
 	public static class Config {
-
 	}
 
 	@Override
@@ -49,13 +48,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 				logger.info(authHeader);
 				System.out.println(authHeader);
 				System.out.println("---------------------------------");
+				
 
 				if (authHeader != null && authHeader.startsWith("Bearer ")) {
 					authHeader = authHeader.substring(7);
 				}
 
 				if (jwtUtil.validateJwtToken(authHeader)) {
-//					return chain.filter(exchange);
 					logger.info("Token validate sucessfully");
 					return new LoggingGatewayFilterFactory().apply(new LoggingGatewayFilterFactory.Config())
 							.filter(exchange, chain);
@@ -68,8 +67,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
 				}
 			}
-//			return new LoggingGatewayFilterFactory().apply(new LoggingGatewayFilterFactory.Config()).filter(exchange,
-//					chain);
 			return null;
 		});
 	}
