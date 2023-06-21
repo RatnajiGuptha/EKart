@@ -31,4 +31,13 @@ public class UserBalanceController {
 
         return userBalance.getPrice();
     }
+    
+    @PutMapping("/updateBalance/{userName}/{amount}")
+    public  String updateUserBalance(@PathVariable String userName,@PathVariable int amount){
+        UserBalance ub = userBalanceRepository.findByUserName(userName);
+        ub.setPrice(ub.getPrice() + amount);
+        userBalanceRepository.save(ub);
+        return "user Balance Updated";
+    }
+
 }

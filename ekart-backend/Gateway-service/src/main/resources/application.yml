@@ -465,6 +465,32 @@ spring:
           - Path=/api/address/GetAddressById/**  
           filters:
             - AuthenticationFilter
+            
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/generateOTP/**  
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/promocodes/addNewPromoCode 
+          filters:
+            - AuthenticationFilter
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/promocodes/getAllPromoCodes
+          filters:
+            - AuthenticationFilter
+        
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/promocodes/getDiscountPrice/**
+          filters:
+            - AuthenticationFilter
         
         - id : payment-service
           uri : http://localhost:8083
@@ -490,7 +516,14 @@ spring:
         - id : payment-service
           uri : http://localhost:8083
           predicates:
-          - Path=/api/add
+          - Path=/api/userBalance/updateBalance/**
+          filters:
+            - AuthenticationFilter
+            
+        - id : payment-service
+          uri : http://localhost:8083
+          predicates:
+          - Path=/api/updateBalance/
           filters:
             - AuthenticationFilter
           
@@ -568,6 +601,11 @@ spring:
           uri : http://localhost:8400 
           predicates:
           - Path=/updatePasswordByUserName/**
+        
+        - id : user-service
+          uri : http://localhost:8400 
+          predicates:
+          - Path=/updatePasswordByEmail/**
        
         
       

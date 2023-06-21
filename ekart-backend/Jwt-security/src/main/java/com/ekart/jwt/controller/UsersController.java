@@ -85,4 +85,17 @@ public class UsersController {
 		
 	}
 	
+	@PutMapping("/updatePasswordByEmail/{email}/{password}")
+	public ResponseEntity<?> updatePasswordByEmail(@PathVariable String email, @PathVariable String password) {
+
+		CustomerEntity customer = customerRepo.findByEmail(email).get();
+
+		customer.setPassword(encoder.encode(password));
+
+		customerRepo.save(customer);
+
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("updated password");
+
+	}
+	
 }

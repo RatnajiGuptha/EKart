@@ -4,15 +4,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-import com.ekart.common.DTO.ProductCategories;
-import com.ekart.order.controller.CartController;
-import com.ekart.order.proxy.InventoryServiceProxy;
-import com.ekart.order.service.EmailSenderService;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ekart.common.DTO.OrderRequestDTO;
@@ -24,10 +17,12 @@ import com.ekart.order.config.OrderStatusPublisher;
 import com.ekart.order.controller.CartController;
 import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.proxy.InventoryServiceProxy;
+import com.ekart.order.service.EmailSenderService;
+
+import jakarta.mail.MessagingException;
 
 @Configuration
 public class OrderStatusUpdateHandler {
-
 
 	@Autowired
 	private OrderRepository orderRepository;
@@ -39,7 +34,6 @@ public class OrderStatusUpdateHandler {
 
 	@Autowired
 	private InventoryServiceProxy inventoryServiceProxy;
-
 
 	@Transactional
 	public void updateOrder(UUID id, Consumer<PurchaseOrder> consumer) {
@@ -82,7 +76,7 @@ public class OrderStatusUpdateHandler {
 
 			}
 			try {
-				triggerMail(id,email);
+				triggerMail(id, email);
 			} catch (MessagingException e) {
 				throw new RuntimeException(e);
 			}
@@ -107,6 +101,9 @@ public class OrderStatusUpdateHandler {
 		orderRequestDTO.setSellerName(purchaseOrder.getSellerName());
 		orderRequestDTO.setEmail(purchaseOrder.getEmail());
 		orderRequestDTO.setPrice(purchaseOrder.getPrice());
+		orderRequestDTO.setAddress(purchaseOrder.getAddress());
+		orderRequestDTO.setPromoCode(purchaseOrder.getPromoCode());
+
 		return orderRequestDTO;
 	}
 
@@ -114,11 +111,11 @@ public class OrderStatusUpdateHandler {
 	private EmailSenderService senderService;
 
 //	@EventListener(ApplicationReadyEvent.class)
-public void triggerMail(UUID id,String email) throws MessagingException {
-	senderService.sendSimpleEmail(email,
-			"Order Placed Successfully",
-			"Congratulations your order with ID : " + id + " is placed successfully and will soon deliver to you"
-					+ "\n" + "please click here " + "http://localhost:3000" +" For more information");
+	public void triggerMail(UUID id, String email) throws MessagingException {
+		senderService.sendSimpleEmail(email, "Order Placed Successfully",
+				"Congratulations your order with ID : " + id + " is placed successfully and will soon deliver to you"
+						+ "\n" + "please click here for invoice " + "http://localhost:3000/invoice/" + id
+						+ " For more information");
 
-}
+	}
 }
