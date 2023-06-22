@@ -18,12 +18,7 @@ public class UserBalanceController {
 
 	@Autowired
 	private UserBalanceRepository userBalanceRepository;
-
-	@PostMapping("/add")
-	public String saveUserBalance(@RequestBody UserBalance userBalance) {
-		userBalanceRepository.save(userBalance);
-		return "Balnce Saved";
-	}
+	
 
 	@GetMapping("/getBalanceByEmail/{email}")
 	public int getBalanceByEmail(@PathVariable String email) {

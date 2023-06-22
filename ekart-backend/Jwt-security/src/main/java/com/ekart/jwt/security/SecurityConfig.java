@@ -56,11 +56,10 @@ public class SecurityConfig {
 		security.cors();
 		security.csrf().disable()			
 		.authorizeHttpRequests()
-				.requestMatchers("/login", "/addUser", "/getUserName/{userName}", "/getUserByMail/{email}",
+				.requestMatchers("/login", "/addUser", "/getUserByMail/{email}",
 						"/addSeller", "/getUserByContactNumber/**", "/getUserInfo/{email}",
-						"/updateUserData/{userName}/{fullName}/{email}/{contactNumber}",
-						"/updatePasswordByUserName/${username}/${password}",
-						"/updatePasswordByEmail/{email}/{password}")
+						"/updateUserData/{fullName}/{email}/{contactNumber}",						
+						"/updatePasswordByEmail/{email}/{password}","/api/getUserByName/{name}")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(entryPoint)
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authenticationProvider(authenticationProvider())

@@ -34,6 +34,30 @@ public class UsersController {
 		}
 	}
 
+	@GetMapping("/getUserByContactNumber/{contactNumber}")
+	public ResponseEntity<?> getUserByContactNumber(@PathVariable String contactNumber) {
+		Optional<CustomerEntity> user = customerRepo.findByContactNumber(contactNumber);
+		if (user.isEmpty()) {
+			return ResponseEntity.ok("null");
+		} else {
+			System.out.println(user.get().getContactNumber());
+			return ResponseEntity.ok(user.get().getContactNumber());
+		}
+	}
+
+	
+	@GetMapping("/api/getUserByName/{name}")
+	public ResponseEntity<?> getUserName(@PathVariable String name) {
+		Optional<CustomerEntity> user = customerRepo.findByFullName(name);
+		if (user.isEmpty()) {
+			return ResponseEntity.ok("null");
+		} else {
+			System.out.println(user.get().getFullName());
+			return ResponseEntity.ok(user.get().getFullName());
+		}
+	}
+	
+	
 	@GetMapping("/getUserInfo/{email}")
 	public ResponseEntity<?> getUserByUserInfo(@PathVariable String email) {
 		Optional<CustomerEntity> user = customerRepo.findByEmail(email);
@@ -50,17 +74,7 @@ public class UsersController {
 		customerRepo.save(customer);
 	}
 
-	@GetMapping("/getUserByContactNumber/{contactNumber}")
-	public ResponseEntity<?> getUserByContactNumber(@PathVariable String contactNumber) {
-		Optional<CustomerEntity> user = customerRepo.findByContactNumber(contactNumber);
-		if (user.isEmpty()) {
-			return ResponseEntity.ok("null");
-		} else {
-			System.out.println(user.get().getContactNumber());
-			return ResponseEntity.ok(user.get().getContactNumber());
-		}
-	}
-
+	
 	@PutMapping("/updatePasswordByEmail/{email}/{password}")
 	public ResponseEntity<?> updatePasswordByEmail(@PathVariable String email, @PathVariable String password) {
 

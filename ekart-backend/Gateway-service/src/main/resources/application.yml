@@ -353,14 +353,7 @@ spring:
           - Path=/api/cart/getProducts
           filters:
             - AuthenticationFilter
-         
-        - id : order-service
-          uri : http://localhost:8300
-          predicates:
-          - Path=/api/cart/getByUserName/**
-          filters:
-            - AuthenticationFilter
-          
+                          
         - id : order-service
           uri : http://localhost:8300
           predicates:
@@ -402,35 +395,7 @@ spring:
           - Path=/api/cart/deleteProductInCart/**
           filters:
             - AuthenticationFilter
-          
-        - id : order-service
-          uri : http://localhost:8300
-          predicates:
-          - Path=/api/createOrder/**
-          filters:
-            - AuthenticationFilter
             
-        - id : order-service
-          uri : http://localhost:8300
-          predicates:
-          - Path=/api/getByUserName/**
-          filters:
-            - AuthenticationFilter
-          
-        - id : order-service
-          uri : http://localhost:8300
-          predicates:
-          - Path=/api/getOrders/**
-          filters:
-            - AuthenticationFilter
-          
-        - id : order-service
-          uri : http://localhost:8300
-          predicates:
-          - Path=/api/getOrders
-          filters:
-            - AuthenticationFilter
-          
         - id : order-service
           uri : http://localhost:8300
           predicates:
@@ -444,15 +409,47 @@ spring:
           - Path=/api/cart/add
           filters:
             - AuthenticationFilter
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/createOrder/**
+          filters:
+            - AuthenticationFilter
+                           
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/getOrders/**
+          filters:
+            - AuthenticationFilter
+          
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/getByEmail/**
+          filters:
+            - AuthenticationFilter
             
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/getOrders
+          filters:
+            - AuthenticationFilter
+               
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/generateOTP/**  
+          
         - id : order-service
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/getByEmail/**
           filters:
             - AuthenticationFilter
-            
-                  
+                
         
         - id : order-service
           uri : http://localhost:8300
@@ -488,13 +485,8 @@ spring:
           - Path=/api/address/getAllAddressByEmail/**  
           filters:
             - AuthenticationFilter
-            
-            
-                    
-        - id : order-service
-          uri : http://localhost:8300
-          predicates:
-          - Path=/api/generateOTP/**  
+                              
+      
           
         - id : order-service
           uri : http://localhost:8300
@@ -515,36 +507,8 @@ spring:
           predicates:
           - Path=/api/promocodes/getDiscountPrice/**
           filters:
-            - AuthenticationFilter
-            
-        - id : order-service
-          uri : http://localhost:8300
-          predicates:
-          - Path=/api/getByEmail/**
-          filters:
-            - AuthenticationFilter
-        
-        - id : payment-service
-          uri : http://localhost:8083
-          predicates:
-          - Path=/api/userBalance/getUserBalance
-          filters:
-            - AuthenticationFilter
-          
-        - id : payment-service
-          uri : http://localhost:8083
-          predicates:
-          - Path=/api/userBalance/getBalanceByUserName/**
-          filters:
-            - AuthenticationFilter
-          
-        - id : payment-service
-          uri : http://localhost:8083
-          predicates:
-          - Path=/api/userBalance/getDetails
-          filters:
-            - AuthenticationFilter
-          
+            - AuthenticationFilter            
+              
                     
         - id : payment-service
           uri : http://localhost:8083
@@ -564,12 +528,21 @@ spring:
           uri : http://localhost:8083
           predicates:
           - Path=/api/userBalance/addBalance
-                    
-        - id : user-service
-          uri : http://localhost:8400
+          
+        - id : payment-service
+          uri : http://localhost:8083
           predicates:
-          - Path=/getUserName/**
-
+          - Path=/api/transaction/getDetails
+          filters:
+            - AuthenticationFilter
+                    
+        - id : payment-service
+          uri : http://localhost:8083
+          predicates:
+          - Path=/api/transaction/getTransactionDetails/**
+          filters:
+            - AuthenticationFilter
+          
         - id : user-service
           uri : http://localhost:8400
           predicates:
@@ -579,6 +552,12 @@ spring:
           uri : http://localhost:8400
           predicates:
           - Path=/getUserByMail/**
+          
+          
+        - id : user-service
+          uri : http://localhost:8400
+          predicates:
+          - Path=/api/getUserByName/**
           
         - id : user-service
           uri : http://localhost:8400
@@ -606,7 +585,7 @@ spring:
           uri : http://localhost:8400 
           predicates:
           - Path=/addSeller
-          
+
         - id : inventory-service
           uri : http://localhost:8200
           predicates:
@@ -635,15 +614,9 @@ spring:
           filters:
             - AuthenticationFilter
             
-        - id : user-service
-          uri : http://localhost:8400 
-          predicates:
-          - Path=/updatePasswordByUserName/**
+       
         
-        - id : user-service
-          uri : http://localhost:8400 
-          predicates:
-          - Path=/updatePasswordByEmail/**
+      
        
         
       
