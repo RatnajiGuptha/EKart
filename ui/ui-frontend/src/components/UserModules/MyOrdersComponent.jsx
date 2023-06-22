@@ -7,7 +7,7 @@ const MyOrdersComponent = () => {
   const [order, setOrder] = useState([]);
   const navigate = useNavigate("");
   useEffect(() => {
-    OrderService.getByUserName(localStorage.getItem("email"))
+    OrderService.getAllOrderByUser(localStorage.getItem("email"))
       .then((response) => {
         setOrder(response.data);
         console.log(response.data);

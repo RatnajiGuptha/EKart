@@ -58,8 +58,13 @@ function SellerRegistration() {
             valid = false;
         }
 
+        const userNameExists = await SecurityService.getUserName(registerData.fullName);
+        console.log("name --> ", userNameExists.data);
         if (!registerData.fullName || registerData.fullName.trim().length < 3) {
             newError.fullName = 'Full name should have at least 3 characters';
+            valid = false;
+        } else if (userNameExists.data !== null) {
+            newError.fullName = "Seller already exists";
             valid = false;
         } else if (!/^[a-zA-Z ]+$/.test(registerData.fullName)) {
             newError.fullName = 'Invalid Name';

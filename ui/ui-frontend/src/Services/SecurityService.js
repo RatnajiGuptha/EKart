@@ -44,8 +44,16 @@ export const SecurityService = {
             method: 'GET',
         });
         return res;
-    }
-    ,
+    },
+
+    async getUserName(name) {
+        const res = await api.request({
+            url: `/api/getUserByName/${name}`,
+            method: 'GET',
+        });
+        return res;
+    },
+
     async getUserByContactNumber(contactNumber) {
         const res = await api.request({
             url: `/getUserByContactNumber/${contactNumber}`,
@@ -62,13 +70,6 @@ export const SecurityService = {
         return res;
     },
 
-    async updatePasswordByUsername(username, password) {
-        const res = await authenticateApi.request({
-            url: `/updatePasswordByUserName/${username}/${password}`,
-            method: 'PUT'
-        })
-        return res;
-    },
 
     async updatePasswordByEmail(email, password) {
         const res = await api.request({
@@ -76,6 +77,8 @@ export const SecurityService = {
             method: 'PUT'
         })
         return res;
-    }
+    },
+
+
 
 }

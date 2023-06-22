@@ -4,6 +4,7 @@
     padding: 2rem;
     background-color: aliceblue;
     border-radius: 16px;
+    min-height: 75vh;
 }
 
 .link {

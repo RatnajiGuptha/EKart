@@ -38,8 +38,14 @@ export const OrderService = {
         return res;
     },
 
+    async getAllOrderByUser(email) {
+        const res = await authenticateApi.request({
+            url: `/api/getByEmail/${email}`,
+            method: "GET",
+        });
+        return res;
+    }
 
-   
 
 }
 

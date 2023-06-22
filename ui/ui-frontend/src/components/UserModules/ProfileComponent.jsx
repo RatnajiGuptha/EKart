@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { useNavigate } from "react-router-dom";
 import ChangePassword from "../SecurityModules/ChangePassword";
+import "../../StyleSheets/ManageProfile.css";
 
 const ProfileComponent = () => {
   const email = localStorage.getItem('email');
@@ -33,15 +33,15 @@ const ProfileComponent = () => {
     const newError = {};
 
 
-    const userEmailExists = await SecurityService.getUserByEmail(email);
+    const userEmailExists = await SecurityService.getUserByEmail(emailAddress);
     console.log("email =", userEmailExists.data);
-    if (!email || !email.trim()) {
+    if (!emailAddress || !emailAddress.trim()) {
       newError.email = "Email is required";
       valid = false;
     } else if (userEmailExists.data !== null) {
       newError.email = "Email address already exists";
       valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
+    } else if (!/\S+@\S+\.\S+/.test(emailAddress)) {
       newError.email = "Invalid Email address";
       valid = false;
     }
@@ -88,7 +88,7 @@ const ProfileComponent = () => {
     if (await validateForm()) {
       setDisplayProfile(true)
       setEditProfile(false)
-      SecurityService.updateUserByemail(fullName, emailAddress, contactNumber).then((response) => {
+      SecurityService.updateUserByUserName(fullName, emailAddress, contactNumber).then((response) => {
         console.log(response.data)
       }).catch((err) => {
         if (err.response.status === 401) {
