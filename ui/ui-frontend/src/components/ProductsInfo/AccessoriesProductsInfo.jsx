@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AccessoriesService } from "../../Services/AccessoriesService";
 import { CartService } from "../../Services/CartService";
 import "../../StyleSheets/ProductInfo.css";
+import { WishListService } from "../../Services/WishListService";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,7 +50,7 @@ const AccessoriesProductsInfo = () => {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
 
       console.log(datad.data);
@@ -74,28 +75,28 @@ const AccessoriesProductsInfo = () => {
         if (productsInfo.qty > quantity) {
           await CartService.addItemsToCart(cart).then((response) => {
             //   console.log(response);
-            toast.success("Item added successfully",{theme:"dark"});
+            toast.success("Item added successfully", { theme: "dark" });
           }).catch((err) => {
             if (err.response.status === 401) {
               console.log(err.response.data)
               navigate("/login")
               localStorage.clear();
-          }
+            }
           });
         } else {
-          toast.warning(" products Left",{theme:"dark"});
+          toast.warning(" products Left", { theme: "dark" });
         }
       } else {
         //   console.log(datad.data.cartId);
         const qty = datad.data.qty + quantity;
         await CartService.updateQuantity(datad.data.cartId, email, qty).then(() => {
-          toast.success("Cart contains " + qty + " " + datad.data.productName,{theme:"dark"});
+          toast.success("Cart contains " + qty + " " + datad.data.productName, { theme: "dark" });
         }).catch((err) => {
           if (err.response.status === 401) {
             console.log(err.response.data)
             navigate("/login")
             localStorage.clear();
-        }
+          }
         });
       }
     }
@@ -104,6 +105,57 @@ const AccessoriesProductsInfo = () => {
 
     }
   };
+  const InventoryType = "accessories";
+
+  const handleWishListItem = async () => {
+
+    if (localStorage.getItem('token')) {
+
+      const datad = await WishListService.getItemByTypeAndId(InventoryType, accessoryId).then()
+        .catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
+        });
+
+      console.log(datad.data);
+
+
+      if (datad.data.wishlistId == null) {
+        const wishList = {
+          email: email,
+          inventory: InventoryType,
+          inventoryType: InventoryType,
+          prodId: productsInfo.accessoryId,
+          logoImg: productsInfo.logoImg,
+          type: productsInfo.type,
+          productName: productsInfo.productName,
+
+          price: productsInfo.productPrice,
+
+        };
+
+
+        await WishListService.addItemsToWishList(wishList).then((response) => {
+          console.log(response.data);
+          toast.success("Item added successfully", { theme: "dark" });
+        }).catch((err) => {
+          if (err.response.status === 401) {
+            console.log(err.response.data)
+            navigate("/login")
+            localStorage.clear();
+          }
+        });
+      } else {
+        toast.error("Item is already in wish list", { theme: "dark" });
+      }
+
+    }
+
+  }
+
 
   return (
     <div className="product-info-container">
@@ -155,7 +207,7 @@ const AccessoriesProductsInfo = () => {
         <h5 className="seller-name">Seller : {productsInfo.sellerName}</h5>
         <div className="quantity">
           <div>
-            <button className="quantity-button" onClick={quantityDec}>
+            <button className="quantity-button" disabled={quantity === 1} onClick={quantityDec}>
               {" "}
               -{" "}
             </button>
@@ -167,10 +219,14 @@ const AccessoriesProductsInfo = () => {
           </div>
         </div>
         <div>
+          <button className="btn btn-info" onClick={handleWishListItem}>
+            Add to wishList
+          </button>{" "}
+
           <button className="btn btn-warning" onClick={handleCardItems}>
             Add to cart
           </button>{" "}
-          <ToastContainer/>
+          <ToastContainer />
         </div>
       </div>
     </div>

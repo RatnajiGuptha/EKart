@@ -10,6 +10,7 @@ const CartComponent = () => {
   const [discountCodes, setDiscountCodes] = useState([])
   const [coupon, setCoupon] = useState("none")
   const [discountedPrice, setDiscountedPrice] = useState(0)
+  const [quantity, setQuantity] = useState(1);
 
   const email = localStorage.getItem("email");
   const navigate = useNavigate("");
@@ -39,8 +40,8 @@ const CartComponent = () => {
   const applyCoupon = async () => {
     const response = await PromoCodesService.getDiscountPrice(coupon)
     console.log(response.data);
-    console.log(calculateTotalPrice().totalPrice*response.data)    
-    const distPrice =(calculateTotalPrice().totalPrice*response.data)
+    console.log(calculateTotalPrice().totalPrice * response.data)
+    const distPrice = (calculateTotalPrice().totalPrice * response.data)
     setDiscountedPrice(distPrice.toFixed(2))
 
   }
@@ -55,6 +56,32 @@ const CartComponent = () => {
         navigate("/login");
         localStorage.clear();
       });
+  };
+
+  const quantityDec = async (cartId, qty) => {
+
+    if (qty > 1) {
+      let b = quantity - 1
+      setQuantity(b);
+      console.log(quantity)
+      let a = qty - quantity
+      CartService.updateQuantity(cartId, email, a).then((response) => {
+        console.log(response.data);
+
+      })
+    }
+    window.location.reload(false);
+  };
+
+  const quantityInc = async (cartId, qty) => {
+    setQuantity(quantity + 1);
+    let a = quantity + qty;
+    CartService.updateQuantity(cartId, email, a).then((response => {
+      console.log(response.data)
+      console.log(quantity)
+    }))
+    window.location.reload(false);
+
   };
 
   const calculateTotalPrice = () => {
@@ -98,11 +125,14 @@ const CartComponent = () => {
       <div className="cart-container">
         {cartItems.map((item) => (
           <div key={item.cartId} className="items-container">
+
             <div>
               <img src={item.logoImg} className="cart-product-img" alt="/"></img>
             </div>
+
             <div className="cart-item-details">
               <h5 className="product-name">{item.productName}</h5>
+
               <div className="d-flex">
                 <div className={`size-selectors`}>
                   <span className="size-text"> Color: {item.color} </span>
@@ -112,18 +142,25 @@ const CartComponent = () => {
                 </div>
               </div>
             </div>
+
             <div className="product-qty-container">
-              <p className="product-price">    {" "}  Quantity:{" "}
-                <span style={{ fontStyle: "italic", fontWeight: "bold" }}> {item.qty} </span>
-              </p>
+              <div className="quantity" style={{ alignItems: "flex-start" }}>
+                <div>
+                  <button className="quantity-button" disabled={item.qty === 1} onClick={() => quantityDec(item.cartId, item.qty)} >{" "}-{" "} </button>
+                  Quantity:{item.qty}
+                  <button className="quantity-button" onClick={() => quantityInc(item.cartId, item.qty)}>{" "}+{" "} </button>
+                </div>
+              </div>
               <p className="product-price"> Price: ₹ {" "}
                 <span style={{ fontStyle: "italic", fontWeight: "bold" }}>{item.productPrice}/- </span>
               </p>
             </div>
-            <div className="m-2">
-              <button className="btn btn-danger" onClick={() => deleteItemFromCarttt(item.cartId)}>
-                Remove From Cart  </button>
+
+            <div className="m-2 d-flex flex-column">
+              <button className="btn btn-danger m-2" style={{ fontWeight: "600" }} onClick={() => deleteItemFromCarttt(item.cartId)}>  Remove  </button>
+              <button className="btn btn-info m-2" style={{ fontWeight: "600" }}> Save later  </button>
             </div>
+
           </div>
         ))}
       </div>
@@ -148,8 +185,9 @@ const CartComponent = () => {
             <li className="total-price">{" "} Grand Price:  <span > {" "} ₹ {calculateTotalPrice().grandPrice}/-{" "}  </span></li>
           </ul>
           <p className="products-count-info"> Total Products: <span>{calculateTotalPrice().count}</span></p>
+
           <div className="btn-container">
-            <button className="btn btn-success" onClick={() => checkoutFromCart()}> Place Order   </button>
+            <button className="btn btn-success" onClick={() => checkoutFromCart()}> Place Order</button>
           </div>
         </div>
 

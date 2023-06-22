@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { useNavigate } from "react-router-dom";
 import ChangePassword from "../SecurityModules/ChangePassword";
-import "../../StyleSheets/ManageProfile.css";
 
 const ProfileComponent = () => {
   const email = localStorage.getItem('email');
@@ -14,6 +14,7 @@ const ProfileComponent = () => {
   const [displayProfile, setDisplayProfile] = useState(true);
   const [editProfile, setEditProfile] = useState(false);
   const [showChangepassword, setChangepassword] = useState(false);
+  let status = false
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate('')
@@ -32,26 +33,18 @@ const ProfileComponent = () => {
     let valid = true;
     const newError = {};
 
-
-    const userEmailExists = await SecurityService.getUserByEmail(emailAddress);
-    console.log("email =", userEmailExists.data);
-    if (!emailAddress || !emailAddress.trim()) {
-      newError.email = "Email is required";
-      valid = false;
-    } else if (userEmailExists.data !== null) {
-      newError.email = "Email address already exists";
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(emailAddress)) {
-      newError.email = "Invalid Email address";
-      valid = false;
-    }
-
     const contactNumberExists = await SecurityService.getUserByContactNumber(contactNumber);
+    if (contactNumberExists.data !== null) {
+      status = true
+      console.log(status)
+    }
+    console.log(status)
+
     console.log(contactNumberExists.data);
     if (!contactNumber.trim() || contactNumber.trim().length !== 10) {
       newError.contactNumber = 'Mobile number should have 10 digits'
       valid = false;
-    } else if (contactNumberExists.data !== null) {
+    } else if (status) {
       newError.contactNumber = "Mobile number already exists";
       valid = false;
     } else if (!/^[0-9]+$/.test(contactNumber)) {
@@ -66,6 +59,8 @@ const ProfileComponent = () => {
       newError.fullName = 'Invalid Name';
       valid = false;
     }
+
+
 
     setErrors(newError);
     return valid;
@@ -85,10 +80,13 @@ const ProfileComponent = () => {
   const saveUserProfile = async (e) => {
     e.preventDefault();
 
+
     if (await validateForm()) {
+      status = false
+      console.log(status)
       setDisplayProfile(true)
       setEditProfile(false)
-      SecurityService.updateUserByUserName(fullName, emailAddress, contactNumber).then((response) => {
+      await SecurityService.updateUserData(fullName, emailAddress, contactNumber).then((response) => {
         console.log(response.data)
       }).catch((err) => {
         if (err.response.status === 401) {
@@ -136,14 +134,14 @@ const ProfileComponent = () => {
           editProfile &&
           <form className="myprofile-profile-form">
             <h2> My Profile</h2>
+              <label>Email
+                <input type="text" name="email" value={emailAddress} placeholder="Enter email" />
+                {errors.email && <span>{errors.email}</span>}
+              </label>
             <label>Full Name
               <input type="text" name="fullName" value={fullName} onChange={(e) => { setFullName(e.target.value) }} placeholder="Enter full name" />
               {errors.fullName && <span>{errors.fullName}</span>}
-            </label>
-            <label>Email
-              <input type="text" name="email" value={emailAddress} onChange={(e) => { setEmailAddress(e.target.value) }} placeholder="Enter email" />
-              {errors.email && <span>{errors.email}</span>}
-            </label>
+              </label>
 
             <label>Contact number
               <input type="text" name="contactNumber" value={contactNumber} onChange={(e) => { setContactNumber(e.target.value) }} placeholder="Enter contact number" />
@@ -171,4 +169,3 @@ const ProfileComponent = () => {
 };
 
 export default ProfileComponent;
-

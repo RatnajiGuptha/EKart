@@ -28,7 +28,7 @@ function AddNewAddressComponent() {
         Pincode: "",
     });
 
-    const validateAddress = () => {
+    const validateAddress = async () => {
         let valid = true;
         const newError = {}
 
@@ -36,7 +36,7 @@ function AddNewAddressComponent() {
             newError.name = "User name should have at least 5 characters";
             valid = false;
         } else if (!/^[a-zA-Z]+$/.test(addressData.Name)) {
-            newError.userName = "Invalid user name";
+            newError.name = "Invalid user name";
             valid = false;
         }
 
@@ -83,26 +83,27 @@ function AddNewAddressComponent() {
                 District: pincodeData.District,
             }));
 
-            await AddressService.addNewAddress({
-                email: localStorage.getItem("email"),
-                receiverName: addressData.Name,
-                receiverPhoneNumber: addressData.ContactNumber,
-                buildingNo: addressData.buildingNo,
-                street1: addressData.Area,
-                city: selectCity,
-                district: pincodeData.District,
-                state: pincodeData.State,
-                pincode: addressData.Pincode,
-            }).then((response) => {
-                console.log(response.data);
-            }).catch((err) => {
-                if (err.response.status === 401) {
-                    console.log(err.response.data);
-                    navigate("/login");
-                    localStorage.clear();
-                }
-            });
-
+            if (await validateAddress()) {
+                await AddressService.addNewAddress({
+                    email: localStorage.getItem("email"),
+                    receiverName: addressData.Name,
+                    receiverPhoneNumber: addressData.ContactNumber,
+                    buildingNo: addressData.buildingNo,
+                    street1: addressData.Area,
+                    city: selectCity,
+                    district: pincodeData.District,
+                    state: pincodeData.State,
+                    pincode: addressData.Pincode,
+                }).then((response) => {
+                    console.log(response.data);
+                }).catch((err) => {
+                    if (err.response.status === 401) {
+                        console.log(err.response.data);
+                        navigate("/login");
+                        localStorage.clear();
+                    }
+                });
+            }
 
             console.log(addressData.Name, addressData.ContactNumber, addressData.Area, pincodeData.City, pincodeData.State, pincodeData.District, addressData.Pincode);
             window.location.reload(false);
@@ -172,6 +173,8 @@ function AddNewAddressComponent() {
                         <div>
                             <label htmlFor="Name"> Name <br />
                                 <input value={addressData.Name} onChange={handleAddress} placeholder="Name" type="text" id="Name" />
+                                {errors.name && <span>{errors.name}</span>}
+                                {/* {errors.fullName && <span>{errors.fullName}</span>} */}
                             </label>
                             <br />
 
@@ -187,6 +190,7 @@ function AddNewAddressComponent() {
 
                             <label htmlFor="Area"> LandMark <br />
                                 <input value={addressData.Area} onChange={handleAddress} placeholder="LandMark" type="text" id="Area" />
+                                {errors.Area && <span>{errors.Area}</span>}
                             </label>
                             <br />
                         </div>
@@ -194,6 +198,7 @@ function AddNewAddressComponent() {
                         <div>
                             <label htmlFor="Pincode"> Pincode <br />
                                 <input value={addressData.Pincode} onChange={handleAddress} placeholder="Pincode" type="text" id="Pincode" />
+                                {errors.Pincode && <span>{errors.Pincode}</span>}
                             </label>
                             <br />
 

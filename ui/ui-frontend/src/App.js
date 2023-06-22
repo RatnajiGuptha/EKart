@@ -62,6 +62,7 @@ import SellerHomeCategories from "./components/SellerModules/SellerHomeCategorie
 import AccountPage from "./components/UserModules/AccountPage";
 import InvoiceComponent from "./components/UserModules/InvoiceComponent";
 import TypesOfProductsBySeller from "./components/SellerModules/SellerGraphs/TypesOfProductsBySeller";
+import WishListComponent from "./components/OrdersModules/WishListComponent";
 
 function App() {
   const role = localStorage.getItem("role");
@@ -81,6 +82,9 @@ function App() {
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/registration" element={<Registrationpage />}></Route>
           <Route path="/addSeller" element={<SellerRegistration />}></Route>
+
+          {/* Wish List*/}
+          <Route path="/wishList" element={<WishListComponent />}></Route>
 
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
