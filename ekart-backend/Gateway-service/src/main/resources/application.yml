@@ -346,6 +346,49 @@ spring:
           - Path=/api/Toys/updateSellerProducts/**
           filters:
             - AuthenticationFilter
+            
+            
+            
+        - id: order-service
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/wishlist/addToWishList
+          filters:
+            - AuthenticationFilter
+
+        - id: order-service
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/wishlist/getAllItemsInWishList
+          filters:
+            - AuthenticationFilter
+        - id: order-service
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/wishlist/getItemByProdId/**
+          filters:
+            - AuthenticationFilter
+
+        - id: order-service
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/wishlist/getItemByEmail/**
+          filters:
+            - AuthenticationFilter
+
+        - id: order-service
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/wishlist/getItemByProdIdAndInventoryType/**
+          filters:
+            - AuthenticationFilter
+
+        - id: order-service
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/wishlist/deleteItemById/**
+          filters:
+            - AuthenticationFilter
        
         - id : order-service
           uri : http://localhost:8300
