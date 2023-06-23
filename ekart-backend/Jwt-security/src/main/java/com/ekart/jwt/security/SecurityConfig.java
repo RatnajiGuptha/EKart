@@ -59,7 +59,7 @@ public class SecurityConfig {
 				.requestMatchers("/login", "/addUser", "/getUserByMail/{email}",
 						"/addSeller", "/getUserByContactNumber/**", "/getUserInfo/{email}",
 						"/updateUserData/{fullName}/{email}/{contactNumber}",						
-						"/updatePasswordByEmail/{email}/{password}","/api/getUserByName/{name}")
+						"/updatePasswordByEmail/{email}/{password}","/api/getUserByName/{name}","/actuator/**")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(entryPoint)
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authenticationProvider(authenticationProvider())

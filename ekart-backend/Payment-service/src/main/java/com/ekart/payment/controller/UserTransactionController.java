@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ekart.payment.Repository.UserTransactionRepository;
 import com.ekart.payment.entity.UserTransaction;
 
+import io.micrometer.observation.annotation.Observed;
+
 @RestController
 @RequestMapping("/api/transaction")
 public class UserTransactionController {
@@ -19,11 +21,13 @@ public class UserTransactionController {
 	private UserTransactionRepository userTransactionRepository;
 
 	@GetMapping("/getDetails")
+	@Observed(name="get.allTranscationDetails")
 	public List<UserTransaction> getTransactionDetails() {
 		return userTransactionRepository.findAll();
 	}
 
 	@GetMapping("/getTransactionDetails/{email}")
+	@Observed(name="get.allTranscationDetailsByEmail")
 	public List<UserTransaction> getTransactionByUser(@PathVariable String email) {
 		return userTransactionRepository.findByEmail(email);
 	}
