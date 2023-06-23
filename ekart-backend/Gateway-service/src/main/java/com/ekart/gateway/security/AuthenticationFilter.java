@@ -46,9 +46,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 				System.out.println("---------------------------------");
 				String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
 				logger.info(authHeader);
-				System.out.println(authHeader);
+//				System.out.println(authHeader);
 				System.out.println("---------------------------------");
-				
 
 				if (authHeader != null && authHeader.startsWith("Bearer ")) {
 					authHeader = authHeader.substring(7);
@@ -56,15 +55,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
 				if (jwtUtil.validateJwtToken(authHeader)) {
 					logger.info("Token validate sucessfully");
-					return new LoggingGatewayFilterFactory().apply(new LoggingGatewayFilterFactory.Config())
-							.filter(exchange, chain);
+					return chain.filter(exchange);
 
 				} else {
 					System.err.println("invalid token...!");
 					logger.error("invalid token...!");
 					throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
 							"unauthorized access to application invalid token");
-
 				}
 			}
 			return null;

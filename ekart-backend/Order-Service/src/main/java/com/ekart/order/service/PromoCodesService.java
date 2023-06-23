@@ -16,4 +16,6 @@ public interface PromoCodesService {
 	
 	public List<PromoCodes> getAllPromoCodes();
 
+	public List<PromoCodes> getAllPromoCodesByStatus(String status);
+
 }

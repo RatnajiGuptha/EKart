@@ -38,4 +38,6 @@ public interface FashionProductService {
 
 	public List<FashionProducts> GetFashionProductsBySellerNameAndType(String sellerName, FashionTypes type);
 
+	public FashionProducts GetFashionProductsBySuitable(int id);
+
 }

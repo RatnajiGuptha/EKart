@@ -2,6 +2,8 @@ package com.ekart.order.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -20,46 +22,51 @@ import com.ekart.order.service.WishListService;
 @RequestMapping("/api/wishlist")
 public class WishlistController {
 
-    @Autowired
-    private WishListService wishListService;
+	private static final Logger LOGGER = LoggerFactory.getLogger(WishlistController.class);
 
-    @PostMapping("/addToWishList")
-    public ResponseEntity<String> addToWishList(@RequestBody Wishlist wishlist){
-        String Response = wishListService.addItems(wishlist);
-        return  ResponseEntity.status(HttpStatusCode.valueOf(200)).body(Response);
-    }
+	@Autowired
+	private WishListService wishListService;
 
-    @GetMapping("/getAllItemsInWishList")
-    public ResponseEntity<List<Wishlist>> fetchItemsInWishList(){
-        List<Wishlist> wishlists = wishListService.getAllItemsInWishList();
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlists);
-    }
+	@PostMapping("/addToWishList")
+	public ResponseEntity<String> addToWishList(@RequestBody Wishlist wishlist) {
+		String Response = wishListService.addItems(wishlist);
+		LOGGER.info("add products to wishlist");
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(Response);
+	}
 
-    @GetMapping("/getItemByProdId/{prodId}")
-    public ResponseEntity<Wishlist> fetchItemByProdId(@PathVariable int prodId){
-        Wishlist wishlist =  wishListService.getItemByProdId(prodId);
+	@GetMapping("/getAllItemsInWishList")
+	public ResponseEntity<List<Wishlist>> fetchItemsInWishList() {
+		List<Wishlist> wishlists = wishListService.getAllItemsInWishList();
+		LOGGER.info("Returns products to wishlist");
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlists);
+	}
 
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlist);
-    }
+	@GetMapping("/getItemByProdId/{prodId}")
+	public ResponseEntity<Wishlist> fetchItemByProdId(@PathVariable int prodId) {
+		Wishlist wishlist = wishListService.getItemByProdId(prodId);
+		LOGGER.info("return the product by id {} in wishlist", prodId);
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlist);
+	}
 
-    @GetMapping("/getItemByEmail/{email}")
-    public ResponseEntity<List<Wishlist>> fetchItemByUserName(@PathVariable String email){
-        List<Wishlist> wishlists =  wishListService.getItemByEmail(email);
+	@GetMapping("/getItemByEmail/{email}")
+	public ResponseEntity<List<Wishlist>> fetchItemByUserName(@PathVariable String email) {
+		List<Wishlist> wishlists = wishListService.getItemByEmail(email);
+		LOGGER.info("return the product by eamil {} in wishlist", email);
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlists);
+	}
 
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlists);
-    }
+	@GetMapping("/getItemByProdIdAndInventoryType/{inventory}/{prodId}")
+	public ResponseEntity<Wishlist> fetchItemByProdIdAndType(@PathVariable String inventory, @PathVariable int prodId) {
+		Wishlist wishlist = wishListService.getItemByProdIdAndType(prodId, inventory);
+		LOGGER.info("return the product by ProdId And InventoryType {} in wishlist", inventory, prodId);
+		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlist);
+	}
 
-    @GetMapping("/getItemByProdIdAndInventoryType/{inventory}/{prodId}")
-    public ResponseEntity<Wishlist> fetchItemByProdIdAndType( @PathVariable String inventory , @PathVariable int prodId){
-        Wishlist wishlist =  wishListService.getItemByProdIdAndType(prodId, inventory);
-
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(wishlist);
-    }
-
-    @DeleteMapping("/deleteItemById/{wishlistId}")
-    public ResponseEntity<String> deleteItemFromWishList(@PathVariable int wishlistId){
-        String response = wishListService.deleteItemById(wishlistId);
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(response);
-    }
+	@DeleteMapping("/deleteItemById/{wishlistId}")
+	public ResponseEntity<String> deleteItemFromWishList(@PathVariable int wishlistId) {
+		String response = wishListService.deleteItemById(wishlistId);
+		LOGGER.info("delete product in whishlist by id {}", wishlistId);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(response);
+	}
 
 }

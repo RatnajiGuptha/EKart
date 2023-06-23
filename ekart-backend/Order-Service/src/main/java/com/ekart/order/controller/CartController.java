@@ -67,12 +67,10 @@ public class CartController {
 
 	}
 
-	
-
 	@DeleteMapping("/deleteProductInCartByProductId/{productId}")
 	public ResponseEntity<String> deleteCartItemByProduct(@PathVariable int productId) {
 		String response = cartService.removeCartByProductId(productId);
-		LOGGER.info("Deleting the item with product id {}",productId);
+		LOGGER.info("Deleting the item with product id {}", productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
 	}
 
@@ -97,6 +95,7 @@ public class CartController {
 	@GetMapping("/getByEmail/{email}")
 	public ResponseEntity<List<Cart>> fetchCartByEmail(@PathVariable String email) {
 		List<Cart> cartList = cartService.getByEmail(email);
+		LOGGER.info("Returning all products in cart by email {}", email);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cartList);
 	}
 
@@ -107,9 +106,15 @@ public class CartController {
 		Cart cart = cartService.getByCartIdAndEmail(id, email);
 		cart.setQty(qty);
 		cartService.saveItemsInCart(cart);
-
+		LOGGER.info("Updating the products {} qty in cart by", qty);
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(cart);
 
+	}
+	@GetMapping("/getByCart/{cartId}")
+	public ResponseEntity<Cart> fetchCartByCartId(@PathVariable int cartId) {
+		Cart cart = cartService.getByCartId(cartId);
+		LOGGER.info("Returning products from cart by id {}", cartId);
+		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(cart);
 	}
 
 }

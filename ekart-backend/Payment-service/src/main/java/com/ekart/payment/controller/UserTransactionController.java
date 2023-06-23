@@ -2,6 +2,8 @@ package com.ekart.payment.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,17 +16,21 @@ import com.ekart.payment.entity.UserTransaction;
 @RestController
 @RequestMapping("/api/transaction")
 public class UserTransactionController {
-
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserTransactionController.class);
+	
 	@Autowired
 	private UserTransactionRepository userTransactionRepository;
 
 	@GetMapping("/getDetails")
 	public List<UserTransaction> getTransactionDetails() {
+		LOGGER.info("Returning all user transaction details");
 		return userTransactionRepository.findAll();
 	}
 
 	@GetMapping("/getTransactionDetails/{email}")
 	public List<UserTransaction> getTransactionByUser(@PathVariable String email) {
+		LOGGER.info("Returning all transaction details by email {}" , email);
 		return userTransactionRepository.findByEmail(email);
 	}
 

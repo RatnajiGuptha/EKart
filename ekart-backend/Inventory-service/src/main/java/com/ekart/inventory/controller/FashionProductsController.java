@@ -35,14 +35,16 @@ public class FashionProductsController {
 		LOGGER.info("Returning all fashion products");
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(fashionProduct);
 	}
+	
 
 	@GetMapping("/getProductsById/{productId}")
 	public ResponseEntity<FashionProducts> getFashionProductsById(@PathVariable int productId) {
 		FashionProducts product = fashionService.fetchById(productId);
-		LOGGER.info("Returning fashion products by id {}",productId);
+		LOGGER.info("Returning fashion products by id {}", productId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(product);
 	}
-
+	
+	
 	@GetMapping("/getProductsByType/type/{type}")
 	public ResponseEntity<List<FashionProducts>> getFashionProductsByType(@PathVariable FashionTypes type) {
 		List<FashionProducts> fetchByTypes = fashionService.fetchByType(type);

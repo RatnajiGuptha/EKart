@@ -95,4 +95,10 @@ public class FashionProductServiceImpl implements FashionProductService {
 		List<FashionProducts>fashionProducts=fashionProductsRepo.findBySellerNameAndType(sellerName,type);
 		return fashionProducts;
 	}
+
+	@Override
+	public FashionProducts GetFashionProductsBySuitable(int id) {
+		// TODO Auto-generated method stub
+		return fashionProductsRepo.findById(id).get();
+	}
 }

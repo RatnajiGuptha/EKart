@@ -117,7 +117,7 @@ public class OrderController {
 		addr.add(String.valueOf(address.getPincode()));
 
 		orderRequestDTO.setAddress(addr);
-		LOGGER.info("Creating order for user name {} with email {} for address id {}",  email, addressId);
+		LOGGER.info("Creating order for user name {} with email {} for address id {}", email, addressId);
 		return orderService.createOrders(orderRequestDTO);
 
 	}
@@ -136,6 +136,7 @@ public class OrderController {
 
 	@GetMapping("/getByEmail/{email}")
 	public List<PurchaseOrder> getOrderByEmail(@PathVariable String email) {
+		LOGGER.info("Return order by email {}", email);
 		return orderService.fetchOrderByEmail(email);
 	}
 
@@ -146,7 +147,7 @@ public class OrderController {
 			otp = emailSenderService.generateOtp();
 			emailSenderService.sendOtp(email, otp);
 		}
-
+		LOGGER.info("Generated the otp by email", email);
 		return otp;
 	}
 }

@@ -95,6 +95,8 @@ spring:
           uri : http://localhost:8200
           predicates:
           - Path=/api/fashionProducts/getProductsById/**
+          filters:
+            - AuthenticationFilter
           
         - id : inventory-service
           uri : http://localhost:8200
@@ -132,6 +134,8 @@ spring:
           - Path=/api/fashionProducts/setQuantity/**
           filters:
             - AuthenticationFilter
+            
+        
                    
         - id : inventory-service
           uri : http://localhost:8200
@@ -347,8 +351,34 @@ spring:
           filters:
             - AuthenticationFilter
             
-            
-            
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/fashionProducts/getProductsBySellerNameAndType/sellerName/**
+          filters:
+            - AuthenticationFilter
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/footWear/getFootWearBySellerNameAndType/sellerName/**
+          filters:
+            - AuthenticationFilter
+        
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/electronicsProducts/getElectronicsBySellerNameAndType/sellerName/**
+          filters:
+            - AuthenticationFilter
+          
+        - id : inventory-service
+          uri : http://localhost:8200
+          predicates:
+          - Path=/api/accessoriesProducts/getAccessoriesBySellerNameAndType/sellerName/**
+          filters:
+            - AuthenticationFilter
+                        
         - id: order-service
           uri: http://localhost:8300
           predicates:
@@ -422,6 +452,13 @@ spring:
           uri : http://localhost:8300
           predicates:
           - Path=/api/cart/deleteProductInCartByProductId/**
+          filters:
+            - AuthenticationFilter
+            
+        - id: order-service
+          uri: http://localhost:8300
+          predicates:
+            - Path=/api/cart/getByCart/**
           filters:
             - AuthenticationFilter
           
@@ -529,8 +566,7 @@ spring:
           filters:
             - AuthenticationFilter
                               
-      
-          
+                
         - id : order-service
           uri : http://localhost:8300
           predicates:
@@ -552,7 +588,14 @@ spring:
           filters:
             - AuthenticationFilter            
               
-                    
+        - id : order-service
+          uri : http://localhost:8300
+          predicates:
+          - Path=/api/promocodes/getAllPromoCodes/**
+          filters:
+            - AuthenticationFilter
+                                     
+                     
         - id : payment-service
           uri : http://localhost:8083
           predicates:
@@ -629,33 +672,7 @@ spring:
           predicates:
           - Path=/addSeller
 
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Path=/api/fashionProducts/getProductsBySellerNameAndType/sellerName/**
-          filters:
-            - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Path=/api/footWear/getFootWearBySellerNameAndType/sellerName/**
-          filters:
-            - AuthenticationFilter
-        
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Path=/api/electronicsProducts/getElectronicsBySellerNameAndType/sellerName/**
-          filters:
-            - AuthenticationFilter
-          
-        - id : inventory-service
-          uri : http://localhost:8200
-          predicates:
-          - Path=/api/accessoriesProducts/getAccessoriesBySellerNameAndType/sellerName/**
-          filters:
-            - AuthenticationFilter
+       
             
        
         

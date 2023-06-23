@@ -51,6 +51,7 @@ public class AddressController {
 	@GetMapping("/getAllAddressByEmail/{email}")
 	public ResponseEntity<List<Address>> fetchAllAddressbyEmail(@PathVariable String email) {
 		List<Address> addressList = addressService.fetchByUserNameByEmail(email);
+		LOGGER.info("Get all address by email {}", email);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(addressList);
 	}
 

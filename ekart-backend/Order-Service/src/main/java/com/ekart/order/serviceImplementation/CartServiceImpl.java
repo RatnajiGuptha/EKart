@@ -67,6 +67,11 @@ public class CartServiceImpl implements CartService {
 		// TODO Auto-generated method stub
 		return cartRepository.findByCartIdAndEmail(id,email);
 	}
+	
+	@Override
+    public Cart getByCartId(int cartId) {
+        return cartRepository.findById(cartId).get();
+    }
 
 	
 }
