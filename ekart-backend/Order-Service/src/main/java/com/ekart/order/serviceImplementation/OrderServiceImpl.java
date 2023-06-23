@@ -13,6 +13,8 @@ import com.ekart.order.config.OrderStatusPublisher;
 import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.OrderService;
 
+import io.micrometer.observation.annotation.Observed;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -23,6 +25,7 @@ public class OrderServiceImpl implements OrderService {
 	private OrderStatusPublisher orderStatusPublisher;
 
 	@Override
+	@Observed(name="create.orders")
 	public PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO) {
 		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
 //		purchaseOrder.setEmail(email);
@@ -32,11 +35,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Observed(name="get.orders")
 	public List<PurchaseOrder> fetchOrders() {
 		List<PurchaseOrder> orders = orderRepository.findAll();
 		return orders;
 	}
-
+	
 	private PurchaseOrder convertDtoToEntity(OrderRequestDTO dto) {
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		purchaseOrder.setPurchaseOrderId(UUID.randomUUID());
@@ -62,12 +66,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Observed(name="get.orderById")
 	public PurchaseOrder fetchOrderById(UUID id) {
 		return orderRepository.findById(id).get();
 	}
 
 	
 	@Override
+	@Observed(name="get.ordersByEmail")
 	public List<PurchaseOrder> fetchOrderByEmail(String email) {
 		// TODO Auto-generated method stub
 		return orderRepository.findByEmail(email);

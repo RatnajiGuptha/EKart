@@ -20,6 +20,8 @@ import com.ekart.jwt.repos.CustomerRepo;
 import com.ekart.jwt.security.CustomerDetailsService;
 import com.ekart.jwt.security.JwtService;
 
+import io.micrometer.observation.annotation.Observed;
+
 @RestController
 public class CustomersController {
 
@@ -39,6 +41,7 @@ public class CustomersController {
 	private PasswordEncoder encoder;
 
 	@PostMapping("/login")
+	@Observed(name="create.token")
 	public ResponseEntity<?> createToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 		try {
 			authenticationManager.authenticate(
@@ -54,6 +57,7 @@ public class CustomersController {
 	}
 
 	@PostMapping("/addUser")
+	@Observed(name="add.createCustomer")
 	public ResponseEntity<?> addCustomer(@RequestBody CustomerEntity customerEntity) {
 		Optional<CustomerEntity> name = customerRepo.findByEmail(customerEntity.getEmail());
 
@@ -69,6 +73,7 @@ public class CustomersController {
 	}
 
 	@PostMapping("/addSeller")
+	@Observed(name="add.createSeller")
 	public ResponseEntity<?> addSeller(@RequestBody CustomerEntity customerEntity) {
 		Optional<CustomerEntity> name = customerRepo.findByEmail(customerEntity.getEmail());
 

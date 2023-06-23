@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ekart.jwt.entity.CustomerEntity;
 import com.ekart.jwt.repos.CustomerRepo;
 
+import io.micrometer.observation.annotation.Observed;
+
 @RestController
 public class UsersController {
 
@@ -24,6 +26,7 @@ public class UsersController {
 	private PasswordEncoder encoder;
 
 	@GetMapping("/getUserByMail/{email}")
+	@Observed(name="get.userByEmail")
 	public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
 		Optional<CustomerEntity> byEmail = customerRepo.findByEmail(email);
 		if (byEmail.isEmpty()) {
@@ -35,6 +38,7 @@ public class UsersController {
 	}
 
 	@GetMapping("/getUserByContactNumber/{contactNumber}")
+	@Observed(name="get.userByContactNumber")
 	public ResponseEntity<?> getUserByContactNumber(@PathVariable String contactNumber) {
 		Optional<CustomerEntity> user = customerRepo.findByContactNumber(contactNumber);
 		if (user.isEmpty()) {
@@ -47,6 +51,7 @@ public class UsersController {
 
 	
 	@GetMapping("/api/getUserByName/{name}")
+	@Observed(name="get.userByName")
 	public ResponseEntity<?> getUserName(@PathVariable String name) {
 		Optional<CustomerEntity> user = customerRepo.findByFullName(name);
 		if (user.isEmpty()) {
@@ -59,12 +64,14 @@ public class UsersController {
 	
 	
 	@GetMapping("/getUserInfo/{email}")
+	@Observed(name="get.userByUserInfo")
 	public ResponseEntity<?> getUserByUserInfo(@PathVariable String email) {
 		Optional<CustomerEntity> user = customerRepo.findByEmail(email);
 		return ResponseEntity.ok(user);
 	}
 
 	@PutMapping("/updateUserData/{fullName}/{email}/{contactNumber}")
+	@Observed(name="update.userDetails")
 	public void updateUser(@PathVariable String fullName, @PathVariable String email,
 			@PathVariable String contactNumber) {
 		CustomerEntity customer = customerRepo.findByEmail(email).get();
@@ -76,6 +83,7 @@ public class UsersController {
 
 	
 	@PutMapping("/updatePasswordByEmail/{email}/{password}")
+	@Observed(name="update.passwordByEmail")
 	public ResponseEntity<?> updatePasswordByEmail(@PathVariable String email, @PathVariable String password) {
 
 		CustomerEntity customer = customerRepo.findByEmail(email).get();
