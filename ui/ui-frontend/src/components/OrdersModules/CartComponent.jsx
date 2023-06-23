@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { CartService } from "../../Services/CartService";
 import { PromoCodesService } from '../../Services/PromoCodesService';
 import "../../StyleSheets/Cart.css";
+import { WishListService } from "../../Services/WishListService";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const CartComponent = () => {
 
@@ -11,6 +16,7 @@ const CartComponent = () => {
   const [coupon, setCoupon] = useState("none")
   const [discountedPrice, setDiscountedPrice] = useState(0)
   const [quantity, setQuantity] = useState(1);
+  const [cartItem, setCartItem] = useState([]);
 
   const email = localStorage.getItem("email");
   const navigate = useNavigate("");
@@ -38,6 +44,7 @@ const CartComponent = () => {
     navigate(`/paymentPage/${email}/${coupon}`);
   };
 
+  console.log(cartItem);
   const applyCoupon = async () => {
     const response = await PromoCodesService.getDiscountPrice(coupon)
     console.log(response.data);
@@ -103,6 +110,70 @@ const CartComponent = () => {
   };
 
 
+  const handleWishList = async (cartId) => {
+
+    const response = await CartService.getCartItemsById(cartId)
+    console.log(response.data);
+    setCartItem(response.data);
+
+
+    const Inventory = response.data.productCategories.toLowerCase();
+    console.log(Inventory);
+
+    const datad = await WishListService.getItemByTypeAndId(Inventory, response.data.productId).then()
+      .catch((err) => {
+        if (err.response.status === 401) {
+          console.log(err.response.data)
+          navigate("/login")
+          localStorage.clear();
+        }
+      });
+
+    console.log(datad.data);
+
+
+    if (datad.data.wishlistId == null) {
+      const wishList = {
+        email: email,
+        inventory: Inventory,
+        inventoryType: Inventory,
+        prodId: response.data.productId,
+        logoImg: response.data.logoImg,
+        type: response.data.type,
+        productName: response.data.productName,
+
+        price: response.data.productPrice,
+
+      };
+
+
+      await WishListService.addItemsToWishList(wishList).then((response) => {
+        console.log(response.data);
+        toast.success("Item added successfully", { theme: "dark" });
+      }).catch((err) => {
+        if (err.response.status === 401) {
+          console.log(err.response.data)
+          navigate("/login")
+          localStorage.clear();
+        }
+      });
+    } else {
+      toast.error("Item is already in wish list", { theme: "dark" });
+    }
+
+    await CartService.deleteItemFromCart(cartId)
+      .then(() => {
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        navigate("/login");
+        localStorage.clear();
+      });
+
+
+  }
+
   console.log(cartItems.length);
   if (cartItems.length === 0) {
     return (
@@ -120,6 +191,14 @@ const CartComponent = () => {
       </div>
     );
   }
+
+
+
+
+
+
+
+
 
   return (
     <div className="cart-page">
@@ -159,7 +238,9 @@ const CartComponent = () => {
 
             <div className="m-2 d-flex flex-column">
               <button className="btn btn-danger m-2" style={{ fontWeight: "600" }} onClick={() => deleteItemFromCarttt(item.cartId)}>  Remove  </button>
-              <button className="btn btn-info m-2" style={{ fontWeight: "600" }}> Save later  </button>
+              <button className="btn btn-info m-2" style={{ fontWeight: "600" }} onClick={() => handleWishList(item.cartId)}> Save later  </button>
+              <ToastContainer />
+
             </div>
 
           </div>

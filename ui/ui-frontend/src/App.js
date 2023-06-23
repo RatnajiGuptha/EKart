@@ -20,6 +20,7 @@ import FashionProductsByGenderInfo from "./components/ProductsInfo/FashionProduc
 import FashionProductByCategory from "./components/Products/FashionProductByCategory";
 import FashionProductsInfo from "./components/ProductsInfo/FashionProductsInfo";
 import FashionProductByGenderAndType from "./components/Products/FashionProductByGenderAndType";
+import FashionProductsByIdInfo from "./components/ProductsInfo/FashionProductsByIdInfo";
 
 import Footware from "./components/Products/Footwear";
 import FootwearProductsInfo from "./components/ProductsInfo/FootwearProductsInfo";
@@ -63,7 +64,6 @@ import AccountPage from "./components/UserModules/AccountPage";
 import InvoiceComponent from "./components/UserModules/InvoiceComponent";
 import TypesOfProductsBySeller from "./components/SellerModules/SellerGraphs/TypesOfProductsBySeller";
 import WishListComponent from "./components/OrdersModules/WishListComponent";
-import { useEffect } from "react";
 
 function App() {
   const role = localStorage.getItem("role");
@@ -72,10 +72,6 @@ function App() {
   const home = role === "SELLER" ? (<SellerHomeCategories forceRefresh={true} />) : (<HomeComponent forceRefresh={true} />);
 
 
-
-  useEffect(() => {
-    document.title = "Ekart"
-  })
   return (
     <div className="App">
       <Router>
@@ -99,6 +95,7 @@ function App() {
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>
+          <Route path="/fashion/:productId" element={<FashionProductsByIdInfo />}></Route>
           <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
           <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
           <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>

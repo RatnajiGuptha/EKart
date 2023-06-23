@@ -9,7 +9,9 @@
     display: flex;
     justify-content: space-around;
 }
-
+.add-address-container span {
+    color: orangered
+}
 .addr-form input[type="text"],
 .addr-form [type="number"],
 .addr-form select {

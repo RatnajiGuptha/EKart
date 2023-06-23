@@ -22,7 +22,7 @@ function AddNewAddressComponent() {
         ContactNumber: "",
         buildingNo: "",
         Area: "",
-        City: "",
+        City: selectCity,
         State: "",
         District: "",
         Pincode: "",
@@ -31,16 +31,16 @@ function AddNewAddressComponent() {
     const validateAddress = async () => {
         let valid = true;
         const newError = {}
-
-        if (!addressData.Name || addressData.Name.trim().length < 5) {
-            newError.name = "User name should have at least 5 characters";
+        console.log(addressData)
+        if (addressData.Name.trim().length <= 4) {
+            newError.name = "Name should have at least 5 characters";
             valid = false;
-        } else if (!/^[a-zA-Z]+$/.test(addressData.Name)) {
-            newError.name = "Invalid user name";
+        } else if (!/^[a-zA-Z ]+$/.test(addressData.Name)) {
+            newError.name = "Invalid name";
             valid = false;
         }
 
-        if (!addressData.ContactNumber.trim() || addressData.ContactNumber.trim().length !== 10) {
+        if (addressData.ContactNumber.trim().length !== 10) {
             newError.ContactNumber = "Mobile number should have 10 digits";
             valid = false;
         } else if (!/^[0-9]+$/.test(addressData.ContactNumber)) {
@@ -48,17 +48,23 @@ function AddNewAddressComponent() {
             valid = false;
         }
 
-        if (!addressData.buildingNo.trim() || addressData.buildingNo.trim().length >= 1) {
+        if (!addressData.buildingNo.trim().length >= 1) {
             newError.buildingNo = "Enter a valid street name";
             valid = false;
-        }
-
-        if (!addressData.Area.trim() || addressData.Area.trim().length >= 1) {
-            newError.Area = "Enter a valid land Mark";
+        } else if (!/^[a-zA-Z 0-9/\\.:]+$/.test(addressData.buildingNo)) {
+            newError.buildingNo = "Invalid Building No";
             valid = false;
         }
 
-        if (!addressData.Pincode.trim() || addressData.Pincode.trim().length == 6) {
+        if (!addressData.Area.trim().length > 1) {
+            newError.Area = "Enter a valid land Mark";
+            valid = false;
+        } else if (!/^[a-zA-Z ]+$/.test(addressData.Area)) {
+            newError.landMark = "Invalid land mark";
+            valid = false;
+        }
+
+        if (!addressData.Pincode.trim().length === 6) {
             newError.Pincode = "Enter a valid pincode";
             valid = false;
         } else if (!/^[1-9][0-9]{5}$/.test(addressData.Pincode)) {
@@ -73,41 +79,33 @@ function AddNewAddressComponent() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setAddNewAddress(false);
 
-        const pincodeData = await fetchPincodeData(addressData.Pincode);
-        if (pincodeData) {
-            setAddressData((prevData) => ({
-                ...prevData,
-                State: pincodeData.State,
-                District: pincodeData.District,
-            }));
-
-            if (await validateAddress()) {
-                await AddressService.addNewAddress({
-                    email: localStorage.getItem("email"),
-                    receiverName: addressData.Name,
-                    receiverPhoneNumber: addressData.ContactNumber,
-                    buildingNo: addressData.buildingNo,
-                    street1: addressData.Area,
-                    city: selectCity,
-                    district: pincodeData.District,
-                    state: pincodeData.State,
-                    pincode: addressData.Pincode,
-                }).then((response) => {
-                    console.log(response.data);
-                }).catch((err) => {
-                    if (err.response.status === 401) {
-                        console.log(err.response.data);
-                        navigate("/login");
-                        localStorage.clear();
-                    }
-                });
-            }
-
-            console.log(addressData.Name, addressData.ContactNumber, addressData.Area, pincodeData.City, pincodeData.State, pincodeData.District, addressData.Pincode);
-            window.location.reload(false);
+        if (await validateAddress()) {
+            await AddressService.addNewAddress({
+                email: localStorage.getItem("email"),
+                receiverName: addressData.Name,
+                receiverPhoneNumber: addressData.ContactNumber,
+                buildingNo: addressData.buildingNo,
+                street1: addressData.Area,
+                city: selectCity,
+                district: addressData.District,
+                state: addressData.State,
+                pincode: addressData.Pincode,
+            }).then((response) => {
+                console.log(response.data);
+                window.location.reload(false);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data);
+                    navigate("/login");
+                    localStorage.clear();
+                }
+            });
+            setAddNewAddress(false);
         }
+
+        console.log(addressData.Name, addressData.ContactNumber, addressData.Area, selectCity, addressData.State, addressData.District, addressData.Pincode);
+
     };
 
     const handleAddress = async (e) => {
@@ -129,36 +127,48 @@ function AddNewAddressComponent() {
         }
     };
 
+    console.log(addressData)
+
     const handleAddressCancel = () => {
         setAddNewAddress(false);
+        window.location.reload(false)
     };
 
     const handleSelectCity = (e) => {
         setSelectedCity(e.target.value);
     }
+    console.log(selectCity)
 
     const fetchPincodeData = async (pincode) => {
-        try {
-            const response = await axios.get(`https://api.postalpincode.in/pincode/${pincode}`);
-            const data = response.data[0];
-            console.log(data)
-            if (data.Status === "Success") {
-                const cities = response.data[0].PostOffice;
-                for (let i = 0; i < cities.length; i++) {
-                    const city = cities[i].Name;
-                    citiess.push(city);
-                }
-                setCitys(citiess);
-                console.log(citiess)
-                const locationData = {
-                    State: data.PostOffice[0].State,
-                    District: data.PostOffice[0].District,
-                };
-                return locationData;
-            }
-        } catch (error) {
-            console.log(error);
+
+        const response = await axios.get(`https://api.postalpincode.in/pincode/${pincode}`)
+        const data = response.data[0];
+        console.log(data)
+        if (data.Status === "Error") {
+            const newError = {}
+            newError.Pincode = "Enter a valid pincode"
+            setErrors(newError);
         }
+        else if (data.Status === "Success") {
+            setErrors({})
+            const cities = response.data[0].PostOffice;
+            for (let i = 0; i < cities.length; i++) {
+                const city = cities[i].Name;
+                citiess.push(city);
+            }
+            setCitys(citiess);
+            console.log(citiess)
+            const locationData = {
+                State: data.PostOffice[0].State,
+                District: data.PostOffice[0].District,
+            };
+            return locationData;
+        } else if (data.Status === "404") {
+            await validateAddress()
+        }
+
+
+
     };
 
     console.log(selectCity)
@@ -170,34 +180,41 @@ function AddNewAddressComponent() {
             {addNewAddress && (
                 <div className="addr-form">
                     <div className="add-address-container">
+
                         <div>
                             <label htmlFor="Name"> Name <br />
                                 <input value={addressData.Name} onChange={handleAddress} placeholder="Name" type="text" id="Name" />
+                                <br />
                                 {errors.name && <span>{errors.name}</span>}
-                                {/* {errors.fullName && <span>{errors.fullName}</span>} */}
                             </label>
                             <br />
 
                             <label htmlFor="ContactNumber"> Contact Number <br />
                                 <input value={addressData.ContactNumber} onChange={handleAddress} placeholder="Contact Number" type="number" id="ContactNumber" />
+                                <br />
+                                {errors.ContactNumber && <span>{errors.ContactNumber}</span>}
                             </label>
                             <br />
 
                             <label htmlFor="buildingNo"> Street Name  <br />
                                 <input value={addressData.buildingNo} onChange={handleAddress} placeholder="Street Name" type="text" id="buildingNo" />
+                                <br />
+                                {errors.buildingNo && <span>{errors.buildingNo}</span>}
                             </label>
                             <br />
 
                             <label htmlFor="Area"> LandMark <br />
                                 <input value={addressData.Area} onChange={handleAddress} placeholder="LandMark" type="text" id="Area" />
-                                {errors.Area && <span>{errors.Area}</span>}
+                                <br />
+                                {errors.landMark && <span>{errors.landMark}</span>}
                             </label>
                             <br />
                         </div>
-
                         <div>
+
                             <label htmlFor="Pincode"> Pincode <br />
                                 <input value={addressData.Pincode} onChange={handleAddress} placeholder="Pincode" type="text" id="Pincode" />
+                                <br />
                                 {errors.Pincode && <span>{errors.Pincode}</span>}
                             </label>
                             <br />
@@ -207,8 +224,7 @@ function AddNewAddressComponent() {
                                 <select onChange={handleSelectCity}>
                                     <option>Select City</option>
                                     {citys.map((city) =>
-                                        <option> {city}</option>
-                                    )}
+                                        <option> {city}</option>)}
                                 </select>
 
                             </label>
