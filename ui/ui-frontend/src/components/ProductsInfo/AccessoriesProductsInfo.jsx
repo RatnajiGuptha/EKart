@@ -132,7 +132,6 @@ const AccessoriesProductsInfo = () => {
           logoImg: productsInfo.logoImg,
           type: productsInfo.type,
           productName: productsInfo.productName,
-
           price: productsInfo.productPrice,
 
         };

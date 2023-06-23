@@ -63,6 +63,7 @@ import AccountPage from "./components/UserModules/AccountPage";
 import InvoiceComponent from "./components/UserModules/InvoiceComponent";
 import TypesOfProductsBySeller from "./components/SellerModules/SellerGraphs/TypesOfProductsBySeller";
 import WishListComponent from "./components/OrdersModules/WishListComponent";
+import { useEffect } from "react";
 
 function App() {
   const role = localStorage.getItem("role");
@@ -70,6 +71,11 @@ function App() {
     role === "SELLER" ? (<SellerHeaderComponent forceRefresh={true} />) : (<HeaderComponent forceRefresh={true} />);
   const home = role === "SELLER" ? (<SellerHomeCategories forceRefresh={true} />) : (<HomeComponent forceRefresh={true} />);
 
+
+
+  useEffect(() => {
+    document.title = "Ekart"
+  })
   return (
     <div className="App">
       <Router>

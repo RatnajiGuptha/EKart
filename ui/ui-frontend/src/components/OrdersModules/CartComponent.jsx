@@ -20,7 +20,8 @@ const CartComponent = () => {
       try {
         const response = await CartService.getCartItemsByEmail(email);
         setCartItems(response.data);
-        const res = await PromoCodesService.getAllPromoCodes();
+        const res = await PromoCodesService.getAllPromoCodesByStatus("ACTIVE");
+        console.log(res.data)
         setDiscountCodes(res.data);
       } catch (err) {
         if (err.response.status === 401) {

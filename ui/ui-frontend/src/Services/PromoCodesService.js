@@ -16,4 +16,12 @@ export const PromoCodesService = {
         });
         return res;
     },
+
+    async getAllPromoCodesByStatus(status) {
+        const res = await authenticateApi.request({
+            url: `/api/promocodes/getAllPromoCodes/${status}`,
+            method: "GET",
+        });
+        return res;
+    },
 };
