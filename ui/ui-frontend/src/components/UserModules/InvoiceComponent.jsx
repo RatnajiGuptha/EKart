@@ -1,8 +1,9 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect ,useRef} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { OrderService } from "../../Services/OrderService";
 import { PromoCodesService } from "../../Services/PromoCodesService";
 import "../../StyleSheets/Invoice.css";
+import {useReactToPrint} from 'react-to-print';
 
 const InvoiceComponent = () => {
     const { purchaseOrderId } = useParams();
@@ -11,11 +12,18 @@ const InvoiceComponent = () => {
     const [address, setAddress] = useState("")
     const [locality, setLocality] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
+    const componentRef = useRef();
 
     const [promoCode, setPromoCode] = useState("NA")
     const [discountPrice, setDiscountPrice] = useState(0);
 
     const navigate = useNavigate("")
+
+    const printData = useReactToPrint({
+        content : () => componentRef.current,
+        documentTitle : "Invoice " + purchaseOrderId,
+        onafterprint : () => alert('print Sucess')
+    });
 
     useEffect(() => {
         OrderService.getOrderDetails(purchaseOrderId).then((response) => {
@@ -50,7 +58,7 @@ const InvoiceComponent = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" ref={componentRef}>
             <div className="invoice-container">
                 <h3> INVOICE COPY </h3>
                 <div className="header">
@@ -124,35 +132,9 @@ const InvoiceComponent = () => {
                     </div>
 
                 </div >
+                <button onClick={printData}>print</button>
             </div >
         </div >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     );
 };
 

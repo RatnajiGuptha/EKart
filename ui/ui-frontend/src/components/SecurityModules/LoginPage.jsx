@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import "../../StyleSheets/Login.css"
 import { useNavigate, Link } from "react-router-dom";
 import { SecurityService } from "../../Services/SecurityService";
 import { toast } from 'react-toastify';
 import { ForgotPassword } from "../SecurityModules/ForgotPassword";
+import "../../StyleSheets/Login.css"
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -63,7 +63,10 @@ function LoginPage() {
                     </Link>
                 </div>
 
-                <p style={{ fontStyle: 'italic' }}><div className='d-flex'><div>Forgot password?</div><div><ForgotPassword /></div></div></p>
+                <div style={{ fontStyle: 'italic' }}>
+                    <div className='d-flex'><div>Forgot password?</div>
+                        <div><ForgotPassword /></div></div>
+                </div>
                 <p style={{ fontStyle: 'italic' }}>Become a seller?<a href="/addSeller"> <span style={{ color: "blue" }} >register here</span></a></p>
             </div>
         </div>
