@@ -4,6 +4,7 @@
   align-items: center;
   background-image: url("https://res.cloudinary.com/dx7zsxo2g/image/upload/v1685961369/login-bg_chqubm.png");
   background-size: cover;
+  height: 100vh;
 }
 
 .forms {
@@ -13,8 +14,9 @@
   background-color: #fcf9ea;
   border-radius: 5px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-  margin-right: 28rem;
-  margin-bottom: 7rem;
+  margin-right: 35rem;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .forms label {

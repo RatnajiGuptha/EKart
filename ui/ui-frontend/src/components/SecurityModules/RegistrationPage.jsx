@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../StyleSheets/Login.css";
+import { UserBalanceService } from "../../Services/UserBalanceService";
 import { SecurityService } from "../../Services/SecurityService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { UserBalanceService } from "../../Services/UserBalanceService";
+import "../../StyleSheets/Login.css";
+
 function Registrationpage() {
 
   const [registerData, setRegisterData] = useState({
     fullName: "",
-    email: "",
+    email: '',
     password: "",
-    contactNumber: "",
+    contactNumber: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -28,17 +29,20 @@ function Registrationpage() {
     let valid = true;
     const newError = {};
 
-    const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
-    console.log(userEmailExists.data);
+
     if (!registerData.email || !registerData.email.trim()) {
       newError.email = "Email is required";
       valid = false;
-    } else if (userEmailExists.data !== null) {
-      newError.email = "Email address already exists";
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(registerData.email)) {
-      newError.email = "Invalid Email address";
-      valid = false;
+    } else if (registerData.email !== "") {
+      const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
+      console.log(userEmailExists.data);
+      if (userEmailExists.data !== null) {
+        newError.email = "Email address already exists";
+        valid = false;
+      } else if (!/\S+@\S+\.\S+/.test(registerData.email)) {
+        newError.email = "Invalid Email address";
+        valid = false;
+      }
     }
 
     if (!registerData.fullName || registerData.fullName.trim().length < 3) {
@@ -49,6 +53,13 @@ function Registrationpage() {
       valid = false;
     }
 
+    if (registerData.contactNumber !== "") {
+      const userPhoneNo = await SecurityService.getUserByContactNumber(registerData.contactNumber);
+      console.log(userPhoneNo.data);
+      if (userPhoneNo.data !== null) {
+        newError.contactNumber = "Contact number already exists";
+      }
+    }
     if (!registerData.contactNumber.trim() || registerData.contactNumber.trim().length !== 10) {
       newError.contactNumber = "Mobile number should have 10 digits";
       valid = false;
@@ -66,7 +77,9 @@ function Registrationpage() {
     }
 
     setErrors(newError);
-    toast.error("Check the required fields");
+    if (newError === {}) {
+      toast.error("Check the required fields");
+    }
     return valid;
   };
 
@@ -103,7 +116,7 @@ function Registrationpage() {
         </label>
 
         <label>  Contact Number
-          <input type="text" name="contactNumber" placeholder="Enter Contactnumber" value={registerData.contactNumber} onChange={handleChange} />
+          <input type="number" name="contactNumber" placeholder="Enter Contactnumber" value={registerData.contactNumber} onChange={handleChange} />
           {errors.contactNumber && <span>{errors.contactNumber}</span>}
         </label>
 

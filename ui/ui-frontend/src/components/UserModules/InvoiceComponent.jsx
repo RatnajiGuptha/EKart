@@ -1,9 +1,9 @@
-import { React, useState, useEffect ,useRef} from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { OrderService } from "../../Services/OrderService";
 import { PromoCodesService } from "../../Services/PromoCodesService";
+import { useReactToPrint } from 'react-to-print';
 import "../../StyleSheets/Invoice.css";
-import {useReactToPrint} from 'react-to-print';
 
 const InvoiceComponent = () => {
     const { purchaseOrderId } = useParams();
@@ -12,6 +12,7 @@ const InvoiceComponent = () => {
     const [address, setAddress] = useState("")
     const [locality, setLocality] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
+
     const componentRef = useRef();
 
     const [promoCode, setPromoCode] = useState("NA")
@@ -20,9 +21,10 @@ const InvoiceComponent = () => {
     const navigate = useNavigate("")
 
     const printData = useReactToPrint({
-        content : () => componentRef.current,
-        documentTitle : "Invoice " + purchaseOrderId,
-        onafterprint : () => alert('print Sucess')
+        content: () => componentRef.current,
+        documentTitle: "Invoice " + purchaseOrderId,
+        onafterprint: () => alert('print Sucess')
+
     });
 
     useEffect(() => {
@@ -118,26 +120,25 @@ const InvoiceComponent = () => {
                         <div>
                         </div>
                         <div className="saved-card">
-                            <p>You have saved <span> ₹ {discountPrice*orderss.totalAmount}/-</span> </p>
+                            <p>You have saved <span> ₹ {discountPrice * orderss.totalAmount}/-</span> </p>
                             <h6>Thank you for Shopping</h6>
                         </div>
                         <div className="price-details">
                             <ul className="list-unstyled">
                                 <li>Total price: ₹ <span>{orderss.totalAmount}/-</span></li>
                                 <li>Promo Code: <span>{promoCode}</span></li>
-                                <li>Discount amount: ₹ <span>{discountPrice*orderss.totalAmount}/-</span></li>
+                                <li>Discount amount: ₹ <span>{discountPrice * orderss.totalAmount}/-</span></li>
                                 <li>Grand Total: ₹ <span>{orderss.price}/-</span></li>
                             </ul>
                         </div>
                     </div>
 
                 </div >
-                <button onClick={printData}>print</button>
+                <button onClick={printData} className="btn btn-success">Print</button>
             </div >
         </div >
     );
 };
-
 
 
 

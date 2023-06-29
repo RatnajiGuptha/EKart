@@ -56,7 +56,7 @@ export const ForgotPassword = () => {
 
     return (
         <div>
-            <a><span style={{ color: "blue" }} onClick={() => setShow(true)}>click here</span></a>
+            <a><span style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }} onClick={() => setShow(true)}>click here</span></a>
             <MDBModal show={show} onHide={() => setShow(false)}>
                 <MDBModalDialog centered>
                     <MDBModalContent>

@@ -32,39 +32,47 @@ function SellerRegistration() {
         let valid = true;
         const newError = {};
 
-        const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
-        console.log("email =", userEmailExists.data);
         if (!registerData.email || !registerData.email.trim()) {
             newError.email = "Email is required";
             valid = false;
-        } else if (userEmailExists.data !== null) {
-            newError.email = "Email address already exists";
-            valid = false;
-        } else if (!/\S+@\S+\.\S+/.test(registerData.email)) {
-            newError.email = "Invalid Email address";
-            valid = false;
+        } else if (registerData.email !== "") {
+            const userEmailExists = await SecurityService.getUserByEmail(registerData.email);
+            console.log(userEmailExists.data);
+            if (userEmailExists.data !== null) {
+                newError.email = "Email address already exists";
+                valid = false;
+            } else if (!/\S+@\S+\.\S+/.test(registerData.email)) {
+                newError.email = "Invalid Email address";
+                valid = false;
+            }
         }
 
-        const contactNumberExists = await SecurityService.getUserByContactNumber(registerData.contactNumber);
-        console.log(contactNumberExists.data);
+
+        if (registerData.contactNumber !== "") {
+            const userPhoneNo = await SecurityService.getUserByContactNumber(registerData.contactNumber);
+            console.log(userPhoneNo.data);
+            if (userPhoneNo.data !== null) {
+                newError.contactNumber = "Contact number already exists";
+            }
+        }
         if (!registerData.contactNumber.trim() || registerData.contactNumber.trim().length !== 10) {
             newError.contactNumber = 'Mobile number should have 10 digits'
-            valid = false;
-        } else if (contactNumberExists.data !== null) {
-            newError.contactNumber = "Mobile number already exists";
             valid = false;
         } else if (!/^[0-9]+$/.test(registerData.contactNumber)) {
             newError.contactNumber = 'Mobile number should have 10 digits'
             valid = false;
         }
 
-        const userNameExists = await SecurityService.getUserName(registerData.fullName);
-        console.log("name --> ", userNameExists.data);
+        if (registerData.fullName !== "") {
+            const userNameExists = await SecurityService.getUserName(registerData.fullName);
+            console.log("name --> ", userNameExists.data);
+            if (userNameExists.data !== null) {
+                newError.fullName = "Seller already exists";
+                valid = false;
+            }
+        }
         if (!registerData.fullName || registerData.fullName.trim().length < 3) {
             newError.fullName = 'Full name should have at least 3 characters';
-            valid = false;
-        } else if (userNameExists.data !== null) {
-            newError.fullName = "Seller already exists";
             valid = false;
         } else if (!/^[a-zA-Z ]+$/.test(registerData.fullName)) {
             newError.fullName = 'Invalid Name';
@@ -80,7 +88,9 @@ function SellerRegistration() {
         }
 
         setErrors(newError);
-        toast.error("Check the required fields");
+        if (newError === {}) {
+            toast.error("Check the required fields");
+        }
         return valid;
     }
 
