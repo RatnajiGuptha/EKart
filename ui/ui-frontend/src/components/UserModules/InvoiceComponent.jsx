@@ -1,6 +1,8 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { OrderService } from "../../Services/OrderService";
+import { PromoCodesService } from "../../Services/PromoCodesService";
+import { useReactToPrint } from 'react-to-print';
 import "../../StyleSheets/Invoice.css";
 
 const InvoiceComponent = () => {
@@ -10,7 +12,20 @@ const InvoiceComponent = () => {
     const [address, setAddress] = useState("")
     const [locality, setLocality] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
+
+    const componentRef = useRef();
+
+    const [promoCode, setPromoCode] = useState("NA")
+    const [discountPrice, setDiscountPrice] = useState(0);
+
     const navigate = useNavigate("")
+
+    const printData = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: "Invoice " + purchaseOrderId,
+        onafterprint: () => alert('print Sucess')
+
+    });
 
     useEffect(() => {
         OrderService.getOrderDetails(purchaseOrderId).then((response) => {
@@ -20,6 +35,12 @@ const InvoiceComponent = () => {
             setAddress(response.data.address[4] + " " + response.data.address[5])
             setLocality(response.data.address[6] + "-" + response.data.address[9])
             setPhoneNumber(response.data.address[3])
+            setPromoCode(response.data.promoCode)
+
+
+            PromoCodesService.getDiscountPrice(response.data.promoCode).then((response) => {
+                setDiscountPrice(response.data)
+            })
 
         }).catch((err) => {
             if (err.response.status === 401) {
@@ -39,7 +60,7 @@ const InvoiceComponent = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" ref={componentRef}>
             <div className="invoice-container">
                 <h3> INVOICE COPY </h3>
                 <div className="header">
@@ -95,44 +116,29 @@ const InvoiceComponent = () => {
                         </table>
                     </div>
                     <hr className="mt-0" />
-                    <div className="price-details">
-                        <ul className="list-unstyled">
-                            <li>Grand Total: ₹ <span>{orderss.price} /-</span></li>
-                        </ul>
+                    <div className="price-containers">
+                        <div>
+                        </div>
+                        <div className="saved-card">
+                            <p>You have saved <span> ₹ {(discountPrice * orderss.totalAmount).toFixed(2)}/-</span> </p>
+                            <h6>Thank you for Shopping</h6>
+                        </div>
+                        <div className="price-details">
+                            <ul className="list-unstyled">
+                                <li>Total price: ₹ <span>{orderss.totalAmount}/-</span></li>
+                                <li>Promo Code: <span>{promoCode}</span></li>
+                                <li>Discount amount: ₹ <span>{discountPrice * orderss.totalAmount}/-</span></li>
+                                <li>Grand Total: ₹ <span>{orderss.price}/-</span></li>
+                            </ul>
+                        </div>
                     </div>
+
                 </div >
+                <button onClick={printData} className="btn btn-success">Print</button>
             </div >
         </div >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     );
 };
-
 
 
 

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
@@ -12,8 +11,6 @@ const ChangePassword = ({ email }) => {
     const [reenterNewPassword, setReenterNewPassword] = useState("");
     const [errors, setErrors] = useState({});
 
-
-
     const validatePassword = async () => {
         let valid = true;
         const newError = {};
@@ -23,8 +20,8 @@ const ChangePassword = ({ email }) => {
         } else if (!newPassword || newPassword.trim().length < 8) {
             newError.password = 'Password should have at least 8 characters';
             valid = false;
-        } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(newPassword)) {
-            newError.password = 'Password should at least one letter, one number and one special character';
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(newPassword)) {
+            newError.password = "Password should contains least one letter, one number and one special character";
             valid = false;
         }
 

@@ -17,7 +17,7 @@ const AccountPage = () => {
   }
 
   const navigate = useNavigate();
-  const userName = localStorage.getItem("name");
+  const name = localStorage.getItem("name");
 
   const [assignType, setAssignType] = useState(type);
   const [page, setPages] = useState(assignType);
@@ -46,7 +46,7 @@ const AccountPage = () => {
             <div className="profile">
               <img className="profile-img"
                 alt="/" src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg" ></img>
-              <div className="username">{userName}</div>
+              <div className="username">{name}</div>
             </div>
             <div className="profile-categories">
               <a className="category" href="/profile/info" onClick={() => { handlePage("info") }}> <FontAwesomeIcon icon={faUser} /> &ensp; Manage Profile</a>

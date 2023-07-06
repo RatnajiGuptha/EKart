@@ -1,30 +1,34 @@
-import { useState, useEffect, React } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { UserBalanceService } from '../../Services/UserBalanceService';
+import { React, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AddressService } from '../../Services/AddressService';
 import { OrderService } from '../../Services/OrderService';
-import "../../StyleSheets/Checkout.css";
+import { UserBalanceService } from '../../Services/UserBalanceService';
 import AddressSelectionCompoonent from './AddressSelectionCompoonent';
+import "../../StyleSheets/Checkout.css";
 
 const CheckoutComponent = () => {
-    var { userName, addressId } = useParams();
+    const email = localStorage.getItem("email");
+    var { addressId, coupon } = useParams();
 
-    console.log(userName);
+    console.log(email);
     console.log(addressId);
     const navigate = useNavigate();
     const [purchaseOrder, setPurchaseOrder] = useState([]);
     const [balance, setBalance] = useState(0);
-    // const [isChecked, setIsChecked] = useState(false);
     const [address, setAddress] = useState([]);
     const [addressList, setAddressList] = useState([]);
     const [defaultAddId, setDefaultAddId] = useState();
-
+    const [OTP, setOTP] = useState(0);
+    const [userEnteredOTP, setUserEnteredOTP] = useState(0);
+    const [errors, setErrors] = useState({});
+    const [otpVerify, setOtpverify] = useState(false);
+    const [msg, setMsg] = useState({});
 
     console.log("defaultid : ", defaultAddId);
     console.log(addressList)
 
     useEffect(() => {
-        UserBalanceService.getUserBalance(userName).then((Response) => {
+        UserBalanceService.getUserBalance(email).then((Response) => {
             setBalance(Response.data);
             console.log("Balance", Response.data);
         }).catch((err) => {
@@ -35,7 +39,7 @@ const CheckoutComponent = () => {
             }
         });
 
-        AddressService.getAllAddress(userName).then((Response) => {
+        AddressService.getAllAddress(email).then((Response) => {
             setAddressList(Response.data);
             console.log(Response.data);
             setDefaultAddId(Response.data[0].addressId);
@@ -71,33 +75,49 @@ const CheckoutComponent = () => {
                 }
             })
         }
-    }, [userName, addressId, defaultAddId, navigate]);
+    }, [email, addressId, defaultAddId, navigate]);
 
-    const Email = localStorage.getItem("userEmail");
-    console.log("email", Email);
+    console.log("email", email);
     console.log(address.addressId)
+    const generateOTP = async () => {
+        const msg={}
+        const otp = await OrderService.generateOtp(email,"OTP verification for payment confirmation","please enter this OTP for payment confirmation : ").then()
+        setOTP(otp.data)
+        msg.otpSuccess="Please enter the OTP send to your mail."
+        setMsg(msg);
+        setOtpverify(true)
+    }
 
+    console.log(OTP)
     const paymentFromCart = async () => {
-        if (addressId === undefined) {
-            addressId = defaultAddId;
-        }
-        await OrderService.createOrderForCart(userName, address.addressId, Email).then((Response) => {
-            setPurchaseOrder(Response.data);
-            console.log(purchaseOrder);
-            return Response.data;
-        }).then((data) => {
-            console.log(data?.purchaseOrderId)
-            console.log(data)
-            console.log("...........receivedData.........");
-            const i = data?.purchaseOrderId;
-            navigate(`/orderStatus/${i}`);
-        }).catch((err) => {
-            if (err.response.status === 401) {
-                console.log(err.response.data)
-                navigate("/login")
-                localStorage.clear();
+        const newError = {}
+        if (userEnteredOTP == OTP && otpVerify) {
+            if (addressId === undefined) {
+                addressId = defaultAddId;
             }
-        });
+            await OrderService.createOrderForCart(address.addressId, coupon, email).then((Response) => {
+                setPurchaseOrder(Response.data);
+                console.log(purchaseOrder);
+                return Response.data;
+            }).then((data) => {
+                console.log(data?.purchaseOrderId)
+                console.log(data)
+                console.log("...........receivedData.........");
+                const i = data?.purchaseOrderId;
+                navigate(`/orderStatus/${i}`);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data)
+                    navigate("/login")
+                    localStorage.clear();
+                }
+            });
+        }
+        else {
+            newError.OtpCheck = "Please enter correct OTP."
+            setErrors(newError);
+        }
+
     }
 
     return (
@@ -118,23 +138,37 @@ const CheckoutComponent = () => {
                                         : <p>Add address Here</p>
                                     }
                                 </div>
+                                
                                 <div>
-                                    <AddressSelectionCompoonent userName={userName} />
+                                    <AddressSelectionCompoonent email={email} promoCode={coupon} />
                                 </div>
                             </div>
                         </div>
+
                         <form className='cashClass'>
                             <table className='addressTable2'>
-                                <tr style={{ border: "2px solid black" }}>
+                                <tr>
                                     <td><img className="img-fluid" alt="/" src="https://www.pngkit.com/png/full/332-3321940_wallet-icon-control-money-icon-png.png" /></td>
                                     <td> congrats you have  <strong >Rs.{balance}</strong> in wallet</td>
                                 </tr>
                             </table>
                         </form>
 
-                        <button className="btn btn-info mt-3" onClick={() => paymentFromCart()}>Proceed For payment</button>
+
+                        <label className="otp-label">OTP
+                            <input type="number" name='otp' placeholder="Enter OTP" onChange={(e) => { setUserEnteredOTP(e.target.value) }}></input>
+                            <button className="btn btn-warning " style={{ margin: "0px 15px" }} onClick={() => generateOTP()} > Request OTP</button>
+                        </label>
+                        {msg.otpSuccess && <span className="otp-success">{msg.otpSuccess}</span>}
+                        {errors.OtpCheck && <span>{errors.OtpCheck}</span>}
+
+                        <div>
+                            <button className="btn btn-info mt-3" onClick={() => paymentFromCart()}>Proceed For payment</button>
+                        </div>
                     </div>
+
                 </div>
+
                 <div className="d-flex align-items-start flex-column" >
                     <div className='paymentGif'>
                         <img src='https://res.cloudinary.com/dmanaxtze/image/upload/v1686544328/ezgif-1-e4608c3f86_yb9poo.gif' alt='paymentgif'></img>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import { BeautyService } from '../../Services/BeautyService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function AddBeautyModule() {
     const [productName, setProductName] = useState('')
     const [logoImg, setLogoImg] = useState('')
@@ -32,7 +34,7 @@ function AddBeautyModule() {
         if (beautyId) {
             BeautyService.updateBeautyProducts(beautyId, beauty).then((response) => {
                 console.log(response.data)
-                navigate("/listBeautyProducts");
+                toast.success("Product updated successfully", { theme: "dark" });
             }).catch(err => {
                 if (err.response.status === 401) {
                     console.log(err.response.data)
@@ -44,7 +46,7 @@ function AddBeautyModule() {
         } else {
             BeautyService.saveBeautyProducts(beauty).then((response) => {
                 console.log(response.data)
-                navigate("/listBeautyProducts");
+                toast.success("Product added successfully", { theme: "dark" });
             }).catch(err => {
                 if (err.response.status === 401) {
                     console.log(err.response.data)
@@ -186,6 +188,7 @@ function AddBeautyModule() {
                                 <Link to='/listBeautyProducts'>
                                     <button className='btn btn-warning m-3'>Back</button>
                                 </Link>
+                                <ToastContainer />
                             </form>
                         </div>
                     </div>

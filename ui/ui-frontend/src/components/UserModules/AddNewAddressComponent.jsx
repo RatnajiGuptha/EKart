@@ -1,112 +1,256 @@
 import React, { useState } from "react";
-import { AddressService } from "../../Services/AddressService";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AddressService } from "../../Services/AddressService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../../StyleSheets/NewAddress.css";
-const AddNewAddressComponent = () => {
 
-    const [addNewAddress, setAddNewAddress] = useState(true)
-    const [Name, setName] = useState('');
-    const [ContactNumber, setContactNumber] = useState('');
-    const [buildingNo, setBuildingNo] = useState('')
-    const [Area, setArea] = useState('');
-    const [City, setCity] = useState('');
-    const [State, setState] = useState('');
-    const [District, setDistrict] = useState('');
-    const [Pincode, setPincode] = useState('');
-    const navigate = useNavigate("")
+function AddNewAddressComponent() {
+    const [addNewAddress, setAddNewAddress] = useState(true);
 
-    const handleSubmit = (e) => {
+    const [citys, setCitys] = useState([])
+    const [selectCity, setSelectedCity] = useState("");
+    const citiess = []
+
+    const [errors, setErrors] = useState({});
+
+    const navigate = useNavigate();
+
+    const [addressData, setAddressData] = useState({
+        Name: "",
+        ContactNumber: "",
+        buildingNo: "",
+        Area: "",
+        City: selectCity,
+        State: "",
+        District: "",
+        Pincode: "",
+    });
+
+    const validateAddress = async () => {
+        let valid = true;
+        const newError = {}
+        console.log(addressData)
+        if (addressData.Name.trim().length <= 4) {
+            newError.name = "Name should have at least 5 characters";
+            valid = false;
+        } else if (!/^[a-zA-Z ]+$/.test(addressData.Name)) {
+            newError.name = "Invalid name";
+            valid = false;
+        }
+
+        if (addressData.ContactNumber.trim().length !== 10) {
+            newError.ContactNumber = "Mobile number should have 10 digits";
+            valid = false;
+        } else if (!/^[0-9]+$/.test(addressData.ContactNumber)) {
+            newError.ContactNumber = "Mobile number should have 10 digits";
+            valid = false;
+        }
+
+        if (!addressData.buildingNo.trim().length >= 1) {
+            newError.buildingNo = "Enter a valid street name";
+            valid = false;
+        } else if (!/^[a-zA-Z 0-9/\\.:]+$/.test(addressData.buildingNo)) {
+            newError.buildingNo = "Invalid Building No";
+            valid = false;
+        }
+
+        if (!addressData.Area.trim().length > 1) {
+            newError.Area = "Enter a valid land Mark";
+            valid = false;
+        } else if (!/^[a-zA-Z ]+$/.test(addressData.Area)) {
+            newError.landMark = "Invalid land mark";
+            valid = false;
+        }
+
+        if (!addressData.Pincode.trim().length === 6) {
+            newError.Pincode = "Enter a valid pincode";
+            valid = false;
+        } else if (!/^[1-9][0-9]{5}$/.test(addressData.Pincode)) {
+            newError.Pincode = "Enter a valid pincode";
+            valid = false;
+        }
+
+        setErrors(newError);
+        toast.error("Check the required fields");
+        return valid;
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setAddNewAddress(false)
-        AddressService.addNewAddress({
-            userName: localStorage.getItem("username"),
-            receiverName: Name,
-            receiverPhoneNumber: ContactNumber,
-            buildingNo: buildingNo,
-            street1: Area,
-            city: City,
-            district: District,
-            state: State,
-            pincode: Pincode
-        }).then((response) => {
-            console.log(response.data)
-        }).catch((err) => {
-            if (err.response.status === 401) {
-                console.log(err.response.data)
-                navigate("/login")
-                localStorage.clear();
-            }
-        })
-        console.log(Name, ContactNumber, Area, City, State, District, Pincode);
-        window.location.reload(false)
-    }
 
-    const handleAddress = (e) => {
+        if (await validateAddress()) {
+            await AddressService.addNewAddress({
+                email: localStorage.getItem("email"),
+                receiverName: addressData.Name,
+                receiverPhoneNumber: addressData.ContactNumber,
+                buildingNo: addressData.buildingNo,
+                street1: addressData.Area,
+                city: selectCity,
+                district: addressData.District,
+                state: addressData.State,
+                pincode: addressData.Pincode,
+            }).then((response) => {
+                console.log(response.data);
+                window.location.reload(false);
+            }).catch((err) => {
+                if (err.response.status === 401) {
+                    console.log(err.response.data);
+                    navigate("/login");
+                    localStorage.clear();
+                }
+            });
+            setAddNewAddress(false);
+        }
+
+        console.log(addressData.Name, addressData.ContactNumber, addressData.Area, selectCity, addressData.State, addressData.District, addressData.Pincode);
+
+    };
+
+    const handleAddress = async (e) => {
         const { id, value } = e.target;
-        if (id === "Name") {
-            setName(value)
-        }
-        if (id === "ContactNumber") {
-            setContactNumber(value)
-        }
-        if (id === "buildingNo") {
-            setBuildingNo(value)
-        }
-        if (id === "Area") {
-            setArea(value)
-        }
-        if (id === "City") {
-            setCity(value)
-        }
-        if (id === "State") {
-            setState(value)
-        }
-        if (id === "District") {
-            setDistrict(value)
-        }
-        if (id === "Pincode") {
-            setPincode(value)
-        }
-    }
+        setAddressData((prevData) => ({
+            ...prevData,
+            [id]: value,
+        }));
 
-    const handleAddressCancel = (e) => {
-        setAddNewAddress(false)
+        if (id === "Pincode") {
+            const pincodeData = await fetchPincodeData(value);
+            if (pincodeData) {
+                setAddressData((prevData) => ({
+                    ...prevData,
+                    State: pincodeData.State,
+                    District: pincodeData.District,
+                }));
+            }
+        }
+    };
+
+    console.log(addressData)
+
+    const handleAddressCancel = () => {
+        setAddNewAddress(false);
+        window.location.reload(false)
+    };
+
+    const handleSelectCity = (e) => {
+        setSelectedCity(e.target.value);
     }
+    console.log(selectCity)
+
+    const fetchPincodeData = async (pincode) => {
+
+        const response = await axios.get(`https://api.postalpincode.in/pincode/${pincode}`)
+        const data = response.data[0];
+        console.log(data)
+        if (data.Status === "Error") {
+            const newError = {}
+            newError.Pincode = "Enter a valid pincode"
+            setErrors(newError);
+        }
+        else if (data.Status === "Success") {
+            setErrors({})
+            const cities = response.data[0].PostOffice;
+            for (let i = 0; i < cities.length; i++) {
+                const city = cities[i].Name;
+                citiess.push(city);
+            }
+            setCitys(citiess);
+            console.log(citiess)
+            const locationData = {
+                State: data.PostOffice[0].State,
+                District: data.PostOffice[0].District,
+            };
+            return locationData;
+        } else if (data.Status === "404") {
+            await validateAddress()
+        }
+
+
+
+    };
+
+    console.log(selectCity)
+
+
+
     return (
         <div className="mb-3">
-            {addNewAddress &&
-                <form className="addr-form">
+            {addNewAddress && (
+                <div className="addr-form">
                     <div className="add-address-container">
+
                         <div>
-                            <label htmlFor="Name" className="texted">Name </label><br />
-                            <input value={Name} onChange={(e) => handleAddress(e)} placeholder="Name" type="text" id="Name"/><br />
-                            <label htmlFor="ContactNumber" className="texted">ContactNumber</label><br />
-                            <input value={ContactNumber} onChange={(e) => handleAddress(e)} placeholder="10-digit number" type="text" id="ContactNumber" required /><br />
-                            <label htmlFor="buildingNo" className="texted">BuildingNo</label><br />
-                            <input value={buildingNo} onChange={(e) => handleAddress(e)} placeholder="buildingNo" type="text" id="buildingNo" required /><br />
-                            <label htmlFor="Area" className="texted">Area</label><br />
-                            <input value={Area} onChange={(e) => handleAddress(e)} placeholder="Area" type="text" id="Area" required /><br />
+                            <label htmlFor="Name"> Name <br />
+                                <input value={addressData.Name} onChange={handleAddress} placeholder="Name" type="text" id="Name" />
+                                <br />
+                                {errors.name && <span>{errors.name}</span>}
+                            </label>
+                            <br />
+
+                            <label htmlFor="ContactNumber"> Contact Number <br />
+                                <input value={addressData.ContactNumber} onChange={handleAddress} placeholder="Contact Number" type="number" id="ContactNumber" />
+                                <br />
+                                {errors.ContactNumber && <span>{errors.ContactNumber}</span>}
+                            </label>
+                            <br />
+
+                            <label htmlFor="buildingNo"> Street Name  <br />
+                                <input value={addressData.buildingNo} onChange={handleAddress} placeholder="Street Name" type="text" id="buildingNo" />
+                                <br />
+                                {errors.buildingNo && <span>{errors.buildingNo}</span>}
+                            </label>
+                            <br />
+
+                            <label htmlFor="Area"> LandMark <br />
+                                <input value={addressData.Area} onChange={handleAddress} placeholder="LandMark" type="text" id="Area" />
+                                <br />
+                                {errors.landMark && <span>{errors.landMark}</span>}
+                            </label>
+                            <br />
                         </div>
                         <div>
-                            <label htmlFor="City" className="texted">City</label><br />
-                            <input value={City} onChange={(e) => handleAddress(e)} placeholder="City" type="text" id="City" required /><br />
-                            <label htmlFor="State" className="texted" >State</label><br />
-                            <input value={State} onChange={(e) => handleAddress(e)} placeholder="State" type="text" id="State" required /><br />
-                            <label htmlFor="District" className="texted" >District</label><br />
-                            <input value={District} onChange={(e) => handleAddress(e)} placeholder="District" type="text" id="District" required /><br />
-                            <label htmlFor="Pincode" className="texted" >Pincode</label><br />
-                            <input value={Pincode} onChange={(e) => handleAddress(e)} placeholder="Pincode" type="text" id="Pincode" required /><br />
+
+                            <label htmlFor="Pincode"> Pincode <br />
+                                <input value={addressData.Pincode} onChange={handleAddress} placeholder="Pincode" type="text" id="Pincode" />
+                                <br />
+                                {errors.Pincode && <span>{errors.Pincode}</span>}
+                            </label>
+                            <br />
+
+                            <label htmlFor="City"> City <br />
+
+                                <select onChange={handleSelectCity}>
+                                    <option>Select City</option>
+                                    {citys.map((city) =>
+                                        <option> {city}</option>)}
+                                </select>
+
+                            </label>
+                            <br />
+
+                            <label htmlFor="District"> District <br />
+                                <input value={addressData.District} placeholder="District" type="text" id="District" />
+                            </label>
+                            <br />
+
+                            <label htmlFor="State"> State <br />
+                                <input value={addressData.State} placeholder="State" type="text" id="State" />
+                            </label>
+                            <br />
+
                         </div>
                     </div>
                     <div className="btn-container m-2">
-                        <button className="btn btn-success m-2" onClick={(e) => { handleSubmit(e) }}>save</button>
-                        <button className="btn btn-warning m-2" onClick={(e) => { handleAddressCancel(e) }}>cancel</button>
+                        <button type="submit" className="btn btn-success m-2" onClick={handleSubmit}> Save</button>
+                        <button type="button" className="btn btn-warning m-2" onClick={handleAddressCancel}>  Cancel</button>
                     </div>
-                </form>
-            }
+                    <ToastContainer />
+                </div>
+            )}
         </div>
-
     );
-};
+}
 
 export default AddNewAddressComponent;

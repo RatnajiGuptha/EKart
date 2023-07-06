@@ -20,6 +20,7 @@ import FashionProductsByGenderInfo from "./components/ProductsInfo/FashionProduc
 import FashionProductByCategory from "./components/Products/FashionProductByCategory";
 import FashionProductsInfo from "./components/ProductsInfo/FashionProductsInfo";
 import FashionProductByGenderAndType from "./components/Products/FashionProductByGenderAndType";
+import FashionProductsByIdInfo from "./components/ProductsInfo/FashionProductsByIdInfo";
 
 import Footware from "./components/Products/Footwear";
 import FootwearProductsInfo from "./components/ProductsInfo/FootwearProductsInfo";
@@ -62,12 +63,14 @@ import SellerHomeCategories from "./components/SellerModules/SellerHomeCategorie
 import AccountPage from "./components/UserModules/AccountPage";
 import InvoiceComponent from "./components/UserModules/InvoiceComponent";
 import TypesOfProductsBySeller from "./components/SellerModules/SellerGraphs/TypesOfProductsBySeller";
+import WishListComponent from "./components/OrdersModules/WishListComponent";
 
 function App() {
   const role = localStorage.getItem("role");
   const header =
     role === "SELLER" ? (<SellerHeaderComponent forceRefresh={true} />) : (<HeaderComponent forceRefresh={true} />);
   const home = role === "SELLER" ? (<SellerHomeCategories forceRefresh={true} />) : (<HomeComponent forceRefresh={true} />);
+
 
   return (
     <div className="App">
@@ -76,20 +79,23 @@ function App() {
         {header}
         <Routes>
           <Route path="/" element={home}></Route>
-          {/* <Route path="/" element={<HomeComponent />} ></Route> */}
 
           {/* security  */}
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/registration" element={<Registrationpage />}></Route>
           <Route path="/addSeller" element={<SellerRegistration />}></Route>
 
+          {/* Wish List*/}
+          <Route path="/wishList" element={<WishListComponent />}></Route>
+
           {/* cart  */}
           <Route path="/cart" element={<CartComponent />}></Route>
-          <Route path="/paymentPage/:userName" element={<CheckoutComponent />}></Route>
-          <Route path="/paymentPage/:userName/:addressId" element={<CheckoutComponent />}></Route>
+          <Route path="/paymentPage/:userName/:coupon" element={<CheckoutComponent />}></Route>
+          <Route path="/paymentPage/:userName/:addressId/:coupon" element={<CheckoutComponent />}></Route>
 
           {/* fashion products  */}
           <Route path="/fashion" element={<FashionComponent />}></Route>
+          <Route path="/fashion/:productId" element={<FashionProductsByIdInfo />}></Route>
           <Route path="/fashionBy/:suitablefor" element={<FashionProductByGender />}></Route>
           <Route path="/fashionBy/:suitablefor/:productId" element={<FashionProductsByGenderInfo />}></Route>
           <Route path="/fashionByType/:type" element={<FashionProductByCategory />}></Route>

@@ -10,9 +10,10 @@ const AddressComponent = () => {
     const [showAddNewAddress, setAddNewAddress] = useState(false);
     const [addressList, setAddressList] = useState([]);
     const navigate = useNavigate("")
+    const email = localStorage.getItem('email')
 
     useEffect(() => {
-        AddressService.getAllAddress(localStorage.getItem("username")).then((response) => {
+        AddressService.getAllAddress(email).then((response) => {
             console.log(response.data.length);
             setAddressList(response.data);
         }).catch((err) => {
@@ -22,7 +23,7 @@ const AddressComponent = () => {
                 localStorage.clear();
             }
         })
-    }, [navigate])
+    }, [email, navigate])
 
     const toggleAddNewAddress = (event) => {
         setAddNewAddress(!showAddNewAddress);
@@ -52,8 +53,8 @@ const AddressComponent = () => {
                     {showAddNewAddress && <AddNewAddress />}
                 </div>
                 <div className='address-card'>
-                    {addressList.map((item) => (
-                        <div className="address-info-container">
+                    {addressList.map((item, i) => (
+                        <div className="address-info-container" key={i}>
                             <ul className="list-unstyled">
                                 <li>{item.receiverName}- {item.receiverPhoneNumber}</li>
                                 <li>{item.buildingNo},{item.street1}</li>

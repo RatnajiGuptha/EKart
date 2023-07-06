@@ -1,7 +1,5 @@
-.paymentPage{
+.paymentPage {
     align-items: center;
-    /* background-color: lightblue; */
-    /* min-height: 100vh; */
 }
 
 .card1 {
@@ -9,14 +7,13 @@
     width: 400px;
     padding: 2rem 2.5rem;
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: #e6e6e6; 
-    align-items: center; 
+    background-color: #e6e6e6;
+    align-items: center;
 
 }
 
-.card2{
+.card2 {
     margin: auto;
-    /* margin-left: 20px; */
     margin-top: 45px;
     min-height: 300px;
     width: 500px;
@@ -24,8 +21,10 @@
     box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     justify-content: center;
     align-items: center;
-    background-color: #e6e6e6; 
+    background-color: #e6e6e6;
     margin-left: 70px;
+    padding-top: 30px;
+    padding-bottom: 20px;
 }
 
 
@@ -34,17 +33,13 @@ table {
     width: 300px;
     height: 15vh;
     border-radius: 15px;
-    /* border-color: black; */
-    /* align-items: center; */
+
 }
 
 form .img-fluid {
     width: 45px;
 }
 
-payment-btn {
-    margin-top: 50vh;
-}
 .AddressText {
     font-size: 14px;
     font-family: Garamond, serif;
@@ -54,45 +49,78 @@ payment-btn {
 .address-container1 {
     display: flex;
     text-align: start;
-    border: 2px solid black;
+    border: 2px solid gray;
     width: 350px;
     border-radius: 2px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     margin-left: 10px;
     line-height: 80%;
-    background-color: white;
-   
+    background-color: aliceblue;
+
 }
-.addr1{
-    background-color: white;
-    margin-top : 10px;
-    width:300px;
+
+.addr1 {
+    background-color: aliceblue;
+    margin-top: 5px;
+    width: 300px;
     padding: 10px;
 }
-.addressTable2{
+
+.cashClass {
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.addressTable2 {
     margin-left: 10px;
     width: 350px;
     text-align: center;
-}
-.cashClass{
-    align-items: center;
+    border: 2px solid gray;
+    background-color: aliceblue;
 
 }
-.paymentGif{
-margin-left: 70px;
+
+.otp-label {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: 700;
 }
-.changeBtn{
-     margin-left:-15px; 
+
+.card2 span {
+    color: orangered;
+}
+.card2 .otp-success {
+    color: green;
+}
+
+.otp-label input[type="number"] {
+    height: 40px;
+    max-width: 150px;
+    border-radius: 12px;
+    border: 2px solid gray;
+    background-color: aliceblue;
+    margin-left: 10px;
+}
+
+.paymentGif {
+    margin-left: 70px;
+}
+
+.changeBtn {
+    margin-left: -15px;
     margin-top: 20px;
-   
+
 }
-.edit-icon{
- width: 60px;
- height:20px;
- margin-top: 30px;
- 
+
+.edit-icon {
+    width: 60px;
+    height: 20px;
+    margin-top: 30px;
+
 }
-.addressText2{
+
+.addressText2 {
     font-family: Garamond, serif;
     font-weight: bold;
     line-height: 50%;

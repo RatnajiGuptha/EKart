@@ -1,20 +1,13 @@
 import React from 'react'
 import "../StyleSheets/AboutUs.css";
+
 export const AboutUs = () => {
+    
     return (
-
-        //                     <div className="d-flex align-content-start flex" style={{ height: "300px" }}>
-        //                         <div className="d-flex align-items-start flex-column" >
-        //                             <h4 className='content'>Beauty</h4>
-        //                             
-        //                         </div>
-        //                        
-
-
         <div className='bg-container'>
             <h3>About us</h3>
             <div className='page-container'>
-                <div className="card-container">
+                <div className="about-card-container">
                     <div>
                         <img src="https://res.cloudinary.com/dlhx8bf7w/image/upload/v1686638738/fashion_icon_fct794.jpg" alt="/" className='images' />
                     </div>
@@ -32,7 +25,7 @@ export const AboutUs = () => {
                     </div>
                 </div>
 
-                <div className="card-container">
+                <div className="about-card-container">
                     <div>
                         <img src="https://res.cloudinary.com/dlhx8bf7w/image/upload/v1686642382/footwear-icon_h8shbu.jpg" alt="/" className='images' />
 
@@ -51,7 +44,7 @@ export const AboutUs = () => {
                     </div>
                 </div>
 
-                <div className="card-container">
+                <div className="about-card-container">
                     <div>
                         <img src="https://res.cloudinary.com/dlhx8bf7w/image/upload/v1686646850/appliances-icon_axx6mi.jpg" alt="/" className='images' />
                     </div>
@@ -71,13 +64,13 @@ export const AboutUs = () => {
 
                 <div className="card-container-last">
                     <div>
-                        <img src="https://res.cloudinary.com/dlhx8bf7w/image/upload/v1686641651/beauty-icon_fdhprb.jpg" alt="/" className='images' />
+                        <img src="https://res.cloudinary.com/dlhx8bf7w/image/upload/v1686641651/beauty-icon_fdhprb.jpg" alt="/" className='images m-2' />
                     </div>
                     <div className="cards-info" >
                         <h4 >Beauty</h4>
                         <p >Beauty category includes all types of beauty products like face serum , face moisturiser, sunscreen, kajal, mascara and also the product for hair like shampoo, conditioner and hair serum.</p>
                     </div>
-                </div>
+                </div> 
             </div>
         </div >
     )

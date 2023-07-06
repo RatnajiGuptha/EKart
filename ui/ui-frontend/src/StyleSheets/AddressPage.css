@@ -4,17 +4,12 @@
     padding: 2rem;
     background-color: aliceblue;
     border-radius: 16px;
+    min-height: 75vh;
 }
 
 .update-balance {
     color: black;
 }
-
-/* .from-container {
-    height: 100vh;   
-    display: flex;
-    padding: 10px;
-} */
 
 .address-card {
     display: flex;

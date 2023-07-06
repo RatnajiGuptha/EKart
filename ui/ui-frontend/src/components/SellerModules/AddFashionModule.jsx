@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import "../../StyleSheets/SellerModule.css";
 import { FashionProductService } from '../../Services/FashionProductService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function AddFashionModule() {
     const [productName, setProductName] = useState('')
     const [logoImg, setLogoImg] = useState('')
@@ -36,7 +38,7 @@ function AddFashionModule() {
         if (fashionId) {
             FashionProductService.updateFashionProducts(fashionId, fashionProducts).then((response) => {
                 console.log(response.data)
-                navigate("/listFashionProducts")
+                toast.success("Product updated successfully", { theme: "dark" });
             }).catch(err => {
                 if (err.response.status === 401) {
                     console.log(err.response.data)
@@ -48,7 +50,7 @@ function AddFashionModule() {
         } else {
             FashionProductService.addFashionProduct(fashionProducts).then((response) => {
                 console.log(response.data)
-                navigate("/listFashionProducts")
+                toast.success("Product added successfully", { theme: "dark" });
             }).catch(err => {
                 if (err.response.status === 401) {
                     console.log(err.response.data)
@@ -233,10 +235,15 @@ function AddFashionModule() {
                                 </div>
 
                                 <button className="btn btn-success" onClick={(e) => saveOrUpdateProduct(e)} >Submit </button>
-
+                                
                                 <Link to="/listFashionProducts">
                                     <button className='btn btn-warning m-3'>Back</button>
                                 </Link>
+
+                                <ToastContainer />
+
+
+
                             </form>
                         </div>
                     </div>

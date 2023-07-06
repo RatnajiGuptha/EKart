@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import "../../StyleSheets/SellerModule.css";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AccessoriesService } from '../../Services/AccessoriesService';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function AddAccessoriesModule() {
     const [productName, setProductName] = useState('')
     const [logoImg, setLogoImg] = useState('')
@@ -35,7 +36,7 @@ function AddAccessoriesModule() {
         if (accessoryId) {
             AccessoriesService.updateAccessoriesProducts(accessoryId, accessoriesProducts).then((response) => {
                 console.log(response.data)
-                navigate("/listAccessoriesProducts")
+                toast.success("Product updated successfully", { theme: "dark" });
             }).catch(err => {
                 if (err.response.status === 401) {
                     console.log(err.response.data)
@@ -46,7 +47,7 @@ function AddAccessoriesModule() {
         } else {
             AccessoriesService.addProduct(accessoriesProducts).then((response) => {
                 console.log(response.data)
-                navigate("/listAccessoriesProducts")
+                toast.success("Product added successfully", { theme: "dark" });
             }).catch(err => {
                 if (err.response.status === 401) {
                     console.log(err.response.data)
@@ -216,6 +217,8 @@ function AddAccessoriesModule() {
                                 <Link to="/listAccessoriesProducts">
                                     <button className='btn btn-warning m-3'>Back</button>
                                 </Link>
+
+                                <ToastContainer />
 
                             </form>
                         </div>
