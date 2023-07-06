@@ -20,6 +20,8 @@ import com.ekart.jwt.repos.CustomerRepo;
 import com.ekart.jwt.security.CustomerDetailsService;
 import com.ekart.jwt.security.JwtService;
 
+import io.micrometer.observation.annotation.Observed;
+
 @RestController
 public class CustomersController {
 
@@ -39,23 +41,25 @@ public class CustomersController {
 	private PasswordEncoder encoder;
 
 	@PostMapping("/login")
+	@Observed(name="create.token")
 	public ResponseEntity<?> createToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 		try {
 			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(jwtRequest.getUserName(), jwtRequest.getPassword()));
+					new UsernamePasswordAuthenticationToken(jwtRequest.getEmail(), jwtRequest.getPassword()));
 		} catch (BadCredentialsException e) {
 			return ResponseEntity.badRequest().body("Bad Credential");
 		}
 
-		UserDetails userDetails = customerDetailsService.loadUserByUsername(jwtRequest.getUserName());
+		UserDetails userDetails = customerDetailsService.loadUserByUsername(jwtRequest.getEmail());
 		String token = this.jwtService.generateToken(userDetails.getUsername());
 		System.out.println(token);
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
 	@PostMapping("/addUser")
+	@Observed(name="add.createCustomer")
 	public ResponseEntity<?> addCustomer(@RequestBody CustomerEntity customerEntity) {
-		Optional<CustomerEntity> name = customerRepo.findByUserName(customerEntity.getUserName());
+		Optional<CustomerEntity> name = customerRepo.findByEmail(customerEntity.getEmail());
 
 		if (!name.isEmpty()) {
 			return ResponseEntity.badRequest().body("User already Exists");
@@ -69,8 +73,9 @@ public class CustomersController {
 	}
 
 	@PostMapping("/addSeller")
+	@Observed(name="add.createSeller")
 	public ResponseEntity<?> addSeller(@RequestBody CustomerEntity customerEntity) {
-		Optional<CustomerEntity> name = customerRepo.findByUserName(customerEntity.getUserName());
+		Optional<CustomerEntity> name = customerRepo.findByEmail(customerEntity.getEmail());
 
 		if (!name.isEmpty()) {
 			return ResponseEntity.badRequest().body("User already Exists");

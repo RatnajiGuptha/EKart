@@ -13,6 +13,8 @@ import com.ekart.order.config.OrderStatusPublisher;
 import com.ekart.order.entity.PurchaseOrder;
 import com.ekart.order.service.OrderService;
 
+import io.micrometer.observation.annotation.Observed;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -22,9 +24,8 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderStatusPublisher orderStatusPublisher;
 
-
-
 	@Override
+	@Observed(name="create.orders")
 	public PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO) {
 		PurchaseOrder purchaseOrder = orderRepository.save(convertDtoToEntity(orderRequestDTO));
 //		purchaseOrder.setEmail(email);
@@ -34,15 +35,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Observed(name="get.orders")
 	public List<PurchaseOrder> fetchOrders() {
 		List<PurchaseOrder> orders = orderRepository.findAll();
 		return orders;
 	}
-
+	
 	private PurchaseOrder convertDtoToEntity(OrderRequestDTO dto) {
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
 		purchaseOrder.setPurchaseOrderId(UUID.randomUUID());
-		purchaseOrder.setUserName(dto.getUserName());
+		
 		purchaseOrder.setProductIds(dto.getProductIds());
 		purchaseOrder.setQty(dto.getQty());
 		purchaseOrder.setCategoryNames(dto.getCategoryNames());
@@ -55,15 +57,26 @@ public class OrderServiceImpl implements OrderService {
 		purchaseOrder.setSellerName(dto.getSellerName());
 		purchaseOrder.setOrderStatus(OrderStatus.ORDER_CREATED);
 		purchaseOrder.setEmail(dto.getEmail());
-	
+		purchaseOrder.setTotalAmount(dto.getTotalPrice());
+
 		purchaseOrder.setAddress(dto.getAddress());
+		purchaseOrder.setPromoCode(dto.getPromoCode());
 
 		return purchaseOrder;
 	}
 
 	@Override
+	@Observed(name="get.orderById")
 	public PurchaseOrder fetchOrderById(UUID id) {
 		return orderRepository.findById(id).get();
+	}
+
+	
+	@Override
+	@Observed(name="get.ordersByEmail")
+	public List<PurchaseOrder> fetchOrderByEmail(String email) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByEmail(email);
 	}
 
 }

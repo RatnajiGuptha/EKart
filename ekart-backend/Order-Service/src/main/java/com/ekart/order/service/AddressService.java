@@ -17,6 +17,8 @@ public interface AddressService {
 
 	public String deleteByAddressId(int id);
 	
-	public List<Address> fetchByUserName(String userName);
+	
+
+	public List<Address> fetchByUserNameByEmail(String email);
 
 }

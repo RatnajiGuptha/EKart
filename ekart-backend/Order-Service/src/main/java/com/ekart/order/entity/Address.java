@@ -18,7 +18,8 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int addressId;
-	public String userName;
+		
+	public String email;
 	public String receiverName;
 	public String receiverPhoneNumber;
 	public String buildingNo;

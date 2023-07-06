@@ -8,11 +8,12 @@ import com.ekart.order.entity.PurchaseOrder;
 
 public interface OrderService {
 
-//	public PurchaseOrder createOrder(OrderRequestDTO orderRequestDTO);
-
 	public List<PurchaseOrder> fetchOrders();
 
-    PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO);
-    
-    PurchaseOrder fetchOrderById(UUID id);
+	PurchaseOrder createOrders(OrderRequestDTO orderRequestDTO);
+
+	PurchaseOrder fetchOrderById(UUID id);
+
+
+	public List<PurchaseOrder> fetchOrderByEmail(String email);
 }
