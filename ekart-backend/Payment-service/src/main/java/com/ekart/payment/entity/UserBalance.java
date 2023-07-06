@@ -20,5 +20,5 @@ public class UserBalance {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
 	private String email;
-	private int price;
+	private double price;
 }

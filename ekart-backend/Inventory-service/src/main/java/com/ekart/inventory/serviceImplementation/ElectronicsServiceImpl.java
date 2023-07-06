@@ -19,8 +19,8 @@ public class ElectronicsServiceImpl implements ElectronicsService{
 	private ElectronicsRepository electronicsRepo;
 	@Override
 	@Observed(name="add.electronicProducts")
-	public void saveElectronics(ElectronicsProducts product) {
-		electronicsRepo.save(product);
+	public ElectronicsProducts saveElectronics(ElectronicsProducts product) {
+		return electronicsRepo.save(product);
 	}
 
 	@Override

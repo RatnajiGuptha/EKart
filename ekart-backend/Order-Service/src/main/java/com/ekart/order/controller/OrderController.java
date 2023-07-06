@@ -140,12 +140,12 @@ public class OrderController {
 		return orderService.fetchOrderByEmail(email);
 	}
 
-	@GetMapping("/generateOTP/{email}")
-	public String generateOtp(@PathVariable String email) {
+	@GetMapping("/generateOTP/{email}/{subject}/{text}")
+	public String generateOtp(@PathVariable String email,@PathVariable String subject,@PathVariable String text) {
 		String otp = "";
 		if (email != null) {
 			otp = emailSenderService.generateOtp();
-			emailSenderService.sendOtp(email, otp);
+			emailSenderService.sendOtp(email, otp,subject,text);
 		}
 		LOGGER.info("Generated the otp by email", email);
 		return otp;

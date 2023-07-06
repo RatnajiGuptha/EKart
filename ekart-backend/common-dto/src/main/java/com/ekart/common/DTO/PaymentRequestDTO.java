@@ -26,6 +26,6 @@ public class PaymentRequestDTO {
 	private List<String> size;
 	private List<String> color;
 	private List<String> sellerName;
-	private int amount;
+	private double amount;
 	
 }

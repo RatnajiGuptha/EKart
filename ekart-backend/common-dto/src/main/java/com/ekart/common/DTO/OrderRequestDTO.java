@@ -17,7 +17,7 @@ public class OrderRequestDTO {
 	private List<Integer> productIds;
 	private List<Integer> qty;
 	private List<ProductCategories> categoryNames;
-	private int price;
+	private double price;
 	private double totalPrice;
 	
 	private List<Integer> priceList;

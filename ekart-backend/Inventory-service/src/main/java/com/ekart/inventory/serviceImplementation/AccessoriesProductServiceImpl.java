@@ -21,8 +21,8 @@ public class AccessoriesProductServiceImpl implements AccessoriesProductService 
 
 	@Override
 	@Observed(name="add.accessoriesProducts")
-	public void saveAccessoriesProducts(AccessoriesProducts accessoriesProducts) {
-		accessoriesRepo.save(accessoriesProducts);
+	public AccessoriesProducts saveAccessoriesProducts(AccessoriesProducts accessoriesProducts) {
+		return accessoriesRepo.save(accessoriesProducts);
 
 	}
 

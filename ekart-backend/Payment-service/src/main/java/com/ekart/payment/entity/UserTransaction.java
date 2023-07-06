@@ -19,5 +19,5 @@ public class UserTransaction {
     private UUID transactionId;
   
     private String email;
-    private int amount;
+    private double amount;
 }

@@ -7,7 +7,7 @@ import com.ekart.inventory.enums.ElectronicsTypes;
 
 public interface ElectronicsService {
 
-	public void saveElectronics(ElectronicsProducts product);
+	public ElectronicsProducts saveElectronics(ElectronicsProducts product);
 
 	public List<ElectronicsProducts> fetchAllElectronics();
 

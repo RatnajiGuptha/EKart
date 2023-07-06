@@ -26,7 +26,7 @@ public class UserBalanceController {
 
 	@GetMapping("/getBalanceByEmail/{email}")
 	@Observed(name="get.balanceByEmail")
-	public int getBalanceByEmail(@PathVariable String email) {
+	public double getBalanceByEmail(@PathVariable String email) {
 		UserBalance userBalance = userBalanceRepository.findByEmail(email);
 		LOGGER.info("Returning user balance transaction details by email {}", email);
 		return userBalance.getPrice();
@@ -34,7 +34,7 @@ public class UserBalanceController {
 
 	@PutMapping("/updateBalanceByEmail/{email}/{amount}")
 	@Observed(name="update.balanceByEmail")
-	public String updateUserBalanceByEmail(@PathVariable String email, @PathVariable int amount) {
+	public String updateUserBalanceByEmail(@PathVariable String email, @PathVariable double amount) {
 		UserBalance ub = userBalanceRepository.findByEmail(email);
 		ub.setPrice(ub.getPrice() + amount);
 		userBalanceRepository.save(ub);
