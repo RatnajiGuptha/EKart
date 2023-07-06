@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { SecurityService } from "../../Services/SecurityService";
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,8 +7,6 @@ import "../../StyleSheets/Login.css";
 
 
 function SellerRegistration() {
-
-    const navigate = useNavigate();
 
     const [registerData, setRegisterData] = useState({
         fullName: '',
@@ -88,9 +86,6 @@ function SellerRegistration() {
         }
 
         setErrors(newError);
-        if (newError === {}) {
-            toast.error("Check the required fields");
-        }
         return valid;
     }
 
@@ -99,8 +94,10 @@ function SellerRegistration() {
         if (await validateForm()) {
             SecurityService.addSeller(registerData).then((res) => {
                 console.log(res.data);
-                navigate("/login")
+                toast.success("seller registered successfully");
             })
+        } else {
+            toast.error("Check the required fields");
         }
     }
 

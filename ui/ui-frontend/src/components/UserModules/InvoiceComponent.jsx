@@ -120,7 +120,7 @@ const InvoiceComponent = () => {
                         <div>
                         </div>
                         <div className="saved-card">
-                            <p>You have saved <span> ₹ {discountPrice * orderss.totalAmount}/-</span> </p>
+                            <p>You have saved <span> ₹ {(discountPrice * orderss.totalAmount).toFixed(2)}/-</span> </p>
                             <h6>Thank you for Shopping</h6>
                         </div>
                         <div className="price-details">

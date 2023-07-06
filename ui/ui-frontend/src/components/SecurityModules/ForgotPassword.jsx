@@ -26,7 +26,7 @@ export const ForgotPassword = () => {
         if (user.data === null) {
             newError.email = "There is no account with this email, please sign up"
         } else {
-            const otp = await OrderService.generateOtp(email).then()
+            const otp = await OrderService.generateOtp(email,"OTP verfication for changing password","please enter this OTP for changing password : ").then()
             setOTP(otp.data)
 
             setShowOTP(true)

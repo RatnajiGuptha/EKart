@@ -21,8 +21,8 @@ const CheckoutComponent = () => {
     const [OTP, setOTP] = useState(0);
     const [userEnteredOTP, setUserEnteredOTP] = useState(0);
     const [errors, setErrors] = useState({});
-    const [otpVerify, setOtpverify] = useState(false)
-
+    const [otpVerify, setOtpverify] = useState(false);
+    const [msg, setMsg] = useState({});
 
     console.log("defaultid : ", defaultAddId);
     console.log(addressList)
@@ -80,8 +80,11 @@ const CheckoutComponent = () => {
     console.log("email", email);
     console.log(address.addressId)
     const generateOTP = async () => {
-        const otp = await OrderService.generateOtp(email).then()
+        const msg={}
+        const otp = await OrderService.generateOtp(email,"OTP verification for payment confirmation","please enter this OTP for payment confirmation : ").then()
         setOTP(otp.data)
+        msg.otpSuccess="Please enter the OTP send to your mail."
+        setMsg(msg);
         setOtpverify(true)
     }
 
@@ -111,7 +114,7 @@ const CheckoutComponent = () => {
             });
         }
         else {
-            newError.OtpCheck = "Please enter OTP."
+            newError.OtpCheck = "Please enter correct OTP."
             setErrors(newError);
         }
 
@@ -156,7 +159,7 @@ const CheckoutComponent = () => {
                             <input type="number" name='otp' placeholder="Enter OTP" onChange={(e) => { setUserEnteredOTP(e.target.value) }}></input>
                             <button className="btn btn-warning " style={{ margin: "0px 15px" }} onClick={() => generateOTP()} > Request OTP</button>
                         </label>
-
+                        {msg.otpSuccess && <span className="otp-success">{msg.otpSuccess}</span>}
                         {errors.OtpCheck && <span>{errors.OtpCheck}</span>}
 
                         <div>

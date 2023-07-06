@@ -30,9 +30,9 @@ export const OrderService = {
     },
 
 
-    async generateOtp(email) {
+    async generateOtp(email,subject,body) {
         const res = await api.request({
-            url: `/api/generateOTP/${email}`,
+            url: `/api/generateOTP/${email}/${subject}/${body}`,
             method: "GET",
         });
         return res;

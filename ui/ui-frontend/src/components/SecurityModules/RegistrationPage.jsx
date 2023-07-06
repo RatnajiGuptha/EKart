@@ -77,9 +77,6 @@ function Registrationpage() {
     }
 
     setErrors(newError);
-    if (newError === {}) {
-      toast.error("Check the required fields");
-    }
     return valid;
   };
 
@@ -88,12 +85,14 @@ function Registrationpage() {
     if (await validateForm()) {
       SecurityService.addUser(registerData).then((res) => {
         console.log(res.data);
-        toast.success("registered successfully");
+        toast.success("Customer registered successfully");
 
         UserBalanceService.addMoneyTowallet({ email: registerData.email, price: 0 }).then((res) => {
           console.log(res.data);
         })
       });
+    } else {
+      toast.error("Check the required fields");
     }
   };
 

@@ -90,6 +90,9 @@ form .img-fluid {
 .card2 span {
     color: orangered;
 }
+.card2 .otp-success {
+    color: green;
+}
 
 .otp-label input[type="number"] {
     height: 40px;

@@ -34,7 +34,7 @@ const CheckMark = () => {
             <div style={{ marginTop: 200 }} >
                 <div><Roller /></div>
                 <div style={{ color: "black", marginTop: 40 }} className="ugb-highlight">
-                    Payment is beeing processed, please wait
+                    Payment is being processed, please wait
                 </div>
             </div>
         )
