@@ -9,17 +9,22 @@
     display: flex;
     justify-content: space-around;
 }
-
-.addr-form input {
+.add-address-container span {
+    color: orangered
+}
+.addr-form input[type="text"],
+.addr-form [type="number"],
+.addr-form select {
     border-radius: 10px;
     width: 300px;
+    padding: 0.6rem;
+    border: none;
+    outline: none;
+    background-color: #eee;
+    margin-right: 10px;
 }
 
-.texted {
-    text-align: left;
-    font-size: 18px;
-    padding: 0px;
-}
+
 
 .btn-container {
     display: flex;

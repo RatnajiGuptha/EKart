@@ -10,9 +10,9 @@ export const AddressService = {
         return res;
     },
 
-    async getAllAddress(userName) {
+    async getAllAddress(email) {
         const res = await authenticateApi.request({
-            url: `/api/address/getAllAddress/${userName}`,
+            url: `/api/address/getAllAddressByEmail/${email}`,
             method: 'GET',
         });
         return res;

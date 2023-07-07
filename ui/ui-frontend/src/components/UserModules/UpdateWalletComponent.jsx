@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
-import {
-  MDBBtn,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-} from 'mdb-react-ui-kit';
+import { MDBBtn, MDBModal, MDBModalDialog, MDBModalContent, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, } from 'mdb-react-ui-kit';
 import { UserBalanceService } from '../../Services/UserBalanceService';
 
 export default function UpdateWalletComponent(props) {
   const [centredModal, setCentredModal] = useState(false);
   const toggleShow = () => setCentredModal(!centredModal);
 
-  const userName = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
 
   const balance = props.balance;
   console.log(balance);
@@ -27,7 +18,7 @@ export default function UpdateWalletComponent(props) {
 
     console.log(updatedBalance);
 
-    UserBalanceService.updateUserBalance(userName, updatedBalance).then((Response) => {
+    UserBalanceService.updateUserBalance(email, updatedBalance).then((Response) => {
       console.log(Response.data);
 
     })
@@ -37,7 +28,7 @@ export default function UpdateWalletComponent(props) {
   }
 
   return (
-    <div className='update-balance'> 
+    <div className='update-balance'>
       <button className="btn btn-info mt-5" onClick={toggleShow}>Add Money to Wallet</button>
 
       <MDBModal tabIndex='-1' show={centredModal} setShow={setCentredModal}>
@@ -48,10 +39,8 @@ export default function UpdateWalletComponent(props) {
               <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>
-              <input
-                type="number"
-                onChange={(e) => setUpdatedBalance(e.target.value)}
-              />
+              <input type="number"
+                onChange={(e) => setUpdatedBalance(e.target.value)} />
             </MDBModalBody>
             <MDBModalFooter>
               <MDBBtn color='secondary' onClick={toggleShow}>

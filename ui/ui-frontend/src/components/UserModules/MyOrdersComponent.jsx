@@ -7,11 +7,10 @@ const MyOrdersComponent = () => {
   const [order, setOrder] = useState([]);
   const navigate = useNavigate("");
   useEffect(() => {
-    OrderService.getAllOrdersAfterPayment()
+    OrderService.getAllOrderByUser(localStorage.getItem("email"))
       .then((response) => {
         setOrder(response.data);
         console.log(response.data);
-        // console.log(order);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -51,9 +50,9 @@ const MyOrdersComponent = () => {
                     <p className="payment">{item.paymentStatus}</p>
                   </div>
                 ) : (
-                  <div>
+                  <div className="payment-status">
                     <span className="reddot"></span>
-                    <p>{item.paymentStatus}</p>
+                    <p className="payment">{item.paymentStatus}</p>
                   </div>
                 )}
               </div>

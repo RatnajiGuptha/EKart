@@ -11,7 +11,7 @@ export const FashionProductService = {
     },
 
     async getProductById(productId) {
-        const res = await api.request({
+        const res = await authenticateApi.request({
             url: `/api/fashionProducts/getProductsById/${productId}`,
             method: "GET",
         });
@@ -92,7 +92,7 @@ export const FashionProductService = {
         return res;
     },
 
-    async getBySellerNameAndType(sellerName, type){
+    async getBySellerNameAndType(sellerName, type) {
         const res = await authenticateApi.request({
             url: `/api/fashionProducts/getProductsBySellerNameAndType/sellerName/${sellerName}/type/${type}`,
             method: "GET"

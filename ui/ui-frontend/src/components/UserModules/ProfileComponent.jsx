@@ -1,60 +1,50 @@
-
 import React, { useState } from "react";
 import { useEffect } from "react";
-// import Changepassword from "./Changepassword";
 import "../../StyleSheets/ManageProfile.css";
 import { SecurityService } from "../../Services/SecurityService";
 import { useNavigate } from "react-router-dom";
 import ChangePassword from "../SecurityModules/ChangePassword";
 
 const ProfileComponent = () => {
-  const userName = localStorage.getItem('username');
+  const email = localStorage.getItem('email');
   const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
   const [contactNumber, setContactNumber] = useState('');
 
   const [displayProfile, setDisplayProfile] = useState(true);
   const [editProfile, setEditProfile] = useState(false);
   const [showChangepassword, setChangepassword] = useState(false);
+  let status = false
 
   const [errors, setErrors] = useState({});
   const navigate = useNavigate('')
 
   useEffect(() => {
 
-    SecurityService.getUserInfo(userName).then((response) => {
+    SecurityService.getUserInfo(email).then((response) => {
       setFullName(response.data.fullName)
-      setEmail(response.data.email)
+      setEmailAddress(response.data.email)
       setContactNumber(response.data.contactNumber)
-
       console.log(response.data)
     })
-  }, [userName]);
+  }, [email]);
 
   const validateForm = async () => {
     let valid = true;
     const newError = {};
 
-
-    const userEmailExists = await SecurityService.getUserByEmail(email);
-    console.log("email =", userEmailExists.data);
-    if (!email || !email.trim()) {
-      newError.email = "Email is required";
-      valid = false;
-    } else if (userEmailExists.data !== null) {
-      newError.email = "Email address already exists";
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newError.email = "Invalid Email address";
-      valid = false;
-    }
-
     const contactNumberExists = await SecurityService.getUserByContactNumber(contactNumber);
+    if (contactNumberExists.data !== null) {
+      status = true
+      console.log(status)
+    }
+    console.log(status)
+
     console.log(contactNumberExists.data);
     if (!contactNumber.trim() || contactNumber.trim().length !== 10) {
       newError.contactNumber = 'Mobile number should have 10 digits'
       valid = false;
-    } else if (contactNumberExists.data !== null) {
+    } else if (status) {
       newError.contactNumber = "Mobile number already exists";
       valid = false;
     } else if (!/^[0-9]+$/.test(contactNumber)) {
@@ -69,6 +59,8 @@ const ProfileComponent = () => {
       newError.fullName = 'Invalid Name';
       valid = false;
     }
+
+
 
     setErrors(newError);
     return valid;
@@ -88,10 +80,13 @@ const ProfileComponent = () => {
   const saveUserProfile = async (e) => {
     e.preventDefault();
 
+
     if (await validateForm()) {
+      status = false
+      console.log(status)
       setDisplayProfile(true)
       setEditProfile(false)
-      SecurityService.updateUserByUserName(userName, fullName, email, contactNumber).then((response) => {
+      await SecurityService.updateUserData(fullName, emailAddress, contactNumber).then((response) => {
         console.log(response.data)
       }).catch((err) => {
         if (err.response.status === 401) {
@@ -102,10 +97,8 @@ const ProfileComponent = () => {
       })
       window.location.reload(false)
     }
-    console.log(userName, fullName, email, contactNumber);
+    console.log(fullName, emailAddress, contactNumber);
   };
-
-
 
   const cancelChanges = (e) => {
     window.location.reload(false)
@@ -121,8 +114,6 @@ const ProfileComponent = () => {
         {displayProfile && <div>
           <form className="myprofile-profile-form">
             <h2> My Profile</h2>
-            <h6>User Name</h6>
-            <p>{userName}</p>
 
             <h6>Full Name</h6>
             <p>{fullName}</p>
@@ -138,20 +129,19 @@ const ProfileComponent = () => {
                 change password
               </button>
             </div>
-            {/* {showChangepassword && <Changepassword />} */}
           </form></div>}
         {
           editProfile &&
           <form className="myprofile-profile-form">
             <h2> My Profile</h2>
+              <label>Email
+                <input type="text" name="email" value={emailAddress} placeholder="Enter email" />
+                {errors.email && <span>{errors.email}</span>}
+              </label>
             <label>Full Name
               <input type="text" name="fullName" value={fullName} onChange={(e) => { setFullName(e.target.value) }} placeholder="Enter full name" />
               {errors.fullName && <span>{errors.fullName}</span>}
-            </label>
-            <label>Email
-              <input type="text" name="email" value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter email" />
-              {errors.email && <span>{errors.email}</span>}
-            </label>
+              </label>
 
             <label>Contact number
               <input type="text" name="contactNumber" value={contactNumber} onChange={(e) => { setContactNumber(e.target.value) }} placeholder="Enter contact number" />
@@ -159,7 +149,7 @@ const ProfileComponent = () => {
             </label>
             <div className="myprofile-profile-form-buttons">
               <button className="btn btn-success saveProfile" onClick={(e) => { saveUserProfile(e); }}>save</button>
-              <button className="btn btn-warning cancelChanges" onClick={(e) => { cancelChanges(e); }}>cancel</button>
+              <button className="btn btn-warning cancelChanges" onClick={(e) => { cancelChanges(e); }}>Back</button>
             </div>
           </form>
         }
@@ -168,7 +158,7 @@ const ProfileComponent = () => {
           <form className="myprofile-profile-form">
             <h2> My Profile </h2>
 
-              <ChangePassword />
+            <ChangePassword />
 
           </form>
 
@@ -179,4 +169,3 @@ const ProfileComponent = () => {
 };
 
 export default ProfileComponent;
-
