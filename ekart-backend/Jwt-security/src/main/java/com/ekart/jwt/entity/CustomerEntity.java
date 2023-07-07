@@ -18,11 +18,11 @@ public class CustomerEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String userName;
 	private String fullName;
 	private String email;
 	private String password;
 	private String contactNumber;
+
 	private String roles;
 
 }

@@ -14,27 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ekart.jwt.entity.CustomerEntity;
 import com.ekart.jwt.repos.CustomerRepo;
 
+import io.micrometer.observation.annotation.Observed;
+
 @RestController
 public class UsersController {
 
 	@Autowired
 	private CustomerRepo customerRepo;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
 
-	@GetMapping("/getUserName/{userName}")
-	public ResponseEntity<?> getUserByUserName(@PathVariable String userName) {
-		Optional<CustomerEntity> user = customerRepo.findByUserName(userName);
-		if (user.isEmpty()) {
-			return ResponseEntity.ok("null");
-		} else {
-			System.out.println(user.get().getUserName());
-			return ResponseEntity.ok(user.get().getUserName());
-		}
-	}
-
 	@GetMapping("/getUserByMail/{email}")
+	@Observed(name="get.userByEmail")
 	public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
 		Optional<CustomerEntity> byEmail = customerRepo.findByEmail(email);
 		if (byEmail.isEmpty()) {
@@ -45,23 +37,8 @@ public class UsersController {
 		}
 	}
 
-
-	@GetMapping("/getUserInfo/{userName}")
-	public ResponseEntity<?> getUserByUserInfo(@PathVariable String userName) {
-		Optional<CustomerEntity> user = customerRepo.findByUserName(userName);
-		return ResponseEntity.ok(user);
-	}
-	
-	@PutMapping("/updateUserData/{userName}/{fullName}/{email}/{contactNumber}")
-	public void updateUser(@PathVariable String userName,@PathVariable String fullName,@PathVariable String email,@PathVariable String contactNumber) {
-		CustomerEntity customer =customerRepo.findByUserName(userName).get();
-		customer.setFullName(fullName);
-		customer.setEmail(email);
-		customer.setContactNumber(contactNumber);
-		customerRepo.save(customer);
-	}
-
 	@GetMapping("/getUserByContactNumber/{contactNumber}")
+	@Observed(name="get.userByContactNumber")
 	public ResponseEntity<?> getUserByContactNumber(@PathVariable String contactNumber) {
 		Optional<CustomerEntity> user = customerRepo.findByContactNumber(contactNumber);
 		if (user.isEmpty()) {
@@ -71,31 +48,50 @@ public class UsersController {
 			return ResponseEntity.ok(user.get().getContactNumber());
 		}
 	}
+
 	
-	@PutMapping("/updatePasswordByUserName/{userName}/{password}")
-	public ResponseEntity<?> updatePassword(@PathVariable String userName, @PathVariable String password){
-		
-		CustomerEntity customer = customerRepo.findByUserName(userName).get();
-		
-		customer.setPassword(encoder.encode(password));
-		
-		customerRepo.save(customer);
-		
-		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("updated password");
-		
+	@GetMapping("/api/getUserByName/{name}")
+	@Observed(name="get.userByName")
+	public ResponseEntity<?> getUserName(@PathVariable String name) {
+		Optional<CustomerEntity> user = customerRepo.findByFullName(name);
+		if (user.isEmpty()) {
+			return ResponseEntity.ok("null");
+		} else {
+			System.out.println(user.get().getFullName());
+			return ResponseEntity.ok(user.get().getFullName());
+		}
 	}
 	
+	
+	@GetMapping("/getUserInfo/{email}")
+	@Observed(name="get.userByUserInfo")
+	public ResponseEntity<?> getUserByUserInfo(@PathVariable String email) {
+		Optional<CustomerEntity> user = customerRepo.findByEmail(email);
+		return ResponseEntity.ok(user);
+	}
+
+	@PutMapping("/updateUserData/{fullName}/{email}/{contactNumber}")
+	@Observed(name="update.userDetails")
+	public void updateUser(@PathVariable String fullName, @PathVariable String email,
+			@PathVariable String contactNumber) {
+		CustomerEntity customer = customerRepo.findByEmail(email).get();
+		customer.setFullName(fullName);
+		customer.setEmail(email);
+		customer.setContactNumber(contactNumber);
+		customerRepo.save(customer);
+	}
+
+	
 	@PutMapping("/updatePasswordByEmail/{email}/{password}")
+	@Observed(name="update.passwordByEmail")
 	public ResponseEntity<?> updatePasswordByEmail(@PathVariable String email, @PathVariable String password) {
 
 		CustomerEntity customer = customerRepo.findByEmail(email).get();
-
 		customer.setPassword(encoder.encode(password));
-
 		customerRepo.save(customer);
 
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("updated password");
 
 	}
-	
+
 }

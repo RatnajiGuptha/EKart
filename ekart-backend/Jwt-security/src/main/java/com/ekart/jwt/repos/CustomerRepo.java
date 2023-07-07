@@ -8,10 +8,11 @@ import com.ekart.jwt.entity.CustomerEntity;
 
 public interface CustomerRepo extends JpaRepository<CustomerEntity, Integer> {
 
-	Optional<CustomerEntity> findByUserName(String userName);
 
 	Optional<CustomerEntity> findByEmail(String email);
 
 	Optional<CustomerEntity> findByContactNumber(String contactNumber);
+
+	Optional<CustomerEntity> findByFullName(String name);
 
 }

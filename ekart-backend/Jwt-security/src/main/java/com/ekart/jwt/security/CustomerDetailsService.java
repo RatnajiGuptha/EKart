@@ -18,11 +18,11 @@ public class CustomerDetailsService implements UserDetailsService {
 	private CustomerRepo customerRepo;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<CustomerEntity> findUser = customerRepo.findByUserName(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Optional<CustomerEntity> findUser = customerRepo.findByEmail(email);
 
 		return findUser.map(CustomerDetailsInfo::new)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found " + username));
+				.orElseThrow(() -> new UsernameNotFoundException("User not found " + email));
 	}
 
 }

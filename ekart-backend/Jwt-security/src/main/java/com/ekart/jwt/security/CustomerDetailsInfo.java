@@ -13,18 +13,15 @@ import com.ekart.jwt.entity.CustomerEntity;
 
 public class CustomerDetailsInfo implements UserDetails {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	private String email;
 	private String password;
 
 	private List<GrantedAuthority> authorities;
 
 	public CustomerDetailsInfo(CustomerEntity customerInfo) {
-		name = customerInfo.getUserName();
+		email = customerInfo.getEmail();
 		password = customerInfo.getPassword();
 		authorities = Arrays.stream(customerInfo.getRoles().split(",")).map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
@@ -42,8 +39,9 @@ public class CustomerDetailsInfo implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return name;
+		return email;
 	}
+		
 
 	@Override
 	public boolean isAccountNonExpired() {

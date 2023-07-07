@@ -10,5 +10,6 @@ public interface AddressRepository extends JpaRepository<Address, Integer>{
 	
 	public Address findByReceiverName(String receiverName);
 	
-	public List<Address> findByUserName(String username);
+
+	public List<Address> findByEmail(String email);
 }

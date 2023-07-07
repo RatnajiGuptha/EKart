@@ -54,13 +54,12 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
 		security.cors();
-		security.csrf().disable()			
-		.authorizeHttpRequests()
-				.requestMatchers("/login", "/addUser", "/getUserName/{userName}", "/getUserByMail/{email}",
-						"/addSeller", "/getUserByContactNumber/**", "/getUserInfo/{userName}",
-						"/updateUserData/{userName}/{fullName}/{email}/{contactNumber}",
-						"/updatePasswordByUserName/${username}/${password}",
-						"/updatePasswordByEmail/{email}/{password}")
+		security.csrf().disable().authorizeHttpRequests()
+				.requestMatchers("/login", "/addUser", "/getUserByMail/{email}", "/addSeller",
+						"/getUserByContactNumber/**", "/getUserInfo/{email}",
+						"/updateUserData/{fullName}/{email}/{contactNumber}",
+						"/updatePasswordByEmail/{email}/{password}", "/api/getUserByName/{name}", "/actuator/**",
+						"/actuator")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(entryPoint)
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authenticationProvider(authenticationProvider())

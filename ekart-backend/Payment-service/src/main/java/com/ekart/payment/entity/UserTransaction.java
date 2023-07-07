@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class UserTransaction {
     @Id
     private UUID transactionId;
-    private String UserName;
-    private int amount;
+  
+    private String email;
+    private double amount;
 }

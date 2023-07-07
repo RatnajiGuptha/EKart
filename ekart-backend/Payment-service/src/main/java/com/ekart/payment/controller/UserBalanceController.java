@@ -1,43 +1,53 @@
 package com.ekart.payment.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ekart.payment.Repository.UserBalanceRepository;
 import com.ekart.payment.entity.UserBalance;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import io.micrometer.observation.annotation.Observed;
 
 @RestController
 @RequestMapping("/api/userBalance")
 public class UserBalanceController {
 
-    @Autowired
-    private UserBalanceRepository userBalanceRepository;
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserBalanceController.class);
+	@Autowired
+	private UserBalanceRepository userBalanceRepository;
 
-    @PostMapping("/add")
-    public String saveUserBalance(@RequestBody UserBalance userBalance){
-        userBalanceRepository.save(userBalance);
-        return "Balnce Saved";
-    }
+	@GetMapping("/getBalanceByEmail/{email}")
+	@Observed(name="get.balanceByEmail")
+	public double getBalanceByEmail(@PathVariable String email) {
+		UserBalance userBalance = userBalanceRepository.findByEmail(email);
+		LOGGER.info("Returning user balance transaction details by email {}", email);
+		return userBalance.getPrice();
+	}
 
-    @GetMapping("/getUserBalance")
-    public List<UserBalance> getUserBalance(){
-        return userBalanceRepository.findAll();
-    }
+	@PutMapping("/updateBalanceByEmail/{email}/{amount}")
+	@Observed(name="update.balanceByEmail")
+	public String updateUserBalanceByEmail(@PathVariable String email, @PathVariable double amount) {
+		UserBalance ub = userBalanceRepository.findByEmail(email);
+		ub.setPrice(ub.getPrice() + amount);
+		userBalanceRepository.save(ub);
+		LOGGER.info("updating the user  balance  by email {}" ,email);
+		return "user Balance Updated";
+	}
 
-    @GetMapping("/getBalanceByUserName/{userName}")
-    public int getBalanceByName(@PathVariable String userName){
-        UserBalance userBalance = userBalanceRepository.findByUserName(userName);
-
-        return userBalance.getPrice();
-    }
-    
-    @PutMapping("/updateBalance/{userName}/{amount}")
-    public  String updateUserBalance(@PathVariable String userName,@PathVariable int amount){
-        UserBalance ub = userBalanceRepository.findByUserName(userName);
-        ub.setPrice(ub.getPrice() + amount);
-        userBalanceRepository.save(ub);
-        return "user Balance Updated";
-    }
+	@PostMapping("/addBalance")
+	@Observed(name="add.balanceByEmail")
+	public String addUserBalanceByEmail(@RequestBody UserBalance ub) {
+		userBalanceRepository.save(ub);
+		LOGGER.info("creating  user  balance account by email {}" ,ub.getEmail());
+		return "user Balance Updated";
+	}
 
 }

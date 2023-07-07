@@ -2,6 +2,8 @@ package com.ekart.inventory.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ import com.ekart.inventory.service.AccessoriesProductService;
 @RestController
 @RequestMapping("/api/accessoriesProducts")
 public class AccessoriesProductsController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AccessoriesProductsController.class);
+
 
 	@Autowired
 	private AccessoriesProductService accessoriesProductService;
@@ -28,18 +33,22 @@ public class AccessoriesProductsController {
 	@GetMapping("/getAllAccessoriesProduct")
 	public ResponseEntity<List<AccessoriesProducts>> getAllAccessoriesProducts() {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProducts();
+		LOGGER.info("Returning all accessories products");
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
+		
 	}
 
 	@GetMapping("/getAccessoriesProductById/{accessoryId}")
 	public ResponseEntity<AccessoriesProducts> getAccessoriesProductById(@PathVariable int accessoryId) {
 		AccessoriesProducts accessoriesProducts = accessoriesProductService.getAccessoriesProductById(accessoryId);
+		LOGGER.info("Returning accessories products by id {}",accessoryId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
 	@GetMapping("/getAccessoriesByType/type/{type}")
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductByType(@PathVariable AccessoriesTypes type) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService.getAccessoriesProductsByType(type);
+		LOGGER.info("Returning all accessories by type {}",type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
@@ -48,6 +57,7 @@ public class AccessoriesProductsController {
 			@PathVariable int accessoryId) {
 		AccessoriesProducts acccessoryProductById = accessoriesProductService.getAccessoriesByTpeAndProductById(type,
 				accessoryId);
+		LOGGER.info("Returning accessories by type {} and id {}",type,accessoryId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(acccessoryProductById);
 	}
 
@@ -55,12 +65,14 @@ public class AccessoriesProductsController {
 	public ResponseEntity<List<AccessoriesProducts>> getAccessoriesProductsBySuitable(@PathVariable Suitable suitable) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
 				.GetAccessoriesProductsBySuitable(suitable);
+		LOGGER.info("Returning all accessories by suitable {}",suitable);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
 	@PostMapping("/add")
 	public ResponseEntity<String> addProduct(@RequestBody AccessoriesProducts accessoriesProduct) {
 		accessoriesProductService.saveAccessoriesProducts(accessoriesProduct);
+		LOGGER.info("Adding single accessory product to database");
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Accessory product Added");
 	}
 
@@ -70,6 +82,7 @@ public class AccessoriesProductsController {
 		for (AccessoriesProducts prods : accessoriesProducts) {
 			accessoriesProductService.saveAccessoriesProducts(prods);
 		}
+		LOGGER.info("Adding multiple accessory products into database");
 		return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Multiple Items added");
 	}
 
@@ -79,6 +92,7 @@ public class AccessoriesProductsController {
 		AccessoriesProducts accessoriesProducts = accessoriesProductService.getAccessoriesProductById(prodId);
 
 		accessoriesProducts.setQty(accessoriesProducts.getQty() - quantity);
+		LOGGER.info("quantity updated for prodId {}",prodId);
 		accessoriesProductService.saveAccessoriesProducts(accessoriesProducts);
 	}
 
@@ -87,6 +101,7 @@ public class AccessoriesProductsController {
 			@PathVariable String sellerName) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
 				.GetAccessoriesProductsBySellerName(sellerName);
+		LOGGER.info("Returning all accessories products by sellerName {}",sellerName);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 
@@ -115,7 +130,7 @@ public class AccessoriesProductsController {
 		updateAccessoriesProducts.setProductImg5(accessoriesProducts.getProductImg5());
 
 		accessoriesProductService.saveSellerAccessoriesProducts(updateAccessoriesProducts);
-
+		LOGGER.info("updated seller accessories products for accessoryId {}",accessoryId);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(updateAccessoriesProducts);
 	}
 	
@@ -124,6 +139,7 @@ public class AccessoriesProductsController {
 			@PathVariable String sellerName,@PathVariable AccessoriesTypes type) {
 		List<AccessoriesProducts> accessoriesProducts = accessoriesProductService
 				.GetAccessoriesProductsBySellerNameAndType(sellerName,type);
+		LOGGER.info("Returning all accessories products by sellerName {} and type {}",sellerName,type);
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(accessoriesProducts);
 	}
 

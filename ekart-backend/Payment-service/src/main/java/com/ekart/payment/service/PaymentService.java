@@ -35,12 +35,14 @@ public class PaymentService {
         OrderRequestDTO orderRequestDTO = orderEvent.getOrderRequestDTO();
         logger.info(orderRequestDTO.toString());
 
-        PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO(orderRequestDTO.getOrderId(),orderRequestDTO.getUserName(),orderRequestDTO.getEmail()
+        PaymentRequestDTO paymentRequestDTO = new PaymentRequestDTO(orderRequestDTO.getOrderId(),orderRequestDTO.getEmail()
                 ,orderRequestDTO.getProductIds(),orderRequestDTO.getQty(),orderRequestDTO.getCategoryNames(),orderRequestDTO.getPriceList(),orderRequestDTO.getProductName(),orderRequestDTO.getBrandName(),orderRequestDTO.getAddress(), orderRequestDTO.getSize(),orderRequestDTO.getColor()
                 ,orderRequestDTO.getSellerName(),orderRequestDTO.getPrice());
         logger.info((paymentRequestDTO.toString()));
 
-        UserBalance userBalance = userBalanceRepository.findByUserName(orderRequestDTO.getUserName());
+
+        
+        UserBalance userBalance = userBalanceRepository.findByEmail(orderRequestDTO.getEmail());
         if(userBalance != null) {
 
             int id = userBalance.getUserId();
@@ -49,7 +51,7 @@ public class PaymentService {
                     .filter(ub -> ub.getPrice() > orderRequestDTO.getPrice())
                     .map(ub -> {
                         ub.setPrice(ub.getPrice() - orderRequestDTO.getPrice());
-                        userTransactionRepository.save(new UserTransaction(UUID.randomUUID(),orderRequestDTO.getUserName(),orderRequestDTO.getPrice()));
+                        userTransactionRepository.save(new UserTransaction(UUID.randomUUID(),orderRequestDTO.getEmail(),orderRequestDTO.getPrice()));
 
                         return new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_COMPLETED);
                     }).orElse(new PaymentEvent(paymentRequestDTO, PaymentStatus.PAYMENT_FAILED));
@@ -61,15 +63,5 @@ public class PaymentService {
 
     @Transactional
     public void cancelOrder(OrderEvent orderEvent) {
-//        UserTransaction ut =  userTransactionRepository.findById(orderEvent.getOrderRequestDTO().getOrderId()).get();
-//
-//        System.out.println("........................");
-//        System.out.println(orderEvent.getOrderRequestDTO().getUserName());
-//        System.out.println("........................");
-//        UserBalance ub = userBalanceRepository.findById(orderEvent.getOrderRequestDTO().getOrderId()).get();
-//
-//        ub.setPrice(ub.getPrice() + ut.getAmount());
-//
-//        userTransactionRepository.deleteById(ut.getOrderId());
-    }
+}
 }

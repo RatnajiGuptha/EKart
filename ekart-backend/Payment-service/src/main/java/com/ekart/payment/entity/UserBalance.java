@@ -1,7 +1,8 @@
 package com.ekart.payment.entity;
 
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +15,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 public class UserBalance {
-    @Id
-    private int userId;
-    private String userName;
-    private int price;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userId;
+	private String email;
+	private double price;
 }

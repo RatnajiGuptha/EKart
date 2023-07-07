@@ -8,7 +8,7 @@ import com.ekart.inventory.enums.Suitable;
 
 public interface AccessoriesProductService {
 
-	public void saveAccessoriesProducts(AccessoriesProducts accessoriesProducts);
+	public AccessoriesProducts saveAccessoriesProducts(AccessoriesProducts accessoriesProducts);
 
 	public List<AccessoriesProducts> getAccessoriesProducts();
 

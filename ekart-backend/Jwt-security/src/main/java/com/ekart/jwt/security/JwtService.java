@@ -27,9 +27,9 @@ public class JwtService {
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 
-	public String generateToken(String username) {
+	public String generateToken(String email) {
 		Map<String, Object> claims = new HashMap<>();
-		JwtBuilder builder = Jwts.builder().setClaims(claims).setSubject(username)
+		JwtBuilder builder = Jwts.builder().setClaims(claims).setSubject(email)
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDATIY * 1000))
 				.signWith(getSignKey(), SignatureAlgorithm.HS256);
